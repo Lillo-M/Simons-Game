@@ -1,12 +1,13 @@
 #include "Game.h"
+#include <stdio.h>
 
 Game::Game() :
-	window(sf::VideoMode(200, 200), "SFML works!"),
-	shape(100.f),
-	player(sf::Vector2f(10, 10), sf::Vector2f(10, 10))
+	window(sf::VideoMode(WIDTH, HEIGHT), "Simon's Game"),
+	player(sf::Vector2f(10, 10), sf::Vector2f(100, 100)),
+	eManager(window, player)
 {
 	Entity::setWindow(window);
-	shape.setFillColor(sf::Color::Green);
+	window.setFramerateLimit(FPS);
 	Executar();
 }
 
@@ -18,15 +19,9 @@ void Game::Executar()
 {
 	while (window.isOpen())
 	{
-		sf::Event event;
-		while (window.pollEvent(event))
-		{
-			if (event.type == sf::Event::Closed)
-				window.close();
-		}
-
+		eManager.Manage();
+		player.Move();
 		window.clear();
-		window.draw(shape);
 		player.Draw();
 		window.display();
 	}
