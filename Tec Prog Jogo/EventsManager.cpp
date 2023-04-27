@@ -3,12 +3,56 @@
 #include <iostream>
 EventsManager::~EventsManager()
 {
+	keyMap.clear();
+	window = NULL;
+	pPlayer = NULL;
+	delete pPlayerIM;
+	pPlayerIM = NULL;
 }
+
 EventsManager::EventsManager(sf::RenderWindow& wds, Player& pP):
 	kb(),
 	window(&wds),
-	player(&pP)
+	pPlayer(&pP)
 {
+	pPlayerIM = new PlayerInputManager(pPlayer);
+	keyMap.clear();
+	keyMap[sf::Keyboard::A] = 'A';
+	keyMap[sf::Keyboard::B] = 'B';
+	keyMap[sf::Keyboard::C] = 'C';
+	keyMap[sf::Keyboard::D] = 'D';
+	keyMap[sf::Keyboard::E] = 'E';
+	keyMap[sf::Keyboard::F] = 'F';
+	keyMap[sf::Keyboard::G] = 'G';
+	keyMap[sf::Keyboard::H] = 'H';
+	keyMap[sf::Keyboard::I] = 'I';
+	keyMap[sf::Keyboard::J] = 'J';
+	keyMap[sf::Keyboard::K] = 'K';
+	keyMap[sf::Keyboard::L] = 'L';
+	keyMap[sf::Keyboard::M] = 'M';
+	keyMap[sf::Keyboard::N] = 'N';
+	keyMap[sf::Keyboard::O] = 'O';
+	keyMap[sf::Keyboard::P] = 'P';
+	keyMap[sf::Keyboard::Q] = 'Q';
+	keyMap[sf::Keyboard::R] = 'R';
+	keyMap[sf::Keyboard::S] = 'S';
+	keyMap[sf::Keyboard::T] = 'T';
+	keyMap[sf::Keyboard::U] = 'U';
+	keyMap[sf::Keyboard::V] = 'V';
+	keyMap[sf::Keyboard::W] = 'W';
+	keyMap[sf::Keyboard::X] = 'X';
+	keyMap[sf::Keyboard::Y] = 'Y';
+	keyMap[sf::Keyboard::Z] = 'Z';
+	keyMap[sf::Keyboard::LShift] = "LShift";
+	keyMap[sf::Keyboard::Space] = "Space";
+	keyMap[sf::Keyboard::LControl] = "lCtrl";
+	keyMap[sf::Keyboard::Tab] = "Tab";
+	keyMap[sf::Keyboard::Escape] = "Esc";
+	keyMap[sf::Keyboard::Right] = "Right";
+	keyMap[sf::Keyboard::Left] = "Left";
+	keyMap[sf::Keyboard::Up] = "Up";
+	keyMap[sf::Keyboard::Down] = "Down";
+	mapIt = keyMap.begin();
 }
 
 void EventsManager::Manage()
@@ -19,54 +63,24 @@ void EventsManager::Manage()
 	{
 		if (evente.type == sf::Event::KeyPressed)
 		{
-			if (evente.key.code == sf::Keyboard::W && player->getGrounded())
+			for (mapIt; mapIt != keyMap.end(); mapIt++)
 			{
-				player->addVelocity(sf::Vector2f(0, -30 * VVV));
-				player->setGrounded(false);
+				if (mapIt->first == evente.key.code)
+					pPlayerIM->pressedInput(mapIt->second);
 			}
-			if (evente.key.code == sf::Keyboard::A)
-			{
-				player->addVelocity(sf::Vector2f(-VVV, 0));
-			}
-			if (evente.key.code == sf::Keyboard::S)
-			{
-				player->addVelocity(sf::Vector2f(0, VVV));
-			}
-			if (evente.key.code == sf::Keyboard::D)
-			{
-				player->addVelocity(sf::Vector2f(VVV, 0));
-			}
+			mapIt = keyMap.begin();
 		}
 		if (evente.type == sf::Event::KeyReleased)
 		{
-			if (evente.key.code == sf::Keyboard::A)
+			for (mapIt; mapIt != keyMap.end(); mapIt++)
 			{
-				player->addVelocity(sf::Vector2f(-VVV, 0));
+				if (mapIt->first == evente.key.code)
+					pPlayerIM->releasedInput(mapIt->second);
 			}
-			if (evente.key.code == sf::Keyboard::S)
-			{
-				player->addVelocity(sf::Vector2f(0, VVV));
-			}
-			if (evente.key.code == sf::Keyboard::D)
-			{
-				player->addVelocity(sf::Vector2f(VVV, 0));
-			}
+			mapIt = keyMap.begin();
 		}
 		if (evente.type == sf::Event::Closed)
 			window->close();
-		
-		/*if (kb.isKeyPressed(sf::Keyboard::W) && player->getGrounded())
-		{
-			player->addVelocity(sf::Vector2f(0, -15 * VVV));
-			player->setGrounded(false);
-		}
-
-		if (kb.isKeyPressed(sf::Keyboard::A))
-			player->addVelocity(sf::Vector2f(-VVV, 0));
-		if (kb.isKeyPressed(sf::Keyboard::S))
-			player->addVelocity(sf::Vector2f(0, VVV));
-		if (kb.isKeyPressed(sf::Keyboard::D))
-			player->addVelocity(sf::Vector2f(VVV, 0));*/
 	}
 }
 

@@ -13,17 +13,23 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
-      <Filter>Arquivos de Origem</Filter>
-    </ClCompile>
     <ClCompile Include="Game.cpp">
       <Filter>Arquivos de Origem\src</Filter>
     </ClCompile>
     <ClCompile Include="Entity.cpp">
       <Filter>Arquivos de Origem\src</Filter>
     </ClCompile>
-    <ClCompile Include="Player.cpp">
+    <ClCompile Include="EventsManager.cpp">
+      <Filter>Arquivos de Origem\src</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
       <Filter>Arquivos de Origem</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Arquivos de Origem\src</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerInputManager.cpp">
+      <Filter>Arquivos de Origem\src</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -34,6 +40,12 @@
       <Filter>Arquivos de Origem\include</Filter>
     </ClInclude>
     <ClInclude Include="Player.h">
+      <Filter>Arquivos de Origem\include</Filter>
+    </ClInclude>
+    <ClInclude Include="EventsManager.h">
+      <Filter>Arquivos de Origem\include</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerInputManager.h">
       <Filter>Arquivos de Origem\include</Filter>
     </ClInclude>
   </ItemGroup>

@@ -25,7 +25,7 @@ void Entity::Draw()
 	{
 		grounded = false;
 	}
-		HitBox.setPosition(Position);
+	HitBox.setPosition(Position);
 	window->draw(HitBox);
 }
 
@@ -44,5 +44,5 @@ void Entity::setWindow(sf::RenderWindow& wds)
 const bool Entity::getGrounded() const { return grounded; }
 
 unsigned int Entity::Cont(0);
-const float Entity::gravity(8.166);
+const float Entity::gravity(4.08); // 8.166
 sf::RenderWindow* Entity::window(NULL);

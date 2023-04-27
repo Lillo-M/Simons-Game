@@ -19,8 +19,8 @@ private:
 	sf::RectangleShape HitBox;
 	static sf::RenderWindow* window;
 	static unsigned int Cont;
-	bool grounded;
 protected:
 	static const float gravity;
 	sf::Vector2f Position;
+	bool grounded;
 };
