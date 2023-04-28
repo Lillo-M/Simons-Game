@@ -18,7 +18,7 @@ namespace Entities
 			HitBox.setTexture(&texture);
 		}
 		else
-			std::cout << std::endl << "ERROR: FAIL TO LOAD PLAYER SPRITE!" << std::endl;
+			std::cout << std::endl << "ERROR: FAIL TO LOAD PLAYER TEXTURE!" << std::endl;
 	}
 
 	Player::~Player()
