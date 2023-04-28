@@ -26,7 +26,6 @@ namespace Entities
 		void operator--();
 		sf::Vector2f getPosition();
 		const sf::Vector2f getVelocity() const;
-		void addVelocity(sf::Vector2f vel);
 		void Gravity();
 		const bool getAlive() const;
 		void setDead();

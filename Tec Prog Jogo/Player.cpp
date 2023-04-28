@@ -38,16 +38,6 @@ namespace Entities
 
 	const sf::Vector2f Player::getVelocity() const { return velocity; }
 
-	void Player::addVelocity(sf::Vector2f vel)
-	{
-		//if ( velocity.x < maxVelocity && vel.x > 0 || velocity.x > -maxVelocity && vel.x < 0) velocity.x += vel.x;
-		//if (velocity.y < maxVelocity && vel.y > 0 || velocity.y > -maxVelocity && vel.y < 0) velocity.y += vel.y;
-		//velocity.x += vel.x;
-		//velocity.y += vel.y;
-		//if ( velocity.x > maxVelocity ) velocity.x = maxVelocity;
-		//if ( velocity.x < -maxVelocity ) velocity.x = -maxVelocity;
-
-	}
 
 	void Player::Gravity()
 	{
