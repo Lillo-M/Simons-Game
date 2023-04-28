@@ -10,7 +10,7 @@ EventsManager::~EventsManager()
 	pPlayerIM = NULL;
 }
 
-EventsManager::EventsManager(sf::RenderWindow& wds, Player& pP):
+EventsManager::EventsManager(sf::RenderWindow& wds, Entities::Player& pP):
 	kb(),
 	window(&wds),
 	pPlayer(&pP)

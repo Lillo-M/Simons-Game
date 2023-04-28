@@ -4,6 +4,7 @@
 #include "Player.h"
 #include "EventsManager.h"
 #include <SFML/System.hpp>
+#include <SFML/Config.hpp>
 #define WIDTH 1280
 #define HEIGHT 720
 #define FPS 60
@@ -15,7 +16,8 @@ public:
 	void Executar();
 
 private:
+	sf::ContextSettings settings;
 	EventsManager eManager;
-	Player player;
+	Entities::Player player;
 	sf::RenderWindow window;
 };

@@ -6,13 +6,13 @@
 class PlayerInputManager
 {
 public:
-	PlayerInputManager( Player* pP );
+	PlayerInputManager( Entities::Player* pP );
 	~PlayerInputManager();
 	void pressedInput(std::string s);
 	void releasedInput(std::string s);
 	bool jumpKeyReleased;
 private:
-	Player* pPlayer;
+	Entities::Player* pPlayer;
 	std::map<std::string, std::string> inputSets;
 	std::map<std::string, std::string>::const_iterator mapIt;
 };

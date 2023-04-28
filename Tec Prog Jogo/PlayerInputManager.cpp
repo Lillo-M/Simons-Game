@@ -1,7 +1,7 @@
 #include "PlayerInputManager.h"
 
 
-PlayerInputManager::PlayerInputManager(Player* pP ):
+PlayerInputManager::PlayerInputManager(Entities::Player* pP ):
 	pPlayer(pP),
 	jumpKeyReleased(true)
 {
@@ -79,7 +79,7 @@ void PlayerInputManager::releasedInput(std::string s)
 			}
 			if (mapIt->first == "Attack")
 			{
-				std::cout << std::endl << "attack!" << std::endl;
+				std::cout << std::endl << "attack Released!" << std::endl;
 			}
 		}
 	}
