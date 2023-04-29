@@ -35,5 +35,6 @@ namespace Entities
 		void MoveRight(const bool b);
 		void MoveLeft(const bool b);
 		void Fall();
+		void Attack(const bool b);
 	};
 }

@@ -26,7 +26,7 @@ namespace Entities
 	void Entity::Gravity()
 	{
 		float dt = static_cast<float>(clock.getElapsedTime().asMicroseconds()) / 1000000.f;
-		if (!grounded)
+		//if(!grounded)
 			velocity.y += gravity * dt;
 	}
 
@@ -64,15 +64,42 @@ namespace Entities
 
 	void Entity::OnCollision(Entity* ent)
 	{
-		float dist = ent->getPosition().y - Position.y;
-		if (dist < 0)
-			dist = -dist;
+		float dist_y = ent->getPosition().y - Position.y;
+		//if (dist_y < 0)
+		//	dist_y = -dist_y;
 		float dy = ent->getSize().y/2 + getSize().y/2;
-		if (dy < 0)
-			dy = -dy;
-		if (dist < dy)Position.y -= dy - dist;
-		grounded = true;
-		std::cout << std::endl << "Colision!" << std::endl;
+
+		float dist_x = ent->getPosition().x - Position.x;
+		//if (dist_x < 0)
+			//dist_x = -dist_x;
+		float dx = ent->getSize().x / 2 + getSize().x / 2;
+		/*if (dx - dist_x > dy - dist_y)
+		{
+			if ((dist_x < 0 ? -dist_x : dist_x) < dx && dx - dist_x > 0 && dist_x > 0)
+			{
+				Position.x += -dx + dist_x;
+				velocity.x = 0;
+			}
+			if ((dist_x < 0 ? -dist_x : dist_x) < dx && dx - dist_x > 0 && dist_x < 0)
+			{
+				Position.x -= -dx + dist_x;
+				velocity.x = 0;
+			}
+		}*/
+			if ((dist_y < 0 ? -dist_y : dist_y) < dy && dy - dist_y > 0 && dist_y > 0)
+			{
+				Position.y += -dy + dist_y;
+				velocity.y = 0;
+			}
+			if ((dist_y < 0 ? -dist_y : dist_y) < dy && dy - dist_y > 0 && dist_y < 0)
+			{
+				Position.y -= -dy + dist_y;
+				velocity.y = 0;
+			}
+
+		if( ent->getPosition().y > Position.y ) 
+			grounded = true;
+		std::cout << std::endl << "Colision!" << velocity.y << std::endl;
 	}
 
 	const bool Entity::getGrounded() const { return grounded; }

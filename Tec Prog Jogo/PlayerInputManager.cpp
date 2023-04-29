@@ -50,6 +50,7 @@ namespace Managers
 				if (mapIt->first == "Attack")
 				{
 					std::cout << std::endl << "attack!" << std::endl;
+					pPlayer->Attack(true);
 				}
 			}
 		}
@@ -77,6 +78,7 @@ namespace Managers
 				}
 				if (mapIt->first == "Attack")
 				{
+					pPlayer->Attack(false);
 					std::cout << std::endl << "attack Released!" << std::endl;
 				}
 			}

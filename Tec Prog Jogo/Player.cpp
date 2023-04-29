@@ -138,4 +138,12 @@ namespace Entities
 		fall = true;
 		std::cout << std::endl << "Fall!" << std::endl;
 	}
+	void Player::Attack(const bool b)
+	{
+		if(b)
+			HitBox.setFillColor(sf::Color(sf::Color::Red));
+		else
+			HitBox.setFillColor(sf::Color(sf::Color::White));
+
+	}
 }

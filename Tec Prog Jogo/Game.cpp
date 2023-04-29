@@ -4,10 +4,15 @@ Game::Game() :
 	window(sf::VideoMode(WIDTH, HEIGHT), "Simon's Game"),
 	eManager(window)
 {
-	player = new Entities::Player(sf::Vector2f(10, 10), sf::Vector2f(61, 100));
+	player = new Entities::Player(sf::Vector2f(300, 200), sf::Vector2f(61, 100));
 	entities.push_back(player);
 	eManager.setpPlayer(player);
-	entities.push_back(new Entities::Ground(sf::Vector2f(640, 700), sf::Vector2f(1280, 40)));
+	for (int i = 0; i < 10; i++)
+	{
+		entities.push_back(new Entities::Ground(sf::Vector2f(64 + i*128, 700), sf::Vector2f(128, 128)));
+	}
+	entities.push_back(new Entities::Ground(sf::Vector2f(300, 500), sf::Vector2f(128, 128)));
+	entities.push_back(new Entities::Ground(sf::Vector2f(1000, 500), sf::Vector2f(128, 128)));
 	settings.antialiasingLevel = 16;
 	Entities::Entity::setWindow(window);
 	window.setFramerateLimit(FPS);
