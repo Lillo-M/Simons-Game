@@ -11,16 +11,18 @@ namespace Entities
 		Entity(const sf::Vector2f pos = sf::Vector2f(0, 0), const sf::Vector2f size = sf::Vector2f(0, 0));
 		virtual ~Entity();
 		void Draw();
-		void Draw(sf::Sprite sprite);
 		virtual void Move() = 0;
 		static void setWindow(sf::RenderWindow& wds);
 		virtual void Gravity() = 0;
 		const bool getGrounded() const;
 		void setGrounded(bool b);
+		static void restartClock();
 	private:
 		static sf::RenderWindow* window;
 		static unsigned int Cont;
 	protected:
+		sf::Vector2f velocity;
+		static sf::Clock clock;
 		static const float gravity;
 		sf::Vector2f Position;
 		bool grounded;

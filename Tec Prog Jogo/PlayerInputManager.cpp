@@ -1,87 +1,90 @@
 #include "PlayerInputManager.h"
 
 
-PlayerInputManager::PlayerInputManager(Entities::Player* pP ):
-	pPlayer(pP),
-	jumpKeyReleased(true)
+namespace Managers
 {
-	inputSets["Jump"] = "W";
-	inputSets["Right"] = "D";
-	inputSets["Left"] = "A";
-	inputSets["Down"] = "S";
-	inputSets["Attack"] = "F";
-	mapIt = inputSets.begin();
-}
-
-PlayerInputManager::~PlayerInputManager()
-{
-	pPlayer = NULL;
-}
-
-void PlayerInputManager::pressedInput(std::string s)
-{
-	for (mapIt; mapIt != inputSets.end(); mapIt++)
+	PlayerInputManager::PlayerInputManager(Entities::Player* pP) :
+		pPlayer(pP),
+		jumpKeyReleased(true)
 	{
-		if (mapIt->second == s)
+		inputSets["Jump"] = "W";
+		inputSets["Right"] = "D";
+		inputSets["Left"] = "A";
+		inputSets["Down"] = "S";
+		inputSets["Attack"] = "F";
+		mapIt = inputSets.begin();
+	}
+
+	PlayerInputManager::~PlayerInputManager()
+	{
+		pPlayer = NULL;
+	}
+
+	void PlayerInputManager::pressedInput(std::string s)
+	{
+		for (mapIt; mapIt != inputSets.end(); mapIt++)
 		{
-			if (mapIt->first == "Jump")
+			if (mapIt->second == s)
 			{
-				std::cout << std::endl << "jump!" << std::endl;
-				if (jumpKeyReleased)
+				if (mapIt->first == "Jump")
 				{
-					pPlayer->Jump();
-					jumpKeyReleased = false;
+					if (jumpKeyReleased)
+					{
+						std::cout << std::endl << "jump!" << std::endl;
+						pPlayer->Jump();
+						jumpKeyReleased = false;
+					}
+				}
+				if (mapIt->first == "Right")
+				{
+					pPlayer->MoveRight(true);
+				}
+				if (mapIt->first == "Left")
+				{
+					pPlayer->MoveLeft(true);
+				}
+				if (mapIt->first == "Down")
+				{
+					pPlayer->Fall();
+				}
+				if (mapIt->first == "Attack")
+				{
+					std::cout << std::endl << "attack!" << std::endl;
 				}
 			}
-			if (mapIt->first == "Right")
-			{
-				pPlayer->MoveRight(true);
-			}
-			if (mapIt->first == "Left")
-			{
-				pPlayer->MoveLeft(true);
-			}
-			if (mapIt->first == "Down")
-			{
-				pPlayer->Fall();
-			}
-			if (mapIt->first == "Attack")
-			{
-				std::cout << std::endl << "attack!" << std::endl;
-			}
 		}
+		mapIt = inputSets.begin();
 	}
-	mapIt = inputSets.begin();
-}
 
-void PlayerInputManager::releasedInput(std::string s)
-{
-	for (mapIt; mapIt != inputSets.end(); mapIt++)
+	void PlayerInputManager::releasedInput(std::string s)
 	{
-		if (mapIt->second == s)
+		for (mapIt; mapIt != inputSets.end(); mapIt++)
 		{
-			if (mapIt->first == "Jump")
+			if (mapIt->second == s)
 			{
-				std::cout << std::endl << "jump Released!" << std::endl;
-				jumpKeyReleased = true;
-			}
-			if (mapIt->first == "Right")
-			{
-				pPlayer->MoveRight(false);
-			}
-			if (mapIt->first == "Left")
-			{
-				pPlayer->MoveLeft(false);
-			}
-			if (mapIt->first == "Down")
-			{
-				pPlayer->Fall();
-			}
-			if (mapIt->first == "Attack")
-			{
-				std::cout << std::endl << "attack Released!" << std::endl;
+				if (mapIt->first == "Jump")
+				{
+					std::cout << std::endl << "jump Released!" << std::endl;
+					jumpKeyReleased = true;
+				}
+				if (mapIt->first == "Right")
+				{
+					pPlayer->MoveRight(false);
+				}
+				if (mapIt->first == "Left")
+				{
+					pPlayer->MoveLeft(false);
+				}
+				if (mapIt->first == "Down")
+				{
+					pPlayer->Fall();
+				}
+				if (mapIt->first == "Attack")
+				{
+					std::cout << std::endl << "attack Released!" << std::endl;
+				}
 			}
 		}
+		mapIt = inputSets.begin();
 	}
-	mapIt = inputSets.begin();
 }

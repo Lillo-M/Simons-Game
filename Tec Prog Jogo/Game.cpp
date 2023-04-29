@@ -1,5 +1,4 @@
 #include "Game.h"
-#include <stdio.h>
 
 Game::Game() :
 	window(sf::VideoMode(WIDTH, HEIGHT), "Simon's Game"),
@@ -25,5 +24,7 @@ void Game::Executar()
 		window.clear();
 		player.Draw();
 		window.display();
+		Entities::Entity::restartClock();
+		Sleep(8);
 	}
 }

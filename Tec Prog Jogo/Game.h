@@ -7,7 +7,8 @@
 #include <SFML/Config.hpp>
 #define WIDTH 1280
 #define HEIGHT 720
-#define FPS 60
+#define FPS 600
+#include <Windows.h>
 class Game
 {
 public:
@@ -17,7 +18,7 @@ public:
 
 private:
 	sf::ContextSettings settings;
-	EventsManager eManager;
+	Managers::EventsManager eManager;
 	Entities::Player player;
 	sf::RenderWindow window;
 };
