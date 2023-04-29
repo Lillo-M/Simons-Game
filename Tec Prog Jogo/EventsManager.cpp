@@ -14,10 +14,10 @@ namespace Managers
 		pPlayerIM = NULL;
 	}
 
-	EventsManager::EventsManager(sf::RenderWindow& wds, Entities::Player& pP) :
+	EventsManager::EventsManager(sf::RenderWindow& wds, Entities::Player* pP) :
 		kb(),
 		window(&wds),
-		pPlayer(&pP)
+		pPlayer(pP)
 	{
 		pPlayerIM = new PlayerInputManager(pPlayer);
 		keyMap.clear();
@@ -86,5 +86,10 @@ namespace Managers
 			if (evente.type == sf::Event::Closed)
 				window->close();
 		}
+	}
+	void EventsManager::setpPlayer(Entities::Player* pP)
+	{
+		pPlayer = pP;
+		pPlayerIM->setpPlayer(pPlayer);
 	}
 }

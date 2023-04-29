@@ -20,7 +20,7 @@ namespace Entities
 		bool BoolMoveRight;
 		bool boolMoveLeft;
 		bool secondJump;
-		sf::Texture texture;
+		bool fall;
 	public:
 		Player(const sf::Vector2f pos = sf::Vector2f(0, 0), const sf::Vector2f size = sf::Vector2f(0, 0));
 		~Player();
@@ -28,7 +28,7 @@ namespace Entities
 		void operator--();
 		sf::Vector2f getPosition();
 		const sf::Vector2f getVelocity() const;
-		void Gravity();
+		//void Gravity();
 		const bool getAlive() const;
 		void setDead();
 		void Jump();

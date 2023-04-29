@@ -31,6 +31,12 @@
     <ClCompile Include="PlayerInputManager.cpp">
       <Filter>Arquivos de Origem\src</Filter>
     </ClCompile>
+    <ClCompile Include="CollisionManager.cpp">
+      <Filter>Arquivos de Origem\src</Filter>
+    </ClCompile>
+    <ClCompile Include="Ground.cpp">
+      <Filter>Arquivos de Origem</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -46,6 +52,15 @@
       <Filter>Arquivos de Origem\include</Filter>
     </ClInclude>
     <ClInclude Include="PlayerInputManager.h">
+      <Filter>Arquivos de Origem\include</Filter>
+    </ClInclude>
+    <ClInclude Include="CollisionManager.h">
+      <Filter>Arquivos de Origem\include</Filter>
+    </ClInclude>
+    <ClInclude Include="EntityList.h">
+      <Filter>Arquivos de Origem\include</Filter>
+    </ClInclude>
+    <ClInclude Include="Ground.h">
       <Filter>Arquivos de Origem\include</Filter>
     </ClInclude>
   </ItemGroup>

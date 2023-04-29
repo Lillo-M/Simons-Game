@@ -3,13 +3,14 @@
 namespace Entities
 {
 	Player::Player(const sf::Vector2f pos, const sf::Vector2f size) :
-		Entity(pos, size),
+		Entity(pos, size, false),
 		lives(LIVES),
 		alive(true),
 		maxVelocity(MAXV),
 		boolMoveLeft(false),
 		BoolMoveRight(false),
-		secondJump(false)
+		secondJump(false),
+		fall(false)
 	{
 		HitBox.setOrigin(size.x / 2, size.y / 2);
 		if (texture.loadFromFile("Assets/Idle.png"))
@@ -37,14 +38,6 @@ namespace Entities
 
 	const sf::Vector2f Player::getVelocity() const { return velocity; }
 
-
-	void Player::Gravity()
-	{
-		float dt = static_cast<float>(clock.getElapsedTime().asMicroseconds()) / 1000000.f;
-		if (!grounded)
-			velocity.y += gravity * dt;
-	}
-
 	void Player::Move()
 	{
 		float dt = static_cast<float>(clock.getElapsedTime().asMicroseconds()) / 1000000.f;
@@ -62,6 +55,12 @@ namespace Entities
 			if (velocity.x < maxVelocity)velocity.x += PSPEED * dt; // Velocidade De Teste
 			else velocity.x = maxVelocity; // Velocidade De Teste
 			if (velocity.x > maxVelocity) velocity.x = maxVelocity;
+		}
+		if (fall)
+		{
+			if (!grounded) velocity.y += -5 * JUMPHEIGHT * dt;
+			else
+				fall = false;
 		}
 
 		//if (!boolMoveLeft && !BoolMoveRight) velocity.x = 0;
@@ -102,6 +101,7 @@ namespace Entities
 		{
 			grounded = false;
 			secondJump = true;
+			fall = false;
 			//std::cout << velocity.y << "vy" << std::endl;
 			//std::cout << Position.y << "apy" << std::endl;
 			velocity.y = JUMPHEIGHT;// Valor De Teste
@@ -109,6 +109,7 @@ namespace Entities
 		else
 			if (secondJump)
 			{
+				fall = false;
 				secondJump = false;
 				velocity.y = JUMPHEIGHT;// Valor De Teste
 			}
@@ -134,7 +135,7 @@ namespace Entities
 
 	void Player::Fall()
 	{
-		float dt = static_cast<float>(clock.getElapsedTime().asMicroseconds()) / 1000000.f;
-		if (!grounded) velocity.y += gravity * dt;//valores de teste
+		fall = true;
+		std::cout << std::endl << "Fall!" << std::endl;
 	}
 }

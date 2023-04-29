@@ -16,8 +16,9 @@ namespace Managers
 		std::map<sf::Keyboard::Key, std::string >::const_iterator mapIt;
 		PlayerInputManager* pPlayerIM;
 	public:
-		EventsManager(sf::RenderWindow& wds, Entities::Player& pP);
+		EventsManager(sf::RenderWindow& wds, Entities::Player* pP = NULL);
 		~EventsManager();
 		void Manage();
+		void setpPlayer(Entities::Player* pP);
 	};
 }

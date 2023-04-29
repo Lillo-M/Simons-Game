@@ -9,6 +9,9 @@
 #define HEIGHT 720
 #define FPS 600
 #include <Windows.h>
+#include <list>
+#include "Ground.h"
+#include "CollisionManager.h"
 class Game
 {
 public:
@@ -17,8 +20,11 @@ public:
 	void Executar();
 
 private:
+	Managers::CollisionManager CManager;
 	sf::ContextSettings settings;
 	Managers::EventsManager eManager;
-	Entities::Player player;
+	std::list<Entities::Entity*> entities;
+	std::list<Entities::Entity*>::iterator entIt;
+	Entities::Player* player;
 	sf::RenderWindow window;
 };

@@ -75,10 +75,6 @@ namespace Managers
 				{
 					pPlayer->MoveLeft(false);
 				}
-				if (mapIt->first == "Down")
-				{
-					pPlayer->Fall();
-				}
 				if (mapIt->first == "Attack")
 				{
 					std::cout << std::endl << "attack Released!" << std::endl;
@@ -86,5 +82,9 @@ namespace Managers
 			}
 		}
 		mapIt = inputSets.begin();
+	}
+	void PlayerInputManager::setpPlayer(Entities::Player* pP)
+	{
+		pPlayer = pP;
 	}
 }

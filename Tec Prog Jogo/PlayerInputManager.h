@@ -16,6 +16,7 @@ namespace Managers
 		void pressedInput(std::string s);
 		void releasedInput(std::string s);
 		bool jumpKeyReleased;
+		void setpPlayer(Entities::Player* pP);
 	private:
 		Entities::Player* pPlayer;
 		std::map<std::string, std::string> inputSets;
