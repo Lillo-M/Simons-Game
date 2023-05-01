@@ -1,5 +1,6 @@
 #include "Entity.h"
 #include <iostream>
+#include <math.h>
 namespace Entities
 {
 	Entity::Entity(const sf::Vector2f pos, const sf::Vector2f size, const bool isG) :
@@ -25,7 +26,6 @@ namespace Entities
 
 	void Entity::Gravity()
 	{
-		float dt = static_cast<float>(clock.getElapsedTime().asMicroseconds()) / 1000000.f;
 		//if(!grounded)
 			velocity.y += gravity * dt;
 	}
@@ -33,10 +33,6 @@ namespace Entities
 
 	void Entity::setGrounded(bool b) { grounded = b; }
 
-	void Entity::restartClock()
-	{
-		Entity::clock.restart();
-	}
 
 	void Entity::setWindow(sf::RenderWindow& wds)
 	{
@@ -64,48 +60,53 @@ namespace Entities
 
 	void Entity::OnCollision(Entity* ent)
 	{
+		//std::cout << std::endl << "Colision!" << velocity.y << std::endl;
+		float size_y = ent->getSize().y / 2 + getSize().y / 2;
+		float size_x = ent->getSize().x / 2 + getSize().x / 2;
 		float dist_y = ent->getPosition().y - Position.y;
-		//if (dist_y < 0)
-		//	dist_y = -dist_y;
-		float dy = ent->getSize().y/2 + getSize().y/2;
-
 		float dist_x = ent->getPosition().x - Position.x;
-		//if (dist_x < 0)
-			//dist_x = -dist_x;
-		float dx = ent->getSize().x / 2 + getSize().x / 2;
-		/*if (dx - dist_x > dy - dist_y)
+		if ( abs(dist_x) - size_x  > abs(dist_y) - size_y)
 		{
-			if ((dist_x < 0 ? -dist_x : dist_x) < dx && dx - dist_x > 0 && dist_x > 0)
+			if (dist_x > 0)
 			{
-				Position.x += -dx + dist_x;
-				velocity.x = 0;
+				Position.x += dist_x - size_x;
+				if(velocity.x > 0) velocity.x = 0;
 			}
-			if ((dist_x < 0 ? -dist_x : dist_x) < dx && dx - dist_x > 0 && dist_x < 0)
+			if (dist_x < 0)
 			{
-				Position.x -= -dx + dist_x;
-				velocity.x = 0;
+				Position.x += dist_x + size_x;
+				if (velocity.x < 0)velocity.x = 0;
 			}
-		}*/
-			if ((dist_y < 0 ? -dist_y : dist_y) < dy && dy - dist_y > 0 && dist_y > 0)
+		}
+		else
+		{
+			if (dist_y > 0)
 			{
-				Position.y += -dy + dist_y;
+				Position.y += dist_y - size_y;
+				velocity.y = 0;
+				grounded = true;
+			}
+			if (dist_y < 0)
+			{
+				Position.y -= dist_y - size_y;
 				velocity.y = 0;
 			}
-			if ((dist_y < 0 ? -dist_y : dist_y) < dy && dy - dist_y > 0 && dist_y < 0)
-			{
-				Position.y -= -dy + dist_y;
-				velocity.y = 0;
-			}
+		}
+		// if (ent->getPosition().y > Position.y) {}
+			
+	}
 
-		if( ent->getPosition().y > Position.y ) 
-			grounded = true;
-		std::cout << std::endl << "Colision!" << velocity.y << std::endl;
+	void Entity::updateDeltaTime()
+	{
+		//dt = static_cast<float>(clock.getElapsedTime().asSeconds());
+		dt = 1 / 600.f;
+		Entity::clock.restart();
 	}
 
 	const bool Entity::getGrounded() const { return grounded; }
-
+	float Entity::dt = static_cast<float>(clock.getElapsedTime().asMicroseconds()) / 1000.f;
 	unsigned int Entity::Cont(0);
-	const float Entity::gravity(static_cast<float>(98.f)); // 8.166
+	const float Entity::gravity(static_cast<float>(40.8)); // 8.166
 	sf::RenderWindow* Entity::window(NULL);
 	sf::Clock Entity::clock;
 }

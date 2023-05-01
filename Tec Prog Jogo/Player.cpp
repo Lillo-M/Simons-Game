@@ -40,8 +40,7 @@ namespace Entities
 
 	void Player::Move()
 	{
-		float dt = static_cast<float>(clock.getElapsedTime().asMicroseconds()) / 1000000.f;
-		//std::cout << std::endl << dt << std::endl;
+		std::cout << std::endl << dt << std::endl;
 		if (boolMoveLeft)
 		{
 			//std::cout << std::endl << "MoveLeft" << std::endl;
@@ -58,7 +57,7 @@ namespace Entities
 		}
 		if (fall)
 		{
-			if (!grounded) velocity.y += -5 * JUMPHEIGHT * dt;
+			if (!grounded) velocity.y -= 5 * JUMPHEIGHT * dt;
 			else
 				fall = false;
 		}

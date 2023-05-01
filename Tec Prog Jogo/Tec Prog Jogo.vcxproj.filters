@@ -35,7 +35,7 @@
       <Filter>Arquivos de Origem\src</Filter>
     </ClCompile>
     <ClCompile Include="Ground.cpp">
-      <Filter>Arquivos de Origem</Filter>
+      <Filter>Arquivos de Origem\src</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

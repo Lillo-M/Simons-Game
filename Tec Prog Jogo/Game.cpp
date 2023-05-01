@@ -4,7 +4,8 @@ Game::Game() :
 	window(sf::VideoMode(WIDTH, HEIGHT), "Simon's Game"),
 	eManager(window)
 {
-	player = new Entities::Player(sf::Vector2f(300, 200), sf::Vector2f(61, 100));
+	entities.clear();
+	player = new Entities::Player(sf::Vector2f(500, 150), sf::Vector2f(61, 100));
 	entities.push_back(player);
 	eManager.setpPlayer(player);
 	for (int i = 0; i < 10; i++)
@@ -27,10 +28,12 @@ Game::~Game()
 	{
 		delete (*entIt);
 	}
+	entities.clear();
 }
 
 void Game::Executar()
 { 
+	Entities::Entity::updateDeltaTime();
 	while (window.isOpen())
 	{
 		eManager.Manage();
@@ -38,6 +41,7 @@ void Game::Executar()
 		{
 			(*entIt)->Move();
 		}
+		Entities::Entity::updateDeltaTime();
 		CManager.Manage();
 		entIt = entities.begin();
 		window.clear();
@@ -47,7 +51,6 @@ void Game::Executar()
 		}
 		entIt = entities.begin();
 		window.display();
-		Entities::Entity::restartClock();
-		Sleep(8);
+		//Sleep(8);
 	}
 }

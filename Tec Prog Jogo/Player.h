@@ -7,7 +7,7 @@
 #define LIVES 5
 #define MAXV 10
 #define ATRITO 45
-#define JUMPHEIGHT -25
+#define JUMPHEIGHT -15
 #define PSPEED 75
 namespace Entities
 {

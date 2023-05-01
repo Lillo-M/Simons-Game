@@ -1,2 +1,10 @@
-﻿  Entity.cpp
+﻿  Game.cpp
+C:\Users\muron\OneDrive\Documentos\Projetos\Tec Prog Jogo\Tec Prog Jogo\Game.cpp(13,59): warning C4244: 'argumento': conversão de 'int' para 'T', possível perda de dados
+          with
+          [
+              T=float
+          ]
+  Player.cpp
+  main.cpp
+  Gerando Código...
   Tec Prog Jogo.vcxproj -> C:\Users\muron\OneDrive\Documentos\Projetos\Tec Prog Jogo\Debug\Tec Prog Jogo.exe

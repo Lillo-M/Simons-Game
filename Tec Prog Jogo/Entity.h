@@ -16,15 +16,16 @@ namespace Entities
 		void Gravity();
 		const bool getGrounded() const;
 		void setGrounded(bool b);
-		static void restartClock();
 		sf::Vector2f getPosition() const;
 		sf::Vector2f getSize() const;
 		bool getIsGround();
 		virtual void OnCollision(Entity* ent);
+		static void updateDeltaTime();
 	private:
 		static sf::RenderWindow* window;
 		static unsigned int Cont;
 	protected:
+		static float dt;
 		const bool isGround;
 		sf::Vector2f velocity;
 		static sf::Clock clock;

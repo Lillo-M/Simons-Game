@@ -20,5 +20,7 @@ namespace Managers
 		~EventsManager();
 		void Manage();
 		void setpPlayer(Entities::Player* pP);
+		void keyPressedEvent(sf::Event::KeyEvent key);
+		void keyReleasedEvent(sf::Event::KeyEvent key);
 	};
 }

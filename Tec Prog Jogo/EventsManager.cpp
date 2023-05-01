@@ -59,37 +59,46 @@ namespace Managers
 		mapIt = keyMap.begin();
 	}
 
-	void EventsManager::Manage()
-	{
-		sf::Event evente;
-		//window->waitEvent(evente);
-		while (window->pollEvent(evente))
-		{
-			if (evente.type == sf::Event::KeyPressed)
-			{
-				for (mapIt; mapIt != keyMap.end(); mapIt++)
-				{
-					if (mapIt->first == evente.key.code)
-						pPlayerIM->pressedInput(mapIt->second);
-				}
-				mapIt = keyMap.begin();
-			}
-			if (evente.type == sf::Event::KeyReleased)
-			{
-				for (mapIt; mapIt != keyMap.end(); mapIt++)
-				{
-					if (mapIt->first == evente.key.code)
-						pPlayerIM->releasedInput(mapIt->second);
-				}
-				mapIt = keyMap.begin();
-			}
-			if (evente.type == sf::Event::Closed)
-				window->close();
-		}
-	}
 	void EventsManager::setpPlayer(Entities::Player* pP)
 	{
 		pPlayer = pP;
 		pPlayerIM->setpPlayer(pPlayer);
 	}
+	void EventsManager::keyPressedEvent(sf::Event::KeyEvent key)
+	{
+		for (mapIt; mapIt != keyMap.end(); mapIt++)
+		{
+			if (mapIt->first == key.code)
+				pPlayerIM->pressedInput(mapIt->second);
+		}
+		mapIt = keyMap.begin();
+	}
+	void EventsManager::keyReleasedEvent(sf::Event::KeyEvent key)
+	{
+		for (mapIt; mapIt != keyMap.end(); mapIt++)
+		{
+			if (mapIt->first == key.code)
+				pPlayerIM->releasedInput(mapIt->second);
+		}
+		mapIt = keyMap.begin();
+	}
+
+	void EventsManager::Manage()
+	{
+		sf::Event event;
+		while (window->pollEvent(event))
+		{
+			if (event.type == sf::Event::KeyPressed)
+			{
+				keyPressedEvent(event.key);
+			}
+			if (event.type == sf::Event::KeyReleased)
+			{
+				keyReleasedEvent(event.key);
+			}
+			if (event.type == sf::Event::Closed)
+				window->close();
+		}
+	}
+	
 }

@@ -7,7 +7,7 @@
 #include <SFML/Config.hpp>
 #define WIDTH 1280
 #define HEIGHT 720
-#define FPS 600
+#define FPS 60
 #include <Windows.h>
 #include <list>
 #include "Ground.h"
