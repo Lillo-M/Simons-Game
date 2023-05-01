@@ -26,8 +26,9 @@ namespace Entities
 
 	void Entity::Gravity()
 	{
+		float mult = 60;
 		//if(!grounded)
-			velocity.y += gravity * dt;
+			velocity.y += gravity * dt * mult;
 	}
 
 
@@ -98,15 +99,19 @@ namespace Entities
 
 	void Entity::updateDeltaTime()
 	{
-		//dt = static_cast<float>(clock.getElapsedTime().asSeconds());
-		dt = 1 / 600.f;
+		dt = static_cast<float>(clock.getElapsedTime().asSeconds());
+		if (dt > 1)
+		{
+			std::cout << std::endl << "STUTTER DETECTED!" << std::endl;
+			dt = 0;
+		}
 		Entity::clock.restart();
 	}
 
 	const bool Entity::getGrounded() const { return grounded; }
-	float Entity::dt = static_cast<float>(clock.getElapsedTime().asMicroseconds()) / 1000.f;
+	float Entity::dt = 0;
 	unsigned int Entity::Cont(0);
-	const float Entity::gravity(static_cast<float>(40.8)); // 8.166
+	const float Entity::gravity(static_cast<float>(0.78)); // 8.166
 	sf::RenderWindow* Entity::window(NULL);
 	sf::Clock Entity::clock;
 }

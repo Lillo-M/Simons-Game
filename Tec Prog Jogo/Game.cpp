@@ -33,7 +33,6 @@ Game::~Game()
 
 void Game::Executar()
 { 
-	Entities::Entity::updateDeltaTime();
 	while (window.isOpen())
 	{
 		eManager.Manage();

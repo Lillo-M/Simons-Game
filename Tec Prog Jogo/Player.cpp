@@ -40,57 +40,39 @@ namespace Entities
 
 	void Player::Move()
 	{
-		std::cout << std::endl << dt << std::endl;
 		if (boolMoveLeft)
 		{
-			//std::cout << std::endl << "MoveLeft" << std::endl;
-			if (velocity.x > -maxVelocity)velocity.x -= PSPEED  * dt; // Velocidade De Teste
+			if (velocity.x > -maxVelocity)velocity.x -= PSPEED * dt * MULT; // Velocidade De Teste
 			else velocity.x = -maxVelocity; // Velocidade De Teste
 			if (velocity.x < -maxVelocity) velocity.x = -maxVelocity;
 		}
 		if (BoolMoveRight)
 		{
-			//std::cout << std::endl << "MoveRight" << std::endl;
-			if (velocity.x < maxVelocity)velocity.x += PSPEED * dt; // Velocidade De Teste
+			if (velocity.x < maxVelocity)velocity.x += PSPEED * dt * MULT; // Velocidade De Teste
 			else velocity.x = maxVelocity; // Velocidade De Teste
 			if (velocity.x > maxVelocity) velocity.x = maxVelocity;
 		}
 		if (fall)
 		{
-			if (!grounded) velocity.y -= 5 * JUMPHEIGHT * dt;
+			if (!grounded) velocity.y -= JUMPHEIGHT/8 * dt * MULT;//Valores de Teste
 			else
 				fall = false;
 		}
 
-		//if (!boolMoveLeft && !BoolMoveRight) velocity.x = 0;
-
 		if (velocity.x < 0 && !boolMoveLeft && !BoolMoveRight) // Atrito
 		{
-			if (velocity.x + ATRITO * dt < 0)
-				velocity.x += ATRITO * dt;
-			else
+			velocity.x += ATRITO * dt * MULT;
+			if (velocity.x > 0)
 				velocity.x = 0;
 		}
 		else if (velocity.x > 0 && !boolMoveLeft && !BoolMoveRight) // Atrito
 		{
-			if (velocity.x - ATRITO * dt > 0)
-				velocity.x -= ATRITO * dt;
-			else
+			velocity.x -= ATRITO * dt * MULT;
+			if (velocity.x < 0)
 				velocity.x = 0;
 		}
-		//else if (!boolMoveLeft && !BoolMoveRight)velocity.x = 0;
-		
-		//std::cout << "y" << std::endl << velocity.y << std::endl;
-		//std::cout << "x" << std::endl << velocity.x << std::endl;
-
-		//std::cout << "y" << std::endl << Position.y << std::endl;
-		//std::cout << "x" << std::endl << Position.x << std::endl;
-		//std::cout << "a" << velocity.y << std::endl;
-
-		Position.x += velocity.x;
-		Position.y += velocity.y;
-		//std::cout << Position.y << "bpy" << std::endl;
-		//std::cout << "b" << velocity.y << std::endl;
+		Position.x += velocity.x * dt * MULT;
+		Position.y += velocity.y * dt * MULT;
 		Gravity();
 	}
 
@@ -101,8 +83,6 @@ namespace Entities
 			grounded = false;
 			secondJump = true;
 			fall = false;
-			//std::cout << velocity.y << "vy" << std::endl;
-			//std::cout << Position.y << "apy" << std::endl;
 			velocity.y = JUMPHEIGHT;// Valor De Teste
 		}
 		else

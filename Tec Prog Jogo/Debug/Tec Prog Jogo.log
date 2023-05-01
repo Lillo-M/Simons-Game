@@ -1,10 +1,22 @@
-﻿  Game.cpp
+﻿  EventsManager.cpp
+  Game.cpp
 C:\Users\muron\OneDrive\Documentos\Projetos\Tec Prog Jogo\Tec Prog Jogo\Game.cpp(13,59): warning C4244: 'argumento': conversão de 'int' para 'T', possível perda de dados
           with
           [
               T=float
           ]
   Player.cpp
+C:\Users\muron\OneDrive\Documentos\Projetos\Tec Prog Jogo\Tec Prog Jogo\Player.cpp(64,30): warning C4244: '+=': conversão de 'double' para 'T', possível perda de dados
+          with
+          [
+              T=float
+          ]
+C:\Users\muron\OneDrive\Documentos\Projetos\Tec Prog Jogo\Tec Prog Jogo\Player.cpp(70,30): warning C4244: '-=': conversão de 'double' para 'T', possível perda de dados
+          with
+          [
+              T=float
+          ]
+  PlayerInputManager.cpp
   main.cpp
   Gerando Código...
   Tec Prog Jogo.vcxproj -> C:\Users\muron\OneDrive\Documentos\Projetos\Tec Prog Jogo\Debug\Tec Prog Jogo.exe
