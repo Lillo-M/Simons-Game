@@ -1,6 +1,6 @@
 #include "Entity.h"
 #include <iostream>
-#include <math.h>
+#include <math.h> //Fazer uma Função ABS
 namespace Entities
 {
 	Entity::Entity(const sf::Vector2f pos, const sf::Vector2f size, const bool isG) :
@@ -66,7 +66,7 @@ namespace Entities
 		float size_x = ent->getSize().x / 2 + getSize().x / 2;
 		float dist_y = ent->getPosition().y - Position.y;
 		float dist_x = ent->getPosition().x - Position.x;
-		if ( abs(dist_x) - size_x  > abs(dist_y) - size_y)
+		if ( abs(dist_x) - size_x  > abs(dist_y) - size_y) // retirar ABS 
 		{
 			if (dist_x > 0)
 			{
