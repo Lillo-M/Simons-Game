@@ -8,7 +8,7 @@
 #define WIDTH 1280
 #define HEIGHT 720
 #define FPS 0
-#include <Windows.h>
+//#include <Windows.h>
 #include <list>
 #include "Ground.h"
 #include "CollisionManager.h"
