@@ -155,8 +155,12 @@
     <ClInclude Include="EventsManager.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Ground.h" />
+    <ClInclude Include="List.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerInputManager.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Makefile" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,8 +1,6 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
-#define WIDTH 1280
-#define HEIGHT 720
 namespace Entities
 {
 	class Entity
@@ -21,6 +19,7 @@ namespace Entities
 		bool getIsGround();
 		virtual void OnCollision(Entity* ent);
 		static void updateDeltaTime();
+		static unsigned int getContEntities();
 	private:
 		static sf::RenderWindow* window;
 		static unsigned int Cont;

@@ -10,6 +10,7 @@
 #define FPS 0
 //#include <Windows.h>
 #include <list>
+#include "List.h"
 #include "Ground.h"
 #include "CollisionManager.h"
 class Game
@@ -23,6 +24,7 @@ private:
 	Managers::CollisionManager CManager;
 	sf::ContextSettings settings;
 	Managers::EventsManager eManager;
+	Math::List<Entities::Entity> lentities;
 	std::list<Entities::Entity*> entities;
 	std::list<Entities::Entity*>::iterator entIt;
 	Entities::Player* player;

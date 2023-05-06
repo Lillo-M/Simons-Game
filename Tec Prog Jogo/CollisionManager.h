@@ -1,6 +1,6 @@
 #pragma once
-#include <list>
 #include "Entity.h"
+#include "List.h"
 namespace Managers
 {
 
@@ -9,10 +9,9 @@ namespace Managers
 	public:
 		CollisionManager();
 		~CollisionManager();
-		void getList(std::list<Entities::Entity*>& ents);
+		void getList(Math::List<Entities::Entity>& ents);
 		void Manage();
 	private:
-		std::list<Entities::Entity*>* entities;
-		std::list<Entities::Entity*>::iterator entIt;
+		Math::List<Entities::Entity>* entities;
 	};
 }

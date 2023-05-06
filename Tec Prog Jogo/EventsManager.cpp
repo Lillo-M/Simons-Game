@@ -1,5 +1,4 @@
 #include "EventsManager.h"
-#define VVV 10
 #include <iostream>
 
 

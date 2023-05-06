@@ -63,5 +63,11 @@
     <ClInclude Include="Ground.h">
       <Filter>Arquivos de Origem\include</Filter>
     </ClInclude>
+    <ClInclude Include="List.h">
+      <Filter>Arquivos de Origem\include</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Makefile" />
   </ItemGroup>
 </Project>

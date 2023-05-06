@@ -8,7 +8,7 @@
 #define MAXV 10
 #define ATRITO 0.45
 #define JUMPHEIGHT -15
-#define PSPEED 75
+#define PSPEED 50
 #define MULT 60
 namespace Entities
 {

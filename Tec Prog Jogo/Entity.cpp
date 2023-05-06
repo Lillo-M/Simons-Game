@@ -108,6 +108,11 @@ namespace Entities
 		Entity::clock.restart();
 	}
 
+	unsigned int Entity::getContEntities()
+	{
+		return Entity::Cont;
+	}
+
 	const bool Entity::getGrounded() const { return grounded; }
 	float Entity::dt = 0;
 	unsigned int Entity::Cont(0);
