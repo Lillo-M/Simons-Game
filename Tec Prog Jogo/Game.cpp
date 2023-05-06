@@ -26,7 +26,7 @@ Game::Game() :
 	Entities::Entity::setWindow(window);
 	window.setFramerateLimit(FPS);
 	entIt = entities.begin();
-	CManager.getList(entities, lentities);
+	CManager.getList(lentities);
 	Executar();
 }
 

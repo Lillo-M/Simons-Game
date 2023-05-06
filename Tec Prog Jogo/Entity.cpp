@@ -10,7 +10,7 @@ namespace Entities
 		velocity(sf::Vector2f(0,0)),
 		isGround(isG)
 	{
-		HitBox.setFillColor(sf::Color(sf::Color::White));// RGBA setados em 255 para testes
+		HitBox.setFillColor(sf::Color(sf::Color::White));// RGBA de Teste
 		HitBox.setPosition(Position);
 		Cont++;
 	}
@@ -27,7 +27,6 @@ namespace Entities
 	void Entity::Gravity()
 	{
 		float mult = 60;
-		//if(!grounded)
 			velocity.y += gravity * dt * mult;
 	}
 
@@ -61,7 +60,6 @@ namespace Entities
 
 	void Entity::OnCollision(Entity* ent)
 	{
-		//std::cout << std::endl << "Colision!" << velocity.y << std::endl;
 		float size_y = ent->getSize().y / 2 + getSize().y / 2;
 		float size_x = ent->getSize().x / 2 + getSize().x / 2;
 		float dist_y = ent->getPosition().y - Position.y;
@@ -93,8 +91,6 @@ namespace Entities
 				velocity.y = 0;
 			}
 		}
-		// if (ent->getPosition().y > Position.y) {}
-			
 	}
 
 	void Entity::updateDeltaTime()
@@ -114,6 +110,7 @@ namespace Entities
 	}
 
 	const bool Entity::getGrounded() const { return grounded; }
+
 	float Entity::dt = 0;
 	unsigned int Entity::Cont(0);
 	const float Entity::gravity(static_cast<float>(0.78)); // 8.166
