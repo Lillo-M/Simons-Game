@@ -8,4 +8,3 @@ Changes: *.cpp *.h
 
 clean:
 	rm *.o Game
-	aaaaaaaaaaaaaaaaaaaaaa
