@@ -12,6 +12,5 @@ namespace Entities
 		Ground(const sf::Vector2f pos, const sf::Vector2f size);
 		~Ground();
 		void Move();
-
 	};
 }

@@ -1,8 +1,8 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
-#include "Player.h"
-#include "EventsManager.h"
+#include "Entities/Player.h"
+#include "Managers/EventsManager.h"
 #include <SFML/System.hpp>
 #include <SFML/Config.hpp>
 #define WIDTH 1280
@@ -10,9 +10,10 @@
 #define FPS 0
 //#include <Windows.h>
 #include <list>
-#include "List.h"
-#include "Ground.h"
-#include "CollisionManager.h"
+#include "Math/List.h"
+#include "Entities/Ground.h"
+#include "Managers/CollisionManager.h"
+
 class Game
 {
 public:
@@ -25,8 +26,8 @@ private:
 	sf::ContextSettings settings;
 	Managers::EventsManager eManager;
 	Math::List<Entities::Entity> lentities;
-	std::list<Entities::Entity*> entities;
-	std::list<Entities::Entity*>::iterator entIt;
+	//std::list<Entities::Entity*> entities;
+	//std::list<Entities::Entity*>::iterator entIt;
 	Entities::Player* player;
 	sf::RenderWindow window;
 };

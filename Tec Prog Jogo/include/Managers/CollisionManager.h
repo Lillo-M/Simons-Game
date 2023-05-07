@@ -1,6 +1,6 @@
 #pragma once
-#include "Entity.h"
-#include "List.h"
+#include "../Entities/Entity.h"
+#include "../Math/List.h"
 namespace Managers
 {
 

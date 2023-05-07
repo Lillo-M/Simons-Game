@@ -1,15 +1,15 @@
 #pragma once
 
-#include "Player.h"
+#include "../Entities/Player.h"
 #include <SFML/Window.hpp>
-#include "PlayerInputManager.h"
+#include "../Managers/PlayerInputManager.h"
 
 namespace Managers
 {
 	class EventsManager
 	{
 	private:
-		sf::Keyboard kb;
+		//sf::Keyboard kb;
 		sf::RenderWindow* window;
 		Entities::Player* pPlayer;
 		std::map<sf::Keyboard::Key, std::string > keyMap;

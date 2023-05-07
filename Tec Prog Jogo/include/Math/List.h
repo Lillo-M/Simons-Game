@@ -13,8 +13,8 @@ namespace Math
 		public:
 			Element<TE>* next;
 			TE* data;
-			Element( T* dt = NULL, Element* nxt = NULL ):
-				data(dt),next(nxt)
+			Element( T* dt = NULL):
+				data(dt),next(NULL)
 			{
 			}
 
@@ -113,7 +113,7 @@ namespace Math
 
 		const bool empty() const { return (size == 0 ? true : false); }
 
-		int getSize() const { return size; }
+		const int getSize() const { return size; }
 
 		void remove(int idx)
 		{
