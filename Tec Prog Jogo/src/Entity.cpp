@@ -1,4 +1,4 @@
-#include "Entity.h"
+#include "../include/Entity.h"
 #include <iostream>
 #include <math.h> //Fazer uma Função ABS
 namespace Entities

@@ -1,4 +1,4 @@
-#include "CollisionManager.h"
+#include "../include/CollisionManager.h"
 
 Managers::CollisionManager::CollisionManager()
 {

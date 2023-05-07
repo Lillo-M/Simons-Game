@@ -139,28 +139,42 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="CollisionManager.cpp" />
-    <ClCompile Include="Entity.cpp" />
-    <ClCompile Include="EventsManager.cpp" />
-    <ClCompile Include="Game.cpp" />
-    <ClCompile Include="Ground.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Player.cpp" />
-    <ClCompile Include="PlayerInputManager.cpp" />
+    <ClCompile Include="src\CollisionManager.cpp" />
+    <ClCompile Include="src\Entity.cpp" />
+    <ClCompile Include="src\EventsManager.cpp" />
+    <ClCompile Include="src\Game.cpp" />
+    <ClCompile Include="src\Ground.cpp" />
+    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\Player.cpp" />
+    <ClCompile Include="src\PlayerInputManager.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="CollisionManager.h" />
-    <ClInclude Include="Entity.h" />
-    <ClInclude Include="EntityList.h" />
-    <ClInclude Include="EventsManager.h" />
-    <ClInclude Include="Game.h" />
-    <ClInclude Include="Ground.h" />
-    <ClInclude Include="List.h" />
-    <ClInclude Include="Player.h" />
-    <ClInclude Include="PlayerInputManager.h" />
-  </ItemGroup>
-  <ItemGroup>
+    <None Include="Game.exe" />
+    <None Include="main" />
     <None Include="Makefile" />
+    <None Include="openal32.dll" />
+    <None Include="sfml-audio-2.dll" />
+    <None Include="sfml-audio-d-2.dll" />
+    <None Include="sfml-graphics-2.dll" />
+    <None Include="sfml-graphics-d-2.dll" />
+    <None Include="sfml-network-2.dll" />
+    <None Include="sfml-network-d-2.dll" />
+    <None Include="sfml-system-2.dll" />
+    <None Include="sfml-system-d-2.dll" />
+    <None Include="sfml-window-2.dll" />
+    <None Include="sfml-window-d-2.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\CollisionManager.h" />
+    <ClInclude Include="include\Entity.h" />
+    <ClInclude Include="include\EntityList.h" />
+    <ClInclude Include="include\EventsManager.h" />
+    <ClInclude Include="include\Game.h" />
+    <ClInclude Include="include\Ground.h" />
+    <ClInclude Include="include\List.h" />
+    <ClInclude Include="include\Player.h" />
+    <ClInclude Include="include\PlayerInputManager.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

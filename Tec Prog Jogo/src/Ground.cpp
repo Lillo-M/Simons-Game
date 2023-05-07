@@ -1,4 +1,4 @@
-#include "Ground.h"
+#include "../include/Ground.h"
 
 Entities::Ground::Ground(const sf::Vector2f pos, const sf::Vector2f size):
 	Entity(pos,size,true)
