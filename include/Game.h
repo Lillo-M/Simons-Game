@@ -26,8 +26,6 @@ private:
 	sf::ContextSettings settings;
 	Managers::EventsManager eManager;
 	Math::List<Entities::Entity> lentities;
-	//std::list<Entities::Entity*> entities;
-	//std::list<Entities::Entity*>::iterator entIt;
 	Entities::Player* player;
 	sf::RenderWindow window;
 };

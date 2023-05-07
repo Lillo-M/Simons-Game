@@ -87,7 +87,7 @@ void Entity::OnCollision(Entity *ent)
 		}
 		if (dist_y < 0)
 		{
-			Position.y -= dist_y - size_y;
+			Position.y += size_y + dist_y;
 			velocity.y = 0;
 		}
 	}
