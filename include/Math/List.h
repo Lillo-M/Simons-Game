@@ -103,11 +103,15 @@ namespace Math
 				return NULL;
 			}
 			Element<T> *pAux = pFirst;
-			if(pAux)
-				for (int i = 0; i < idx; i++)
-				{
-					pAux = pAux->next;
-				}
+			if(!pAux)
+			{
+				std::cout << "pica";
+				return NULL;
+			}
+			for (int i = 0; i < idx; i++)
+			{
+				pAux = pAux->next;
+			}
 			return pAux->data;
 		}
 

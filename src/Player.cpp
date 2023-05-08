@@ -1,10 +1,9 @@
-#include "../include/Entities/Player.h"
+#include "../include/Entities/Characters/Player.h"
 
 using namespace Entities;
 
-Player::Player(const sf::Vector2f pos, const sf::Vector2f size) : Entity(pos, size, false),
-	lives(LIVES),
-	alive(true),
+Player::Player(const sf::Vector2f pos, const sf::Vector2f size) :
+	Character(pos, size, false, "Player"),
 	maxVelocity(MAXV),
 	boolMoveLeft(false),
 	BoolMoveRight(false),
@@ -25,11 +24,9 @@ Player::~Player()
 {
 }
 
-const bool Player::getAlive() const { return alive; }
 
 void Player::setDead() { alive = false; }
 
-void Player::operator--() { lives--; }
 
 sf::Vector2f Player::getPosition() // botar na entidade
 {
@@ -81,6 +78,7 @@ void Player::Move()
 	Position.x += velocity.x * dt * MULT;
 	Position.y += velocity.y * dt * MULT;
 	Gravity();
+	HitBox.setPosition(Position);
 }
 
 void Player::Jump()

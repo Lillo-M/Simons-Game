@@ -1,5 +1,4 @@
 #include "../include/Managers/EventsManager.h"
-#include <iostream>
 
 using namespace Managers;
 

@@ -6,13 +6,13 @@ Game::Game() :
 {
 	Entities::Entity* pAux;
 	player = new Entities::Player(sf::Vector2f(500.f, 592.f), sf::Vector2f(61.f, 100.f));
-	lentities.insert_back(player);
+	Dentities.insert_back(player);
 	eManager.setpPlayer(player);
-	for (int i = 0; i < 10; i++)
+	for (int i = 0; i < 200; i++)
 	{
 		pAux = new Entities::Ground(sf::Vector2f(64.f + i * 128.f, 656.f), sf::Vector2f(128.f, 128.f));
 		if(pAux)
-			lentities.insert_back(pAux);
+			Sentities.insert_back(pAux);
 		else
 		{
 			std::cout << std::endl << "ERROR: Failed To Memory Allocate" << std::endl;
@@ -21,51 +21,76 @@ Game::Game() :
 	}
 	pAux = new Entities::Ground(sf::Vector2f(300.f, 400.f), sf::Vector2f(128.f, 128.f));
 	if(pAux)
-		lentities.insert_back(pAux);
+		Sentities.insert_back(pAux);
 	else
 	{
 		std::cout << std::endl << "ERROR: Failed To Memory Allocate" << std::endl;
 	}
 	pAux = new Entities::Ground(sf::Vector2f(1000.f, 400.f), sf::Vector2f(128.f, 128.f));
 	if(pAux)
-		lentities.insert_back(pAux);
+		Sentities.insert_back(pAux);
 	else
 	{
 		std::cout << std::endl << "ERROR: Failed To Memory Allocate" << std::endl;
 	}
 	settings.antialiasingLevel = 16;
-	Entities::Entity::setWindow(window);
+	Ente::setWindow(window);
 	window.setFramerateLimit(FPS);
-	CManager.getList(lentities);
+	CManager.getSList(Sentities);
+	CManager.getDList(Dentities);
 	Executar();
 }
 
 Game::~Game()
 {
-	for(int i = 0; i < lentities.getSize(); i++ )
+	for(int i = 0; i < Dentities.getSize(); i++ )
 	{
-		if(lentities[i])
-			delete lentities[i];
+		if(Dentities[i])
+			delete Dentities[i];
 	}
-	lentities.clear();
+	Dentities.clear();
+	for(int i = 0; i < Sentities.getSize(); i++ )
+	{
+		if(Sentities[i])
+			delete Sentities[i];
+	}
+	Sentities.clear();
 }
 
 void Game::Executar()
 { 
+	sf::Font font;
+	if(!font.loadFromFile("Assets/arial.ttf"))
+		std::cout << "fail to load font" << std::endl;
+	sf::Text fps("hello", font);
+	fps.setCharacterSize(30);
+	fps.setFillColor(sf::Color::Red);
+	fps.setPosition(sf::Vector2f(10.f,10.f));
+	fps.setStyle(sf::Text::Bold);
 	while (window.isOpen())
 	{
+		fps.setString(std::to_string(static_cast<int>(1/Entities::Entity::getDt())));
 		eManager.Manage();
-		for (unsigned int i = 0; i < Entities::Entity::getContEntities(); i++)
+		for (int i = 0; i < Dentities.getSize(); i++)
 		{
-			lentities[i]->Move();
+			Dentities[i]->Move();
+		}
+		for (int i = 0; i < Sentities.getSize(); i++)
+		{
+			Sentities[i]->Move();
 		}
 		Entities::Entity::updateDeltaTime();
 		CManager.Manage();
 		window.clear();
-		for (unsigned int i = 0; i < Entities::Entity::getContEntities(); i++)
+		for (int i = 0; i < Dentities.getSize(); i++)
 		{
-			lentities[i]->Draw();
+			Dentities[i]->Draw();
 		}
+		for (int i = 0; i < Sentities.getSize(); i++)
+		{
+			Sentities[i]->Draw();
+		}
+		window.draw(fps);
 		window.display();
 	}
 }

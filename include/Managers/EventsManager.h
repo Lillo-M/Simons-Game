@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../Entities/Player.h"
+#include "../Entities/Characters/Player.h"
 #include <SFML/Window.hpp>
 #include "../Managers/PlayerInputManager.h"
 

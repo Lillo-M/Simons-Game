@@ -10,9 +10,11 @@ namespace Managers
 	public:
 		CollisionManager();
 		~CollisionManager();
-		void getList(Math::List<Entities::Entity>& ents);
+		void getSList(Math::List<Entities::Entity>& ents);
+		void getDList(Math::List<Entities::Entity>& ents);
 		void Manage();
 	private:
-		Math::List<Entities::Entity>* entities;
+		Math::List<Entities::Entity>* Dentities;
+		Math::List<Entities::Entity>* Sentities;
 	};
 }

@@ -1,13 +1,13 @@
 #include "../include/Entities/Entity.h"
-#include <iostream>
-#include <math.h> //Fazer uma Fun��o ABS
+
 using namespace Entities;
 
-Entity::Entity(const sf::Vector2f pos, const sf::Vector2f size, const bool isG) : Position(pos.x, pos.y),
-																				  HitBox(size),
-																				  grounded(false),
-																				  velocity(sf::Vector2f(0, 0)),
-																				  isGround(isG)
+Entity::Entity(const sf::Vector2f pos, const sf::Vector2f size, const bool isG, std::string id) : 
+	Ente(size, id),
+	Position(pos.x, pos.y),
+	grounded(false),
+	velocity(sf::Vector2f(0, 0)),
+	isStatic(isG)
 {
 	HitBox.setFillColor(sf::Color(sf::Color::White)); // RGBA de Teste
 	HitBox.setPosition(Position);
@@ -16,11 +16,6 @@ Entity::Entity(const sf::Vector2f pos, const sf::Vector2f size, const bool isG) 
 Entity::~Entity()
 {
 	Cont--;
-}
-void Entity::Draw()
-{
-	HitBox.setPosition(Position);
-	window->draw(HitBox);
 }
 
 void Entity::Gravity()
@@ -31,16 +26,6 @@ void Entity::Gravity()
 
 void Entity::setGrounded(bool b) { grounded = b; }
 
-void Entity::setWindow(sf::RenderWindow &wds)
-{
-	if (!&wds)
-	{
-		std::cout << std::endl
-				  << "ERROR: NULL Window pointer" << std::endl;
-		exit(1);
-	}
-	Entity::window = &wds;
-}
 sf::Vector2f Entity::getPosition() const
 {
 	return Position;
@@ -51,9 +36,9 @@ sf::Vector2f Entity::getSize() const
 	return HitBox.getSize();
 }
 
-bool Entity::getIsGround()
+bool Entity::getisStatic()
 {
-	return isGround;
+	return isStatic;
 }
 
 void Entity::OnCollision(Entity *ent)
@@ -96,7 +81,7 @@ void Entity::OnCollision(Entity *ent)
 void Entity::updateDeltaTime()
 {
 	dt = static_cast<float>(clock.getElapsedTime().asSeconds());
-	if (dt > 1)
+	if (dt > 0.3f)
 	{
 		std::cout << std::endl
 				  << "STUTTER DETECTED!" << std::endl;
@@ -109,11 +94,14 @@ unsigned int Entity::getContEntities()
 {
 	return Entity::Cont;
 }
+float Entities::Entity::getDt()
+{
+    return dt;
+}
 
 const bool Entity::getGrounded() const { return grounded; }
 
 float Entity::dt = 0;
 unsigned int Entity::Cont(0);
 const float Entity::gravity(static_cast<float>(0.78)); // 8.166 valor de teste
-sf::RenderWindow *Entity::window(NULL);
 sf::Clock Entity::clock;

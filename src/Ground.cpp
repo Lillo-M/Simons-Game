@@ -20,4 +20,5 @@ void Entities::Ground::Move()
 {
 	Gravity();
 	velocity.y -= velocity.y;
+	HitBox.setPosition(Position);
 }
