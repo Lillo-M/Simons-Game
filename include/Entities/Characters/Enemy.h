@@ -8,7 +8,7 @@ namespace Entities
     {
         namespace Enemies
         {
-        class Enemy : public Character
+        class Enemy : public Characters::Character
         {
         private:
         public:

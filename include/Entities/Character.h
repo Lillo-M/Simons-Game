@@ -1,7 +1,9 @@
 #pragma once
 #include "Entity.h"
-
-
+namespace Entities
+{
+    namespace Characters
+    {
         class Character : public Entities::Entity
         {
         public:
@@ -11,8 +13,11 @@
             virtual void Move() = 0;
             virtual void Attack(const bool b) = 0;
             const bool getAlive() const;
-            virtual void OnCollision(Entity* ent);
+            virtual void OnCollision(Entity *ent);
+
         protected:
             int lives;
             bool alive;
         };
+    }
+}

@@ -14,7 +14,7 @@ namespace Entities
 {
 	namespace Characters
 	{
-		class Player : public Character
+		class Player: public Characters::Character
 		{
 		private:
 			const float maxVelocity;

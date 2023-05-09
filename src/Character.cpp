@@ -1,19 +1,19 @@
 #include "../include/Entities/Character.h"
 
-Character::Character(const sf::Vector2f pos, const sf::Vector2f size, const bool isS, std::string id):
+Entities::Characters::Character::Character(const sf::Vector2f pos, const sf::Vector2f size, const bool isS, std::string id):
     Entity(pos, size, false, id),
     alive(true)
 {
 }
 
-Character::~Character()
+Entities::Characters::Character::~Character()
 {
 }
 
-void Character::OnCollision(Entities::Entity* ent)
+void Entities::Characters::Character::OnCollision(Entities::Entity* ent)
 {
 }
 
-void Character::operator--() { lives--; }
+void Entities::Characters::Character::operator--() { lives--; }
 
-const bool Character::getAlive() const { return alive; }
+const bool Entities::Characters::Character::getAlive() const { return alive; }

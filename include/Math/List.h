@@ -1,6 +1,6 @@
 #pragma once
 #include <iostream>
-
+#include "../Entities/Entity.h"
 namespace Math
 {
 	template< typename T>
@@ -174,4 +174,5 @@ namespace Math
 			}
 		}
 	};
+	typedef List<Entities::Entity> EntityList;
 }

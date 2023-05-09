@@ -26,8 +26,8 @@ private:
 	Managers::CollisionManager CManager;
 	sf::ContextSettings settings;
 	Managers::EventsManager eManager;
-	Math::List<Entities::Entity> Sentities;
-	Math::List<Entities::Entity> Dentities;
+	Math::EntityList Sentities;
+	Math::EntityList Dentities;
 	Entities::Characters::Player* player;
 	sf::RenderWindow window;
 };
