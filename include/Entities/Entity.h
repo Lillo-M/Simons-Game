@@ -24,6 +24,7 @@ namespace Entities
 		static void updateDeltaTime();
 		static unsigned int getContEntities();
 		static float getDt();
+		//virtual void Save();
 	private:
 		static unsigned int Cont;
 	protected:

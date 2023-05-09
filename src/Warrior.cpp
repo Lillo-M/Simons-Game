@@ -32,7 +32,6 @@ void Entities::Characters::Enemies::Warrior::Attack(const bool b)
 
 void Entities::Characters::Enemies::Warrior::OnCollision(Entities::Entity* ent)
 {
-	std::cout << std::endl << ent->getID() << std::endl;
 	if(ent->getID() == "Player")
 	{
 		Attack(true);
