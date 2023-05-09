@@ -1,8 +1,6 @@
 #include "../include/Entities/Characters/Player.h"
 
-using namespace Entities;
-
-Player::Player(const sf::Vector2f pos, const sf::Vector2f size) :
+Entities::Characters::Player::Player(const sf::Vector2f pos, const sf::Vector2f size) : 
 	Character(pos, size, false, "Player"),
 	maxVelocity(MAXV),
 	boolMoveLeft(false),
@@ -11,31 +9,26 @@ Player::Player(const sf::Vector2f pos, const sf::Vector2f size) :
 	fall(false)
 {
 	HitBox.setOrigin(size.x / 2, size.y / 2);
-	if (texture.loadFromFile("Assets/Idle.png"))
-	{
-		HitBox.setTexture(&texture);
-	}
-	else
-		std::cout << std::endl
-				  << "ERROR: FAIL TO LOAD PLAYER TEXTURE!" << std::endl;
+	if(!textureLoaded)
+		if (!texture.loadFromFile("Assets/Player-Idle.png"))
+			std::cout << std::endl << "ERROR: FAIL TO LOAD PLAYER TEXTURE!" << std::endl;
+	HitBox.setTexture(&texture);
 }
 
-Player::~Player()
+Entities::Characters::Player::~Player()
 {
 }
 
+void Entities::Characters::Player::setDead() { alive = false; }
 
-void Player::setDead() { alive = false; }
-
-
-sf::Vector2f Player::getPosition() // botar na entidade
+sf::Vector2f Entities::Characters::Player::getPosition() // botar na entidade
 {
 	return Position;
 }
 
-const sf::Vector2f Player::getVelocity() const { return velocity; } // botar na entidade
+const sf::Vector2f Entities::Characters::Player::getVelocity() const { return velocity; } // botar na entidade
 
-void Player::Move()
+void Entities::Characters::Player::Move()
 {
 	if (boolMoveLeft)
 	{
@@ -81,7 +74,7 @@ void Player::Move()
 	HitBox.setPosition(Position);
 }
 
-void Player::Jump()
+void Entities::Characters::Player::Jump()
 {
 	if (grounded)
 	{
@@ -98,7 +91,7 @@ void Player::Jump()
 	}
 }
 
-void Player::MoveRight(const bool b)
+void Entities::Characters::Player::MoveRight(const bool b)
 {
 	if (b)
 		HitBox.setScale(sf::Vector2f(-1, 1));
@@ -107,7 +100,7 @@ void Player::MoveRight(const bool b)
 	BoolMoveRight = b;
 }
 
-void Player::MoveLeft(const bool b)
+void Entities::Characters::Player::MoveLeft(const bool b)
 {
 	if (b)
 		HitBox.setScale(sf::Vector2f(1, 1));
@@ -116,17 +109,32 @@ void Player::MoveLeft(const bool b)
 	boolMoveLeft = b;
 }
 
-void Player::Fall()
+void Entities::Characters::Player::Fall()
 {
 	fall = true;
 	std::cout << std::endl
 			  << "Fall!" << std::endl;
 }
 
-void Player::Attack(const bool b)
+void Entities::Characters::Player::Attack(const bool b)
 {
 	if (b)
 		HitBox.setFillColor(sf::Color(sf::Color::Blue));
 	else
 		HitBox.setFillColor(sf::Color(sf::Color::White));
 }
+void Entities::Characters::Player::OnCollision(Entities::Entity *ent)
+{
+	if(ent->getID() == "Enemy")
+	{
+		HitBox.setFillColor(sf::Color(sf::Color::Red));
+	}
+	else
+	{
+		HitBox.setFillColor(sf::Color(sf::Color::White));
+		normalCollision(ent);
+	}
+}
+
+sf::Texture Entities::Characters::Player::texture;
+bool Entities::Characters::Player::textureLoaded = false;

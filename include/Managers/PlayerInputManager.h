@@ -11,14 +11,14 @@ namespace Managers
 	class PlayerInputManager
 	{
 	public:
-		PlayerInputManager(Entities::Player* pP);
+		PlayerInputManager(Entities::Characters::Player* pP);
 		~PlayerInputManager();
 		void pressedInput(std::string s);
 		void releasedInput(std::string s);
 		bool jumpKeyReleased;
-		void setpPlayer(Entities::Player* pP);
+		void setpPlayer(Entities::Characters::Player* pP);
 	private:
-		Entities::Player* pPlayer;
+		Entities::Characters::Player* pPlayer;
 		std::map<std::string, std::string> inputSets;
 		std::map<std::string, std::string>::const_iterator mapIt;
 	};

@@ -2,7 +2,7 @@
 
 using namespace Managers;
 
-PlayerInputManager::PlayerInputManager(Entities::Player *pP) : 
+PlayerInputManager::PlayerInputManager(Entities::Characters::Player *pP) : 
 	pPlayer(pP),
 	jumpKeyReleased(true)
 {
@@ -88,7 +88,7 @@ void PlayerInputManager::releasedInput(std::string s)
 	}
 	mapIt = inputSets.begin();
 }
-void PlayerInputManager::setpPlayer(Entities::Player *pP)
+void PlayerInputManager::setpPlayer(Entities::Characters::Player *pP)
 {
 	pPlayer = pP;
 }

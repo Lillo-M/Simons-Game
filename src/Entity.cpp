@@ -2,12 +2,12 @@
 
 using namespace Entities;
 
-Entity::Entity(const sf::Vector2f pos, const sf::Vector2f size, const bool isG, std::string id) : 
+Entity::Entity(const sf::Vector2f pos, const sf::Vector2f size, const bool isS, std::string id) : 
 	Ente(size, id),
 	Position(pos.x, pos.y),
 	grounded(false),
 	velocity(sf::Vector2f(0, 0)),
-	isStatic(isG)
+	isStatic(isS)
 {
 	HitBox.setFillColor(sf::Color(sf::Color::White)); // RGBA de Teste
 	HitBox.setPosition(Position);
@@ -41,7 +41,7 @@ bool Entity::getisStatic()
 	return isStatic;
 }
 
-void Entity::OnCollision(Entity *ent)
+void Entity::normalCollision(Entity* ent)
 {
 	float size_y = ent->getSize().y / 2 + getSize().y / 2;
 	float size_x = ent->getSize().x / 2 + getSize().x / 2;
@@ -76,6 +76,11 @@ void Entity::OnCollision(Entity *ent)
 			velocity.y = 0;
 		}
 	}
+}
+
+void Entity::OnCollision(Entity *ent)
+{
+	normalCollision(ent);
 }
 
 void Entity::updateDeltaTime()

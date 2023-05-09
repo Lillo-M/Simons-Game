@@ -32,7 +32,6 @@ void Managers::CollisionManager::Manage()
 	{
 		for (int j = i + 1; j < Dentities->getSize(); j++)
 		{
-
 			dist_x = (*Dentities)[i]->getPosition().x - (*Dentities)[j]->getPosition().x;
 			dist_y = (*Dentities)[i]->getPosition().y - (*Dentities)[j]->getPosition().y;
 			if (dist_y < 0)
@@ -44,6 +43,7 @@ void Managers::CollisionManager::Manage()
 			if (dist_x < dx && dist_y < dy)
 			{
 					(*Dentities)[i]->OnCollision((*Dentities)[j]);
+					(*Dentities)[j]->OnCollision((*Dentities)[i]);
 			}
 		}
 		for (int j = 0; j < Sentities->getSize(); j++)

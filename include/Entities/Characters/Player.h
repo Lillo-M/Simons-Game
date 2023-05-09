@@ -12,25 +12,32 @@
 #define MULT 60
 namespace Entities
 {
-	class Player : public Character
+	namespace Characters
 	{
-	private:
-		const float maxVelocity;
-		bool BoolMoveRight;
-		bool boolMoveLeft;
-		bool secondJump;
-		bool fall;
-	public:
-		Player(const sf::Vector2f pos = sf::Vector2f(0, 0), const sf::Vector2f size = sf::Vector2f(0, 0));
-		~Player();
-		void Move();
-		sf::Vector2f getPosition();
-		const sf::Vector2f getVelocity() const;
-		void setDead();
-		void Jump();
-		void MoveRight(const bool b);
-		void MoveLeft(const bool b);
-		void Fall();
-		void Attack(const bool b);
-	};
+		class Player : public Character
+		{
+		private:
+			const float maxVelocity;
+			bool BoolMoveRight;
+			bool boolMoveLeft;
+			bool secondJump;
+			bool fall;
+			static sf::Texture texture;
+			static bool textureLoaded;
+
+		public:
+			Player(const sf::Vector2f pos = sf::Vector2f(0, 0), const sf::Vector2f size = sf::Vector2f(0, 0));
+			~Player();
+			void Move();
+			sf::Vector2f getPosition();
+			const sf::Vector2f getVelocity() const;
+			void setDead();
+			void Jump();
+			void MoveRight(const bool b);
+			void MoveLeft(const bool b);
+			void Fall();
+			void Attack(const bool b);
+			void OnCollision(Entities::Entity* ent);
+		};
+	}
 }

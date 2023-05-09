@@ -11,7 +11,7 @@ EventsManager::~EventsManager()
 	pPlayerIM = NULL;
 }
 
-EventsManager::EventsManager(sf::RenderWindow &wds, Entities::Player *pP) :
+EventsManager::EventsManager(sf::RenderWindow &wds, Entities::Characters::Player *pP) : 
 	window(&wds),
 	pPlayer(pP)
 {
@@ -55,7 +55,7 @@ EventsManager::EventsManager(sf::RenderWindow &wds, Entities::Player *pP) :
 	mapIt = keyMap.begin();
 }
 
-void EventsManager::setpPlayer(Entities::Player *pP)
+void EventsManager::setpPlayer(Entities::Characters::Player *pP)
 {
 	pPlayer = pP;
 	pPlayerIM->setpPlayer(pPlayer);

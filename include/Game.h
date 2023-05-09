@@ -13,6 +13,7 @@
 #include "Math/List.h"
 #include "Managers/CollisionManager.h"
 #include <iostream>
+#include "../include/Entities/Characters/Enemies/Warrior.h"
 
 class Game
 {
@@ -27,6 +28,6 @@ private:
 	Managers::EventsManager eManager;
 	Math::List<Entities::Entity> Sentities;
 	Math::List<Entities::Entity> Dentities;
-	Entities::Player* player;
+	Entities::Characters::Player* player;
 	sf::RenderWindow window;
 };

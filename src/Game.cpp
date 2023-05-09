@@ -5,10 +5,17 @@ Game::Game() :
 	eManager(window)
 {
 	Entities::Entity* pAux;
-	player = new Entities::Player(sf::Vector2f(500.f, 592.f), sf::Vector2f(61.f, 100.f));
+	pAux = new Entities::Characters::Enemies::Warrior(sf::Vector2f(250.f, 200.f), sf::Vector2f(61.f, 100.f));
+	if(pAux)
+		Dentities.insert_back(pAux);
+	else
+	{
+		std::cout << std::endl << "ERROR: Failed To Memory Allocate" << std::endl;
+	}
+	player = new Entities::Characters::Player(sf::Vector2f(500.f, 592.f), sf::Vector2f(61.f, 100.f));
 	Dentities.insert_back(player);
 	eManager.setpPlayer(player);
-	for (int i = 0; i < 200; i++)
+	for (int i = 0; i < 10; i++)
 	{
 		pAux = new Entities::Ground(sf::Vector2f(64.f + i * 128.f, 656.f), sf::Vector2f(128.f, 128.f));
 		if(pAux)
