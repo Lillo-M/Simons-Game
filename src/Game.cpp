@@ -78,7 +78,7 @@ void Game::Executar()
 		std::cout << "ERROR: Fail to load GraphicManager" << std::endl;
 		exit(1);
 	}
-	while (pGM->isWindowOpen())//window.isOpen())
+	while (pGM->isWindowOpen())//window.isOpen()) usamos agr o gerenciador grafico por ponteiro (pGM)
 	{
 		if(!player->getAlive())
 		{
@@ -96,7 +96,7 @@ void Game::Executar()
 		}
 		Entities::Entity::updateDeltaTime();
 		CManager.Manage();
-		//window.clear();
+		//window.clear(); usamos agr o gerenciador grafico por ponteiro (pGM)
 		pGM->Clear();
 		for (int i = 0; i < Dentities.getSize(); i++)
 		{
@@ -106,7 +106,7 @@ void Game::Executar()
 		{
 			Sentities[i]->Draw();
 		}
-		//window.draw(fps);
+		//window.draw(fps); usamos agr o gerenciador grafico por ponteiro (pGM)
 		//window.display();
 		pGM->Draw(fps);
 		pGM->Display();
