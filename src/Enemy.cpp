@@ -4,7 +4,7 @@
 
 
 
-Entities::Characters::Enemies::Enemy::Enemy(const sf::Vector2f pos, const sf::Vector2f size, const bool isS, std::string id):
+Entities::Characters::Enemies::Enemy::Enemy(const sf::Vector2f pos, const sf::Vector2f size, const bool isS, ID id):
     Character(pos, size, isS, id)
 {
 }

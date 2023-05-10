@@ -2,7 +2,7 @@
 
 using namespace Entities;
 
-Entity::Entity(const sf::Vector2f pos, const sf::Vector2f size, const bool isS, std::string id) : 
+Entity::Entity(const sf::Vector2f pos, const sf::Vector2f size, const bool isS, ID id) : 
 	Ente(id),
 	HitBox(size),
 	Position(pos.x, pos.y),

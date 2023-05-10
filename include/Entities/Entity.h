@@ -10,7 +10,7 @@ namespace Entities
 	class Entity : public Ente
 	{
 	public:
-		Entity(const sf::Vector2f pos = sf::Vector2f(0, 0), const sf::Vector2f size = sf::Vector2f(0, 0), const bool isS = false, std::string id = "BackStageEnte");
+		Entity(const sf::Vector2f pos = sf::Vector2f(0, 0), const sf::Vector2f size = sf::Vector2f(0, 0), const bool isS = false, ID id = ID::empty);
 		virtual ~Entity();
 		virtual void Move() = 0;
 		void Gravity();

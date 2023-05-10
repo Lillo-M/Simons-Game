@@ -1,6 +1,6 @@
 #include "../include/Entities/Character.h"
 
-Entities::Characters::Character::Character(const sf::Vector2f pos, const sf::Vector2f size, const bool isS, std::string id):
+Entities::Characters::Character::Character(const sf::Vector2f pos, const sf::Vector2f size, const bool isS, ID id):
     Entity(pos, size, false, id),
     alive(true)
 {

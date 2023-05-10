@@ -1,7 +1,7 @@
 #include "../include/Entities/Characters/Enemies/Warrior.h"
 
 Entities::Characters::Enemies::Warrior::Warrior(const sf::Vector2f pos, const sf::Vector2f size):
-    Enemy(pos, size, false, "Enemy")
+    Enemy(pos, size, false, ID::enemy)
 {
     HitBox.setOrigin(size.x / 2, size.y / 2);
 	if(!textureLoaded)
@@ -31,7 +31,7 @@ void Entities::Characters::Enemies::Warrior::Attack(const bool b)
 
 void Entities::Characters::Enemies::Warrior::OnCollision(Entities::Entity* ent)
 {
-	if(ent->getID() == "Player")
+	if(ent->getID() == ID::player)
 	{
 		Attack(true);
 		Entities::Characters::Player* pPlayer = static_cast<Entities::Characters::Player*>(ent);

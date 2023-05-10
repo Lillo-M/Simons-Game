@@ -1,7 +1,7 @@
 #include "../include/Entities/Ground.h"
 
 Entities::Ground::Ground(const sf::Vector2f pos, const sf::Vector2f size):
-	Entity(pos, size, true, "Obstacle")
+	Entity(pos, size, true, ID::obstacle)
 {
 	HitBox.setOrigin(size.x / 2, size.y / 2);
 	if(!textureLoaded)

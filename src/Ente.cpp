@@ -1,8 +1,8 @@
 #include "../include/Ente.h"
 #include <iostream>
 
-Ente::Ente(std::string id) : 
-	ID(id)
+Ente::Ente(ID _id) : 
+	id(_id)
 {
 }
 
@@ -10,9 +10,9 @@ Ente::~Ente()
 {
 }
 
-const std::string Ente::getID() const
+const ID Ente::getID() const
 {
-	return ID;
+	return id;
 }
 
 Managers::GraphicManager* Ente::pGM(Managers::GraphicManager::getInstance());

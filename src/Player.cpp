@@ -1,7 +1,7 @@
 #include "../include/Entities/Characters/Player.h"
 
 Entities::Characters::Player::Player(const sf::Vector2f pos, const sf::Vector2f size) : 
-	Character(pos, size, false, "Player"),
+	Character(pos, size, false, ID::player),
 	maxVelocity(MAXV),
 	boolMoveLeft(false),
 	BoolMoveRight(false),
@@ -125,7 +125,7 @@ void Entities::Characters::Player::Attack(const bool b)
 }
 void Entities::Characters::Player::OnCollision(Entities::Entity *ent)
 {
-	if(ent->getID() == "Enemy")
+	if(ent->getID() == ID::enemy)
 	{
 		HitBox.setFillColor(sf::Color(sf::Color::Red));
 	}
