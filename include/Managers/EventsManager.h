@@ -9,13 +9,13 @@ namespace Managers
 	class EventsManager
 	{
 	private:
-		sf::RenderWindow* window;
+		Managers::GraphicManager* pGM;
 		Entities::Characters::Player* pPlayer;
 		std::map<sf::Keyboard::Key, std::string > keyMap;
 		std::map<sf::Keyboard::Key, std::string >::const_iterator mapIt;
 		PlayerInputManager* pPlayerIM;
 	public:
-		EventsManager(sf::RenderWindow& wds, Entities::Characters::Player* pP = NULL);
+		EventsManager(Entities::Characters::Player* pP = NULL);
 		~EventsManager();
 		void Manage();
 		void setpPlayer(Entities::Characters::Player* pP);

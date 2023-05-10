@@ -3,7 +3,8 @@
 using namespace Entities;
 
 Entity::Entity(const sf::Vector2f pos, const sf::Vector2f size, const bool isS, std::string id) : 
-	Ente(size, id),
+	Ente(id),
+	HitBox(size),
 	Position(pos.x, pos.y),
 	grounded(false),
 	velocity(sf::Vector2f(0, 0)),
@@ -17,6 +18,12 @@ Entity::~Entity()
 {
 	Cont--;
 }
+
+void Entity::Draw()
+{
+	pGM->Draw(HitBox);
+}
+
 
 void Entity::Gravity()
 {

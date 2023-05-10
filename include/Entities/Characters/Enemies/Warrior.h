@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../Enemy.h"
+#include "../Player.h"
 #define ESPEED 1
 #define MULT 60
 

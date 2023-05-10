@@ -14,6 +14,7 @@
 #include "Managers/CollisionManager.h"
 #include <iostream>
 #include "../include/Entities/Characters/Enemies/Warrior.h"
+//#include "../include/Managers/GraphicManager.h"
 
 class Game
 {
@@ -30,4 +31,5 @@ private:
 	Math::EntityList Dentities;
 	Entities::Characters::Player* player;
 	sf::RenderWindow window;
+	Managers::GraphicManager* pGM;
 };

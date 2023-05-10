@@ -5,16 +5,16 @@ using namespace Managers;
 EventsManager::~EventsManager()
 {
 	keyMap.clear();
-	window = NULL;
 	pPlayer = NULL;
 	delete pPlayerIM;
 	pPlayerIM = NULL;
+	pGM = NULL;
 }
 
-EventsManager::EventsManager(sf::RenderWindow &wds, Entities::Characters::Player *pP) : 
-	window(&wds),
+EventsManager::EventsManager(Entities::Characters::Player *pP) : 
 	pPlayer(pP)
 {
+	pGM = Managers::GraphicManager::getInstance();
 	pPlayerIM = new PlayerInputManager(pPlayer);
 	keyMap.clear();
 	keyMap[sf::Keyboard::A] = 'A';
@@ -60,6 +60,7 @@ void EventsManager::setpPlayer(Entities::Characters::Player *pP)
 	pPlayer = pP;
 	pPlayerIM->setpPlayer(pPlayer);
 }
+
 void EventsManager::keyPressedEvent(sf::Event::KeyEvent key)
 {
 	for (mapIt; mapIt != keyMap.end(); mapIt++)
@@ -82,7 +83,7 @@ void EventsManager::keyReleasedEvent(sf::Event::KeyEvent key)
 void EventsManager::Manage()
 {
 	sf::Event event;
-	while (window->pollEvent(event))
+	while (pGM->getWindow()->pollEvent(event))
 	{
 		if (event.type == sf::Event::KeyPressed)
 		{
@@ -93,6 +94,6 @@ void EventsManager::Manage()
 			keyReleasedEvent(event.key);
 		}
 		if (event.type == sf::Event::Closed)
-			window->close();
+			pGM->Close();
 	}
 }

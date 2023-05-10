@@ -1,19 +1,18 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+#include "Managers/GraphicManager.h"
 #include <string>
+
 class Ente
 {
 public:
-    Ente(const sf::Vector2f size = sf::Vector2f(0, 0), std::string id = "BackStageEnte");
+    Ente(std::string id = "BackStageEnte");
     virtual ~Ente();
-    void Draw();
-    //virtual void Move() = 0;
-    static void setWindow(sf::RenderWindow& wds);
+    virtual void Draw() = 0;
     const std::string getID() const; 
 
 private:
-    static sf::RenderWindow* window;
     const std::string ID;
 protected:
-	sf::RectangleShape HitBox;
+    static Managers::GraphicManager* pGM;
 };

@@ -24,6 +24,7 @@ namespace Entities
 		static void updateDeltaTime();
 		static unsigned int getContEntities();
 		static float getDt();
+		void Draw();
 		//virtual void Save();
 	private:
 		static unsigned int Cont;
@@ -35,5 +36,6 @@ namespace Entities
 		static const float gravity;
 		sf::Vector2f Position;
 		bool grounded;
+		sf::RectangleShape HitBox;
 	};
 }

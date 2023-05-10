@@ -14,6 +14,6 @@ void Entities::Characters::Character::OnCollision(Entities::Entity* ent)
 {
 }
 
-void Entities::Characters::Character::operator--() { lives--; }
+void Entities::Characters::Character::operator--() { lives--; if(lives < 1) alive = false; }
 
 const bool Entities::Characters::Character::getAlive() const { return alive; }

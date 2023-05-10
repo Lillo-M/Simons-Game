@@ -1,9 +1,8 @@
 #include "../include/Game.h"
 
-Game::Game() :
-	window(sf::VideoMode(WIDTH, HEIGHT), "Simon's Game"),
-	eManager(window)
+Game::Game()
 {
+	pGM = Managers::GraphicManager::getInstance();
 	Entities::Entity* pAux;
 	pAux = new Entities::Characters::Enemies::Warrior(sf::Vector2f(250.f, 200.f), sf::Vector2f(61.f, 100.f));
 	if(pAux)
@@ -41,8 +40,8 @@ Game::Game() :
 		std::cout << std::endl << "ERROR: Failed To Memory Allocate" << std::endl;
 	}
 	settings.antialiasingLevel = 16;
-	Ente::setWindow(window);
 	window.setFramerateLimit(FPS);
+	eManager.setpPlayer(player);
 	CManager.getSList(Sentities);
 	CManager.getDList(Dentities);
 	Executar();
@@ -74,8 +73,17 @@ void Game::Executar()
 	fps.setFillColor(sf::Color::Red);
 	fps.setPosition(sf::Vector2f(10.f,10.f));
 	fps.setStyle(sf::Text::Bold);
-	while (window.isOpen())
+	if(!pGM)
 	{
+		std::cout << "ERROR: Fail to load GraphicManager" << std::endl;
+		exit(1);
+	}
+	while (pGM->isWindowOpen())//window.isOpen())
+	{
+		if(!player->getAlive())
+		{
+			std::cout << "Morreu";
+		}
 		fps.setString(std::to_string(static_cast<int>(1/Entities::Entity::getDt())));
 		eManager.Manage();
 		for (int i = 0; i < Dentities.getSize(); i++)
@@ -88,7 +96,8 @@ void Game::Executar()
 		}
 		Entities::Entity::updateDeltaTime();
 		CManager.Manage();
-		window.clear();
+		//window.clear();
+		pGM->Clear();
 		for (int i = 0; i < Dentities.getSize(); i++)
 		{
 			Dentities[i]->Draw();
@@ -97,7 +106,9 @@ void Game::Executar()
 		{
 			Sentities[i]->Draw();
 		}
-		window.draw(fps);
-		window.display();
+		//window.draw(fps);
+		//window.display();
+		pGM->Draw(fps);
+		pGM->Display();
 	}
 }

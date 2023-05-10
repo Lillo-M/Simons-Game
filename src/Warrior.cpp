@@ -1,6 +1,5 @@
 #include "../include/Entities/Characters/Enemies/Warrior.h"
 
-
 Entities::Characters::Enemies::Warrior::Warrior(const sf::Vector2f pos, const sf::Vector2f size):
     Enemy(pos, size, false, "Enemy")
 {
@@ -35,6 +34,9 @@ void Entities::Characters::Enemies::Warrior::OnCollision(Entities::Entity* ent)
 	if(ent->getID() == "Player")
 	{
 		Attack(true);
+		Entities::Characters::Player* pPlayer = static_cast<Entities::Characters::Player*>(ent);
+		pPlayer->operator--();
+		pPlayer = NULL;
 	}
 	else
 	{
