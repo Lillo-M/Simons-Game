@@ -12,7 +12,7 @@ namespace Entities
         {
         private:
         public:
-            Enemy(const sf::Vector2f pos = sf::Vector2f(0, 0), const sf::Vector2f size = sf::Vector2f(0, 0), const bool isS = false, ID id = ID::enemy);
+            Enemy(const sf::Vector2f pos = sf::Vector2f(0, 0), const sf::Vector2f size = sf::Vector2f(0, 0), const bool isS = false, ID id = ID::enemy, int lves = 0);
             virtual ~Enemy();
             void operator--();
             virtual void Move() = 0;

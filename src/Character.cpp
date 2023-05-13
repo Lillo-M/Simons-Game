@@ -1,8 +1,10 @@
 #include "../include/Entities/Character.h"
 
-Entities::Characters::Character::Character(const sf::Vector2f pos, const sf::Vector2f size, const bool isS, ID id):
+Entities::Characters::Character::Character(const sf::Vector2f pos, const sf::Vector2f size, const bool isS, ID id, int lves):
     Entity(pos, size, false, id),
-    alive(true)
+    alive(true),
+    damaged(false),
+    lives(lves)
 {
 }
 
@@ -14,6 +16,30 @@ void Entities::Characters::Character::OnCollision(Entities::Entity* ent)
 {
 }
 
-void Entities::Characters::Character::operator--() { lives--; if(lives < 1) alive = false; }
+void Entities::Characters::Character::Damage(bool b)
+{
+    if(damaged)
+        return;
+    damaged = b;
+    this->operator--();
+    timecont = 0;
+    Damage();
+}
+
+void Entities::Characters::Character::Damage()
+{
+    if(!damaged)
+        return;
+    timecont += dt;
+    HitBox.setFillColor(sf::Color::Red);
+    if(timecont >= 1)
+    {
+        HitBox.setFillColor(sf::Color::White);
+        damaged = false;
+    }
+}
+
+
+void Entities::Characters::Character::operator--() { lives--; if(lives <= 0) alive = false; }
 
 const bool Entities::Characters::Character::getAlive() const { return alive; }

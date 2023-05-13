@@ -4,7 +4,7 @@
 #include "../Ente.h"
 #include <iostream>
 #include <math.h> //Fazer uma Fun��o ABS
-
+#define MULT 60
 namespace Entities
 {
 	class Entity : public Ente
@@ -15,17 +15,20 @@ namespace Entities
 		virtual void Move() = 0;
 		void Gravity();
 		const bool getGrounded() const;
-		void setGrounded(bool b);
-		sf::Vector2f getPosition() const;
-		sf::Vector2f getSize() const;
 		bool getisStatic();
-		virtual void OnCollision(Entity* ent);
-		void normalCollision(Entity* ent);
-		static void updateDeltaTime();
 		static unsigned int getContEntities();
 		static float getDt();
+		sf::Vector2f getPosition() const;
+		sf::Vector2f getSize() const;
+		sf::Vector2f getVelocity() const;
+		void setGrounded(bool b);
+		void setPosition(sf::Vector2f pos);
+		void setPosition(float x, float y);
+		void setVelocity(sf::Vector2f vel);
+		void setVelocity(float x, float y);
+		virtual void OnCollision(Entity* ent);
+		static void updateDeltaTime();
 		void Draw();
-		//virtual void Save();
 	private:
 		static unsigned int Cont;
 	protected:

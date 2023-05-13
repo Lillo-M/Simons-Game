@@ -4,8 +4,8 @@
 
 
 
-Entities::Characters::Enemies::Enemy::Enemy(const sf::Vector2f pos, const sf::Vector2f size, const bool isS, ID id):
-    Character(pos, size, isS, id)
+Entities::Characters::Enemies::Enemy::Enemy(const sf::Vector2f pos, const sf::Vector2f size, const bool isS, ID id, int lves):
+    Character(pos, size, isS, id, lves)
 {
 }
 

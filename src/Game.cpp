@@ -16,7 +16,7 @@ Game::Game()
 	eManager.setpPlayer(player);
 	for (int i = 0; i < 10; i++)
 	{
-		pAux = new Entities::Ground(sf::Vector2f(64.f + i * 128.f, 656.f), sf::Vector2f(128.f, 128.f));
+		pAux = new Entities::Obstacles::Ground(sf::Vector2f(64.f + i * 128.f, 656.f), sf::Vector2f(128.f, 128.f));
 		if(pAux)
 			Sentities.insert_back(pAux);
 		else
@@ -25,14 +25,14 @@ Game::Game()
 		}
 		pAux = NULL;
 	}
-	pAux = new Entities::Ground(sf::Vector2f(300.f, 400.f), sf::Vector2f(128.f, 128.f));
+	pAux = new Entities::Obstacles::Ground(sf::Vector2f(300.f, 400.f), sf::Vector2f(128.f, 128.f));
 	if(pAux)
 		Sentities.insert_back(pAux);
 	else
 	{
 		std::cout << std::endl << "ERROR: Failed To Memory Allocate" << std::endl;
 	}
-	pAux = new Entities::Ground(sf::Vector2f(1000.f, 400.f), sf::Vector2f(128.f, 128.f));
+	pAux = new Entities::Obstacles::Ground(sf::Vector2f(1000.f, 400.f), sf::Vector2f(128.f, 128.f));
 	if(pAux)
 		Sentities.insert_back(pAux);
 	else
@@ -82,7 +82,7 @@ void Game::Executar()
 	{
 		if(!player->getAlive())
 		{
-			std::cout << "Morreu";
+			std::cout << std::endl << "Morreu" << std::endl;
 		}
 		fps.setString(std::to_string(static_cast<int>(1/Entities::Entity::getDt())));
 		eManager.Manage();

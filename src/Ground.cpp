@@ -1,7 +1,7 @@
-#include "../include/Entities/Ground.h"
+#include "../include/Entities/Obstacles/Ground.h"
 
-Entities::Ground::Ground(const sf::Vector2f pos, const sf::Vector2f size):
-	Entity(pos, size, true, ID::obstacle)
+Entities::Obstacles::Ground::Ground(const sf::Vector2f pos, const sf::Vector2f size):
+	Obstacle(pos, size, true, ID::obstacle)
 {
 	HitBox.setOrigin(size.x / 2, size.y / 2);
 	if(!textureLoaded)
@@ -10,17 +10,13 @@ Entities::Ground::Ground(const sf::Vector2f pos, const sf::Vector2f size):
 	HitBox.setTexture(&texture);
 }
 
-Entities::Ground::~Ground()
+Entities::Obstacles::Ground::~Ground()
 {
 }
 
-void Entities::Ground::Move()
+void Entities::Obstacles::Ground::OnCollision(Entities::Entity* ent)
 {
-	Gravity();
-	velocity.y -= velocity.y;
-	HitBox.setPosition(Position);
 }
 
-
-sf::Texture Entities::Ground::texture;
-bool Entities::Ground::textureLoaded = false;
+sf::Texture Entities::Obstacles::Ground::texture;
+bool Entities::Obstacles::Ground::textureLoaded = false;

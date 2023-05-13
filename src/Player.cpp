@@ -1,7 +1,7 @@
 #include "../include/Entities/Characters/Player.h"
 
 Entities::Characters::Player::Player(const sf::Vector2f pos, const sf::Vector2f size) : 
-	Character(pos, size, false, ID::player),
+	Character(pos, size, false, ID::player, LIVES),
 	maxVelocity(MAXV),
 	boolMoveLeft(false),
 	BoolMoveRight(false),
@@ -68,6 +68,7 @@ void Entities::Characters::Player::Move()
 		if (velocity.x < 0)
 			velocity.x = 0;
 	}
+	Damage();
 	Position.x += velocity.x * dt * MULT;
 	Position.y += velocity.y * dt * MULT;
 	Gravity();
@@ -125,15 +126,15 @@ void Entities::Characters::Player::Attack(const bool b)
 }
 void Entities::Characters::Player::OnCollision(Entities::Entity *ent)
 {
-	if(ent->getID() == ID::enemy)
+	/*if(ent->getID() == ID::enemy)
 	{
 		HitBox.setFillColor(sf::Color(sf::Color::Red));
 	}
 	else
 	{
 		HitBox.setFillColor(sf::Color(sf::Color::White));
-		normalCollision(ent);
-	}
+		//normalCollision(ent);
+	}*/
 }
 
 sf::Texture Entities::Characters::Player::texture;

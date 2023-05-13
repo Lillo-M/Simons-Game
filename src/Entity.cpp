@@ -33,6 +33,33 @@ void Entity::Gravity()
 
 void Entity::setGrounded(bool b) { grounded = b; }
 
+void Entity::setPosition(sf::Vector2f pos)
+{
+	Position = pos;
+}
+
+void Entity::setPosition(float x, float y)
+{
+	Position.x = x;
+	Position.y = y;
+}
+
+void Entity::setVelocity(sf::Vector2f vel)
+{
+	velocity = vel;
+}
+
+void Entity::setVelocity(float x, float y)
+{
+	velocity.x = x;
+	velocity.y = y;
+}
+
+sf::Vector2f Entity::getVelocity() const
+{
+	return velocity;
+}
+
 sf::Vector2f Entity::getPosition() const
 {
 	return Position;
@@ -48,46 +75,8 @@ bool Entity::getisStatic()
 	return isStatic;
 }
 
-void Entity::normalCollision(Entity* ent)
-{
-	float size_y = ent->getSize().y / 2 + getSize().y / 2;
-	float size_x = ent->getSize().x / 2 + getSize().x / 2;
-	float dist_y = ent->getPosition().y - Position.y;
-	float dist_x = ent->getPosition().x - Position.x;
-	if (abs(dist_x) - size_x > abs(dist_y) - size_y) // retirar ABS
-	{
-		if (dist_x > 0)
-		{
-			Position.x += dist_x - size_x;
-			if (velocity.x > 0)
-				velocity.x = 0;
-		}
-		if (dist_x < 0)
-		{
-			Position.x += dist_x + size_x;
-			if (velocity.x < 0)
-				velocity.x = 0;
-		}
-	}
-	else
-	{
-		if (dist_y > 0)
-		{
-			Position.y += dist_y - size_y;
-			velocity.y = 0;
-			grounded = true;
-		}
-		if (dist_y < 0)
-		{
-			Position.y += size_y + dist_y;
-			velocity.y = 0;
-		}
-	}
-}
-
 void Entity::OnCollision(Entity *ent)
 {
-	normalCollision(ent);
 }
 
 void Entity::updateDeltaTime()

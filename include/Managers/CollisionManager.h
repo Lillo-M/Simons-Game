@@ -13,6 +13,7 @@ namespace Managers
 		void getSList(Math::List<Entities::Entity>& ents);
 		void getDList(Math::List<Entities::Entity>& ents);
 		void Manage();
+		void normalCollision(Entities::Entity* ent, float dist_x, float dist_y, float size_x, float size_y);
 	private:
 		Math::List<Entities::Entity>* Dentities;
 		Math::List<Entities::Entity>* Sentities;

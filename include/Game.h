@@ -2,7 +2,7 @@
 
 #include <SFML/Graphics.hpp>
 #include "Entities/Characters/Player.h"
-#include "Entities/Ground.h"
+#include "Entities/Obstacles/Ground.h"
 #include "Managers/EventsManager.h"
 #include <SFML/System.hpp>
 #include <SFML/Config.hpp>
