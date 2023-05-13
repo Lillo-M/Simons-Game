@@ -1,7 +1,8 @@
 #include "../include/Managers/GraphicManager.h"
-//#include "GraphicManager.h"
+
 Managers::GraphicManager::GraphicManager() : 
-    window(sf::VideoMode(WIDTH, HEIGHT), "Simon's Game") // incializa a janela
+    window(sf::VideoMode(WIDTH, HEIGHT), "Simon's Game"), // incializa a janela
+    view(window.getView())
 {
 }
 
@@ -53,5 +54,15 @@ void Managers::GraphicManager::Close()
 sf::RenderWindow* Managers::GraphicManager::getWindow() { return &window;} //retorna um ponteiro para a janela (usado no EventManager que depende da janela)
 
 const bool Managers::GraphicManager::isWindowOpen() const { return window.isOpen(); } // retorna se a janela está aberta ou não
+
+void Managers::GraphicManager::CenterView(sf::Vector2f pos)
+{
+    if(pos.y < 300)
+        pos = sf::Vector2f(pos.x, HEIGHT/2 + (pos.y - 300 ) );
+    else
+        pos = sf::Vector2f(pos.x, HEIGHT/2);
+    view.setCenter(pos);
+    window.setView(view);
+}
 
 Managers::GraphicManager *Managers::GraphicManager::Instance(NULL); // incializa o ponteiro estatico para a instancia de Gerenciador grafico

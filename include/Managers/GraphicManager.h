@@ -22,5 +22,6 @@ namespace Managers
         void Display();
         void Clear();
         const bool isWindowOpen() const;
+        void CenterView(sf::Vector2f pos);
     };
 }
