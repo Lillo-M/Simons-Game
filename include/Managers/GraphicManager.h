@@ -11,6 +11,7 @@ namespace Managers
         GraphicManager();
         static GraphicManager* Instance;
         sf::RenderWindow window;
+        sf::View view;
     public:
         ~GraphicManager();
         static GraphicManager* getInstance();

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../Character.h"
+#include "Character.h"
 #include <SFML/Graphics.hpp>
 #include <iostream>
 
@@ -25,7 +25,7 @@ namespace Entities
 			static bool textureLoaded;
 
 		public:
-			Player(const sf::Vector2f pos = sf::Vector2f(0, 0), const sf::Vector2f size = sf::Vector2f(0, 0));
+			Player(const sf::Vector2f pos = sf::Vector2f(0, 0));
 			~Player();
 			void Move();
 			sf::Vector2f getPosition();

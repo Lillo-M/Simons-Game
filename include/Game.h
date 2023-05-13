@@ -14,7 +14,7 @@
 #include "Managers/CollisionManager.h"
 #include <iostream>
 #include "../include/Entities/Characters/Enemies/Warrior.h"
-//#include "../include/Managers/GraphicManager.h"
+#include "../include/Levels/Level1.h"
 
 class Game
 {
@@ -24,12 +24,13 @@ public:
 	void Executar();
 
 private:
-	Managers::CollisionManager CManager;
+	//Managers::CollisionManager CManager;
 	sf::ContextSettings settings;
 	Managers::EventsManager eManager;
-	Math::EntityList Sentities;
-	Math::EntityList Dentities;
-	Entities::Characters::Player* player;
-	sf::RenderWindow window;
+	Levels::Level1 lvl1;
+	//Math::EntityList Sentities;
+	//Math::EntityList Dentities;
+	//Entities::Characters::Player* player;
+	//sf::RenderWindow window;
 	Managers::GraphicManager* pGM;
 };

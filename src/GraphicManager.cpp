@@ -9,6 +9,7 @@ Managers::GraphicManager::~GraphicManager()
 {
     if(Instance)
         delete Instance;
+    Instance = NULL;
 }
 
 Managers::GraphicManager* Managers::GraphicManager::getInstance()

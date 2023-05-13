@@ -1,14 +1,15 @@
 #include "../include/Entities/Characters/Player.h"
-
-Entities::Characters::Player::Player(const sf::Vector2f pos, const sf::Vector2f size) : 
-	Character(pos, size, false, ID::player, LIVES),
+#define SIZEX 61.f
+#define SIZEY 100.f
+Entities::Characters::Player::Player(const sf::Vector2f pos) : 
+	Character(pos, sf::Vector2f(SIZEX, SIZEY), false, ID::player, LIVES),
 	maxVelocity(MAXV),
 	boolMoveLeft(false),
 	BoolMoveRight(false),
 	secondJump(false),
 	fall(false)
 {
-	HitBox.setOrigin(size.x / 2, size.y / 2);
+	HitBox.setOrigin(SIZEX / 2, SIZEY / 2);
 	if(!textureLoaded)
 		if (!texture.loadFromFile("Assets/Player-Idle.png"))
 			std::cout << std::endl << "ERROR: FAIL TO LOAD PLAYER TEXTURE!" << std::endl;

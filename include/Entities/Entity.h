@@ -1,13 +1,13 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
-#include "../Ente.h"
+#include "../Being.h"
 #include <iostream>
 #include <math.h> //Fazer uma Fun��o ABS
 #define MULT 60
 namespace Entities
 {
-	class Entity : public Ente
+	class Entity : public Being
 	{
 	public:
 		Entity(const sf::Vector2f pos = sf::Vector2f(0, 0), const sf::Vector2f size = sf::Vector2f(0, 0), const bool isS = false, ID id = ID::empty);

@@ -1,4 +1,4 @@
-#include "../include/Entities/Obstacle.h"
+#include "../include/Entities/Obstacles/Obstacle.h"
 
 Entities::Obstacles::Obstacle::Obstacle(const sf::Vector2f pos, const sf::Vector2f size, const bool isS, ID id):
     Entity(pos, size, isS, id)

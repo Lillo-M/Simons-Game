@@ -12,12 +12,12 @@ Managers::CollisionManager::~CollisionManager()
 	Dentities = NULL;
 }
 
-void Managers::CollisionManager::getSList(Math::List<Entities::Entity>& ents)
+void Managers::CollisionManager::setSList(Math::List<Entities::Entity>& ents)
 {
 	Sentities = &ents;
 }
 
-void Managers::CollisionManager::getDList(Math::List<Entities::Entity>& ents)
+void Managers::CollisionManager::setDList(Math::List<Entities::Entity>& ents)
 {
 	Dentities = &ents;
 }
@@ -54,7 +54,7 @@ void Managers::CollisionManager::normalCollision(Entities::Entity* ent, float di
 		if (dist_y < 0)
 		{
 			ent->setPosition( ent->getPosition().x, ent->getPosition().y + size_y + dist_y);
-			ent->setVelocity(ent->getVelocity().x,  0);
+			//ent->setVelocity(ent->getVelocity().x,  0);
 		}
 	}
 }

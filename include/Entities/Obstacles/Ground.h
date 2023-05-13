@@ -1,5 +1,5 @@
 #pragma once
-#include "../Obstacle.h"
+#include "Obstacle.h"
 #include <iostream>
 namespace Entities
 {
@@ -12,7 +12,7 @@ namespace Entities
 			static bool textureLoaded;
 
 		public:
-			Ground(const sf::Vector2f pos, const sf::Vector2f size);
+			Ground(const sf::Vector2f pos);
 			~Ground();
 			void OnCollision(Entities::Entity* ent);
 		};

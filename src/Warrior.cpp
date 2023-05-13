@@ -1,9 +1,10 @@
 #include "../include/Entities/Characters/Enemies/Warrior.h"
-
-Entities::Characters::Enemies::Warrior::Warrior(const sf::Vector2f pos, const sf::Vector2f size):
-    Enemy(pos, size, false, ID::enemy, 3)
+#define SIZEX 61.f
+#define SIZEY 100.f
+Entities::Characters::Enemies::Warrior::Warrior(const sf::Vector2f pos):
+    Enemy(pos, sf::Vector2f(SIZEX, SIZEY), false, ID::enemy, 3)
 {
-    HitBox.setOrigin(size.x / 2, size.y / 2);
+    HitBox.setOrigin(SIZEX / 2, SIZEY / 2);
 	if(!textureLoaded)
 		if (!texture.loadFromFile("Assets/Enemy-Warrior-Idle.png"))
 			std::cout << std::endl << "ERROR: FAIL TO LOAD PLAYER TEXTURE!" << std::endl;

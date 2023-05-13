@@ -1,9 +1,10 @@
 #include "../include/Entities/Obstacles/Ground.h"
-
-Entities::Obstacles::Ground::Ground(const sf::Vector2f pos, const sf::Vector2f size):
-	Obstacle(pos, size, true, ID::obstacle)
+#define SIZEX 128.f
+#define SIZEY 128.f
+Entities::Obstacles::Ground::Ground(const sf::Vector2f pos):
+	Obstacle(pos, sf::Vector2f(SIZEX, SIZEY), true, ID::obstacle)
 {
-	HitBox.setOrigin(size.x / 2, size.y / 2);
+	HitBox.setOrigin(SIZEX / 2, SIZEY / 2);
 	if(!textureLoaded)
 		if (!texture.loadFromFile("Assets/Ground2.png"))
 			std::cout << std::endl << "ERROR: FAIL TO LOAD PLAYER TEXTURE!" << std::endl;

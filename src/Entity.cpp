@@ -3,7 +3,7 @@
 using namespace Entities;
 
 Entity::Entity(const sf::Vector2f pos, const sf::Vector2f size, const bool isS, ID id) : 
-	Ente(id),
+	Being(id),
 	HitBox(size),
 	Position(pos.x, pos.y),
 	grounded(false),

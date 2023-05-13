@@ -1,4 +1,4 @@
-#include "../include/Entities/Character.h"
+#include "../include/Entities/Characters/Character.h"
 
 Entities::Characters::Character::Character(const sf::Vector2f pos, const sf::Vector2f size, const bool isS, ID id, int lves):
     Entity(pos, size, false, id),
@@ -32,7 +32,7 @@ void Entities::Characters::Character::Damage()
         return;
     timecont += dt;
     HitBox.setFillColor(sf::Color::Red);
-    if(timecont >= 1)
+    if(timecont >= 0.3)
     {
         HitBox.setFillColor(sf::Color::White);
         damaged = false;

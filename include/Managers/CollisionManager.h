@@ -10,8 +10,8 @@ namespace Managers
 	public:
 		CollisionManager();
 		~CollisionManager();
-		void getSList(Math::List<Entities::Entity>& ents);
-		void getDList(Math::List<Entities::Entity>& ents);
+		void setSList(Math::List<Entities::Entity>& ents);
+		void setDList(Math::List<Entities::Entity>& ents);
 		void Manage();
 		void normalCollision(Entities::Entity* ent, float dist_x, float dist_y, float size_x, float size_y);
 	private:

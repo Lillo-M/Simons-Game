@@ -5,19 +5,20 @@
 
 enum ID
 {
-    empty       = -1,
-    player      = 0,
-    player2     = 1,
-    enemy     = 2,
-    obstacle        = 3
+    empty           = -1,
+    player          = 0,
+    player2         = 1,
+    enemy           = 2,
+    obstacle        = 3,
+    level           = 4
 };
 
 
-class Ente
+class Being
 {
 public:
-    Ente(ID id_ = empty);
-    virtual ~Ente();
+    Being(ID id_ = empty);
+    virtual ~Being();
     virtual void Draw() = 0;
     const ID getID() const; 
 
