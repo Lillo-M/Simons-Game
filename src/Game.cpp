@@ -6,6 +6,7 @@ Game::Game():
     eManager(),
     lvl1(&eManager)
 {
+    settings.antialiasingLevel = 16;
     Executar();
 }
 

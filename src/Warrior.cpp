@@ -2,7 +2,8 @@
 #define SIZEX 61.f
 #define SIZEY 100.f
 Entities::Characters::Enemies::Warrior::Warrior(const sf::Vector2f pos):
-    Enemy(pos, sf::Vector2f(SIZEX, SIZEY), false, ID::enemy, 3)
+    Enemy(pos, sf::Vector2f(SIZEX, SIZEY), false, ID::enemy, 3),
+	timecont(0)
 {
     HitBox.setOrigin(SIZEX / 2, SIZEY / 2);
 	if(!textureLoaded)
@@ -16,6 +17,21 @@ Entities::Characters::Enemies::Warrior::~Warrior()
 }
 void Entities::Characters::Enemies::Warrior::Move()
 {
+	timecont += dt;
+	if( timecont >= 0.3);
+	{
+		direction = !direction;
+		timecont = 0;
+	}
+	if(direction)
+	{
+		velocity.x += ESPEED * dt * MULT;
+	}
+	else
+	{
+		velocity.x -= ESPEED * dt * MULT;
+
+	}
 	Position.x += velocity.x * dt * MULT;
 	Position.y += velocity.y * dt * MULT;
 	Gravity();
