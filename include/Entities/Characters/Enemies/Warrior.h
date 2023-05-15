@@ -2,7 +2,8 @@
 
 #include "Enemy.h"
 #include "../Player.h"
-#define ESPEED 0.1
+#include <stdlib.h>
+
 #define MULT 60
 
 namespace Entities
@@ -14,8 +15,8 @@ namespace Entities
             class Warrior : public Enemy
             {
             private:
-                float timecont;
-                bool direction;
+                float directiontimer;
+                bool directionright;
                 static sf::Texture texture; // Implementar em Enemy tipo A/B/C
                 static bool textureLoaded;  //
             public:

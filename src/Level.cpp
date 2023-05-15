@@ -3,8 +3,8 @@
 Levels::Level::Level(const ID id, Managers::EventsManager *pEM) : Being(id),
     pEManager(pEM),
     pCManager(new Managers::CollisionManager),
-    pPlayer(NULL)/*,
-    pPlayer2(NULL)*/
+    pPlayer(NULL),
+    pPlayer2(NULL)
 {
     if (!pCManager)
     {
@@ -40,11 +40,15 @@ void Levels::Level::CreatePlayer(const sf::Vector2f pos)
         exit(1);
     }
     if(!pPlayer)
+    {
         pPlayer = pAux;
-    /*else
-        pPlayer2 = pAux;*/
-
-    pEManager->setpPlayer(pAux);
+        pEManager->setpPlayer(pAux);
+    }
+    else
+    {
+        pPlayer2 = pAux;
+        pEManager->setpPlayer2(pAux);
+    }
     DentitiesList.insert_back(static_cast<Entities::Entity *>(pAux));
 }
 

@@ -1,5 +1,5 @@
 #include "../include/Game.h"
-
+#include "../include/Entities/Entity.h"
 
 Game::Game():
     pGM(Managers::GraphicManager::getInstance()),

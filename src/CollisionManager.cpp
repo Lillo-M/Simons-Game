@@ -22,7 +22,7 @@ void Managers::CollisionManager::setDList(Math::List<Entities::Entity>& ents)
 	Dentities = &ents;
 }
 
-void Managers::CollisionManager::normalCollision(Entities::Entity* ent, float dist_x, float dist_y, float size_x, float size_y)
+void Managers::CollisionManager::normalCollision(Entities::Entity* ent, float dist_x, float dist_y, float size_x, float size_y, ID id)
 {
 	/*float size_y = ent->getSize().y / 2 + getSize().y / 2;
 	float size_x = ent->getSize().x / 2 + getSize().x / 2;
@@ -48,13 +48,13 @@ void Managers::CollisionManager::normalCollision(Entities::Entity* ent, float di
 		if (dist_y > 0)
 		{
 			ent->setPosition( ent->getPosition().x, ent->getPosition().y + dist_y - size_y);
-			ent->setVelocity(ent->getVelocity().x,  0);
-			ent->setGrounded(true);
+			if(id == ID::obstacle || id == ID::player)ent->setVelocity(ent->getVelocity().x,  0);
+			if(id == ID::obstacle || id == ID::player)ent->setGrounded(true);
 		}
 		if (dist_y < 0)
 		{
 			ent->setPosition( ent->getPosition().x, ent->getPosition().y + size_y + dist_y);
-			//ent->setVelocity(ent->getVelocity().x,  0);
+			ent->setVelocity(ent->getVelocity().x,  0);
 		}
 	}
 }
@@ -78,7 +78,8 @@ void Managers::CollisionManager::Manage()
 			
 			if (abs(dist_x) < dx && abs(dist_y) < dy)
 			{
-				normalCollision((*Dentities)[i], dist_x, dist_y, dx, dy);
+				normalCollision((*Dentities)[i], dist_x, dist_y, dx, dy, (*Dentities)[j]->getID());
+				normalCollision((*Dentities)[j], -dist_x, -dist_y, dx, dy, (*Dentities)[i]->getID());
 				(*Dentities)[i]->OnCollision((*Dentities)[j]);
 				(*Dentities)[j]->OnCollision((*Dentities)[i]);
 			}
@@ -92,10 +93,9 @@ void Managers::CollisionManager::Manage()
 			dy = (*Dentities)[i]->getSize().y / 2 + (*Sentities)[j]->getSize().y / 2;
 			if (abs(dist_x) < dx && abs(dist_y) < dy)
 			{
-				normalCollision((*Dentities)[i], dist_x, dist_y, dx, dy);
+				normalCollision((*Dentities)[i], dist_x, dist_y, dx, dy, (*Sentities)[j]->getID());
 				(*Dentities)[i]->OnCollision((*Sentities)[j]);
 			}
 		}
-
 	}
 }

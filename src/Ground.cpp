@@ -6,7 +6,11 @@ Entities::Obstacles::Ground::Ground(const sf::Vector2f pos):
 {
 	HitBox.setOrigin(SIZEX / 2, SIZEY / 2);
 	if(!textureLoaded)
-		if (!texture.loadFromFile("Assets/Ground2.png"))
+		if (texture.loadFromFile("Assets/Ground2.png"))
+		{
+			textureLoaded = true;
+		}
+		else
 			std::cout << std::endl << "ERROR: FAIL TO LOAD PLAYER TEXTURE!" << std::endl;
 	HitBox.setTexture(&texture);
 }

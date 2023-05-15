@@ -6,16 +6,18 @@ EventsManager::~EventsManager()
 {
 	keyMap.clear();
 	pPlayer = NULL;
+	pPlayer2 = NULL;
 	delete pPlayerIM;
 	pPlayerIM = NULL;
 	pGM = NULL;
 }
 
-EventsManager::EventsManager(Entities::Characters::Player *pP) : 
-	pPlayer(pP)
+EventsManager::EventsManager(Entities::Characters::Player *pP, Entities::Characters::Player *pP2) : 
+	pPlayer(pP),
+	pPlayer2(pP2)
 {
 	pGM = Managers::GraphicManager::getInstance();
-	pPlayerIM = new PlayerInputManager(pPlayer);
+	pPlayerIM = new PlayerInputManager(pPlayer, pPlayer2);
 	keyMap.clear();
 	keyMap[sf::Keyboard::A] = 'A';
 	keyMap[sf::Keyboard::B] = 'B';
@@ -46,6 +48,7 @@ EventsManager::EventsManager(Entities::Characters::Player *pP) :
 	keyMap[sf::Keyboard::LShift] = "LShift";
 	keyMap[sf::Keyboard::Space] = "Space";
 	keyMap[sf::Keyboard::LControl] = "lCtrl";
+	keyMap[sf::Keyboard::RControl] = "rCtrl";
 	keyMap[sf::Keyboard::Tab] = "Tab";
 	keyMap[sf::Keyboard::Escape] = "Esc";
 	keyMap[sf::Keyboard::Right] = "Right";
@@ -59,6 +62,12 @@ void EventsManager::setpPlayer(Entities::Characters::Player *pP)
 {
 	pPlayer = pP;
 	pPlayerIM->setpPlayer(pPlayer);
+}
+
+void EventsManager::setpPlayer2(Entities::Characters::Player *pP)
+{
+	pPlayer2 = pP;
+	pPlayerIM->setpPlayer2(pPlayer2);
 }
 
 void EventsManager::keyPressedEvent(sf::Event::KeyEvent key)

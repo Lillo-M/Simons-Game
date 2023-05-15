@@ -3,11 +3,16 @@
 #define SIZEY 100.f
 Entities::Characters::Enemies::Warrior::Warrior(const sf::Vector2f pos):
     Enemy(pos, sf::Vector2f(SIZEX, SIZEY), false, ID::enemy, 3),
-	timecont(0)
+	directiontimer(0),
+	directionright(static_cast<bool>(rand()%2))
 {
     HitBox.setOrigin(SIZEX / 2, SIZEY / 2);
 	if(!textureLoaded)
-		if (!texture.loadFromFile("Assets/Enemy-Warrior-Idle.png"))
+		if (texture.loadFromFile("Assets/Enemy-Warrior-Idle.png"))
+		{
+			textureLoaded = true;
+		}
+		else
 			std::cout << std::endl << "ERROR: FAIL TO LOAD PLAYER TEXTURE!" << std::endl;
 	HitBox.setTexture(&texture);
 }
@@ -15,22 +20,30 @@ Entities::Characters::Enemies::Warrior::Warrior(const sf::Vector2f pos):
 Entities::Characters::Enemies::Warrior::~Warrior()
 {
 }
+#define ESPEED 1
 void Entities::Characters::Enemies::Warrior::Move()
 {
-	timecont += dt;
-	if( timecont >= 0.3);
+	directiontimer += dt;
+	//
+	if(directiontimer >= 2)
 	{
-		direction = !direction;
-		timecont = 0;
+		directionright = !directionright;
+		directiontimer = 0;
+		velocity.x = 0;
 	}
-	if(direction)
+	if(directionright)
 	{
-		velocity.x += ESPEED * dt * MULT;
+		if (velocity.x < MAXV)
+			velocity.x += ESPEED * dt * MULT; // Velocidade De Teste
+		if (velocity.x > MAXV)
+			velocity.x = MAXV;
 	}
-	else
+	else if(!directionright)
 	{
-		velocity.x -= ESPEED * dt * MULT;
-
+		if (velocity.x > -MAXV)
+			velocity.x -= ESPEED * dt * MULT; // Velocidade De Teste
+		if (velocity.x < -MAXV)
+			velocity.x = -MAXV;
 	}
 	Position.x += velocity.x * dt * MULT;
 	Position.y += velocity.y * dt * MULT;
@@ -53,8 +66,12 @@ void Entities::Characters::Enemies::Warrior::OnCollision(Entities::Entity* ent)
 		Attack(true);
 		Entities::Characters::Player* pPlayer = static_cast<Entities::Characters::Player*>(ent);
 		pPlayer->Damage(true);
-		std::cout << std::endl << "dano" << std::endl;
-		pPlayer->setVelocity(-pPlayer->getVelocity().x, -pPlayer->getVelocity().y);
+		sf::Vector2f vel = sf::Vector2f( 0, JUMPHEIGHT/2);
+		if(pPlayer->getPosition().x > Position.x)
+			vel.x = -JUMPHEIGHT;
+		else
+			vel.x = JUMPHEIGHT;
+		pPlayer->setVelocity(vel);
 		pPlayer = NULL;
 	}
 	else

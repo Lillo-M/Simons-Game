@@ -22,7 +22,7 @@ namespace Levels
         void CreateEntity(char id, sf::Vector2f pos);
     protected:
         Entities::Characters::Player* pPlayer;
-        //Entities::Characters::Player* pPlayer2;
+        Entities::Characters::Player* pPlayer2;
         Managers::EventsManager* pEManager;
         Managers::CollisionManager* pCManager;
         Math::EntityList SentitiesList;

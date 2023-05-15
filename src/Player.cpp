@@ -11,7 +11,11 @@ Entities::Characters::Player::Player(const sf::Vector2f pos) :
 {
 	HitBox.setOrigin(SIZEX / 2, SIZEY / 2);
 	if(!textureLoaded)
-		if (!texture.loadFromFile("Assets/Player-Idle.png"))
+		if (texture.loadFromFile("Assets/Player-Idle.png"))
+		{
+			textureLoaded = true;
+		}
+		else
 			std::cout << std::endl << "ERROR: FAIL TO LOAD PLAYER TEXTURE!" << std::endl;
 	HitBox.setTexture(&texture);
 }
@@ -114,8 +118,6 @@ void Entities::Characters::Player::MoveLeft(const bool b)
 void Entities::Characters::Player::Fall()
 {
 	fall = true;
-	std::cout << std::endl
-			  << "Fall!" << std::endl;
 }
 
 void Entities::Characters::Player::Attack(const bool b)
