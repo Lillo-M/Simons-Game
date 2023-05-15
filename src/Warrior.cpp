@@ -15,6 +15,7 @@ Entities::Characters::Enemies::Warrior::Warrior(const sf::Vector2f pos):
 		else
 			std::cout << std::endl << "ERROR: FAIL TO LOAD PLAYER TEXTURE!" << std::endl;
 	HitBox.setTexture(&texture);
+	animation.AnimationReset(&texture, sf::Vector2u(5,1), static_cast<float>(0.2));
 }
 
 Entities::Characters::Enemies::Warrior::~Warrior()
@@ -28,11 +29,12 @@ void Entities::Characters::Enemies::Warrior::Move()
 	if(directiontimer >= 2)
 	{
 		directionright = !directionright;
-		directiontimer = 0;
+		directiontimer -= 2;
 		velocity.x = 0;
 	}
 	if(directionright)
 	{
+		HitBox.setScale(sf::Vector2f(1, 1));
 		if (velocity.x < MAXV)
 			velocity.x += ESPEED * dt * MULT; // Velocidade De Teste
 		if (velocity.x > MAXV)
@@ -40,6 +42,7 @@ void Entities::Characters::Enemies::Warrior::Move()
 	}
 	else if(!directionright)
 	{
+		HitBox.setScale(sf::Vector2f(-1, 1));
 		if (velocity.x > -MAXV)
 			velocity.x -= ESPEED * dt * MULT; // Velocidade De Teste
 		if (velocity.x < -MAXV)
@@ -49,6 +52,8 @@ void Entities::Characters::Enemies::Warrior::Move()
 	Position.y += velocity.y * dt * MULT;
 	Gravity();
 	HitBox.setPosition(Position);
+	animation.update(0, dt);
+	HitBox.setTextureRect(animation.uvRect);
 }
 
 void Entities::Characters::Enemies::Warrior::Attack(const bool b)
