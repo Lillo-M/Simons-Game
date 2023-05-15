@@ -21,7 +21,7 @@ Entities::Characters::Enemies::Warrior::Warrior(const sf::Vector2f pos):
 Entities::Characters::Enemies::Warrior::~Warrior()
 {
 }
-#define ESPEED 1
+#define ESPEED 0.1
 void Entities::Characters::Enemies::Warrior::Move()
 {
 	directiontimer += dt;
