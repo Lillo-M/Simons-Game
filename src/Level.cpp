@@ -30,7 +30,9 @@ Levels::Level::~Level()
     if(pCManager)
         delete pCManager;
     SentitiesList.clear();
-}
+    if (pCManager)
+        delete pCManager;
+    }
 
 void Levels::Level::CreatePlayer(const sf::Vector2f pos)
 {
