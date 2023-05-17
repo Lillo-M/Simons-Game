@@ -27,6 +27,8 @@ Levels::Level::~Level()
         if (SentitiesList[i])
             delete SentitiesList[i];
     }
+    if(pCManager)
+        delete pCManager;
     SentitiesList.clear();
 }
 

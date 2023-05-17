@@ -2,7 +2,7 @@
 #include <iostream>
 //#include "../Being.h"
 #define WIDTH 1280
-#define HEIGHT 720
+#define HEIGHT 768
 namespace Managers
 {
     class GraphicManager

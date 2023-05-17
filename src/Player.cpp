@@ -18,6 +18,8 @@ Entities::Characters::Player::Player(const sf::Vector2f pos) :
 		else
 			std::cout << std::endl << "ERROR: FAIL TO LOAD PLAYER TEXTURE!" << std::endl;
 	HitBox.setTexture(&texture);
+	animation.AnimationReset(&texture, sf::Vector2u(4,1), static_cast<float>(0.25));
+	HitBox.setTextureRect(animation.uvRect);
 }
 
 Entities::Characters::Player::~Player()
@@ -73,11 +75,18 @@ void Entities::Characters::Player::Move()
 		if (velocity.x < 0)
 			velocity.x = 0;
 	}
+	if(velocity.x > 0)
+		HitBox.setScale(sf::Vector2f(-1, 1));
+	else if(velocity.x < 0)
+		HitBox.setScale(sf::Vector2f(1, 1));
+
 	Damage();
 	Position.x += velocity.x * dt * MULT;
 	Position.y += velocity.y * dt * MULT;
 	Gravity();
 	HitBox.setPosition(Position);
+	animation.update(0, dt);
+	HitBox.setTextureRect(animation.uvRect);
 }
 
 void Entities::Characters::Player::Jump()
@@ -99,19 +108,19 @@ void Entities::Characters::Player::Jump()
 
 void Entities::Characters::Player::MoveRight(const bool b)
 {
-	if (b)
+	/*if (b)
 		HitBox.setScale(sf::Vector2f(-1, 1));
 	else if (boolMoveLeft)
-		HitBox.setScale(sf::Vector2f(1, 1));
+		HitBox.setScale(sf::Vector2f(1, 1));*/
 	BoolMoveRight = b;
 }
 
 void Entities::Characters::Player::MoveLeft(const bool b)
 {
-	if (b)
+	/*if (b)
 		HitBox.setScale(sf::Vector2f(1, 1));
 	else if (BoolMoveRight)
-		HitBox.setScale(sf::Vector2f(-1, 1));
+		HitBox.setScale(sf::Vector2f(-1, 1));*/
 	boolMoveLeft = b;
 }
 

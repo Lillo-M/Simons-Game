@@ -3,7 +3,7 @@
 #include "Character.h"
 #include <SFML/Graphics.hpp>
 #include <iostream>
-
+#include "../../GraphicElements/Animation.h"
 #define LIVES 5
 #define MAXV 10
 #define ATRITO 0.45
@@ -23,7 +23,7 @@ namespace Entities
 			bool fall;
 			static sf::Texture texture;
 			static bool textureLoaded;
-
+			GraphicElements::Animation animation;
 		public:
 			Player(const sf::Vector2f pos = sf::Vector2f(0, 0));
 			~Player();

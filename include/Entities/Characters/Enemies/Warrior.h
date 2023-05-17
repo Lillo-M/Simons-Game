@@ -19,7 +19,7 @@ namespace Entities
                 bool directionright;
                 static sf::Texture texture; // Implementar em Enemy tipo A/B/C
                 static bool textureLoaded;  //
-                Animation animation;
+                GraphicElements::Animation animation;
             public:
                 Warrior(const sf::Vector2f pos = sf::Vector2f(0, 0));
                 ~Warrior();
