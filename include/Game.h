@@ -6,8 +6,6 @@
 #include "Managers/EventsManager.h"
 #include <SFML/System.hpp>
 #include <SFML/Config.hpp>
-#define WIDTH 1280
-#define HEIGHT 720
 #define FPS 0
 #include <list>
 #include "Math/List.h"
