@@ -43,7 +43,7 @@ void Managers::GraphicManager::Display()
 
 void Managers::GraphicManager::Clear()
 {
-    window.clear(); // limpa a janela
+    window.clear(sf::Color::Green); // limpa a janela
 }
 
 void Managers::GraphicManager::Close()
