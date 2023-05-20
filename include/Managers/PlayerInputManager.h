@@ -17,6 +17,8 @@ namespace Managers
 		void releasedInput(std::string s);
 		bool jumpKeyReleased;
 		bool jumpKeyReleased2;
+		bool attackKeyReleased;	
+		bool attackKeyReleased2;
 		void setpPlayer(Entities::Characters::Player* pP);
 		void setpPlayer2(Entities::Characters::Player* pP);
 	private:

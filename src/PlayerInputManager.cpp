@@ -6,7 +6,9 @@ PlayerInputManager::PlayerInputManager(Entities::Characters::Player *pP, Entitie
 	pPlayer(pP),																								  
 	pPlayer2(pP2),
 	jumpKeyReleased(true),
-	jumpKeyReleased2(true)
+	jumpKeyReleased2(true),
+	attackKeyReleased(true),
+	attackKeyReleased2(true)
 {
 	inputSetsPlayer["Jump"] = "W";
 	inputSetsPlayer["Right"] = "D";
@@ -56,14 +58,17 @@ void PlayerInputManager::pressedInput(std::string s)
 			}
 			if (mapIt->first == "Attack")
 			{
-				std::cout << std::endl
-						  << "attack!" << std::endl;
-				pPlayer->Attack(true);
+				if(attackKeyReleased)
+				{ 
+					pPlayer->Attack(true);
+					attackKeyReleased = false;
+				}
 			}
 		}
 	}
 	mapIt = inputSetsPlayer.begin();
 	if (pPlayer2)
+	{
 		for (mapIt2; mapIt2 != inputSetsPlayer2.end(); mapIt2++)
 		{
 			if (mapIt2->second == s)
@@ -90,12 +95,16 @@ void PlayerInputManager::pressedInput(std::string s)
 				}
 				if (mapIt2->first == "Attack")
 				{
-					pPlayer2->Attack(true);
+					if(attackKeyReleased2)
+					{
+						pPlayer2->Attack(true);
+						attackKeyReleased2 = false;
+					}
 				}
 			}
 		}
-	if(pPlayer2)
 		mapIt2 = inputSetsPlayer2.begin();
+	}
 }
 
 void PlayerInputManager::releasedInput(std::string s)
@@ -118,12 +127,14 @@ void PlayerInputManager::releasedInput(std::string s)
 			}
 			if (mapIt->first == "Attack")
 			{
+				attackKeyReleased = true;
 				pPlayer->Attack(false);
 			}
 		}
 	}
 	mapIt = inputSetsPlayer.begin();
 	if (pPlayer2)
+	{
 		for (mapIt2; mapIt2 != inputSetsPlayer2.end(); mapIt2++)
 		{
 			if (mapIt2->second == s)
@@ -142,12 +153,13 @@ void PlayerInputManager::releasedInput(std::string s)
 				}
 				if (mapIt2->first == "Attack")
 				{
+					attackKeyReleased2 = true;
 					pPlayer2->Attack(false);
 				}
 			}
 		}
-	if(pPlayer2)
 		mapIt2 = inputSetsPlayer2.begin();
+	}
 }
 
 void PlayerInputManager::setpPlayer(Entities::Characters::Player *pP)

@@ -103,9 +103,9 @@ void Entities::Characters::Player::Move()
 	if(!attackcooled)
 	{
 		attackcd += dt;
-		if(attackcd >= 1.f)
+		if(attackcd >= 0.34f)
 		{
-			attackcd -= 1.f;
+			attackcd -= 0.34f;
 			attackcooled = true;
 		}
 	}
@@ -163,12 +163,15 @@ void Entities::Characters::Player::Attack(const bool b)
 	if (attackcooled && b)
 	{
 		attackcooled = false;
-		shots[shotcount]->Shoot(sf::Vector2f(Position.x + SIZEX * -HitBox.getScale().x, Position.y), \
-				   sf::Vector2f(-HitBox.getScale().x * 10, 0));	
+		shots[shotcount]->Shoot(sf::Vector2f(Position.x + \
+		( SIZEX / 2 + shots[shotcount]->getSize().x / 2 ) * -HitBox.getScale().x, Position.y), \
+	        sf::Vector2f(-HitBox.getScale().x * 15, 0));	
+	
+		shotcount++;
+	
+		if(shotcount >= shots.size())
+			shotcount = 0;
 	}
-	shotcount++;
-	if(shotcount >= shots.size())
-		shotcount = 0;
 }
 void Entities::Characters::Player::OnCollision(Entities::Entity *ent)
 {
