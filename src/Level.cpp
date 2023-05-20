@@ -54,6 +54,11 @@ void Levels::Level::CreatePlayer(const sf::Vector2f pos)
         pEManager->setpPlayer2(pAux);
     }
     DentitiesList.insert_back(static_cast<Entities::Entity *>(pAux));
+    std::vector<Projectile*>::iterator it;
+    for(it = pAux->getShots()->begin(); it != pAux->getShots()->end(); it++)
+    {
+	DentitiesList.insert_back(static_cast<Entities::Entity *>(*it));
+    }
 }
 
 void Levels::Level::CreateWarrior(const sf::Vector2f pos)
@@ -84,6 +89,16 @@ void Levels::Level::Draw()
 {
     for (int i = 0; i < DentitiesList.getSize(); i++)
     {
+    	if(DentitiesList[i]->getID() != ID::obstacle)
+    	{
+    		if(DentitiesList[i]->getID() == ID::player || DentitiesList[i]->getID() == ID::enemy)
+    		{	if(!static_cast<Entities::Characters::Character*>(DentitiesList[i])->getAlive())
+    				continue;
+    		}
+    		else
+    			if(static_cast<Projectile*>(DentitiesList[i])->getCollided())
+    				continue;
+    	}
         DentitiesList[i]->Draw();
     }
     for (int i = 0; i < SentitiesList.getSize(); i++)
@@ -113,6 +128,17 @@ void Levels::Level::Run()
 {
     for (int i = 0; i < DentitiesList.getSize(); i++)
     {
+    	if(DentitiesList[i]->getID() != ID::obstacle)
+        {
+        	if(DentitiesList[i]->getID() == ID::player || DentitiesList[i]->getID() == ID::enemy)
+       		{	
+       			if(!static_cast<Entities::Characters::Character*>(DentitiesList[i])->getAlive())
+       				continue;
+       		}
+       		else
+       			if(static_cast<Projectile*>(DentitiesList[i])->getCollided())
+       				continue;
+       	}
         DentitiesList[i]->Move();
     }
     for (int i = 0; i < SentitiesList.getSize(); i++)

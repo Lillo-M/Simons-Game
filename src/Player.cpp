@@ -7,8 +7,21 @@ Entities::Characters::Player::Player(const sf::Vector2f pos) :
 	boolMoveLeft(false),
 	BoolMoveRight(false),
 	secondJump(false),
-	fall(false)
+	fall(false),
+	attackcd(0.f),
+	attackcooled(true),
+	shotcount(0)
 {
+	for(int i = 0; i < 10; i++)
+	{
+		Projectile* pAux = new Projectile(sf::Vector2f(0,0), sf::Vector2f(0,0), this);
+		if(!pAux)
+		{
+			std::cout << std::endl << "ERROR: Failed to Memory Allocate" << std::endl;
+			exit(1);
+		}
+		shots.push_back(pAux);
+	}
 	HitBox.setOrigin(SIZEX / 2, SIZEY / 2);
 	if(!textureLoaded)
 		if (texture.loadFromFile("Assets/Player-Idle.png"))
@@ -24,6 +37,13 @@ Entities::Characters::Player::Player(const sf::Vector2f pos) :
 
 Entities::Characters::Player::~Player()
 {
+	/*std::vector<Projectile*>::iterator it = shots.begin();
+	for(it; it != shots.end(); it++)
+	{
+		if(*it)
+			delete *it;
+	}*/
+	shots.clear();
 }
 
 void Entities::Characters::Player::setDead() { alive = false; }
@@ -75,11 +95,20 @@ void Entities::Characters::Player::Move()
 		if (velocity.x < 0)
 			velocity.x = 0;
 	}
-	if(velocity.x > 0)
+	/*if(velocity.x > 0)
 		HitBox.setScale(sf::Vector2f(-1, 1));
 	else if(velocity.x < 0)
-		HitBox.setScale(sf::Vector2f(1, 1));
+		HitBox.setScale(sf::Vector2f(1, 1));*/
 
+	if(!attackcooled)
+	{
+		attackcd += dt;
+		if(attackcd >= 1.f)
+		{
+			attackcd -= 1.f;
+			attackcooled = true;
+		}
+	}
 	Damage();
 	Position.x += velocity.x * dt * MULT;
 	Position.y += velocity.y * dt * MULT;
@@ -108,19 +137,19 @@ void Entities::Characters::Player::Jump()
 
 void Entities::Characters::Player::MoveRight(const bool b)
 {
-	/*if (b)
+	if (b)
 		HitBox.setScale(sf::Vector2f(-1, 1));
 	else if (boolMoveLeft)
-		HitBox.setScale(sf::Vector2f(1, 1));*/
+		HitBox.setScale(sf::Vector2f(1, 1));
 	BoolMoveRight = b;
 }
 
 void Entities::Characters::Player::MoveLeft(const bool b)
 {
-	/*if (b)
+	if (b)
 		HitBox.setScale(sf::Vector2f(1, 1));
 	else if (BoolMoveRight)
-		HitBox.setScale(sf::Vector2f(-1, 1));*/
+		HitBox.setScale(sf::Vector2f(-1, 1));
 	boolMoveLeft = b;
 }
 
@@ -131,10 +160,15 @@ void Entities::Characters::Player::Fall()
 
 void Entities::Characters::Player::Attack(const bool b)
 {
-	if (b)
-		HitBox.setFillColor(sf::Color(sf::Color::Blue));
-	else
-		HitBox.setFillColor(sf::Color(sf::Color::White));
+	if (attackcooled && b)
+	{
+		attackcooled = false;
+		shots[shotcount]->Shoot(sf::Vector2f(Position.x + SIZEX * -HitBox.getScale().x, Position.y), \
+				   sf::Vector2f(-HitBox.getScale().x * 10, 0));	
+	}
+	shotcount++;
+	if(shotcount >= shots.size())
+		shotcount = 0;
 }
 void Entities::Characters::Player::OnCollision(Entities::Entity *ent)
 {
@@ -148,6 +182,8 @@ void Entities::Characters::Player::OnCollision(Entities::Entity *ent)
 		//normalCollision(ent);
 	}*/
 }
+
+std::vector<Projectile*>* Entities::Characters::Player::getShots() {return &shots;}
 
 sf::Texture Entities::Characters::Player::texture;
 bool Entities::Characters::Player::textureLoaded = false;

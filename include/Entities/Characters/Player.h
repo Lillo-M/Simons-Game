@@ -3,7 +3,9 @@
 #include "Character.h"
 #include <SFML/Graphics.hpp>
 #include <iostream>
+#include <vector>
 #include "../../GraphicElements/Animation.h"
+#include "../Projectile.h"
 #define LIVES 5
 #define MAXV 10
 #define ATRITO 0.45
@@ -16,14 +18,18 @@ namespace Entities
 		class Player: public Characters::Character
 		{
 		private:
+			std::vector<Projectile*> shots;
+			int shotcount;
 			const float maxVelocity;
 			bool BoolMoveRight;
 			bool boolMoveLeft;
 			bool secondJump;
 			bool fall;
+			bool attackcooled;
 			static sf::Texture texture;
 			static bool textureLoaded;
 			GraphicElements::Animation animation;
+			float attackcd;	
 		public:
 			Player(const sf::Vector2f pos = sf::Vector2f(0, 0));
 			~Player();
@@ -37,6 +43,7 @@ namespace Entities
 			void Fall();
 			void Attack(const bool b);
 			void OnCollision(Entities::Entity* ent);
+			std::vector<Projectile*>* getShots();
 		};
 	}
 }

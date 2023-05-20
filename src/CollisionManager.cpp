@@ -68,8 +68,30 @@ void Managers::CollisionManager::Manage()
 	float dy = 0;
 	for (int i = 0; i < Dentities->getSize(); i++)
 	{
+		if((*Dentities)[i]->getID() != ID::obstacle)
+		{
+			if((*Dentities)[i]->getID() == ID::player || (*Dentities)[i]->getID() == ID::enemy)
+			{	if(!static_cast<Entities::Characters::Character*>((*Dentities)[i])->getAlive())
+					continue;
+			}
+			else
+				if(static_cast<Projectile*>((*Dentities)[i])->getCollided())
+					continue;
+		}
+
 		for (int j = i + 1; j < Dentities->getSize(); j++)
 		{
+			if((*Dentities)[j]->getID() != ID::obstacle)
+			{
+				if((*Dentities)[j]->getID() == ID::player || (*Dentities)[j]->getID() == ID::enemy)
+				{	
+					if(!static_cast<Entities::Characters::Character*>((*Dentities)[j])->getAlive())
+						continue;
+				}
+				else
+				if(static_cast<Projectile*>((*Dentities)[j])->getCollided())
+					continue;
+			}
 			dist_x = (*Dentities)[j]->getPosition().x - (*Dentities)[i]->getPosition().x;
 			dist_y = (*Dentities)[j]->getPosition().y - (*Dentities)[i]->getPosition().y;
 			dx = (*Dentities)[i]->getSize().x / 2 + (*Dentities)[j]->getSize().x / 2;

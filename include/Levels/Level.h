@@ -1,10 +1,12 @@
 #pragma once
+#include <vector>
 #include "../Managers/CollisionManager.h"
 #include "../Managers/EventsManager.h"
 #include "../Math/List.h"
 #include "../Entities/Characters/Player.h"
 #include "../Entities/Characters/Enemies/Warrior.h"
 #include "../Entities/Obstacles/Ground.h"
+
 namespace Levels
 {
     class Level: public Being
