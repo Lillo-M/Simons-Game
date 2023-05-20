@@ -20,7 +20,7 @@ public:
     virtual ~Being();
     virtual void Draw() = 0;
     const ID getID() const; 
-
+    //virtual void Run() = 0;
 private:
     const ID id;
 protected:

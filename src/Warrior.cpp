@@ -50,6 +50,7 @@ void Entities::Characters::Enemies::Warrior::Move()
 	}
 	Position.x += velocity.x * dt * MULT;
 	Position.y += velocity.y * dt * MULT;
+	Damage();
 	Gravity();
 	HitBox.setPosition(Position);
 	animation.update(0, dt);

@@ -27,7 +27,7 @@ void Projectile::OnCollision(Entities::Entity* ent)
 {
     if(ent->getID() != owner->getID() && ent->getID() != ID::obstacle)
     {
-        static_cast<Entities::Characters::Character*>(ent)->operator--();	    
+        static_cast<Entities::Characters::Character*>(ent)->Damage(true);	    
     }
     collided = true;
 }
