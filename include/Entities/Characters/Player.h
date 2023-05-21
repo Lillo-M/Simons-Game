@@ -34,6 +34,7 @@ namespace Entities
 			Player(const sf::Vector2f pos = sf::Vector2f(0, 0));
 			~Player();
 			void Move();
+			void Update();
 			sf::Vector2f getPosition();
 			const sf::Vector2f getVelocity() const;
 			void setDead();

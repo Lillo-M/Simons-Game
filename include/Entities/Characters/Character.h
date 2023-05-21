@@ -15,6 +15,7 @@ namespace Entities
             void operator--();
             virtual void Move() = 0;
             virtual void Attack(const bool b) = 0;
+            virtual void Update() = 0;
             const bool getAlive() const;
             virtual void OnCollision(Entity *ent);
             void Damage();

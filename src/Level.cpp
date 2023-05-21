@@ -1,6 +1,8 @@
 #include "../include/Levels/Level.h"
 
-Levels::Level::Level(const ID id, Managers::EventsManager *pEM) : Being(id),
+Levels::Level::Level(const ID id, Managers::EventsManager *pEM, States::StateMachine* pSM) : 
+    State(pSM, States::stateID::playing),
+    Being(id),
     pEManager(pEM),
     pCManager(new Managers::CollisionManager),
     pPlayer(NULL),
@@ -85,6 +87,51 @@ void Levels::Level::CreateGround(const sf::Vector2f pos)
     SentitiesList.insert_back(static_cast<Entities::Entity *>(pAux));
 }
 
+
+void Levels::Level::CreateEntity(char id, sf::Vector2f pos)
+{
+    pos = sf::Vector2f( 64 + pos.x * 64, pos.y * 64);
+    switch (id)
+    {
+    case 'P':
+        CreatePlayer(pos);
+        break;
+    case 'W':
+        CreateWarrior(pos);
+        break;
+    case 'G':
+        CreateGround(pos);
+        break;
+    }
+}
+
+void Levels::Level::Update()
+{
+    for (int i = 0; i < DentitiesList.getSize(); i++)
+    {
+    	if(DentitiesList[i]->getID() != ID::obstacle)
+        {
+        	if(DentitiesList[i]->getID() == ID::player || DentitiesList[i]->getID() == ID::enemy)
+       		{	
+       			if(!static_cast<Entities::Characters::Character*>(DentitiesList[i])->getAlive())
+       				continue;
+       		}
+       		else
+       			if(static_cast<Projectile*>(DentitiesList[i])->getCollided())
+       				continue;
+       	}
+        DentitiesList[i]->Update();
+    }
+    for (int i = 0; i < SentitiesList.getSize(); i++)
+    {
+        SentitiesList[i]->Update();
+    }
+    Entities::Entity::updateDeltaTime(pGM->getDeltaTime());
+    pGM->updateDeltaTime();
+    pCManager->Manage();
+    pGM->CenterView(pPlayer->getPosition());
+}
+
 void Levels::Level::Draw()
 {
     for (int i = 0; i < DentitiesList.getSize(); i++)
@@ -105,47 +152,4 @@ void Levels::Level::Draw()
     {
         SentitiesList[i]->Draw();
     }
-}
-
-void Levels::Level::CreateEntity(char id, sf::Vector2f pos)
-{
-    pos = sf::Vector2f( 64 + pos.x * 64, pos.y * 64);
-    switch (id)
-    {
-    case 'P':
-        CreatePlayer(pos);
-        break;
-    case 'W':
-        CreateWarrior(pos);
-        break;
-    case 'G':
-        CreateGround(pos);
-        break;
-    }
-}
-
-void Levels::Level::Run()
-{
-    for (int i = 0; i < DentitiesList.getSize(); i++)
-    {
-    	if(DentitiesList[i]->getID() != ID::obstacle)
-        {
-        	if(DentitiesList[i]->getID() == ID::player || DentitiesList[i]->getID() == ID::enemy)
-       		{	
-       			if(!static_cast<Entities::Characters::Character*>(DentitiesList[i])->getAlive())
-       				continue;
-       		}
-       		else
-       			if(static_cast<Projectile*>(DentitiesList[i])->getCollided())
-       				continue;
-       	}
-        DentitiesList[i]->Move();
-    }
-    for (int i = 0; i < SentitiesList.getSize(); i++)
-    {
-        SentitiesList[i]->Move();
-    }
-    Entities::Entity::updateDeltaTime();
-    pCManager->Manage();
-    pGM->CenterView(pPlayer->getPosition());
 }

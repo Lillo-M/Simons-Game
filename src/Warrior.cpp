@@ -1,7 +1,10 @@
 #include "../include/Entities/Characters/Enemies/Warrior.h"
 #define SIZEX 61.f
 #define SIZEY 100.f
-Entities::Characters::Enemies::Warrior::Warrior(const sf::Vector2f pos):
+#define ESPEED 0.1
+#define dEnemy Entities::Characters::Enemies
+
+dEnemy::Warrior::Warrior(const sf::Vector2f pos):
     Enemy(pos, sf::Vector2f(SIZEX, SIZEY), false, ID::enemy, 3),
 	directiontimer(0),
 	directionright(static_cast<bool>(rand()%2))
@@ -18,11 +21,11 @@ Entities::Characters::Enemies::Warrior::Warrior(const sf::Vector2f pos):
 	animation.AnimationReset(&texture, sf::Vector2u(5,1), static_cast<float>(0.2));
 }
 
-Entities::Characters::Enemies::Warrior::~Warrior()
+dEnemy::Warrior::~Warrior()
 {
 }
-#define ESPEED 0.1
-void Entities::Characters::Enemies::Warrior::Move()
+
+void dEnemy::Warrior::Move()
 {
 	directiontimer += dt;
 	//
@@ -50,14 +53,19 @@ void Entities::Characters::Enemies::Warrior::Move()
 	}
 	Position.x += velocity.x * dt * MULT;
 	Position.y += velocity.y * dt * MULT;
-	Damage();
-	Gravity();
+	this->Gravity();
+}
+
+void dEnemy::Warrior::Update()
+{
+	this->Move();
+	this->Damage();
 	HitBox.setPosition(Position);
 	animation.update(0, dt);
 	HitBox.setTextureRect(animation.uvRect);
 }
 
-void Entities::Characters::Enemies::Warrior::Attack(const bool b)
+void dEnemy::Warrior::Attack(const bool b)
 {
     if (b)
 		HitBox.setFillColor(sf::Color(sf::Color::Red));
@@ -65,7 +73,7 @@ void Entities::Characters::Enemies::Warrior::Attack(const bool b)
 		HitBox.setFillColor(sf::Color(sf::Color::White));
 }
 
-void Entities::Characters::Enemies::Warrior::OnCollision(Entities::Entity* ent)
+void dEnemy::Warrior::OnCollision(Entities::Entity* ent)
 {
 	if(ent->getID() == ID::player)
 	{
@@ -86,5 +94,5 @@ void Entities::Characters::Enemies::Warrior::OnCollision(Entities::Entity* ent)
 	}
 }
 
-sf::Texture Entities::Characters::Enemies::Warrior::texture;
-bool Entities::Characters::Enemies::Warrior::textureLoaded = false;
+sf::Texture dEnemy::Warrior::texture;
+bool dEnemy::Warrior::textureLoaded = false;

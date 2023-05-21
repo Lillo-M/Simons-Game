@@ -13,8 +13,9 @@
 #include <iostream>
 #include "../include/Entities/Characters/Enemies/Warrior.h"
 #include "../include/Levels/Level1.h"
+#include "../include/States/StateMachine.h"
 
-class Game
+class Game: public States::StateMachine
 {
 public:
 	Game();
@@ -23,9 +24,7 @@ public:
 
 private:
 	//Managers::CollisionManager CManager;
-	sf::ContextSettings settings;
 	Managers::EventsManager eManager;
-	Levels::Level1 lvl1;
 	//Math::EntityList Sentities;
 	//Math::EntityList Dentities;
 	//Entities::Characters::Player* player;

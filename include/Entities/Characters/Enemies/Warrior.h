@@ -25,6 +25,7 @@ namespace Entities
                 ~Warrior();
                 void OnCollision(Entity* ent);
                 void Move();
+                void Update();
                 void Attack(const bool b);
             };
         }

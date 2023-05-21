@@ -1,6 +1,6 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
-//#include "../Being.h"
+
 #define WIDTH 1280
 #define HEIGHT 768
 namespace Managers
@@ -12,6 +12,9 @@ namespace Managers
         static GraphicManager* Instance;
         sf::RenderWindow window;
         sf::View view;
+        static sf::Clock clock;
+        static float dt;
+        sf::ContextSettings settings;
     public:
         ~GraphicManager();
         static GraphicManager* getInstance();
@@ -23,5 +26,7 @@ namespace Managers
         void Clear();
         const bool isWindowOpen() const;
         void CenterView(sf::Vector2f pos);
+        void updateDeltaTime();
+        float getDeltaTime();
     };
 }

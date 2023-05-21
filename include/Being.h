@@ -5,11 +5,13 @@
 
 enum ID
 {
-    empty           = -1,
+    empty           =-1,
     player          = 0,
     enemy           = 2,
     obstacle        = 3,
-    level           = 4
+    level           = 4,
+    level1          = 5,
+    level2          = 6
 };
 
 
@@ -20,7 +22,7 @@ public:
     virtual ~Being();
     virtual void Draw() = 0;
     const ID getID() const; 
-    //virtual void Run() = 0;
+    //virtual void Update() = 0;
 private:
     const ID id;
 protected:

@@ -23,5 +23,18 @@ void Entities::Obstacles::Ground::OnCollision(Entities::Entity* ent)
 {
 }
 
+void Entities::Obstacles::Ground::Move()
+{
+    Gravity();
+    velocity.y -= forca_empuxo * dt * MULT;
+    Position.y += velocity.y;
+}
+
+void Entities::Obstacles::Ground::Update()
+{
+	this->Move();
+	HitBox.setPosition(Position);
+}
+
 sf::Texture Entities::Obstacles::Ground::texture;
 bool Entities::Obstacles::Ground::textureLoaded = false;

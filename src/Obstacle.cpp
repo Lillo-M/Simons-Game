@@ -9,14 +9,6 @@ Entities::Obstacles::Obstacle::~Obstacle()
 {
 }
 
-void Entities::Obstacles::Obstacle::Move()
-{
-    Gravity();
-    velocity.y -= forca_empuxo * dt * MULT;
-    Position.y += velocity.y;
-    HitBox.setPosition(Position);
-}
-
 void Entities::Obstacles::Obstacle::OnCollision(Entities::Entity* ent)
 {
 }

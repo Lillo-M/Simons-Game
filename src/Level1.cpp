@@ -1,7 +1,7 @@
 #include "../include/Levels/Level1.h"
 
-Levels::Level1::Level1(Managers::EventsManager *pEM) : 
-    Level(ID::level, pEM)
+Levels::Level1::Level1(Managers::EventsManager *pEM, States::StateMachine* pSM) : 
+    Level(ID::level1, pEM, pSM)
 {
     CreateMap();
     pCManager->setDList(DentitiesList);

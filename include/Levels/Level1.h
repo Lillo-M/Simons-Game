@@ -7,7 +7,7 @@ namespace Levels{
         //sf::Image background;
     public:
         void CreateMap();
-        Level1(Managers::EventsManager* pEM);
+        Level1(Managers::EventsManager* pEM, States::StateMachine* pSM = NULL);
         ~Level1();
     };
 }

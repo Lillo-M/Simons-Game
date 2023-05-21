@@ -3,15 +3,21 @@
 
 Game::Game():
     pGM(Managers::GraphicManager::getInstance()),
-    eManager(),
-    lvl1(&eManager)
+    eManager()
 {
-    settings.antialiasingLevel = 16;
+    currentState = static_cast<States::State*>(new Levels::Level1(&eManager, static_cast<States::StateMachine*>(this)));
+    if(!currentState)
+    {
+        std::cout << "ERROR: Failed to Memory Allocate" << std::endl;
+        exit(1);
+    }
     Executar();
 }
 
 Game::~Game()
 {
+    if(currentState)
+        delete currentState;
 }
 
 
@@ -19,10 +25,9 @@ void Game::Executar()
 {
     while(pGM->isWindowOpen())
     {
-        eManager.Manage();
-        lvl1.Run();
         pGM->Clear();
-        lvl1.Draw();
+        this->runCurrentState();
         pGM->Display();
+        eManager.Manage();
     }
 }

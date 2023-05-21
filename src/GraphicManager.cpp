@@ -4,6 +4,7 @@ Managers::GraphicManager::GraphicManager() :
     window(sf::VideoMode(WIDTH, HEIGHT), "Simon's Game"), // incializa a janela
     view(window.getView())
 {
+    settings.antialiasingLevel = 16;
 }
 
 Managers::GraphicManager::~GraphicManager()
@@ -69,4 +70,24 @@ void Managers::GraphicManager::CenterView(sf::Vector2f pos)
     window.setView(view);
 }
 
+void Managers::GraphicManager::updateDeltaTime()
+{
+	dt = static_cast<float>(clock.getElapsedTime().asSeconds());
+	if (dt > 0.3f)
+	{
+		std::cout << std::endl
+				  << "STUTTER DETECTED!" << std::endl;
+		dt = 0;
+	}
+	clock.restart();
+}
+
+float Managers::GraphicManager::getDeltaTime()
+{
+    return dt;
+}
+
+
 Managers::GraphicManager *Managers::GraphicManager::Instance(NULL); // incializa o ponteiro estatico para a instancia de Gerenciador grafico
+float Managers::GraphicManager::dt = 0;
+sf::Clock Managers::GraphicManager::clock;

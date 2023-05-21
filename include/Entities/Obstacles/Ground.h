@@ -15,6 +15,8 @@ namespace Entities
 			Ground(const sf::Vector2f pos);
 			~Ground();
 			void OnCollision(Entities::Entity* ent);
+			void Move();
+			void Update();
 		};
 	}
 }

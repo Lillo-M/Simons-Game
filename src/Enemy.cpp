@@ -1,23 +1,23 @@
 #include "../include/Entities/Characters/Enemies/Enemy.h"
+#define dEnemy Entities::Characters::Enemies::Enemy
 
 
 
 
-
-Entities::Characters::Enemies::Enemy::Enemy(const sf::Vector2f pos, const sf::Vector2f size, const bool isS, ID id, int lves):
+dEnemy::Enemy(const sf::Vector2f pos, const sf::Vector2f size, const bool isS, ID id, int lves):
     Character(pos, size, isS, id, lves)
 {
 }
 
 
-Entities::Characters::Enemies::Enemy::~Enemy()
+dEnemy::Enemy::~Enemy()
 {
 }
 
-void Entities::Characters::Enemies::Enemy::OnCollision(Entities::Entity* ent)
+void dEnemy::Enemy::OnCollision(Entities::Entity* ent)
 {
 }
 
-void Entities::Characters::Enemies::Enemy::operator--() { lives--; }
+void dEnemy::Enemy::operator--() { lives--; }
 
-const bool Entities::Characters::Enemies::Enemy::getAlive() const {return alive;}
+const bool dEnemy::Enemy::getAlive() const {return alive;}

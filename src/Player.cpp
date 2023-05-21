@@ -99,7 +99,14 @@ void Entities::Characters::Player::Move()
 		HitBox.setScale(sf::Vector2f(-1, 1));
 	else if(velocity.x < 0)
 		HitBox.setScale(sf::Vector2f(1, 1));*/
+	Position.x += velocity.x * dt * MULT;
+	Position.y += velocity.y * dt * MULT;
+	Gravity();
+}
 
+void Entities::Characters::Player::Update()
+{
+	this->Move();
 	if(!attackcooled)
 	{
 		attackcd += dt;
@@ -110,9 +117,6 @@ void Entities::Characters::Player::Move()
 		}
 	}
 	Damage();
-	Position.x += velocity.x * dt * MULT;
-	Position.y += velocity.y * dt * MULT;
-	Gravity();
 	HitBox.setPosition(Position);
 	animation.update(0, dt);
 	HitBox.setTextureRect(animation.uvRect);

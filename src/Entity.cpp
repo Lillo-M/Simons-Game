@@ -79,22 +79,16 @@ void Entity::OnCollision(Entity *ent)
 {
 }
 
-void Entity::updateDeltaTime()
+void Entity::updateDeltaTime(float dt)
 {
-	dt = static_cast<float>(clock.getElapsedTime().asSeconds());
-	if (dt > 0.3f)
-	{
-		std::cout << std::endl
-				  << "STUTTER DETECTED!" << std::endl;
-		dt = 0;
-	}
-	Entity::clock.restart();
+	Entity::dt = dt; 
 }
 
 unsigned int Entity::getContEntities()
 {
 	return Entity::Cont;
 }
+
 float Entities::Entity::getDt()
 {
     return dt;
@@ -105,4 +99,4 @@ const bool Entity::getGrounded() const { return grounded; }
 float Entity::dt = 0;
 unsigned int Entity::Cont(0);
 const float Entity::gravity(static_cast<float>(0.78)); // 8.166 valor de teste
-sf::Clock Entity::clock;
+
