@@ -1,6 +1,6 @@
-#include "../include/Managers/PlayerInputManager.h"
+#include "../include/Observers/PlayerInputManager.h"
 
-using namespace Managers;
+using namespace Observers;
 
 PlayerInputManager::PlayerInputManager(Entities::Characters::Player *pP, Entities::Characters::Player *pP2) : 
 	pPlayer(pP),																								  
@@ -30,11 +30,13 @@ PlayerInputManager::~PlayerInputManager()
 	pPlayer2 = NULL;
 }
 
-void PlayerInputManager::pressedInput(std::string s)
+void PlayerInputManager::notifyKeyPressed(std::string key)
 {
+	if(States::StateMachine::getCurrentStateID() != States::stateID::playing)
+		return;
 	for (mapIt; mapIt != inputSetsPlayer.end(); mapIt++)
 	{
-		if (mapIt->second == s)
+		if (mapIt->second == key)
 		{
 			if (mapIt->first == "Jump")
 			{
@@ -71,7 +73,7 @@ void PlayerInputManager::pressedInput(std::string s)
 	{
 		for (mapIt2; mapIt2 != inputSetsPlayer2.end(); mapIt2++)
 		{
-			if (mapIt2->second == s)
+			if (mapIt2->second == key)
 			{
 				if (mapIt2->first == "Jump")
 				{
@@ -107,11 +109,13 @@ void PlayerInputManager::pressedInput(std::string s)
 	}
 }
 
-void PlayerInputManager::releasedInput(std::string s)
+void PlayerInputManager::notifyKeyReleased(std::string key)
 {
+	if(States::StateMachine::getCurrentStateID() != States::stateID::playing)
+		return;
 	for (mapIt; mapIt != inputSetsPlayer.end(); mapIt++)
 	{
-		if (mapIt->second == s)
+		if (mapIt->second == key)
 		{
 			if (mapIt->first == "Jump")
 			{
@@ -137,7 +141,7 @@ void PlayerInputManager::releasedInput(std::string s)
 	{
 		for (mapIt2; mapIt2 != inputSetsPlayer2.end(); mapIt2++)
 		{
-			if (mapIt2->second == s)
+			if (mapIt2->second == key)
 			{
 				if (mapIt2->first == "Jump")
 				{

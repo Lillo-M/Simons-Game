@@ -1,7 +1,7 @@
 #include "../include/GraphicElements/Animation.h"
 
-
-GraphicElements::Animation::Animation()
+GraphicElements::Animation::Animation():
+    currentImage(sf::Vector2u(0,0))
 {
 }
 
@@ -21,11 +21,10 @@ void GraphicElements::Animation::AnimationReset(sf::Texture* texture, sf::Vector
     uvRect.height = texture->getSize().y / static_cast<float>(imageCount.y);
 }
 
-void GraphicElements::Animation::update(int row, float deltaTime)
+void GraphicElements::Animation::update(sf::Vector2f position)
 {
-    currentImage.y = row;
-    totalTime += deltaTime;
-
+    totalTime += Managers::GraphicManager::getDeltaTime();
+    
     if(totalTime >= switchTime)
     {
         totalTime -= switchTime;

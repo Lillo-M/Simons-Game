@@ -1,20 +1,17 @@
 #pragma once
-
+#include "Observer.h"
 #include "../Entities/Characters/Player.h"
-#include <map>
-#include <iostream>
+#include "../States/StateMachine.h"
 
-
-namespace Managers
+namespace Observers
 {
-
-	class PlayerInputManager
-	{
-	public:
-		PlayerInputManager(Entities::Characters::Player* pP, Entities::Characters::Player* pP2);
+    class PlayerInputManager : public Observers::Observer
+    {
+    public:
+		PlayerInputManager(Entities::Characters::Player* pP = NULL, Entities::Characters::Player* pP2 = NULL);
 		~PlayerInputManager();
-		void pressedInput(std::string s);
-		void releasedInput(std::string s);
+		void notifyKeyPressed(std::string key);
+		void notifyKeyReleased(std::string key);
 		bool jumpKeyReleased;
 		bool jumpKeyReleased2;
 		bool attackKeyReleased;	
@@ -28,5 +25,5 @@ namespace Managers
 		std::map<std::string, std::string> inputSetsPlayer2;
 		std::map<std::string, std::string>::const_iterator mapIt;
 		std::map<std::string, std::string>::const_iterator mapIt2;
-	};
+    };
 }

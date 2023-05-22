@@ -26,7 +26,7 @@ namespace Entities
 			bool secondJump;
 			bool fall;
 			bool attackcooled;
-			static sf::Texture texture;
+			static sf::Texture* texture;
 			static bool textureLoaded;
 			GraphicElements::Animation animation;
 			float attackcd;	

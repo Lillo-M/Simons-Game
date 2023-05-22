@@ -20,7 +20,7 @@ void States::StateMachine::runCurrentState()
     currentState->Draw();
 }
 
-const States::stateID States::StateMachine::getCurrentStateID() const {return States::stateID::playing;}
+const States::stateID States::StateMachine::getCurrentStateID() {return States::stateID::playing;}
 
 void States::StateMachine::insert_State(States::State* pS) 
 {

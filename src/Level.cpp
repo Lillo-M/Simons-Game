@@ -4,20 +4,53 @@ Levels::Level::Level(const ID id, Managers::EventsManager *pEM, States::StateMac
     State(pSM, States::stateID::playing),
     Being(id),
     pEManager(pEM),
-    pCManager(new Managers::CollisionManager),
     pPlayer(NULL),
     pPlayer2(NULL)
 {
-    if (!pCManager)
+    try{
+        pCManager = new Managers::CollisionManager;
+    }
+    catch (int error){
+        if(!error){
+            std::cout << std::endl
+                  << "ERROR: Failed to Allocate Memory" << std::endl;
+            exit(1);
+        }
+    }
+    try{
+        pPIM = new Observers::PlayerInputManager;
+    }
+    catch (int error){
+        if(!error){
+            std::cout << std::endl
+                  << "ERROR: Failed to Allocate Memory" << std::endl;
+            exit(1);
+        }
+    }
+    try{
+        pIM = new Managers::InputManager;
+    }
+    catch (int error){
+        if(!error){
+            std::cout << std::endl
+                  << "ERROR: Failed to Allocate Memory" << std::endl;
+            exit(1);
+        }
+    }
+    pIM->addObserver(static_cast<Observers::Observer*>(pPIM));
+    pEM->setpInputManager(pIM);
+    /*if (!pCManager)
     {
         std::cout << std::endl
                   << "ERROR: Failed to Allocate Memory" << std::endl;
         exit(1);
-    }
+    }*/
 }
 
 Levels::Level::~Level()
 {
+    if(pPIM)
+        delete pPIM;
     for (int i = 0; i < DentitiesList.getSize(); i++)
     {
         if (DentitiesList[i])
@@ -48,18 +81,18 @@ void Levels::Level::CreatePlayer(const sf::Vector2f pos)
     if(!pPlayer)
     {
         pPlayer = pAux;
-        pEManager->setpPlayer(pAux);
+        pPIM->setpPlayer(pAux);
     }
     else
     {
         pPlayer2 = pAux;
-        pEManager->setpPlayer2(pAux);
+        pPIM->setpPlayer2(pAux);
     }
     DentitiesList.insert_back(static_cast<Entities::Entity *>(pAux));
     std::vector<Projectile*>::iterator it;
     for(it = pAux->getShots()->begin(); it != pAux->getShots()->end(); it++)
     {
-	DentitiesList.insert_back(static_cast<Entities::Entity *>(*it));
+	    DentitiesList.insert_back(static_cast<Entities::Entity *>(*it));
     }
 }
 
@@ -153,3 +186,5 @@ void Levels::Level::Draw()
         SentitiesList[i]->Draw();
     }
 }
+
+Observers::PlayerInputManager* Levels::Level::getPlayerInputManager() const { return pPIM;}

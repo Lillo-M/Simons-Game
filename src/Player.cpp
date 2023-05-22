@@ -1,4 +1,5 @@
 #include "../include/Entities/Characters/Player.h"
+
 #define SIZEX 61.f
 #define SIZEY 100.f
 Entities::Characters::Player::Player(const sf::Vector2f pos) : 
@@ -23,15 +24,15 @@ Entities::Characters::Player::Player(const sf::Vector2f pos) :
 		shots.push_back(pAux);
 	}
 	HitBox.setOrigin(SIZEX / 2, SIZEY / 2);
-	if(!textureLoaded)
+	/*if(!textureLoaded)
 		if (texture.loadFromFile("Assets/Player-Idle.png"))
 		{
 			textureLoaded = true;
 		}
 		else
-			std::cout << std::endl << "ERROR: FAIL TO LOAD PLAYER TEXTURE!" << std::endl;
-	HitBox.setTexture(&texture);
-	animation.AnimationReset(&texture, sf::Vector2u(4,1), static_cast<float>(0.25));
+			std::cout << std::endl << "ERROR: FAIL TO LOAD PLAYER TEXTURE!" << std::endl;*/
+	HitBox.setTexture(texture);
+	animation.AnimationReset(texture, sf::Vector2u(4,1), static_cast<float>(0.25));
 	HitBox.setTextureRect(animation.uvRect);
 }
 
@@ -118,7 +119,7 @@ void Entities::Characters::Player::Update()
 	}
 	Damage();
 	HitBox.setPosition(Position);
-	animation.update(0, dt);
+	animation.update(Position);
 	HitBox.setTextureRect(animation.uvRect);
 }
 
@@ -192,5 +193,5 @@ void Entities::Characters::Player::OnCollision(Entities::Entity *ent)
 
 std::vector<Projectile*>* Entities::Characters::Player::getShots() {return &shots;}
 
-sf::Texture Entities::Characters::Player::texture;
+sf::Texture* Entities::Characters::Player::texture(Managers::GraphicManager::getInstance()->loadTexture("Assets/Player-Idle.png"));
 bool Entities::Characters::Player::textureLoaded = false;

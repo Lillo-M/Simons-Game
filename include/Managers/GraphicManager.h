@@ -1,8 +1,13 @@
+#pragma once
 #include <SFML/Graphics.hpp>
 #include <iostream>
+#include <map>
+#include <string>
+#include <string.h>
 
 #define WIDTH 1280
 #define HEIGHT 768
+
 namespace Managers
 {
     class GraphicManager
@@ -15,6 +20,7 @@ namespace Managers
         static sf::Clock clock;
         static float dt;
         sf::ContextSettings settings;
+        std::map<const char*, sf::Texture*> textureMap;
     public:
         ~GraphicManager();
         static GraphicManager* getInstance();
@@ -27,6 +33,7 @@ namespace Managers
         const bool isWindowOpen() const;
         void CenterView(sf::Vector2f pos);
         void updateDeltaTime();
-        float getDeltaTime();
+        static float getDeltaTime();
+        sf::Texture* loadTexture(const char* path);
     };
 }

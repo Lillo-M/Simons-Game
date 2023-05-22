@@ -1,20 +1,10 @@
 #pragma once
-
-#include <SFML/Graphics.hpp>
-#include "Entities/Characters/Player.h"
-#include "Entities/Obstacles/Ground.h"
 #include "Managers/EventsManager.h"
-#include <SFML/System.hpp>
-#include <SFML/Config.hpp>
 #define FPS 0
-#include <list>
-#include "Math/List.h"
-#include "Managers/CollisionManager.h"
 #include <iostream>
-#include "../include/Entities/Characters/Enemies/Warrior.h"
-#include "../include/Levels/Level1.h"
-#include "../include/States/StateMachine.h"
-
+#include "Levels/Level1.h"
+#include "States/StateMachine.h"
+#include "Managers/InputManager.h"
 class Game: public States::StateMachine
 {
 public:

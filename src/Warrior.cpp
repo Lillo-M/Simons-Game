@@ -61,7 +61,7 @@ void dEnemy::Warrior::Update()
 	this->Move();
 	this->Damage();
 	HitBox.setPosition(Position);
-	animation.update(0, dt);
+	animation.update(Position);
 	HitBox.setTextureRect(animation.uvRect);
 }
 

@@ -15,7 +15,7 @@ namespace States
         virtual ~StateMachine();
         void changeCurrentState(States::stateID sId);
         void runCurrentState();
-        const States::stateID getCurrentStateID() const;
+        static const States::stateID getCurrentStateID();
         void insert_State(States::State* pS);
     };
 }

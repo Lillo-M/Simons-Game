@@ -77,7 +77,7 @@ namespace Math
 	    this->y /= right;
 	}
     };    
-    typedef Coord<float> 	Coordf;
+    typedef Coord<float>    	Coordf;
     typedef Coord<unsigned int> Coordu;
-    typedef Coord<int>		Coordi;
+    typedef Coord<int>		    Coordi;
 }
