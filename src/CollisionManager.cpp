@@ -66,57 +66,61 @@ void Managers::CollisionManager::Manage()
 	float dist_y = 0;
 	float dx = 0;
 	float dy = 0;
-	for (int i = 0; i < Dentities->getSize(); i++)
+	Math::EntityList::Iterator Iterator_i;
+	Math::EntityList::Iterator Iterator_j;
+	int i = 0;
+	for (Iterator_i = Dentities->begin(); Iterator_i != Dentities->end(); Iterator_i++)
 	{
-		if((*Dentities)[i]->getID() != ID::obstacle)
+		if(Iterator_i->getID() != ID::obstacle)
 		{
-			if((*Dentities)[i]->getID() == ID::player || (*Dentities)[i]->getID() == ID::enemy)
-			{	if(!static_cast<Entities::Characters::Character*>((*Dentities)[i])->getAlive())
+			if(Iterator_i->getID() == ID::player || Iterator_i->getID() == ID::enemy)
+			{	if(!static_cast<Entities::Characters::Character*>(*Iterator_i)->getAlive())
 					continue;
 			}
 			else
-				if(static_cast<Projectile*>((*Dentities)[i])->getCollided())
+				if(static_cast<Projectile*>(*Iterator_i)->getCollided())
 					continue;
 		}
-
-		for (int j = i + 1; j < Dentities->getSize(); j++)
+		Iterator_j = Iterator_i;
+		Iterator_j++;
+		for (Iterator_j; Iterator_j != Dentities->end(); Iterator_j++)
 		{
-			if((*Dentities)[j]->getID() != ID::obstacle)
+			if(Iterator_j->getID() != ID::obstacle)
 			{
-				if((*Dentities)[j]->getID() == ID::player || (*Dentities)[j]->getID() == ID::enemy)
+				if(Iterator_j->getID() == ID::player || Iterator_j->getID() == ID::enemy)
 				{	
-					if(!static_cast<Entities::Characters::Character*>((*Dentities)[j])->getAlive())
+					if(!static_cast<Entities::Characters::Character*>(*Iterator_j)->getAlive())
 						continue;
 				}
 				else
-				if(static_cast<Projectile*>((*Dentities)[j])->getCollided())
-					continue;
+					if(static_cast<Projectile*>(*Iterator_j)->getCollided())
+						continue;
 			}
-			dist_x = (*Dentities)[j]->getPosition().x - (*Dentities)[i]->getPosition().x;
-			dist_y = (*Dentities)[j]->getPosition().y - (*Dentities)[i]->getPosition().y;
-			dx = (*Dentities)[i]->getSize().x / 2 + (*Dentities)[j]->getSize().x / 2;
-			dy = (*Dentities)[i]->getSize().y / 2 + (*Dentities)[j]->getSize().y / 2;
+			dist_x = Iterator_j->getPosition().x - Iterator_i->getPosition().x;
+			dist_y = Iterator_j->getPosition().y - Iterator_i->getPosition().y;
+			dx = Iterator_i->getSize().x / 2 + Iterator_j->getSize().x / 2;
+			dy = Iterator_i->getSize().y / 2 + Iterator_j->getSize().y / 2;
 
 			
 			if (abs(dist_x) < dx && abs(dist_y) < dy)
 			{
-				normalCollision((*Dentities)[i], dist_x, dist_y, dx, dy, (*Dentities)[j]->getID());
-				normalCollision((*Dentities)[j], -dist_x, -dist_y, dx, dy, (*Dentities)[i]->getID());
-				(*Dentities)[i]->OnCollision((*Dentities)[j]);
-				(*Dentities)[j]->OnCollision((*Dentities)[i]);
+				normalCollision(*Iterator_i, dist_x, dist_y, dx, dy, Iterator_j->getID());
+				normalCollision(*Iterator_j, -dist_x, -dist_y, dx, dy, Iterator_i->getID());
+				Iterator_i->OnCollision(*Iterator_j);
+				Iterator_j->OnCollision(*Iterator_i);
 			}
 		}
-		for (int j = 0; j < Sentities->getSize(); j++)
+		for (Iterator_j = Sentities->begin(); Iterator_j != Sentities->end(); Iterator_j++)
 		{
 
-			dist_x = (*Sentities)[j]->getPosition().x - (*Dentities)[i]->getPosition().x;
-			dist_y = (*Sentities)[j]->getPosition().y - (*Dentities)[i]->getPosition().y;
-			dx = (*Dentities)[i]->getSize().x / 2 + (*Sentities)[j]->getSize().x / 2;
-			dy = (*Dentities)[i]->getSize().y / 2 + (*Sentities)[j]->getSize().y / 2;
+			dist_x = Iterator_j->getPosition().x - Iterator_i->getPosition().x;
+			dist_y = Iterator_j->getPosition().y - Iterator_i->getPosition().y;
+			dx = Iterator_i->getSize().x / 2 + Iterator_j->getSize().x / 2;
+			dy = Iterator_i->getSize().y / 2 + Iterator_j->getSize().y / 2;
 			if (abs(dist_x) < dx && abs(dist_y) < dy)
 			{
-				normalCollision((*Dentities)[i], dist_x, dist_y, dx, dy, (*Sentities)[j]->getID());
-				(*Dentities)[i]->OnCollision((*Sentities)[j]);
+				normalCollision(*Iterator_i, dist_x, dist_y, dx, dy, Iterator_j->getID());
+				Iterator_i->OnCollision(*Iterator_j);
 			}
 		}
 	}

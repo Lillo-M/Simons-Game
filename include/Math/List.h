@@ -3,13 +3,72 @@
 #include "../Entities/Entity.h"
 namespace Math
 {
+	/* Iterator Tutorial used: https://www.youtube.com/watch?v=F9eDv-YIOQ0 */
+	template<typename Element>
+	
+	class ListIterator
+	{
+	public:
+		using PointerType = Element*; 
+		using ValuePointer = typename Element::ValueType*;
+		using ValueReference = typename Element::ValueType&;
+	private:
+		Element* m_ptr;
+			
+	public:
+		ListIterator(PointerType ptr = NULL):
+		m_ptr(ptr)
+		{
+		}
+
+		ListIterator& operator++()
+		{
+			m_ptr = m_ptr->next;
+			return *this;
+		}
+		
+		ListIterator operator++(int)
+		{
+			ListIterator it = *this;
+			++(*this);
+			return it;
+		}
+		
+		bool operator!=(ListIterator it)
+		{
+			return !((*this).m_ptr == it.m_ptr);
+		}
+			
+		//typename Element::ValueType& 
+		
+		ValuePointer operator*()
+		{
+			return (*m_ptr).data;
+		}
+
+		//typename Element::ValueType* 
+				
+		ValuePointer operator->()
+		{
+			return m_ptr->data;
+		}
+
+		void operator=(ListIterator it)
+		{
+			this->m_ptr = it.m_ptr;
+		}
+
+	};
+
 	template< typename T>
 	class List
 	{
-
-	private:
+	public:
+		
 		template <typename TE> class Element
 		{
+		public:
+			using ValueType = TE;
 		public:
 			Element<TE>* next;
 			TE* data;
@@ -24,11 +83,16 @@ namespace Math
 				next = NULL;
 			}
 		};
-		int size;
+
 		Element<T>* pFirst;
 		Element<T>* pLast;
-	public:
+	private:
+		int size;
 
+	public:
+		using Iterator = ListIterator<Element<T>>;
+		using ValueType = T;
+	public:
 		List():
 			pFirst(NULL),
 			pLast(NULL),
@@ -173,6 +237,16 @@ namespace Math
 			{
 				remove(0);
 			}
+		}
+
+		Iterator begin()
+		{
+			return Iterator(pFirst);
+		}	
+		
+		Iterator end()
+		{
+			return Iterator(pLast->next);
 		}
 	};
 	typedef List<Entities::Entity> EntityList;

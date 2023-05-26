@@ -3,6 +3,7 @@
 #include <SFML/Graphics.hpp>
 #include "../Being.h"
 #include <iostream>
+#include <fstream>
 #include <math.h> //Fazer uma Fun��o ABS
 #define MULT 60
 namespace Entities
@@ -13,7 +14,7 @@ namespace Entities
 		Entity(const sf::Vector2f pos = sf::Vector2f(0, 0), const sf::Vector2f size = sf::Vector2f(0, 0), const bool isS = false, ID id = ID::empty);
 		virtual ~Entity();
 		virtual void Move() = 0;
-		//virtual void Save() = 0;
+		virtual void Save();
 		void Gravity();
 		const bool getGrounded() const;
 		bool getisStatic();

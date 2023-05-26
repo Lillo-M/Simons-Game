@@ -94,6 +94,16 @@ float Entities::Entity::getDt()
     return dt;
 }
 
+void Entities::Entity::Save()
+{
+	std::ofstream savefile("Assets/savefile.txt", std::ofstream::binary);
+	std::string line;
+	savefile << this->getID() << std::endl;
+	savefile << Position.x << std::endl;
+	savefile << Position.y << std::endl; 
+	savefile.close();
+}
+
 const bool Entity::getGrounded() const { return grounded; }
 
 float Entity::dt = 0;
