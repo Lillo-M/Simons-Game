@@ -94,15 +94,16 @@ void Levels::Level::CreatePlayer(const sf::Vector2f pos)
     {
 	    DentitiesList.insert_back(static_cast<Entities::Entity *>(*it));
     }
-    /*std::ifstream savefile("Assets/savefile.txt", std::ifstream::binary);
-    std::string line;
+    std::ifstream savefile("Assets/savefile.txt", std::ifstream::binary);
+    std::string line; // Brincando com persistencia de objetos . . . 
     std::getline(savefile, line);
     std::getline(savefile, line);
     float posx = std::stof(line);
     std::getline(savefile, line);
     float posy = std::stof(line);
     pPlayer->setPosition(posx, posy);
-    savefile.close();*/
+    savefile.close();
+    /*  */
 }
 
 void Levels::Level::CreateWarrior(const sf::Vector2f pos)
