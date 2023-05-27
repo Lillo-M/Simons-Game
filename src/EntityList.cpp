@@ -24,7 +24,7 @@ void Math::EntityList::UpdateEntities()
     					continue;
 	       		}
        			else
-       				if(static_cast<Projectile*>(*listIt)->getCollided())
+       				if(static_cast<Entities::Projectile*>(*listIt)->getCollided())
        					continue;
 	       	}
         	listIt->Update();
@@ -44,7 +44,7 @@ void Math::EntityList::DrawEntities()
     					continue;
 	       		}
        			else
-       				if(static_cast<Projectile*>(*listIt)->getCollided())
+       				if(static_cast<Entities::Projectile*>(*listIt)->getCollided())
        					continue;
 	       	}
         	listIt->Draw();

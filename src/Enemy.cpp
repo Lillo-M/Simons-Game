@@ -17,7 +17,3 @@ dEnemy::Enemy::~Enemy()
 void dEnemy::Enemy::OnCollision(Entities::Entity* ent)
 {
 }
-
-void dEnemy::Enemy::operator--() { lives--; }
-
-const bool dEnemy::Enemy::getAlive() const {return alive;}

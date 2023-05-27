@@ -8,9 +8,6 @@ namespace Math
 {
 	class EntityList
 	{
-	private:
-		EntityTList entity_list;
-		EntityTList::Iterator listIt;
 	public:
 		EntityList();
 		~EntityList();
@@ -21,5 +18,8 @@ namespace Math
 		void DeleteEntities();
 		Math::List<Entities::Entity>& getTList();
 		/* **Terminar esta Classe . . .*/
+	private:
+		EntityTList entity_list;
+		EntityTList::Iterator listIt;
 	};
 }

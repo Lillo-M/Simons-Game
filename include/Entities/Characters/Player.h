@@ -22,12 +22,11 @@ namespace Entities
 			int shotcount;
 			const float maxVelocity;
 			bool BoolMoveRight;
-			bool boolMoveLeft;
+			bool BoolMoveLeft;
 			bool secondJump;
 			bool fall;
 			bool attackcooled;
 			static sf::Texture* texture;
-			static bool textureLoaded;
 			GraphicElements::Animation animation;
 			float attackcd;	
 		public:

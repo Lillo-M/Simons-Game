@@ -8,9 +8,7 @@ namespace Entities
 		class Ground : public Obstacles::Obstacle
 		{
 		private:
-			static sf::Texture texture;
-			static bool textureLoaded;
-
+			static sf::Texture* texture;
 		public:
 			Ground(const sf::Vector2f pos);
 			~Ground();

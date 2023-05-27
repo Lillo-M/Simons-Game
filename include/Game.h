@@ -10,14 +10,9 @@ class Game: public States::StateMachine
 public:
 	Game();
 	~Game();
-	void Executar();
+	void Run();
 
 private:
-	//Managers::CollisionManager CManager;
 	Managers::EventsManager eManager;
-	//Math::EntityList Sentities;
-	//Math::EntityList Dentities;
-	//Entities::Characters::Player* player;
-	//sf::RenderWindow window;
 	Managers::GraphicManager* pGM;
 };

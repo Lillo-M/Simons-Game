@@ -21,6 +21,11 @@ namespace Math
 		{
 		}
 
+		~ListIterator()
+		{
+			m_ptr = NULL;
+		}
+
 		ListIterator& operator++()
 		{
 			m_ptr = m_ptr->next;
@@ -65,7 +70,8 @@ namespace Math
 	{
 	public:
 		
-		template <typename TE> class Element
+		template <typename TE> 
+		class Element
 		{
 		public:
 			using ValueType = TE;
@@ -86,6 +92,7 @@ namespace Math
 
 		Element<T>* pFirst;
 		Element<T>* pLast;
+	
 	private:
 		int size;
 

@@ -15,10 +15,6 @@ namespace States
 
     class State
     {
-    private:
-        StateMachine* pSMachine;
-        stateID id;
-    
     public:
         State(StateMachine* pSMachine = NULL, States::stateID id = empty);
         virtual ~State();
@@ -28,5 +24,9 @@ namespace States
         virtual void Update() = 0;
         virtual void Draw() = 0;
         //virtual void Reset() = 0;
+    
+    private:
+        StateMachine* pSMachine;
+        stateID id;
     };
 }

@@ -34,6 +34,6 @@ namespace Levels
         Managers::CollisionManager*         pCManager;
         Math::EntityTList                   SentitiesList;
         //Math::EntityTList                   DentitiesList;
-	Math::EntityList		    DentitiesList;
+	    Math::EntityList		            DentitiesList;
     };
 }

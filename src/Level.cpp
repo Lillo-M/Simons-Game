@@ -49,6 +49,7 @@ Levels::Level::Level(const ID id, Managers::EventsManager *pEM, States::StateMac
 
 Levels::Level::~Level()
 {
+    pPlayer->Save();
     if(pPIM)
         delete pPIM;
     pPIM = NULL;
@@ -92,7 +93,7 @@ void Levels::Level::CreatePlayer(const sf::Vector2f pos)
         pPIM->setpPlayer2(pAux);
     }
     DentitiesList.PushEntity(static_cast<Entities::Entity *>(pAux));
-    std::vector<Projectile*>::iterator it;
+    std::vector<Entities::Projectile*>::iterator it;
     for(it = pAux->getShots()->begin(); it != pAux->getShots()->end(); it++)
     {
 	    DentitiesList.PushEntity(static_cast<Entities::Entity *>(*it));
@@ -177,11 +178,11 @@ void Levels::Level::Update()
     {
         it->Update();
     } /*  */
-    Entities::Entity::updateDeltaTime(pGM->getDeltaTime());
-    pGM->updateDeltaTime();
+    Entities::Entity::updateDeltaTime(Managers::GraphicManager::getDeltaTime());
+    Managers::GraphicManager::updateDeltaTime();
     pCManager->Manage();
     pGM->CenterView(pPlayer->getPosition());
-    pPlayer->Save();
+    //pPlayer->Save();
 }
 
 void Levels::Level::Draw()

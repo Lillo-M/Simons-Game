@@ -10,15 +10,9 @@ dEnemy::Warrior::Warrior(const sf::Vector2f pos):
 	directionright(static_cast<bool>(rand()%2))
 {
     HitBox.setOrigin(SIZEX / 2, SIZEY / 2);
-	if(!textureLoaded)
-		if (texture.loadFromFile("Assets/Enemy-Warrior-Idle.png"))
-		{
-			textureLoaded = true;
-		}
-		else
-			std::cout << std::endl << "ERROR: FAIL TO LOAD PLAYER TEXTURE!" << std::endl;
-	HitBox.setTexture(&texture);
-	animation.AnimationReset(&texture, sf::Vector2u(5,1), static_cast<float>(0.2));
+
+	HitBox.setTexture(texture);
+	animation.AnimationReset(texture, sf::Vector2u(5,1), static_cast<float>(0.2));
 }
 
 dEnemy::Warrior::~Warrior()
@@ -94,5 +88,4 @@ void dEnemy::Warrior::OnCollision(Entities::Entity* ent)
 	}
 }
 
-sf::Texture dEnemy::Warrior::texture;
-bool dEnemy::Warrior::textureLoaded = false;
+sf::Texture* dEnemy::Warrior::texture(Managers::GraphicManager::getInstance()->loadTexture("Assets/Enemy-Warrior-Idle.png"));

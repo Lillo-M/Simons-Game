@@ -12,15 +12,6 @@ namespace Managers
 {
     class GraphicManager
     {
-    private:
-        GraphicManager();
-        static GraphicManager* Instance;
-        sf::RenderWindow window;
-        sf::View view;
-        static sf::Clock clock;
-        static float dt;
-        sf::ContextSettings settings;
-        std::map<const char*, sf::Texture*> textureMap;
     public:
         ~GraphicManager();
         static GraphicManager* getInstance();
@@ -32,8 +23,17 @@ namespace Managers
         void Clear();
         const bool isWindowOpen() const;
         void CenterView(sf::Vector2f pos);
-        void updateDeltaTime();
+        static void updateDeltaTime();
         static float getDeltaTime();
         sf::Texture* loadTexture(const char* path);
+    private:
+        GraphicManager();
+        static GraphicManager* Instance;
+        sf::RenderWindow window;
+        sf::View view;
+        static sf::Clock clock;
+        static float dt;
+        sf::ContextSettings settings;
+        std::map<const char*, sf::Texture*> textureMap;
     };
 }

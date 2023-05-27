@@ -22,7 +22,7 @@ void States::StateMachine::runCurrentState()
 
 const States::stateID States::StateMachine::getCurrentStateID() {return States::stateID::playing;}
 
-void States::StateMachine::insert_State(States::State* pS) 
+void States::StateMachine::push_State(States::State* pS) 
 {
     //lStates.insert_back(pS);
 }

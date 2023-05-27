@@ -1,7 +1,7 @@
 #include "../include/Entities/Projectile.h"
 
 
-Projectile::Projectile(sf::Vector2f pos, sf::Vector2f velocity, Entities::Characters::Character* owner):
+Entities::Projectile::Projectile(sf::Vector2f pos, sf::Vector2f velocity, Entities::Characters::Character* owner):
 	Entity(pos, sf::Vector2f(20,20), false),
     owner(owner),
     collided(false)
@@ -10,11 +10,11 @@ Projectile::Projectile(sf::Vector2f pos, sf::Vector2f velocity, Entities::Charac
 	HitBox.setFillColor(sf::Color::Blue);
 }
 
-Projectile::~Projectile()
+Entities::Projectile::~Projectile()
 {
 }
 
-void Projectile::Move()
+void Entities::Projectile::Move()
 {
     Gravity();
     velocity.y -= 1.f * gravity * dt * 60;
@@ -23,13 +23,13 @@ void Projectile::Move()
 }
 
 
-void Projectile::Update()
+void Entities::Projectile::Update()
 {
     this->Move();
     HitBox.setPosition(Position);
 }
 
-void Projectile::OnCollision(Entities::Entity* ent)
+void Entities::Projectile::OnCollision(Entities::Entity* ent)
 {
     if(ent->getID() != owner->getID() && ent->getID() != ID::obstacle)
     {
@@ -38,11 +38,11 @@ void Projectile::OnCollision(Entities::Entity* ent)
     collided = true;
 }
 
-void Projectile::Shoot(sf::Vector2f pos, sf::Vector2f vel)
+void Entities::Projectile::Shoot(sf::Vector2f pos, sf::Vector2f vel)
 {
     Position = pos;
     velocity = vel;
     collided = false;
 }
 
-const bool Projectile::getCollided() const { return collided;}
+const bool Entities::Projectile::getCollided() const { return collided;}

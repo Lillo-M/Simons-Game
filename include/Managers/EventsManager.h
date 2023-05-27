@@ -8,13 +8,13 @@ namespace Managers
 {
 	class EventsManager
 	{
-	private:
-		Managers::GraphicManager* pGM;
-		Managers::InputManager* pIM;
 	public:
 		EventsManager();
 		~EventsManager();
 		void Manage();
 		void setpInputManager(Managers::InputManager* pIM);
+	private:
+		Managers::GraphicManager* pGM;
+		Managers::InputManager* pIM;
 	};
 }

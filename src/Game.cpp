@@ -5,13 +5,17 @@ Game::Game():
     pGM(Managers::GraphicManager::getInstance()),
     eManager()
 {
+    try{
     currentState = static_cast<States::State*>(new Levels::Level1(&eManager, static_cast<States::StateMachine*>(this)));
-    if(!currentState)
+    }
+    catch(int error){
+    if(!error)
     {
         std::cout << "ERROR: Failed to Memory Allocate" << std::endl;
         exit(1);
     }
-    Executar();
+    }
+    Run();
 }
 
 Game::~Game()
@@ -21,7 +25,7 @@ Game::~Game()
 }
 
 
-void Game::Executar()
+void Game::Run()
 {
     while(pGM->isWindowOpen())
     {

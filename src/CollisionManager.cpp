@@ -78,7 +78,7 @@ void Managers::CollisionManager::Manage()
 					continue;
 			}
 			else
-				if(static_cast<Projectile*>(*Iterator_i)->getCollided())
+				if(static_cast<Entities::Projectile*>(*Iterator_i)->getCollided())
 					continue;
 		}
 		Iterator_j = Iterator_i;
@@ -93,7 +93,7 @@ void Managers::CollisionManager::Manage()
 						continue;
 				}
 				else
-					if(static_cast<Projectile*>(*Iterator_j)->getCollided())
+					if(static_cast<Entities::Projectile*>(*Iterator_j)->getCollided())
 						continue;
 			}
 			dist_x = Iterator_j->getPosition().x - Iterator_i->getPosition().x;

@@ -5,14 +5,8 @@ Entities::Obstacles::Ground::Ground(const sf::Vector2f pos):
 	Obstacle(pos, sf::Vector2f(SIZEX, SIZEY), true, ID::obstacle)
 {
 	HitBox.setOrigin(SIZEX / 2, SIZEY / 2);
-	if(!textureLoaded)
-		if (texture.loadFromFile("Assets/Ground2.png"))
-		{
-			textureLoaded = true;
-		}
-		else
-			std::cout << std::endl << "ERROR: FAIL TO LOAD PLAYER TEXTURE!" << std::endl;
-	HitBox.setTexture(&texture);
+	
+	HitBox.setTexture(texture);
 }
 
 Entities::Obstacles::Ground::~Ground()
@@ -36,5 +30,4 @@ void Entities::Obstacles::Ground::Update()
 	HitBox.setPosition(Position);
 }
 
-sf::Texture Entities::Obstacles::Ground::texture;
-bool Entities::Obstacles::Ground::textureLoaded = false;
+sf::Texture* Entities::Obstacles::Ground::texture(Managers::GraphicManager::getInstance()->loadTexture("Assets/Ground2.png"));

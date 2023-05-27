@@ -14,7 +14,9 @@ namespace Entities
 		Entity(const sf::Vector2f pos = sf::Vector2f(0, 0), const sf::Vector2f size = sf::Vector2f(0, 0), const bool isS = false, ID id = ID::empty);
 		virtual ~Entity();
 		virtual void Move() = 0;
+		virtual void Update() = 0;
 		virtual void Save();
+		void Draw();
 		void Gravity();
 		const bool getGrounded() const;
 		bool getisStatic();
@@ -30,8 +32,6 @@ namespace Entities
 		void setVelocity(float x, float y);
 		virtual void OnCollision(Entity* ent);
 		static void updateDeltaTime(float dt);
-		void Draw();
-		virtual void Update() = 0;
 	private:
 		static unsigned int Cont;
 	protected:
