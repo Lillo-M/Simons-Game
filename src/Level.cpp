@@ -51,23 +51,26 @@ Levels::Level::~Level()
 {
     if(pPIM)
         delete pPIM;
-    for (int i = 0; i < DentitiesList.getSize(); i++)
+    pPIM = NULL;
+    /*for (int i = 0; i < DentitiesList.getSize(); i++)
     {
         if (DentitiesList[i])
             delete DentitiesList[i];
     }
     DentitiesList.clear();
+    /* teste  */
+    DentitiesList.DeleteEntities();
+    /*  */
     for (int i = 0; i < SentitiesList.getSize(); i++)
     {
         if (SentitiesList[i])
             delete SentitiesList[i];
     }
+    SentitiesList.clear();   
     if(pCManager)
         delete pCManager;
-    SentitiesList.clear();
-    if (pCManager)
-        delete pCManager;
-    }
+    pCManager = NULL;
+}
 
 void Levels::Level::CreatePlayer(const sf::Vector2f pos)
 {
@@ -88,11 +91,11 @@ void Levels::Level::CreatePlayer(const sf::Vector2f pos)
         pPlayer2 = pAux;
         pPIM->setpPlayer2(pAux);
     }
-    DentitiesList.insert_back(static_cast<Entities::Entity *>(pAux));
+    DentitiesList.PushEntity(static_cast<Entities::Entity *>(pAux));
     std::vector<Projectile*>::iterator it;
     for(it = pAux->getShots()->begin(); it != pAux->getShots()->end(); it++)
     {
-	    DentitiesList.insert_back(static_cast<Entities::Entity *>(*it));
+	    DentitiesList.PushEntity(static_cast<Entities::Entity *>(*it));
     }
     std::ifstream savefile("Assets/savefile.txt", std::ifstream::binary);
     std::string line; // Brincando com persistencia de objetos . . . 
@@ -115,7 +118,7 @@ void Levels::Level::CreateWarrior(const sf::Vector2f pos)
                   << "ERROR: Failed to Allocate Memory" << std::endl;
         exit(1);
     }
-    DentitiesList.insert_back(static_cast<Entities::Entity *>(pAux));
+    DentitiesList.PushEntity(static_cast<Entities::Entity *>(pAux));
 }
 
 void Levels::Level::CreateGround(const sf::Vector2f pos)
@@ -150,9 +153,9 @@ void Levels::Level::CreateEntity(char id, sf::Vector2f pos)
 
 void Levels::Level::Update()
 {
-    Math::EntityList::Iterator it(DentitiesList.begin());
+    Math::EntityTList::Iterator it;//(DentitiesList.begin());
    
-    for (it; it != DentitiesList.end(); it++)
+    /*for (it; it != DentitiesList.end(); it++)
     {
     	if(it->getID() != ID::obstacle)
         {
@@ -166,11 +169,14 @@ void Levels::Level::Update()
        				continue;
        	}
         it->Update();
-    }
+    }  
+    /* teste */
+    DentitiesList.UpdateEntities();
+    /*  */
     for (it = SentitiesList.begin(); it != SentitiesList.end(); it++)
     {
         it->Update();
-    }
+    } /*  */
     Entities::Entity::updateDeltaTime(pGM->getDeltaTime());
     pGM->updateDeltaTime();
     pCManager->Manage();
@@ -180,9 +186,9 @@ void Levels::Level::Update()
 
 void Levels::Level::Draw()
 {
-    Math::EntityList::Iterator it(DentitiesList.begin());
+    Math::EntityTList::Iterator it;//(DentitiesList.begin());
 
-    for(it; it != DentitiesList.end(); it++)
+    /*for(it; it != DentitiesList.end(); it++)
     {
 	if(it->getID() != ID::obstacle)
     	{
@@ -193,11 +199,13 @@ void Levels::Level::Draw()
     		else
     			if(static_cast<Projectile*>(*it)->getCollided())
     				continue;
-    	} /* */
-        it->Draw();
+    	}
+ 	it->Draw();
 
     }
-    /* */
+    /* teste */
+    DentitiesList.DrawEntities();
+    /*  */
     it = SentitiesList.begin();    
     for(it; it != SentitiesList.end(); it++)
     {

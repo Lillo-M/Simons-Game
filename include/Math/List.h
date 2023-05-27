@@ -102,7 +102,7 @@ namespace Math
 
 		~List()
 		{
-			clear();
+			this->clear();
 			pFirst = NULL;
 			pLast = NULL;
 		}
@@ -249,5 +249,5 @@ namespace Math
 			return Iterator(pLast->next);
 		}
 	};
-	typedef List<Entities::Entity> EntityList;
+	typedef List<Entities::Entity> EntityTList;
 }

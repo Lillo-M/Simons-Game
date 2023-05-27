@@ -2,7 +2,8 @@
 //#include <vector>
 #include "../Managers/CollisionManager.h"
 #include "../Managers/EventsManager.h"
-#include "../Math/List.h"
+#include "../Math/List.h"// remover se a classe EntityList funcionar (e estiver corretamente implementado)
+#include "../Math/EntityList.h"
 #include "../Entities/Characters/Player.h"
 #include "../Entities/Characters/Enemies/Warrior.h"
 #include "../Entities/Obstacles/Ground.h"
@@ -31,7 +32,8 @@ namespace Levels
         Entities::Characters::Player*       pPlayer2;
         Managers::EventsManager*            pEManager;
         Managers::CollisionManager*         pCManager;
-        Math::EntityList                    SentitiesList;
-        Math::EntityList                    DentitiesList;
+        Math::EntityTList                   SentitiesList;
+        //Math::EntityTList                   DentitiesList;
+	Math::EntityList		    DentitiesList;
     };
 }

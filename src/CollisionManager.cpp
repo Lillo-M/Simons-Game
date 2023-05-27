@@ -66,8 +66,8 @@ void Managers::CollisionManager::Manage()
 	float dist_y = 0;
 	float dx = 0;
 	float dy = 0;
-	Math::EntityList::Iterator Iterator_i;
-	Math::EntityList::Iterator Iterator_j;
+	Math::EntityTList::Iterator Iterator_i;
+	Math::EntityTList::Iterator Iterator_j;
 	int i = 0;
 	for (Iterator_i = Dentities->begin(); Iterator_i != Dentities->end(); Iterator_i++)
 	{

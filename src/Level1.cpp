@@ -4,7 +4,7 @@ Levels::Level1::Level1(Managers::EventsManager *pEM, States::StateMachine* pSM) 
     Level(ID::level1, pEM, pSM)
 {
     CreateMap();
-    pCManager->setDList(DentitiesList);
+    pCManager->setDList(DentitiesList.getTList());
     pCManager->setSList(SentitiesList);
 }
 
