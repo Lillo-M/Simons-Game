@@ -242,7 +242,7 @@ namespace Math
 			int size_aux = size;
 			for (int i = 0; i < size_aux; i++)
 			{
-				remove(i);
+				remove(0);
 			}
 		}
 
