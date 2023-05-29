@@ -51,7 +51,7 @@ void Math::EntityList::DrawEntities()
     	}
 }
 
-void Math::EntityList::PushEntity(Entities::Entity* ent)
+void Math::EntityList::Push_BackEntity(Entities::Entity* ent)
 {
 	if(!ent)
 	{
@@ -59,6 +59,16 @@ void Math::EntityList::PushEntity(Entities::Entity* ent)
 		exit(1);
 	}
 	entity_list.insert_back(ent);
+}
+
+void Math::EntityList::Push_FrontEntity(Entities::Entity* ent)
+{
+	if(!ent)
+	{
+		std::cout << "Error: NULL Pointer at EntityList Push!" << std::endl;
+		exit(1);
+	}
+	entity_list.insert_front(ent);
 }
 
 void Math::EntityList::Clear()
@@ -77,6 +87,18 @@ void Math::EntityList::DeleteEntities()
 		}
 	}
 	this->Clear();
+}
+
+void Math::EntityList::Save(std::ofstream& savefile)
+{
+	for(listIt = entity_list.begin();\
+	   listIt != entity_list.end(); listIt++)
+	{
+		if(listIt->getID() != ID::projectile)
+		{
+			listIt->Save(savefile);
+		}
+	}
 }
 
 Math::List<Entities::Entity>& Math::EntityList::getTList()

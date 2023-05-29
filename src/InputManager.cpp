@@ -30,6 +30,7 @@ Managers::InputManager::InputManager()
 	keyMap[sf::Keyboard::X] = 'X';
 	keyMap[sf::Keyboard::Y] = 'Y';
 	keyMap[sf::Keyboard::Z] = 'Z';
+	keyMap[sf::Keyboard::Enter] = "Enter";
 	keyMap[sf::Keyboard::LShift] = "LShift";
 	keyMap[sf::Keyboard::Space] = "Space";
 	keyMap[sf::Keyboard::LControl] = "lCtrl";
@@ -71,4 +72,14 @@ void Managers::InputManager::addObserver(Observers::Observer* observer)
 {
     if(observer)
         subObservers.push_back(observer);
+}
+
+void Managers::InputManager::removeObserver(Observers::Observer* observer)
+{
+    listIt = subObservers.begin();
+    for(listIt; listIt != subObservers.end(); listIt++)
+    {
+        if((*listIt) == observer)
+			subObservers.erase(listIt);
+    }
 }

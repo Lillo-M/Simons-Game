@@ -26,6 +26,7 @@ namespace Entities
                 void Move();
                 void Update();
                 void Attack(const bool b);
+                void Load(std::ifstream& savefile);
             };
         }
     }

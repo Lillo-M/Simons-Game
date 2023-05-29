@@ -16,6 +16,7 @@ namespace Entities
             virtual void OnCollision(Entities::Entity* ent);
             virtual void Move() = 0;
             virtual void Update() = 0;
+            void Save(std::ofstream& savefile);
         };
     }
 }

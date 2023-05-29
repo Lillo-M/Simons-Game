@@ -1,9 +1,9 @@
 #include "../include/Levels/Level.h"
 
-Levels::Level::Level(const ID id, Managers::EventsManager *pEM, States::StateMachine* pSM) : 
-    State(pSM, States::stateID::playing),
+Levels::Level::Level(const ID id, States::StateMachine* pSM, Managers::InputManager* pIM) : 
+    State(pSM, States::stateID::level1),
     Being(id),
-    pEManager(pEM),
+    pIM(pIM),
     pPlayer(NULL),
     pPlayer2(NULL)
 {
@@ -18,7 +18,7 @@ Levels::Level::Level(const ID id, Managers::EventsManager *pEM, States::StateMac
         }
     }
     try{
-        pPIM = new Observers::PlayerInputManager;
+        pPIM = new Observers::PlayerInputManager(NULL, NULL, static_cast<States::State*>(this));
     }
     catch (int error){
         if(!error){
@@ -27,29 +27,12 @@ Levels::Level::Level(const ID id, Managers::EventsManager *pEM, States::StateMac
             exit(1);
         }
     }
-    try{
-        pIM = new Managers::InputManager;
-    }
-    catch (int error){
-        if(!error){
-            std::cout << std::endl
-                  << "ERROR: Failed to Allocate Memory" << std::endl;
-            exit(1);
-        }
-    }
-    pIM->addObserver(static_cast<Observers::Observer*>(pPIM));
-    pEM->setpInputManager(pIM);
-    /*if (!pCManager)
-    {
-        std::cout << std::endl
-                  << "ERROR: Failed to Allocate Memory" << std::endl;
-        exit(1);
-    }*/
+    this->pIM->addObserver(static_cast<Observers::Observer*>(pPIM));
 }
 
 Levels::Level::~Level()
 {
-    pPlayer->Save();
+    this->pIM->removeObserver(static_cast<Observers::Observer*>(pPIM));
     if(pPIM)
         delete pPIM;
     pPIM = NULL;
@@ -92,22 +75,15 @@ void Levels::Level::CreatePlayer(const sf::Vector2f pos)
         pPlayer2 = pAux;
         pPIM->setpPlayer2(pAux);
     }
-    DentitiesList.PushEntity(static_cast<Entities::Entity *>(pAux));
+
     std::vector<Entities::Projectile*>::iterator it;
+
     for(it = pAux->getShots()->begin(); it != pAux->getShots()->end(); it++)
     {
-	    DentitiesList.PushEntity(static_cast<Entities::Entity *>(*it));
+	    DentitiesList.Push_FrontEntity(static_cast<Entities::Entity *>(*it));
     }
-    std::ifstream savefile("Assets/savefile.txt", std::ifstream::binary);
-    std::string line; // Brincando com persistencia de objetos . . . 
-    std::getline(savefile, line);
-    std::getline(savefile, line);
-    float posx = std::stof(line);
-    std::getline(savefile, line);
-    float posy = std::stof(line);
-    pPlayer->setPosition(posx, posy);
-    savefile.close();
-    /*  */
+
+    DentitiesList.Push_FrontEntity(static_cast<Entities::Entity *>(pAux));
 }
 
 void Levels::Level::CreateWarrior(const sf::Vector2f pos)
@@ -119,7 +95,7 @@ void Levels::Level::CreateWarrior(const sf::Vector2f pos)
                   << "ERROR: Failed to Allocate Memory" << std::endl;
         exit(1);
     }
-    DentitiesList.PushEntity(static_cast<Entities::Entity *>(pAux));
+    DentitiesList.Push_BackEntity(static_cast<Entities::Entity *>(pAux));
 }
 
 void Levels::Level::CreateGround(const sf::Vector2f pos)
@@ -154,85 +130,116 @@ void Levels::Level::CreateEntity(char id, sf::Vector2f pos)
 
 void Levels::Level::Update()
 {
-    Math::EntityTList::Iterator it;//(DentitiesList.begin());
-   
-    /*for (it; it != DentitiesList.end(); it++)
-    {
-    	if(it->getID() != ID::obstacle)
-        {
-        	if(it->getID() == ID::player || it->getID() == ID::enemy)
-       		{	
-       			if(!static_cast<Entities::Characters::Character*>(*it)->getAlive())
-    				continue;
-       		}
-       		else
-       			if(static_cast<Projectile*>(*it)->getCollided())
-       				continue;
-       	}
-        it->Update();
-    }  
-    /* teste */
+    isRunning = true;
+    //std::cout << pPlayer->getPosition().y << "pos" << std::endl;
+    //std::cout << pPlayer->getAlive() << std::endl;
+    Math::EntityTList::Iterator it;
     DentitiesList.UpdateEntities();
-    /*  */
+
     for (it = SentitiesList.begin(); it != SentitiesList.end(); it++)
     {
         it->Update();
-    } /*  */
+    }
+
     Entities::Entity::updateDeltaTime(Managers::GraphicManager::getDeltaTime());
     Managers::GraphicManager::updateDeltaTime();
     pCManager->Manage();
     pGM->CenterView(pPlayer->getPosition());
-    //pPlayer->Save();
 }
 
 void Levels::Level::Draw()
 {
-    Math::EntityTList::Iterator it;//(DentitiesList.begin());
+    Math::EntityTList::Iterator it;
 
-    /*for(it; it != DentitiesList.end(); it++)
-    {
-	if(it->getID() != ID::obstacle)
-    	{
-    		if(it->getID() == ID::player || it->getID() == ID::enemy)
-    		{	if(!static_cast<Entities::Characters::Character*>(*it)->getAlive())
-    				continue;
-    		}
-    		else
-    			if(static_cast<Projectile*>(*it)->getCollided())
-    				continue;
-    	}
- 	it->Draw();
-
-    }
-    /* teste */
     DentitiesList.DrawEntities();
-    /*  */
+
     it = SentitiesList.begin();    
     for(it; it != SentitiesList.end(); it++)
     {
 	    it->Draw();
     }
-    /*
-    for (int i = 0; i < DentitiesList.getSize(); i++)
-    {
-    	if(DentitiesList[i]->getID() != ID::obstacle)
-    	{
-    		if(DentitiesList[i]->getID() == ID::player || DentitiesList[i]->getID() == ID::enemy)
-    		{	if(!static_cast<Entities::Characters::Character*>(DentitiesList[i])->getAlive())
-    				continue;
-    		}
-    		else
-    			if(static_cast<Projectile*>(DentitiesList[i])->getCollided())
-    				continue;
-    	}
-        DentitiesList[i]->Draw();
-    }
-    for (int i = 0; i < SentitiesList.getSize(); i++)
-    {
-        SentitiesList[i]->Draw();
-    } 
-    /*  */
 
 }
+
+void Levels::Level::SaveLevel()
+{
+    std::ofstream savefile("Assets/savefile.txt", std::ofstream::binary);
+	std::string line;
+	savefile << this->getID() << std::endl;
+    if(pPlayer2)
+    {
+        savefile << 1 << std::endl;
+    }
+    else
+        savefile << 0 << std::endl;
+    DentitiesList.Save(savefile);
+    savefile << "end" << std::endl;
+    savefile.close();
+}
+
+void Levels::Level::LoadLevel()
+{
+    int iread;
+    float x;
+    float y;
+    std::ifstream savefile("Assets/savefile.txt", std::ifstream::binary);
+    std::string line; // Brincando com persistencia de objetos . . . 
+    savefile >> iread;
+    savefile >> iread;
+    savefile >> iread;
+    Math::EntityTList::Iterator it = DentitiesList.getTList().begin();
+
+    if(static_cast<bool>(iread) == true)
+    {
+        std::cout << "2 players" << std::endl;
+        for(int i = 0; i < 2; i++)
+        {
+            savefile >> iread;
+            static_cast<Entities::Characters::Player*>(*it)->setLives(iread);
+            savefile >> iread;
+            static_cast<Entities::Characters::Player*>(*it)->setAlive(static_cast<bool>(iread));
+            savefile >> x;
+            savefile >> y;
+            std::cout << x << "," << y <<std::endl;
+            it->setPosition(x,y);
+            savefile >> x;
+            savefile >> y;
+            it->setVelocity(x,y);
+            for(int j = 0; j < 10; j++)
+            {
+                static_cast<Entities::Characters::Player*>(*it)->getShots()->operator[](j)->Load(savefile);
+            }
+            it++;
+        }
+    }
+    else
+    {
+        savefile >> iread;
+        static_cast<Entities::Characters::Player*>(*it)->setLives(iread);
+        savefile >> iread;
+        static_cast<Entities::Characters::Player*>(*it)->setAlive(static_cast<bool>(iread));
+        savefile >> x;
+        savefile >> y;
+        it->setPosition(x,y);
+        savefile >> x;
+        savefile >> y;
+        it->setVelocity(x,y);
+        for(int j = 0; j < 10; j++)
+        {
+            static_cast<Entities::Characters::Player*>(*it)->getShots()->operator[](j)->Load(savefile);
+        }
+        it++;
+    }
+    for(it; it != DentitiesList.getTList().end(); it++)
+    {
+        if(it->getID() == ID::projectile)
+            continue;
+        static_cast<Entities::Characters::Enemies::Warrior*>(*it)->Load(savefile);
+    }
+    savefile.close();
+    /*  */
+}
+
+
 
 Observers::PlayerInputManager* Levels::Level::getPlayerInputManager() const { return pPIM;}

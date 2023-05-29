@@ -1,5 +1,4 @@
 #pragma once
-#include <list>
 #include <string>
 
 namespace Observers
@@ -9,8 +8,9 @@ namespace Observers
     public:
         Observer();
         virtual ~Observer();
-        virtual void notifyKeyPressed(std::string) = 0;
-        virtual void notifyKeyReleased(std::string) = 0;
-    private:
+        virtual void notifyKeyPressed(std::string key) = 0;
+        virtual void notifyKeyReleased(std::string key) = 0;
+        //virtual void notifyPlayerDeath();
+    protected:
     };
 }

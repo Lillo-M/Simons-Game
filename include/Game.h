@@ -5,6 +5,10 @@
 #include "Levels/Level1.h"
 #include "States/StateMachine.h"
 #include "Managers/InputManager.h"
+#include "Menus/MainMenu.h"
+#include "Menus/PauseMenu.h"
+#include "States/LoadGameState.h"
+
 class Game: public States::StateMachine
 {
 public:
@@ -13,6 +17,7 @@ public:
 	void Run();
 
 private:
-	Managers::EventsManager eManager;
+	Managers::EventsManager* eManager;
 	Managers::GraphicManager* pGM;
+	Managers::InputManager* iManager;
 };

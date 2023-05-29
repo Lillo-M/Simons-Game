@@ -16,6 +16,7 @@ namespace Managers
 		void pressedInput(sf::Event::KeyEvent key);
 		void releasedInput(sf::Event::KeyEvent key);
         void addObserver(Observers::Observer* observer);
+		void removeObserver(Observers::Observer* observer);
 	private:
         std::list<Observers::Observer*> subObservers;
         std::list<Observers::Observer*>::iterator listIt;

@@ -13,4 +13,8 @@ void Entities::Obstacles::Obstacle::OnCollision(Entities::Entity* ent)
 {
 }
 
+void Entities::Obstacles::Obstacle::Save(std::ofstream& savefile)
+{
+}
+
 const float Entities::Obstacles::Obstacle::forca_empuxo(gravity);

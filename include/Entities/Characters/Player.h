@@ -34,6 +34,7 @@ namespace Entities
 			~Player();
 			void Move();
 			void Update();
+			void Save(std::ofstream& savefile);
 			sf::Vector2f getPosition();
 			const sf::Vector2f getVelocity() const;
 			void setDead();

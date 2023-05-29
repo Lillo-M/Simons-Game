@@ -39,6 +39,23 @@ void Entities::Characters::Character::Damage()
     }
 }
 
+void Entities::Characters::Character::setAlive(bool alive) {this->alive = alive;}
+
+
+void Entities::Characters::Character::setLives(int lives) { this->lives = lives;}
+
+
+void Entities::Characters::Character::Save(std::ofstream& savefile)
+{
+    savefile << this->getID() << std::endl;
+    savefile << lives << std::endl;
+    savefile << alive << std::endl;
+	savefile << Position.x << std::endl;
+	savefile << Position.y << std::endl; 
+    savefile << Velocity.x << std::endl;
+	savefile << Velocity.y << std::endl;
+}
+
 
 void Entities::Characters::Character::operator--() { lives--; if(lives <= 0) alive = false; }
 

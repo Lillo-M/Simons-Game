@@ -13,9 +13,11 @@ namespace Math
 		~EntityList();
 		void UpdateEntities();
 		void DrawEntities();
-		void PushEntity(Entities::Entity* ent);
+		void Push_BackEntity(Entities::Entity* ent);
+		void Push_FrontEntity(Entities::Entity* ent);
 		void Clear();
 		void DeleteEntities();
+		void Save(std::ofstream& savefile);
 		Math::List<Entities::Entity>& getTList();
 		/* **Terminar esta Classe . . .*/
 	private:

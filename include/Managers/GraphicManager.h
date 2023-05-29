@@ -18,6 +18,7 @@ namespace Managers
         void Draw(sf::RectangleShape &hitbox);
         void Draw(sf::Text &text);
         sf::RenderWindow* getWindow();
+        sf::Vector2f getViewCenter() const;
         void Close();
         void Display();
         void Clear();

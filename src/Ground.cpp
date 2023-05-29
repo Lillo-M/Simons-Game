@@ -20,8 +20,8 @@ void Entities::Obstacles::Ground::OnCollision(Entities::Entity* ent)
 void Entities::Obstacles::Ground::Move()
 {
     Gravity();
-    velocity.y -= forca_empuxo * dt * MULT;
-    Position.y += velocity.y;
+    Velocity.y -= forca_empuxo * dt * MULT;
+    Position.y += Velocity.y;
 }
 
 void Entities::Obstacles::Ground::Update()

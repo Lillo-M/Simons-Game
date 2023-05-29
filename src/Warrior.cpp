@@ -27,26 +27,26 @@ void dEnemy::Warrior::Move()
 	{
 		directionright = !directionright;
 		directiontimer -= 2;
-		velocity.x = 0;
+		Velocity.x = 0;
 	}
 	if(directionright)
 	{
 		HitBox.setScale(sf::Vector2f(1, 1));
-		if (velocity.x < MAXV)
-			velocity.x += ESPEED * dt * MULT; // Velocidade De Teste
-		if (velocity.x > MAXV)
-			velocity.x = MAXV;
+		if (Velocity.x < MAXV)
+			Velocity.x += ESPEED * dt * MULT; // Velocidade De Teste
+		if (Velocity.x > MAXV)
+			Velocity.x = MAXV;
 	}
 	else if(!directionright)
 	{
 		HitBox.setScale(sf::Vector2f(-1, 1));
-		if (velocity.x > -MAXV)
-			velocity.x -= ESPEED * dt * MULT; // Velocidade De Teste
-		if (velocity.x < -MAXV)
-			velocity.x = -MAXV;
+		if (Velocity.x > -MAXV)
+			Velocity.x -= ESPEED * dt * MULT; // Velocidade De Teste
+		if (Velocity.x < -MAXV)
+			Velocity.x = -MAXV;
 	}
-	Position.x += velocity.x * dt * MULT;
-	Position.y += velocity.y * dt * MULT;
+	Position.x += Velocity.x * dt * MULT;
+	Position.y += Velocity.y * dt * MULT;
 	this->Gravity();
 }
 
@@ -86,6 +86,24 @@ void dEnemy::Warrior::OnCollision(Entities::Entity* ent)
 	{
 		Attack(false);
 	}
+}
+
+void dEnemy::Warrior::Load(std::ifstream& savefile)
+{
+	float x;
+    float y;
+    int iread;
+    savefile >> iread;
+    savefile >> iread;
+	this->setLives(iread);
+	savefile >> iread;
+    this->setAlive(static_cast<bool>(iread));
+	savefile >> x;
+	savefile >> y;
+    this->setPosition(x,y);
+    savefile >> x;
+	savefile >> y;
+    this->setVelocity(x,y);
 }
 
 sf::Texture* dEnemy::Warrior::texture(Managers::GraphicManager::getInstance()->loadTexture("Assets/Enemy-Warrior-Idle.png"));

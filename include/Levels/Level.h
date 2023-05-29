@@ -9,13 +9,14 @@
 #include "../Entities/Obstacles/Ground.h"
 #include "../States/State.h"
 #include "../Observers/PlayerInputManager.h"
+#include "../GraphicElements/Buttom.h"
 
 namespace Levels
 {
     class Level: public Being, public States::State
     {
     public:
-        Level(const ID id = ID::level, Managers::EventsManager* pEM = NULL, States::StateMachine* pSM = NULL);
+        Level(const ID id = ID::level, States::StateMachine* pSM = NULL, Managers::InputManager* pIM = NULL);
         virtual ~Level();
         virtual void Draw();
         virtual void Update();
@@ -25,12 +26,13 @@ namespace Levels
         virtual void CreateMap() = 0;
         void CreateEntity(char id, sf::Vector2f pos);
         Observers::PlayerInputManager* getPlayerInputManager() const;
+        void SaveLevel();
+        void LoadLevel();
     protected:
     	Managers::InputManager*             pIM;
         Observers::PlayerInputManager*      pPIM;
         Entities::Characters::Player*       pPlayer;
         Entities::Characters::Player*       pPlayer2;
-        Managers::EventsManager*            pEManager;
         Managers::CollisionManager*         pCManager;
         Math::EntityTList                   SentitiesList;
         //Math::EntityTList                   DentitiesList;

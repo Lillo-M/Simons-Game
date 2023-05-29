@@ -94,6 +94,8 @@ float Managers::GraphicManager::getDeltaTime()
     return dt;
 }
 
+sf::Vector2f Managers::GraphicManager::getViewCenter() const {return view.getCenter();}
+
 sf::Texture *Managers::GraphicManager::loadTexture(const char *path)
 {
     std::map<const char *, sf::Texture *>::iterator it;

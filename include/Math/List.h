@@ -121,7 +121,7 @@ namespace Math
 				std::cout << "ERROR: List NULL Insertion" << std::endl;
 				return;
 			}
-			T* pAux = new Element<T>(dt);
+			Element<T>* pAux = new Element<T>(dt);
 			if (!pAux)
 			{
 				std::cout << "ERROR: Failed to Allocate Memory" << std::endl;
@@ -242,7 +242,7 @@ namespace Math
 			int size_aux = size;
 			for (int i = 0; i < size_aux; i++)
 			{
-				remove(i);
+				remove(0);
 			}
 		}
 

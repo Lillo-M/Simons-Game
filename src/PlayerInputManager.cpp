@@ -2,13 +2,14 @@
 
 using namespace Observers;
 
-PlayerInputManager::PlayerInputManager(Entities::Characters::Player *pP, Entities::Characters::Player *pP2) : 
+PlayerInputManager::PlayerInputManager(Entities::Characters::Player *pP, Entities::Characters::Player *pP2, States::State* currentState) : 
 	pPlayer(pP),																								  
 	pPlayer2(pP2),
 	jumpKeyReleased(true),
 	jumpKeyReleased2(true),
 	attackKeyReleased(true),
-	attackKeyReleased2(true)
+	attackKeyReleased2(true),
+	currentState(currentState)
 {
 	inputSetsPlayer["Jump"] = "W";
 	inputSetsPlayer["Right"] = "D";
@@ -32,8 +33,14 @@ PlayerInputManager::~PlayerInputManager()
 
 void PlayerInputManager::notifyKeyPressed(std::string key)
 {
-	if(States::StateMachine::getCurrentStateID() != States::stateID::playing)
+	if(!currentState->getIsRunning())
 		return;
+	if(key == "Esc")
+	{
+		currentState->changeState(States::stateID::pauseMenu);
+
+	}
+	mapIt = inputSetsPlayer.begin();
 	for (mapIt; mapIt != inputSetsPlayer.end(); mapIt++)
 	{
 		if (mapIt->second == key)
@@ -45,18 +52,22 @@ void PlayerInputManager::notifyKeyPressed(std::string key)
 					pPlayer->Jump();
 					jumpKeyReleased = false;
 				}
+				break;
 			}
 			if (mapIt->first == "Right")
 			{
 				pPlayer->MoveRight(true);
+				break;
 			}
 			if (mapIt->first == "Left")
 			{
 				pPlayer->MoveLeft(true);
+				break;
 			}
 			if (mapIt->first == "Down")
 			{
 				pPlayer->Fall();
+				break;
 			}
 			if (mapIt->first == "Attack")
 			{
@@ -65,12 +76,13 @@ void PlayerInputManager::notifyKeyPressed(std::string key)
 					pPlayer->Attack(true);
 					attackKeyReleased = false;
 				}
+				break;
 			}
 		}
 	}
-	mapIt = inputSetsPlayer.begin();
 	if (pPlayer2)
 	{
+		mapIt2 = inputSetsPlayer2.begin();
 		for (mapIt2; mapIt2 != inputSetsPlayer2.end(); mapIt2++)
 		{
 			if (mapIt2->second == key)
@@ -82,18 +94,22 @@ void PlayerInputManager::notifyKeyPressed(std::string key)
 						pPlayer2->Jump();
 						jumpKeyReleased2 = false;
 					}
+					break;
 				}
 				if (mapIt2->first == "Right")
 				{
 					pPlayer2->MoveRight(true);
+					break;
 				}
 				if (mapIt2->first == "Left")
 				{
 					pPlayer2->MoveLeft(true);
+					break;
 				}
 				if (mapIt2->first == "Down")
 				{
 					pPlayer2->Fall();
+					break;
 				}
 				if (mapIt2->first == "Attack")
 				{
@@ -102,17 +118,18 @@ void PlayerInputManager::notifyKeyPressed(std::string key)
 						pPlayer2->Attack(true);
 						attackKeyReleased2 = false;
 					}
+					break;
 				}
 			}
 		}
-		mapIt2 = inputSetsPlayer2.begin();
 	}
 }
 
 void PlayerInputManager::notifyKeyReleased(std::string key)
 {
-	if(States::StateMachine::getCurrentStateID() != States::stateID::playing)
+	if(!currentState->getIsRunning())
 		return;
+	mapIt = inputSetsPlayer.begin();
 	for (mapIt; mapIt != inputSetsPlayer.end(); mapIt++)
 	{
 		if (mapIt->second == key)
@@ -120,25 +137,29 @@ void PlayerInputManager::notifyKeyReleased(std::string key)
 			if (mapIt->first == "Jump")
 			{
 				jumpKeyReleased = true;
+				break;
 			}
 			if (mapIt->first == "Right")
 			{
 				pPlayer->MoveRight(false);
+				break;
 			}
 			if (mapIt->first == "Left")
 			{
 				pPlayer->MoveLeft(false);
+				break;
 			}
 			if (mapIt->first == "Attack")
 			{
 				attackKeyReleased = true;
 				pPlayer->Attack(false);
+				break;
 			}
 		}
 	}
-	mapIt = inputSetsPlayer.begin();
 	if (pPlayer2)
 	{
+		mapIt2 = inputSetsPlayer2.begin();
 		for (mapIt2; mapIt2 != inputSetsPlayer2.end(); mapIt2++)
 		{
 			if (mapIt2->second == key)
@@ -146,23 +167,26 @@ void PlayerInputManager::notifyKeyReleased(std::string key)
 				if (mapIt2->first == "Jump")
 				{
 					jumpKeyReleased2 = true;
+					break;
 				}
 				if (mapIt2->first == "Right")
 				{
 					pPlayer2->MoveRight(false);
+					break;
 				}
 				if (mapIt2->first == "Left")
 				{
 					pPlayer2->MoveLeft(false);
+					break;
 				}
 				if (mapIt2->first == "Attack")
 				{
 					attackKeyReleased2 = true;
 					pPlayer2->Attack(false);
+					break;
 				}
 			}
 		}
-		mapIt2 = inputSetsPlayer2.begin();
 	}
 }
 

@@ -10,19 +10,19 @@ States::StateMachine::~StateMachine()
 
 void States::StateMachine::changeCurrentState(States::stateID sId)
 {
-    //currentState = sId;
+    currentState = sId;
 }
 
 
 void States::StateMachine::runCurrentState()
 {
-    currentState->Update();
-    currentState->Draw();
+    statesMap[currentState]->Update();
+    statesMap[currentState]->Draw();
 }
 
-const States::stateID States::StateMachine::getCurrentStateID() {return States::stateID::playing;}
+const States::stateID States::StateMachine::getCurrentStateID() {return currentState;}
 
 void States::StateMachine::push_State(States::State* pS) 
 {
-    //lStates.insert_back(pS);
+    statesMap[pS->getStateID()] = pS;
 }

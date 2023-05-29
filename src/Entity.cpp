@@ -7,7 +7,7 @@ Entity::Entity(const sf::Vector2f pos, const sf::Vector2f size, const bool isS, 
 	HitBox(size),
 	Position(pos.x, pos.y),
 	grounded(false),
-	velocity(sf::Vector2f(0, 0)),
+	Velocity(sf::Vector2f(0, 0)),
 	isStatic(isS)
 {
 	HitBox.setFillColor(sf::Color(sf::Color::White)); // RGBA de Teste
@@ -28,7 +28,7 @@ void Entity::Draw()
 void Entity::Gravity()
 {
 	float mult = 60;
-	velocity.y += gravity * dt * mult;
+	Velocity.y += gravity * dt * mult;
 }
 
 void Entity::setGrounded(bool b) { grounded = b; }
@@ -46,18 +46,18 @@ void Entity::setPosition(float x, float y)
 
 void Entity::setVelocity(sf::Vector2f vel)
 {
-	velocity = vel;
+	Velocity = vel;
 }
 
 void Entity::setVelocity(float x, float y)
 {
-	velocity.x = x;
-	velocity.y = y;
+	Velocity.x = x;
+	Velocity.y = y;
 }
 
 sf::Vector2f Entity::getVelocity() const
 {
-	return velocity;
+	return Velocity;
 }
 
 sf::Vector2f Entity::getPosition() const
@@ -92,16 +92,6 @@ unsigned int Entity::getContEntities()
 float Entities::Entity::getDt()
 {
     return dt;
-}
-
-void Entities::Entity::Save()
-{
-	std::ofstream savefile("Assets/savefile.txt", std::ofstream::binary);
-	std::string line;
-	savefile << this->getID() << std::endl;
-	savefile << Position.x << std::endl;
-	savefile << Position.y << std::endl; 
-	savefile.close();
 }
 
 const bool Entity::getGrounded() const { return grounded; }

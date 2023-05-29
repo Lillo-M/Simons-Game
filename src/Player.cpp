@@ -48,54 +48,54 @@ sf::Vector2f Entities::Characters::Player::getPosition() // botar na entidade
 	return Position;
 }
 
-const sf::Vector2f Entities::Characters::Player::getVelocity() const { return velocity; } // botar na entidade
+const sf::Vector2f Entities::Characters::Player::getVelocity() const { return Velocity; } // botar na entidade
 
 void Entities::Characters::Player::Move()
 {
 	if (BoolMoveLeft)
 	{
-		if (velocity.x > -maxVelocity)
-			velocity.x -= PSPEED * dt * MULT; // Velocidade De Teste
+		if (Velocity.x > -maxVelocity)
+			Velocity.x -= PSPEED * dt * MULT; // Velocidade De Teste
 		else
-			velocity.x = -maxVelocity; // Velocidade De Teste
-		if (velocity.x < -maxVelocity)
-			velocity.x = -maxVelocity;
+			Velocity.x = -maxVelocity; // Velocidade De Teste
+		if (Velocity.x < -maxVelocity)
+			Velocity.x = -maxVelocity;
 	}
 	if (BoolMoveRight)
 	{
-		if (velocity.x < maxVelocity)
-			velocity.x += PSPEED * dt * MULT; // Velocidade De Teste
+		if (Velocity.x < maxVelocity)
+			Velocity.x += PSPEED * dt * MULT; // Velocidade De Teste
 		else
-			velocity.x = maxVelocity; // Velocidade De Teste
-		if (velocity.x > maxVelocity)
-			velocity.x = maxVelocity;
+			Velocity.x = maxVelocity; // Velocidade De Teste
+		if (Velocity.x > maxVelocity)
+			Velocity.x = maxVelocity;
 	}
 	if (fall)
 	{
 		if (!grounded)
-			velocity.y -= JUMPHEIGHT / 8 * dt * MULT; // Valores de Teste
+			Velocity.y -= JUMPHEIGHT / 8 * dt * MULT; // Valores de Teste
 		else
 			fall = false;
 	}
 
-	if (velocity.x < 0 && !BoolMoveLeft && !BoolMoveRight) // Atrito
+	if (Velocity.x < 0 && !BoolMoveLeft && !BoolMoveRight) // Atrito
 	{
-		velocity.x += ATRITO * dt * MULT;
-		if (velocity.x > 0)
-			velocity.x = 0;
+		Velocity.x += ATRITO * dt * MULT;
+		if (Velocity.x > 0)
+			Velocity.x = 0;
 	}
-	else if (velocity.x > 0 && !BoolMoveLeft && !BoolMoveRight) // Atrito
+	else if (Velocity.x > 0 && !BoolMoveLeft && !BoolMoveRight) // Atrito
 	{
-		velocity.x -= ATRITO * dt * MULT;
-		if (velocity.x < 0)
-			velocity.x = 0;
+		Velocity.x -= ATRITO * dt * MULT;
+		if (Velocity.x < 0)
+			Velocity.x = 0;
 	}
-	/*if(velocity.x > 0)
+	/*if(Velocity.x > 0)
 		HitBox.setScale(sf::Vector2f(-1, 1));
-	else if(velocity.x < 0)
+	else if(Velocity.x < 0)
 		HitBox.setScale(sf::Vector2f(1, 1));*/
-	Position.x += velocity.x * dt * MULT;
-	Position.y += velocity.y * dt * MULT;
+	Position.x += Velocity.x * dt * MULT;
+	Position.y += Velocity.y * dt * MULT;
 	Gravity();
 }
 
@@ -124,13 +124,13 @@ void Entities::Characters::Player::Jump()
 		grounded = false;
 		secondJump = true;
 		fall = false;
-		velocity.y = JUMPHEIGHT; // Valor De Teste
+		Velocity.y = JUMPHEIGHT; // Valor De Teste
 	}
 	else if (secondJump)
 	{
 		fall = false;
 		secondJump = false;
-		velocity.y = JUMPHEIGHT; // Valor De Teste
+		Velocity.y = JUMPHEIGHT; // Valor De Teste
 	}
 }
 
@@ -184,6 +184,22 @@ void Entities::Characters::Player::OnCollision(Entities::Entity *ent)
 		//normalCollision(ent);
 	}*/
 }
+
+void Entities::Characters::Player::Save(std::ofstream& savefile)
+{
+	savefile << this->getID() << std::endl;
+    savefile << lives << std::endl;
+    savefile << alive << std::endl;
+	savefile << Position.x << std::endl;
+	savefile << Position.y << std::endl; 
+    savefile << Velocity.x << std::endl;
+	savefile << Velocity.y << std::endl;
+	for(int i = 0; i < shots.size(); i++)
+	{
+		shots[i]->Save(savefile);
+	}
+}
+
 
 std::vector<Entities::Projectile*>* Entities::Characters::Player::getShots() {return &shots;}
 

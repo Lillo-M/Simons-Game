@@ -15,7 +15,7 @@ namespace Entities
 		virtual ~Entity();
 		virtual void Move() = 0;
 		virtual void Update() = 0;
-		virtual void Save();
+		virtual void Save(std::ofstream& savefile) = 0;
 		void Draw();
 		void Gravity();
 		const bool getGrounded() const;
@@ -37,7 +37,7 @@ namespace Entities
 	protected:
 		static float dt;
 		const bool isStatic;
-		sf::Vector2f velocity;
+		sf::Vector2f Velocity;
 		static const float gravity;
 		sf::Vector2f Position;
 		bool grounded;
