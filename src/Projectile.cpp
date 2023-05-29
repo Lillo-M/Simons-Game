@@ -14,18 +14,9 @@ Entities::Projectile::~Projectile()
 {
 }
 
-void Entities::Projectile::Move()
-{
-    Gravity();
-    velocity.y -= 1.f * gravity * dt * 60;
-    Position.x += velocity.x * dt * 60;
-    Position.y += velocity.y * dt * 60;
-}
-
-
 void Entities::Projectile::Update()
 {
-    this->Move();
+    Move();
     HitBox.setPosition(Position);
 }
 

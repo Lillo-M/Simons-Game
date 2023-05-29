@@ -1,6 +1,6 @@
 G                                       
-G                                       
-G                                       
+G                                   
+G                                   
 G                                       
 G 
 G                                       
@@ -14,9 +14,9 @@ G              W  W
 G                                       
 G                                       
 G            G  G  G  G
+G       P    
 G           
-G           
-G		 P
+G		 
 G     G  G                                                       
 G
 G

@@ -6,6 +6,7 @@
 #include <vector>
 #include "../../GraphicElements/Animation.h"
 #include "../Projectile.h"
+#include "../PlayerProjectile.h"
 #define LIVES 5
 #define MAXV 10
 #define ATRITO 0.45
@@ -18,7 +19,7 @@ namespace Entities
 		class Player: public Characters::Character
 		{
 		private:
-			std::vector<Projectile*> shots;
+			std::vector<PlayerProjectile*> shots;
 			int shotcount;
 			const float maxVelocity;
 			bool BoolMoveRight;
@@ -43,7 +44,7 @@ namespace Entities
 			void Fall();
 			void Attack(const bool b);
 			void OnCollision(Entities::Entity* ent);
-			std::vector<Projectile*>* getShots();
+			std::vector<PlayerProjectile*>* getShots();
 		};
 	}
 }

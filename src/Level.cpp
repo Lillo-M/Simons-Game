@@ -93,7 +93,7 @@ void Levels::Level::CreatePlayer(const sf::Vector2f pos)
         pPIM->setpPlayer2(pAux);
     }
     DentitiesList.PushEntity(static_cast<Entities::Entity *>(pAux));
-    std::vector<Entities::Projectile*>::iterator it;
+    std::vector<Entities::PlayerProjectile*>::iterator it;
     for(it = pAux->getShots()->begin(); it != pAux->getShots()->end(); it++)
     {
 	    DentitiesList.PushEntity(static_cast<Entities::Entity *>(*it));
