@@ -38,8 +38,18 @@ Game::Game():
         exit(1);
     }}
 
+    try{statesMap[States::stateID::newGameState] = static_cast<States::State*>(new States::NewGameState(static_cast<States::StateMachine*>(this)));}
+    catch(int error){
+    if(!error)
+    {
+        std::cout << "ERROR: Failed to Memory Allocate" << std::endl;
+        exit(1);
+    }}
+
     static_cast<States::LoadGameState*>(statesMap[States::stateID::loadGameState])->PushLevel(static_cast<Levels::Level*>(statesMap[States::stateID::level1]));
 
+    static_cast<States::NewGameState*>(statesMap[States::stateID::newGameState])->PushLevel(static_cast<Levels::Level*>(statesMap[States::stateID::level1]));
+    
     currentState = States::stateID::mainMenu;
     Run();
 }

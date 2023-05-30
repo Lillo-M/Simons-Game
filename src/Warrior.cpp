@@ -94,16 +94,37 @@ void dEnemy::Warrior::Load(std::ifstream& savefile)
     float y;
     int iread;
     savefile >> iread;
+	//std::cout << iread << " : iread"<< std::endl;
     savefile >> iread;
+	//std::cout << iread << " : iread"<< std::endl;
 	this->setLives(iread);
 	savefile >> iread;
+	//std::cout << iread << " : iread"<< std::endl;
     this->setAlive(static_cast<bool>(iread));
 	savefile >> x;
+	//std::cout << x << " : x"<< std::endl;
 	savefile >> y;
     this->setPosition(x,y);
     savefile >> x;
 	savefile >> y;
     this->setVelocity(x,y);
+	savefile >> x;
+	this->directiontimer = x;
+	savefile >> iread;
+	this->directionright = iread;
+}
+
+void dEnemy::Warrior::Save(std::ofstream& savefile)
+{
+    savefile << this->getID() << std::endl;
+    savefile << lives << std::endl;
+    savefile << alive << std::endl;
+	savefile << Position.x << std::endl;
+	savefile << Position.y << std::endl; 
+    savefile << Velocity.x << std::endl;
+	savefile << Velocity.y << std::endl;
+	savefile << directiontimer << std::endl;
+	savefile << directionright << std::endl;
 }
 
 sf::Texture* dEnemy::Warrior::texture(Managers::GraphicManager::getInstance()->loadTexture("Assets/Enemy-Warrior-Idle.png"));

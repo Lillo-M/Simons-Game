@@ -33,7 +33,7 @@ void Menus::MainMenu::Select()
     switch (currentButtom)
     {
     case 0:
-        changeState(States::stateID::level1);
+        changeState(States::stateID::newGameState);
         break;
 
     case 1:

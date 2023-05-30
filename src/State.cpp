@@ -29,5 +29,9 @@ const bool States::State::getIsRunning() const {return isRunning;}
 
 const States::stateID States::State::getStateID() const {return id;}
 
+void States::State::Reset()
+{
+}
+
 
 States::State* States::State::previousState(NULL);

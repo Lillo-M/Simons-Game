@@ -186,12 +186,13 @@ void Levels::Level::LoadLevel()
     std::string line; // Brincando com persistencia de objetos . . . 
     savefile >> iread;
     savefile >> iread;
+    bool player2 = static_cast<bool>(iread);
     savefile >> iread;
     Math::EntityTList::Iterator it = DentitiesList.getTList().begin();
 
-    if(static_cast<bool>(iread) == true)
+    if(player2)
     {
-        std::cout << "2 players" << std::endl;
+        //std::cout << "2 players" << std::endl;
         for(int i = 0; i < 2; i++)
         {
             savefile >> iread;
@@ -200,16 +201,21 @@ void Levels::Level::LoadLevel()
             static_cast<Entities::Characters::Player*>(*it)->setAlive(static_cast<bool>(iread));
             savefile >> x;
             savefile >> y;
-            std::cout << x << "," << y <<std::endl;
+            //std::cout << x << "," << y <<std::endl;
             it->setPosition(x,y);
             savefile >> x;
             savefile >> y;
             it->setVelocity(x,y);
+            savefile >> iread;
+            static_cast<Entities::Characters::Player*>(*it)->setFacing(iread);
+            std::vector<Entities::Projectile*>* vshots = static_cast<Entities::Characters::Player*>(*it)->getShots();
+            it++;
             for(int j = 0; j < 10; j++)
             {
-                static_cast<Entities::Characters::Player*>(*it)->getShots()->operator[](j)->Load(savefile);
+                vshots->operator[](j)->Load(savefile);
+                it++;
             }
-            it++;
+            savefile >> iread;
         }
     }
     else
@@ -224,11 +230,15 @@ void Levels::Level::LoadLevel()
         savefile >> x;
         savefile >> y;
         it->setVelocity(x,y);
+        savefile >> iread;
+        static_cast<Entities::Characters::Player*>(*it)->setFacing(iread);
+        std::vector<Entities::Projectile*>* vshots = static_cast<Entities::Characters::Player*>(*it)->getShots();
+        it++;
         for(int j = 0; j < 10; j++)
         {
-            static_cast<Entities::Characters::Player*>(*it)->getShots()->operator[](j)->Load(savefile);
+            vshots->operator[](j)->Load(savefile);
+            it++;
         }
-        it++;
     }
     for(it; it != DentitiesList.getTList().end(); it++)
     {
@@ -238,6 +248,21 @@ void Levels::Level::LoadLevel()
     }
     savefile.close();
     /*  */
+}
+
+void Levels::Level::Reset()
+{
+    DentitiesList.DeleteEntities();
+    /*  */
+    for (int i = 0; i < SentitiesList.getSize(); i++)
+    {
+        if (SentitiesList[i])
+            delete SentitiesList[i];
+    }
+    SentitiesList.clear();
+    pPlayer = NULL;
+    pPlayer2 = NULL;
+    this->CreateMap();
 }
 
 

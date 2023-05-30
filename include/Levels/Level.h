@@ -28,6 +28,7 @@ namespace Levels
         Observers::PlayerInputManager* getPlayerInputManager() const;
         void SaveLevel();
         void LoadLevel();
+        void Reset();
     protected:
     	Managers::InputManager*             pIM;
         Observers::PlayerInputManager*      pPIM;

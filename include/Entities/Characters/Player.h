@@ -37,7 +37,7 @@ namespace Entities
 			void Save(std::ofstream& savefile);
 			sf::Vector2f getPosition();
 			const sf::Vector2f getVelocity() const;
-			void setDead();
+			void setFacing(int side);
 			void Jump();
 			void MoveRight(const bool b);
 			void MoveLeft(const bool b);

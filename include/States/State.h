@@ -12,7 +12,8 @@ namespace States
         level1 =        1,
         gameOver =      2,
         pauseMenu =     3,
-        loadGameState = 4
+        loadGameState = 4,
+        newGameState  = 5
     };
 
     class State
@@ -25,7 +26,7 @@ namespace States
         const States::stateID getStateID() const;
         virtual void Update() = 0;
         virtual void Draw() = 0;
-        //virtual void Reset() = 0;
+        virtual void Reset();
         const bool getIsRunning() const;
     protected:
         bool isRunning;

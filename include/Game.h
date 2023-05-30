@@ -8,6 +8,7 @@
 #include "Menus/MainMenu.h"
 #include "Menus/PauseMenu.h"
 #include "States/LoadGameState.h"
+#include "States/NewGameState.h"
 
 class Game: public States::StateMachine
 {

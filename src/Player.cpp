@@ -41,8 +41,6 @@ Entities::Characters::Player::~Player()
 	shots.clear();
 }
 
-void Entities::Characters::Player::setDead() { alive = false; }
-
 sf::Vector2f Entities::Characters::Player::getPosition() // botar na entidade
 {
 	return Position;
@@ -172,6 +170,12 @@ void Entities::Characters::Player::Attack(const bool b)
 			shotcount = 0;
 	}
 }
+
+void Entities::Characters::Player::setFacing(int side)
+{
+	HitBox.setScale(side, 1);
+}
+
 void Entities::Characters::Player::OnCollision(Entities::Entity *ent)
 {
 	/*if(ent->getID() == ID::enemy)
@@ -194,6 +198,7 @@ void Entities::Characters::Player::Save(std::ofstream& savefile)
 	savefile << Position.y << std::endl; 
     savefile << Velocity.x << std::endl;
 	savefile << Velocity.y << std::endl;
+	savefile << HitBox.getScale().x << std::endl;
 	for(int i = 0; i < shots.size(); i++)
 	{
 		shots[i]->Save(savefile);
