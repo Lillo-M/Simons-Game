@@ -16,7 +16,7 @@ namespace Entities
 		virtual void Move() = 0;
 		virtual void Update() = 0;
 		virtual void Save(std::ofstream& savefile) = 0;
-		void Draw();
+		virtual void Draw() = 0;
 		void Gravity();
 		const bool getGrounded() const;
 		bool getisStatic();
@@ -38,8 +38,9 @@ namespace Entities
 		static float dt;
 		const bool isStatic;
 		sf::Vector2f Velocity;
-		static const float gravity;
 		sf::Vector2f Position;
+		sf::Vector2f Size;
+		static const float gravity;
 		bool grounded;
 		sf::RectangleShape HitBox;
 	};

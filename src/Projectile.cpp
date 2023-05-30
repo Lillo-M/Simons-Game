@@ -29,11 +29,17 @@ void Entities::Projectile::Update()
     HitBox.setPosition(Position);
 }
 
+void Entities::Projectile::Draw()
+{
+	pGM->Draw(HitBox);
+}
+
+
 void Entities::Projectile::OnCollision(Entities::Entity* ent)
 {
     if(ent->getID() != owner->getID() && ent->getID() != ID::obstacle)
     {
-        static_cast<Entities::Characters::Character*>(ent)->Damage(true);	    
+        static_cast<Entities::Characters::Character*>(ent)->Damage(true);
     }
     collided = true;
 }

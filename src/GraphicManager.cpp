@@ -67,9 +67,7 @@ void Managers::GraphicManager::CenterView(sf::Vector2f pos)
 {
     if (pos.y < 3 * HEIGHT / 2)
         pos = sf::Vector2f(pos.x, 3 * HEIGHT / 2 - (3 * HEIGHT / 2 - pos.y));
-    else if (pos.y > 2 * HEIGHT - 128)
-        pos = sf::Vector2f(pos.x, 3 * HEIGHT / 2 - (2 * HEIGHT - 128 - pos.y));
-    else
+    else 
         pos = sf::Vector2f(pos.x, 3 * HEIGHT / 2);
     if (pos.x < WIDTH / 2)
         pos = sf::Vector2f(WIDTH / 2, pos.y);

@@ -8,7 +8,8 @@ Entity::Entity(const sf::Vector2f pos, const sf::Vector2f size, const bool isS, 
 	Position(pos.x, pos.y),
 	grounded(false),
 	Velocity(sf::Vector2f(0, 0)),
-	isStatic(isS)
+	isStatic(isS),
+	Size(size)
 {
 	HitBox.setFillColor(sf::Color(sf::Color::White)); // RGBA de Teste
 	HitBox.setPosition(Position);
@@ -18,12 +19,6 @@ Entity::~Entity()
 {
 	Cont--;
 }
-
-void Entity::Draw()
-{
-	pGM->Draw(HitBox);
-}
-
 
 void Entity::Gravity()
 {
@@ -67,7 +62,7 @@ sf::Vector2f Entity::getPosition() const
 
 sf::Vector2f Entity::getSize() const
 {
-	return HitBox.getSize();
+	return Size;
 }
 
 bool Entity::getisStatic()

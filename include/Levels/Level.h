@@ -29,7 +29,9 @@ namespace Levels
         void SaveLevel();
         void LoadLevel();
         void Reset();
+        bool getLevelStarted() const;
     protected:
+        bool                       levelStarted;
     	Managers::InputManager*             pIM;
         Observers::PlayerInputManager*      pPIM;
         Entities::Characters::Player*       pPlayer;

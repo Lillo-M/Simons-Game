@@ -2,7 +2,6 @@
 #include "../Being.h"
 #include <vector>
 #include "../GraphicElements/Buttom.h"
-#include "../Observers/StateObserver.h"
 #include "../Managers/InputManager.h"
 
 namespace Menus
@@ -22,6 +21,5 @@ namespace Menus
         std::vector<GraphicElements::Buttom*> buttons;
         int buttomCont;
         int currentButtom;
-        //Observers::StateObserver* pSObserver;
     };
 }

@@ -1,6 +1,7 @@
 #pragma once
 #include "Menu.h"
 #include "../Observers/MenuObserver.h"
+#include "../States/State.h"
 
 namespace Menus
 {

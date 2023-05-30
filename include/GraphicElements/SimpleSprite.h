@@ -2,12 +2,14 @@
 #include "Animation.h"
 namespace GraphicElements
 {
-    class SimpleSprite: public Animation
+    class SimpleSprite : public Animation
     {
     public:
         SimpleSprite();
         ~SimpleSprite();    
-        void Update(sf::Vector2f position);
-        void AnimationReset(sf::Texture *texture, sf::Vector2u imageCount, float switchTime);
+        void Update(sf::Vector2f Position);
+        void Reset(const char* path, sf::Vector2f position, sf::Vector2f size, float scale);
+    private:
+        sf::Texture* texture;
     };
 }

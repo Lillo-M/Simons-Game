@@ -4,7 +4,7 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include <vector>
-#include "../../GraphicElements/Animation.h"
+#include "../../GraphicElements/ComplexAnimation.h"
 #include "../Projectile.h"
 #define LIVES 5
 #define MAXV 10
@@ -26,14 +26,19 @@ namespace Entities
 			bool secondJump;
 			bool fall;
 			bool attackcooled;
+			bool faceRight;
+			bool isJumping;
+			//bool isAttacking;
 			static sf::Texture* texture;
-			GraphicElements::Animation animation;
+			//GraphicElements::Animation animation;
+			GraphicElements::ComplexAnimation animation;
 			float attackcd;	
 		public:
 			Player(const sf::Vector2f pos = sf::Vector2f(0, 0));
 			~Player();
 			void Move();
 			void Update();
+			void Draw();
 			void Save(std::ofstream& savefile);
 			sf::Vector2f getPosition();
 			const sf::Vector2f getVelocity() const;

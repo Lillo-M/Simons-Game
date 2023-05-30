@@ -56,7 +56,6 @@ void Entities::Characters::Character::Save(std::ofstream& savefile)
 	savefile << Velocity.y << std::endl;
 }
 
-
 void Entities::Characters::Character::operator--() { lives--; if(lives <= 0) alive = false; }
 
 const bool Entities::Characters::Character::getAlive() const { return alive; }

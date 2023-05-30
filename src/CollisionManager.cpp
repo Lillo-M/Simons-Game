@@ -24,11 +24,7 @@ void Managers::CollisionManager::setDList(Math::List<Entities::Entity>& ents)
 
 void Managers::CollisionManager::normalCollision(Entities::Entity* ent, float dist_x, float dist_y, float size_x, float size_y, ID id)
 {
-	/*float size_y = ent->getSize().y / 2 + getSize().y / 2;
-	float size_x = ent->getSize().x / 2 + getSize().x / 2;
-	float dist_y = ent->getPosition().y - Position.y;
-	float dist_x = ent->getPosition().x - Position.x;*/
-	if (abs(dist_x) - size_x > abs(dist_y) - size_y) // retirar ABS
+	if (abs(dist_x) - size_x > abs(dist_y) - size_y)
 	{
 		if (dist_x > 0)
 		{

@@ -10,15 +10,9 @@ namespace GraphicElements
     public:
         Animation();
         virtual ~Animation();
-        virtual void update(sf::Vector2f position);
-        void AnimationReset(sf::Texture *texture, sf::Vector2u imageCount, float switchTime);
-        sf::IntRect uvRect;
+        virtual void Draw();
     protected:
-        //sf::IntRect uvRect;
-        sf::Vector2u imageCount;
-        sf::Vector2u currentImage;
-        float totalTime;
-        float switchTime;
-        //sf::RectangleShape HitBox;
+        static Managers::GraphicManager* pGM;
+        sf::RectangleShape HitBox;
     };
 }

@@ -14,11 +14,12 @@ Levels::Level1::~Level1()
 
 void Levels::Level1::CreateMap()
 {
+    std::cout<< "create map" << std::endl;
     std::ifstream Map;
     std::string str;
     int j = 0;
     Map.open("Assets/Level1.txt");
-
+    std::cout<< "Open map" << std::endl;
     if (!Map.is_open())
     {
         std::cout << "ERROR: Failed to Open 'Level1.txt'" << std::endl;
@@ -31,6 +32,7 @@ void Levels::Level1::CreateMap()
         {
             if (str[i] != ' ')
             {
+                std::cout<< "create entity" << std::endl;
                 CreateEntity(str[i], sf::Vector2f(i, j));
             }
         }

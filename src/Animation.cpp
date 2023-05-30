@@ -1,7 +1,6 @@
 #include "../include/GraphicElements/Animation.h"
 
-GraphicElements::Animation::Animation():
-    currentImage(sf::Vector2u(0,0))
+GraphicElements::Animation::Animation()
 {
 }
 
@@ -9,32 +8,10 @@ GraphicElements::Animation::~Animation()
 {
 }
 
-void GraphicElements::Animation::AnimationReset(sf::Texture* texture, sf::Vector2u imageCount, float switchTime)
+void GraphicElements::Animation::Draw()
 {
-    this->imageCount = imageCount;
-    this->switchTime = switchTime;
-    totalTime = 0.f;
-    currentImage.x = 0;
-
-
-    uvRect.width = texture->getSize().x / static_cast<float>(imageCount.x);
-    uvRect.height = texture->getSize().y / static_cast<float>(imageCount.y);
+    pGM->Draw(HitBox);
 }
 
-void GraphicElements::Animation::update(sf::Vector2f position)
-{
-    totalTime += Managers::GraphicManager::getDeltaTime();
-    
-    if(totalTime >= switchTime)
-    {
-        totalTime -= switchTime;
-        currentImage.x++;
-        
-        if(currentImage.x >= imageCount.x)
-        {
-            currentImage.x = 0;
-        }
-    }
+Managers::GraphicManager* GraphicElements::Animation::pGM(Managers::GraphicManager::getInstance());
 
-    uvRect.left = currentImage.x * uvRect.width;
-}

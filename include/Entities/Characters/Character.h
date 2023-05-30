@@ -6,9 +6,6 @@ namespace Entities
     {
         class Character : public Entities::Entity
         {    
-        private:
-            bool damaged;
-            float timecont;
         public:
             Character(const sf::Vector2f pos = sf::Vector2f(0, 0), const sf::Vector2f size = sf::Vector2f(0, 0), const bool isS = false, ID id = ID::empty, int lves = 0);
             virtual ~Character();
@@ -16,6 +13,7 @@ namespace Entities
             virtual void Move() = 0;
             virtual void Attack(const bool b) = 0;
             virtual void Update() = 0;
+            virtual void Draw() = 0;
             virtual void Save(std::ofstream& savefile);
             const bool getAlive() const;
             virtual void OnCollision(Entity *ent);
@@ -24,6 +22,8 @@ namespace Entities
             void setAlive(bool alive);
             void setLives(int lives);
         protected:
+            bool damaged;
+            float timecont;
             int lives;
             bool alive;
         };

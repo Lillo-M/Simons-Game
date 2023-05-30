@@ -1,7 +1,7 @@
 #include "../include/Entities/Characters/Player.h"
 
-#define SIZEX 61.f
-#define SIZEY 100.f
+#define SIZEX 40.f
+#define SIZEY 66.f
 Entities::Characters::Player::Player(const sf::Vector2f pos) : 
 	Character(pos, sf::Vector2f(SIZEX, SIZEY), false, ID::player, LIVES),
 	maxVelocity(MAXV),
@@ -11,7 +11,11 @@ Entities::Characters::Player::Player(const sf::Vector2f pos) :
 	fall(false),
 	attackcd(0.f),
 	attackcooled(true),
-	shotcount(0)
+	shotcount(0),
+	animation(),
+	faceRight(false),
+	isJumping(false)
+	//isAttacking(false)
 {
 	for(int i = 0; i < 10; i++)
 	{
@@ -23,11 +27,16 @@ Entities::Characters::Player::Player(const sf::Vector2f pos) :
 		}
 		shots.push_back(pAux);
 	}
-	HitBox.setOrigin(SIZEX / 2, SIZEY / 2);
+	HitBox.setOrigin(0, 0);
 	
-	HitBox.setTexture(texture);
-	animation.AnimationReset(texture, sf::Vector2u(4,1), static_cast<float>(0.25));
-	HitBox.setTextureRect(animation.uvRect);
+	//HitBox.setTexture(texture);
+	animation.pushAnimation(GraphicElements::Animation_ID::idle, "Assets/Idle.png", sf::Vector2u(8,0), 0.125f);
+	animation.pushAnimation(GraphicElements::Animation_ID::walk, "Assets/Walk.png", sf::Vector2u(7,0), 0.143f);
+	animation.pushAnimation(GraphicElements::Animation_ID::jump, "Assets/Jump.png", sf::Vector2u(8,0), 0.125f);
+	animation.pushAnimation(GraphicElements::Animation_ID::attack, "Assets/Magic_arrow.png", sf::Vector2u(6,0), 0.06f);
+	animation.pushAnimation(GraphicElements::Animation_ID::hurt, "Assets/Hurt.png", sf::Vector2u(4,0), 0.25f);
+	//animation.AnimationReset(texture, sf::Vector2u(4,1), static_cast<float>(0.25));
+	//HitBox.setTextureRect(animation.uvRect);
 }
 
 Entities::Characters::Player::~Player()
@@ -92,6 +101,10 @@ void Entities::Characters::Player::Move()
 		HitBox.setScale(sf::Vector2f(-1, 1));
 	else if(Velocity.x < 0)
 		HitBox.setScale(sf::Vector2f(1, 1));*/
+	if(Velocity.x > 0)
+		faceRight = true;
+	else if(Velocity.x < 0)
+		faceRight = false;
 	Position.x += Velocity.x * dt * MULT;
 	Position.y += Velocity.y * dt * MULT;
 	Gravity();
@@ -103,16 +116,46 @@ void Entities::Characters::Player::Update()
 	if(!attackcooled)
 	{
 		attackcd += dt;
-		if(attackcd >= 0.34f)
+		if(attackcd >= 0.36f)
 		{
-			attackcd -= 0.34f;
+			attackcd -= 0.36f;
 			attackcooled = true;
 		}
 	}
 	Damage();
-	HitBox.setPosition(Position);
-	animation.update(Position);
-	HitBox.setTextureRect(animation.uvRect);
+	//animation.Update(GraphicElements::Animation_ID::walk, Position, faceRight);
+	//HitBox.setPosition(Position);
+
+	if(grounded)
+		isJumping = false;
+	
+	if(damaged)
+	{
+		animation.Update(GraphicElements::Animation_ID::hurt, Position, faceRight);
+	}
+	else if(!attackcooled)
+	{
+		animation.Update(GraphicElements::Animation_ID::attack, Position, faceRight);
+	}
+	else if(isJumping)
+	{
+		animation.Update( GraphicElements::Animation_ID::jump,\
+	Position, faceRight);
+	}
+	else if(Velocity.x)
+		animation.Update( GraphicElements::Animation_ID::walk,\
+	Position, faceRight);
+	else
+		animation.Update( GraphicElements::Animation_ID::idle,\
+	Position, faceRight);
+	/*  */
+	//animation.update(Position);
+	//HitBox.setTextureRect(animation.uvRect);
+}
+
+void Entities::Characters::Player::Draw()
+{
+    animation.Draw();
 }
 
 void Entities::Characters::Player::Jump()
@@ -120,12 +163,14 @@ void Entities::Characters::Player::Jump()
 	if (grounded)
 	{
 		grounded = false;
+		isJumping = true;
 		secondJump = true;
 		fall = false;
 		Velocity.y = JUMPHEIGHT; // Valor De Teste
 	}
 	else if (secondJump)
 	{
+		isJumping = true;
 		fall = false;
 		secondJump = false;
 		Velocity.y = JUMPHEIGHT; // Valor De Teste
@@ -134,19 +179,21 @@ void Entities::Characters::Player::Jump()
 
 void Entities::Characters::Player::MoveRight(const bool b)
 {
-	if (b)
+	/*if (b)
 		HitBox.setScale(sf::Vector2f(-1, 1));
 	else if (BoolMoveLeft)
 		HitBox.setScale(sf::Vector2f(1, 1));
+	/**/
 	BoolMoveRight = b;
 }
 
 void Entities::Characters::Player::MoveLeft(const bool b)
 {
-	if (b)
+	/*if (b)
 		HitBox.setScale(sf::Vector2f(1, 1));
 	else if (BoolMoveRight)
 		HitBox.setScale(sf::Vector2f(-1, 1));
+	/*  */
 	BoolMoveLeft = b;
 }
 
@@ -157,12 +204,13 @@ void Entities::Characters::Player::Fall()
 
 void Entities::Characters::Player::Attack(const bool b)
 {
-	if (attackcooled && b)
+	if (attackcooled && b && !damaged)
 	{
+		animation.Update(GraphicElements::Animation_ID::attack, Position, faceRight);
 		attackcooled = false;
 		shots[shotcount]->Shoot(sf::Vector2f(Position.x + \
-		( SIZEX / 2 + shots[shotcount]->getSize().x / 2 ) * -HitBox.getScale().x, Position.y), \
-	        sf::Vector2f(-HitBox.getScale().x * 15, 0));	
+		( SIZEX / 2 + shots[shotcount]->getSize().x / 2 ) * (faceRight ? 1:-1), Position.y), \
+	        sf::Vector2f((faceRight ? 1:-1) * 15, 0));	
 	
 		shotcount++;
 	
@@ -178,15 +226,6 @@ void Entities::Characters::Player::setFacing(int side)
 
 void Entities::Characters::Player::OnCollision(Entities::Entity *ent)
 {
-	/*if(ent->getID() == ID::enemy)
-	{
-		HitBox.setFillColor(sf::Color(sf::Color::Red));
-	}
-	else
-	{
-		HitBox.setFillColor(sf::Color(sf::Color::White));
-		//normalCollision(ent);
-	}*/
 }
 
 void Entities::Characters::Player::Save(std::ofstream& savefile)
@@ -204,7 +243,6 @@ void Entities::Characters::Player::Save(std::ofstream& savefile)
 		shots[i]->Save(savefile);
 	}
 }
-
 
 std::vector<Entities::Projectile*>* Entities::Characters::Player::getShots() {return &shots;}
 

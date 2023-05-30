@@ -11,6 +11,7 @@ namespace Entities
         ~Projectile();
         void Move();
         void Update();
+        void Draw();
         void Shoot(sf::Vector2f pos, sf::Vector2f vel);
         void OnCollision(Entities::Entity *ent);
         const bool getCollided() const;
@@ -18,8 +19,6 @@ namespace Entities
         void Load(std::ifstream& savefile);
     private:
         Entities::Characters::Character *owner;
-        // static sf::Texture texture;
-        // static bool textureLoaded;
         bool collided;
     };
 }

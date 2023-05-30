@@ -1,18 +1,21 @@
 #include "../include/Entities/Characters/Enemies/Warrior.h"
-#define SIZEX 61.f
-#define SIZEY 100.f
+#define SIZEX 35.f
+#define SIZEY 50.f
 #define ESPEED 0.1
+
 #define dEnemy Entities::Characters::Enemies
 
 dEnemy::Warrior::Warrior(const sf::Vector2f pos):
     Enemy(pos, sf::Vector2f(SIZEX, SIZEY), false, ID::enemy, 3),
 	directiontimer(0),
-	directionright(static_cast<bool>(rand()%2))
+	directionright(static_cast<bool>(rand()%2)),
+	isAttacking(false)
 {
-    HitBox.setOrigin(SIZEX / 2, SIZEY / 2);
 
+	animation.pushAnimation(GraphicElements::Animation_ID::idle, "Assets/Warrior-Idle.png", sf::Vector2u(5,0), 0.2f);
+	animation.pushAnimation(GraphicElements::Animation_ID::walk, "Assets/Warrior-Walk.png", sf::Vector2u(7,0), 0.143f);
+	animation.pushAnimation(GraphicElements::Animation_ID::attack, "Assets/Warrior-Attack.png", sf::Vector2u(4,0), 0.1f);
 	HitBox.setTexture(texture);
-	animation.AnimationReset(texture, sf::Vector2u(5,1), static_cast<float>(0.2));
 }
 
 dEnemy::Warrior::~Warrior()
@@ -31,7 +34,6 @@ void dEnemy::Warrior::Move()
 	}
 	if(directionright)
 	{
-		HitBox.setScale(sf::Vector2f(1, 1));
 		if (Velocity.x < MAXV)
 			Velocity.x += ESPEED * dt * MULT; // Velocidade De Teste
 		if (Velocity.x > MAXV)
@@ -39,7 +41,6 @@ void dEnemy::Warrior::Move()
 	}
 	else if(!directionright)
 	{
-		HitBox.setScale(sf::Vector2f(-1, 1));
 		if (Velocity.x > -MAXV)
 			Velocity.x -= ESPEED * dt * MULT; // Velocidade De Teste
 		if (Velocity.x < -MAXV)
@@ -52,19 +53,36 @@ void dEnemy::Warrior::Move()
 
 void dEnemy::Warrior::Update()
 {
+	if(isAttacking)
+	{
+		attacktimer += pGM->getDeltaTime();
+		if( attacktimer >= 0.4f)
+		{
+			isAttacking = false;
+			attacktimer = 0;
+		}
+		animation.Update(GraphicElements::Animation_ID::attack, Position, directionright);
+	}
+	else
+		animation.Update(GraphicElements::Animation_ID::walk, Position, directionright);
 	this->Move();
 	this->Damage();
 	HitBox.setPosition(Position);
-	animation.update(Position);
-	HitBox.setTextureRect(animation.uvRect);
 }
+
+void dEnemy::Warrior::Draw()
+{
+	animation.Draw();
+}
+
 
 void dEnemy::Warrior::Attack(const bool b)
 {
-    if (b)
-		HitBox.setFillColor(sf::Color(sf::Color::Red));
-	else
-		HitBox.setFillColor(sf::Color(sf::Color::White));
+	if(b && !isAttacking)
+	{
+		attacktimer = 0;
+		isAttacking = b;	
+	}
 }
 
 void dEnemy::Warrior::OnCollision(Entities::Entity* ent)
