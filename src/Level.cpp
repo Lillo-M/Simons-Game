@@ -149,7 +149,7 @@ void Levels::Level::Update()
     isRunning = true;
     //std::cout << pPlayer->getPosition().y << "pos" << std::endl;
     //std::cout << pPlayer->getAlive() << std::endl;
-    std::cout<< "Update Entities" << std::endl;
+    //std::cout<< "Update Entities" << std::endl;
     Math::EntityTList::Iterator it;
     DentitiesList.UpdateEntities();
 
@@ -269,7 +269,7 @@ void Levels::Level::LoadLevel()
 
 void Levels::Level::Reset()
 {
-    std::cout<< "reset" << std::endl;
+    //std::cout<< "reset" << std::endl;
     DentitiesList.DeleteEntities();
     /*  */
     for (int i = 0; i < SentitiesList.getSize(); i++)
@@ -277,12 +277,12 @@ void Levels::Level::Reset()
         if (SentitiesList[i])
             delete SentitiesList[i];
     }
-    std::cout<< "Delete" << std::endl;
+    //std::cout<< "Delete" << std::endl;
     SentitiesList.clear();
     pPlayer = NULL;
     pPlayer2 = NULL;
     this->CreateMap();
-    std::cout<< "Reset Complete" << std::endl;
+    //std::cout<< "Reset Complete" << std::endl;
 }
 
 bool Levels::Level::getLevelStarted() const {return levelStarted;}

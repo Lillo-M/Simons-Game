@@ -8,7 +8,7 @@ namespace GraphicElements
         SimpleSprite();
         ~SimpleSprite();    
         void Update(sf::Vector2f Position);
-        void Reset(const char* path, sf::Vector2f position, sf::Vector2f size, float scale);
+        void Reset(const char* path, sf::Vector2f position, sf::Vector2f size);
     private:
         sf::Texture* texture;
     };

@@ -1,11 +1,9 @@
 #include "../include/Entities/Obstacles/Lava.h"
 
 Entities::Obstacles::Lava::Lava(const sf::Vector2f pos):
-    Obstacle(pos, sf::Vector2f(128.f,64.f), true, ID::obstacle)
+    Obstacle(pos, sf::Vector2f(128.f,128.f), true, ID::obstacle)
 {
-    HitBox.setFillColor(sf::Color::Red);
-    HitBox.setSize(sf::Vector2f(128.f, 64.f));
-    HitBox.setOrigin(64.f, 32.f);
+    animation.Reset("Assets/Lava.png", pos, sf::Vector2f(128.f,128.f));
 }
 
 Entities::Obstacles::Lava::~Lava()
@@ -20,6 +18,8 @@ void Entities::Obstacles::Lava::Move()
 
 void Entities::Obstacles::Lava::Update()
 {
+    animation.Update(Position);
+    animation.Draw();
     Gravity();
     Velocity.y -= forca_empuxo * dt * MULT;
     Position.y += Velocity.y;
