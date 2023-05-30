@@ -7,6 +7,7 @@
 #include "../Entities/Characters/Player.h"
 #include "../Entities/Characters/Enemies/Warrior.h"
 #include "../Entities/Obstacles/Ground.h"
+#include "../Entities/Obstacles/Lava.h"
 #include "../States/State.h"
 #include "../Observers/PlayerInputManager.h"
 #include "../GraphicElements/Buttom.h"
@@ -23,6 +24,7 @@ namespace Levels
         void CreateWarrior(const sf::Vector2f pos = sf::Vector2f(0, 0));
         void CreatePlayer(const sf::Vector2f pos = sf::Vector2f(0, 0));
         void CreateGround(const sf::Vector2f pos = sf::Vector2f(0, 0));
+        void CreateLava(const sf::Vector2f pos = sf::Vector2f(0, 0));
         virtual void CreateMap() = 0;
         void CreateEntity(char id, sf::Vector2f pos);
         Observers::PlayerInputManager* getPlayerInputManager() const;

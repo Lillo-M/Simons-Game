@@ -111,6 +111,17 @@ void Levels::Level::CreateGround(const sf::Vector2f pos)
     SentitiesList.insert_back(static_cast<Entities::Entity *>(pAux));
 }
 
+void Levels::Level::CreateLava(const sf::Vector2f pos)
+{
+    Entities::Obstacles::Lava *pAux = new Entities::Obstacles::Lava(pos);
+    if (!pAux)
+    {
+        std::cout << std::endl
+                  << "ERROR: Failed to Allocate Memory" << std::endl;
+        exit(1);
+    }
+    SentitiesList.insert_back(static_cast<Entities::Entity *>(pAux));
+}
 
 void Levels::Level::CreateEntity(char id, sf::Vector2f pos)
 {
@@ -125,6 +136,9 @@ void Levels::Level::CreateEntity(char id, sf::Vector2f pos)
         break;
     case 'G':
         CreateGround(pos);
+        break;
+    case 'L':
+        CreateLava(pos);
         break;
     }
 }

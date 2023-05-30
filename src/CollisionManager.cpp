@@ -117,6 +117,7 @@ void Managers::CollisionManager::Manage()
 			{
 				normalCollision(*Iterator_i, dist_x, dist_y, dx, dy, Iterator_j->getID());
 				Iterator_i->OnCollision(*Iterator_j);
+				Iterator_j->OnCollision(*Iterator_i);
 			}
 		}
 	}
