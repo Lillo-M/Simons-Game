@@ -7,11 +7,13 @@ enum ID
 {
     empty           =-1,
     player          = 0,
-    enemy           = 2,
+    archer          = 1,
+    warrior         = 2,
     obstacle        = 3,
     level           = 4,
     level1          = 5,
     level2          = 6
+    
 };
 
 

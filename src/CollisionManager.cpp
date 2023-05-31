@@ -73,7 +73,7 @@ void Managers::CollisionManager::Manage()
 	{
 		if(Iterator_i->getID() != ID::obstacle)
 		{
-			if(Iterator_i->getID() == ID::player || Iterator_i->getID() == ID::enemy)
+			if(Iterator_i->getID() == ID::player || Iterator_i->getID() == ID::warrior || Iterator_i->getID() == ID::archer)
 			{	if(!static_cast<Entities::Characters::Character*>(*Iterator_i)->getAlive())
 					continue;
 			}
@@ -87,7 +87,7 @@ void Managers::CollisionManager::Manage()
 		{
 			if(Iterator_j->getID() != ID::obstacle)
 			{
-				if(Iterator_j->getID() == ID::player || Iterator_j->getID() == ID::enemy)
+				if(Iterator_j->getID() == ID::player || Iterator_j->getID() == ID::warrior || Iterator_i->getID() == ID::archer)
 				{	
 					if(!static_cast<Entities::Characters::Character*>(*Iterator_j)->getAlive())
 						continue;

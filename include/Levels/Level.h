@@ -5,6 +5,9 @@
 #include "../Math/List.h"// remover se a classe EntityList funcionar (e estiver corretamente implementado)
 #include "../Math/EntityList.h"
 #include "../Entities/Characters/Player.h"
+#include "../Entities/Arrow.h"
+#include "../Entities/Characters/Enemies/Warrior.h"
+#include "../Entities/Characters/Enemies/Archer.h"
 #include "../Entities/Characters/Enemies/Warrior.h"
 #include "../Entities/Obstacles/Ground.h"
 #include "../States/State.h"
@@ -22,6 +25,7 @@ namespace Levels
         void CreateWarrior(const sf::Vector2f pos = sf::Vector2f(0, 0));
         void CreatePlayer(const sf::Vector2f pos = sf::Vector2f(0, 0));
         void CreateGround(const sf::Vector2f pos = sf::Vector2f(0, 0));
+        void CreateArcher(const sf::Vector2f pos = sf::Vector2f(0, 0));
         virtual void CreateMap() = 0;
         void CreateEntity(char id, sf::Vector2f pos);
         Observers::PlayerInputManager* getPlayerInputManager() const;
