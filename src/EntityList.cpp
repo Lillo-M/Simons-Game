@@ -18,7 +18,7 @@ void Math::EntityList::UpdateEntities()
 	{
     		if(listIt->getID() != ID::obstacle)
         	{
-        		if(listIt->getID() == ID::player || listIt->getID() == ID::warrior || Iterator_i->getID() == ID::archer)
+        		if(listIt->getID() == ID::player || listIt->getID() == ID::warrior || listIt->getID() == ID::archer)
        			{	
        				if(!static_cast<Entities::Characters::Character*>(*listIt)->getAlive())
     					continue;
@@ -38,7 +38,7 @@ void Math::EntityList::DrawEntities()
 	{
     		if(listIt->getID() != ID::obstacle)
         	{
-        		if(listIt->getID() == ID::player || listIt->getID() == ID::warrior || Iterator_i->getID() == ID::archer)
+        		if(listIt->getID() == ID::player || listIt->getID() == ID::warrior || listIt->getID() == ID::archer)
        			{	
        				if(!static_cast<Entities::Characters::Character*>(*listIt)->getAlive())
     					continue;

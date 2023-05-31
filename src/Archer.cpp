@@ -30,6 +30,8 @@ dEnemy::Archer::~Archer()
 
 void dEnemy::Archer::Update()
 {
+	std::cout << lives << std::endl;
+	std::cout << alive << std::endl;
     this->Gravity();
 	this->Damage();
 	HitBox.setPosition(Position);
@@ -44,9 +46,14 @@ void dEnemy::Archer::Attack(const bool b)
 	else
 		HitBox.setFillColor(sf::Color(sf::Color::White));
 }
-std::vector<Arrow*> *Entities::Characters::Enemies::Archer::getShots()
+std::vector<Entities::Arrow*>* Entities::Characters::Enemies::Archer::getShots()
 {
     return &aShots;
+}
+
+void dEnemy::Archer::Move()
+{
+	this->Gravity();
 }
 
 sf::Texture* dEnemy::Archer::texture(Managers::GraphicManager::getInstance()->loadTexture("Assets/Archer-Idle.png"));

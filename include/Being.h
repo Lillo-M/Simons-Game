@@ -12,7 +12,8 @@ enum ID
     obstacle        = 3,
     level           = 4,
     level1          = 5,
-    level2          = 6
+    level2          = 6,
+    projectile      = 7
     
 };
 

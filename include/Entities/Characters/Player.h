@@ -17,7 +17,7 @@ namespace Entities
 {
 	namespace Characters
 	{
-		class Player: public Characters::Character
+		class Player: public Character
 		{
 		private:
 			std::vector<PlayerProjectile*> shots;

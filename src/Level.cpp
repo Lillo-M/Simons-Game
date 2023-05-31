@@ -135,7 +135,7 @@ void Levels::Level::CreateArcher(const sf::Vector2f pos)
     std::vector<Entities::Arrow*>::iterator it;
     for (it = pAux->getShots()->begin(); it != pAux->getShots()->end(); it++)
     {
-         DentitiesList.PushEntity(static_cast<Entities::Entity *>(*it));
+        DentitiesList.PushEntity(static_cast<Entities::Entity *>(*it));
     }
 }
 
@@ -207,23 +207,8 @@ void Levels::Level::Update()
 
 void Levels::Level::Draw()
 {
-    Math::EntityTList::Iterator it;//(DentitiesList.begin());
+    Math::EntityTList::Iterator it;
 
-    /*for(it; it != DentitiesList.end(); it++)
-    {
-	if(it->getID() != ID::obstacle)
-    	{
-    		if(it->getID() == ID::player || it->getID() == ID::enemy)
-    		{	if(!static_cast<Entities::Characters::Character*>(*it)->getAlive())
-    				continue;
-    		}
-    		else
-    			if(static_cast<Projectile*>(*it)->getCollided())
-    				continue;
-    	}
- 	it->Draw();
-
-    }
     /* teste */
     DentitiesList.DrawEntities();
     /*  */
@@ -232,27 +217,6 @@ void Levels::Level::Draw()
     {
 	    it->Draw();
     }
-    /*
-    for (int i = 0; i < DentitiesList.getSize(); i++)
-    {
-    	if(DentitiesList[i]->getID() != ID::obstacle)
-    	{
-    		if(DentitiesList[i]->getID() == ID::player || DentitiesList[i]->getID() == ID::enemy)
-    		{	if(!static_cast<Entities::Characters::Character*>(DentitiesList[i])->getAlive())
-    				continue;
-    		}
-    		else
-    			if(static_cast<Projectile*>(DentitiesList[i])->getCollided())
-    				continue;
-    	}
-        DentitiesList[i]->Draw();
-    }
-    for (int i = 0; i < SentitiesList.getSize(); i++)
-    {
-        SentitiesList[i]->Draw();
-    } 
-    /*  */
-
 }
 
 Observers::PlayerInputManager* Levels::Level::getPlayerInputManager() const { return pPIM;}

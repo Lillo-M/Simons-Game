@@ -24,6 +24,7 @@ namespace Entities
                 Archer(const sf::Vector2f pos = sf::Vector2f(0, 0));
                 ~Archer();
                 void Update();
+                void Move();
                 void Attack(const bool b);
                 std::vector<Arrow*>* getShots();
             };
