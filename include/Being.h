@@ -14,7 +14,10 @@ enum ID
     level2          = 6,
     menu            = 7,
     buttom          = 8,
-    projectile      = 9
+    projectile      = 9,
+    ice		    =10,
+    lava	    =11,
+    ground	    =12
 };
 
 

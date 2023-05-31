@@ -20,7 +20,7 @@ namespace Entities
 		private:
 			std::vector<Projectile*> shots;
 			int shotcount;
-			const float maxVelocity;
+			float maxVelocity;
 			bool BoolMoveRight;
 			bool BoolMoveLeft;
 			bool secondJump;
@@ -28,6 +28,7 @@ namespace Entities
 			bool attackcooled;
 			bool faceRight;
 			bool isJumping;
+			bool onIce;
 			//bool isAttacking;
 			static sf::Texture* texture;
 			//GraphicElements::Animation animation;

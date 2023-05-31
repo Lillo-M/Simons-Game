@@ -44,8 +44,12 @@ void Managers::CollisionManager::normalCollision(Entities::Entity* ent, float di
 		if (dist_y > 0)
 		{
 			ent->setPosition( ent->getPosition().x, ent->getPosition().y + dist_y - size_y);
-			if(id == ID::obstacle || id == ID::player)ent->setVelocity(ent->getVelocity().x,  0);
-			if(id == ID::obstacle || id == ID::player)ent->setGrounded(true);
+			if(id == ID::obstacle || id == ID::player\
+			|| id == ID::ice || id == ID::ground)
+			{
+				ent->setVelocity(ent->getVelocity().x,  0);
+				ent->setGrounded(true);
+			}
 		}
 		if (dist_y < 0)
 		{

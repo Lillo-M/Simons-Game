@@ -2,7 +2,7 @@
 #define SIZEX 128.f
 #define SIZEY 128.f
 Entities::Obstacles::Ground::Ground(const sf::Vector2f pos):
-	Obstacle(pos, sf::Vector2f(SIZEX, SIZEY), true, ID::obstacle)
+	Obstacle(pos, sf::Vector2f(SIZEX, SIZEY), true, ID::ground)
 {
 	HitBox.setOrigin(SIZEX / 2, SIZEY / 2);
 	

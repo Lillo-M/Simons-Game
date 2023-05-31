@@ -14,7 +14,8 @@ Entities::Characters::Player::Player(const sf::Vector2f pos) :
 	shotcount(0),
 	animation(),
 	faceRight(false),
-	isJumping(false)
+	isJumping(false),
+	onIce(false)
 	//isAttacking(false)
 {
 	for(int i = 0; i < 10; i++)
@@ -59,6 +60,13 @@ const sf::Vector2f Entities::Characters::Player::getVelocity() const { return Ve
 
 void Entities::Characters::Player::Move()
 {
+	if(onIce)
+	{
+		maxVelocity = 2 * MAXV;
+	}
+	else
+		maxVelocity = MAXV;
+
 	if (BoolMoveLeft)
 	{
 		if (Velocity.x > -maxVelocity)
@@ -226,16 +234,24 @@ void Entities::Characters::Player::setFacing(int side)
 
 void Entities::Characters::Player::OnCollision(Entities::Entity *ent)
 {
+	if(ent->getID() == ID::ice)
+	{
+		onIce = true;
+	}
+	else if( ent->getID() == ID::ground || ent->getID() == ID::lava)
+	{
+		onIce = false;
+	}
 }
 
 void Entities::Characters::Player::Save(std::ofstream& savefile)
 {
 	savefile << this->getID() << std::endl;
-    savefile << lives << std::endl;
-    savefile << alive << std::endl;
+        savefile << lives << std::endl;
+        savefile << alive << std::endl;
 	savefile << Position.x << std::endl;
 	savefile << Position.y << std::endl; 
-    savefile << Velocity.x << std::endl;
+        savefile << Velocity.x << std::endl;
 	savefile << Velocity.y << std::endl;
 	savefile << HitBox.getScale().x << std::endl;
 	for(int i = 0; i < shots.size(); i++)

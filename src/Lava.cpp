@@ -1,7 +1,7 @@
 #include "../include/Entities/Obstacles/Lava.h"
 
 Entities::Obstacles::Lava::Lava(const sf::Vector2f pos):
-    Obstacle(pos, sf::Vector2f(128.f,128.f), true, ID::obstacle)
+    Obstacle(pos, sf::Vector2f(128.f,128.f), true, ID::lava)
 {
     animation.Reset("Assets/Lava.png", pos, sf::Vector2f(128.f,128.f));
 }
