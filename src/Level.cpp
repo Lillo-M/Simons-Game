@@ -76,9 +76,8 @@ void Levels::Level::CreatePlayer(const sf::Vector2f pos)
         pPlayer2 = pAux;
         pPIM->setpPlayer2(pAux);
     }
-
-    std::vector<Entities::Projectile*>::iterator it;
-
+    DentitiesList.PushEntity(static_cast<Entities::Entity *>(pAux));
+    std::vector<Entities::PlayerProjectile*>::iterator it;
     for(it = pAux->getShots()->begin(); it != pAux->getShots()->end(); it++)
     {
 	    DentitiesList.Push_FrontEntity(static_cast<Entities::Entity *>(*it));
@@ -97,6 +96,23 @@ void Levels::Level::CreateWarrior(const sf::Vector2f pos)
         exit(1);
     }
     DentitiesList.Push_BackEntity(static_cast<Entities::Entity *>(pAux));
+}
+
+void Levels::Level::CreateArcher(const sf::Vector2f pos)
+{
+    Entities::Characters::Enemies::Archer *pAux = new Entities::Characters::Enemies::Archer(pos);
+    if (!pAux)
+    {
+        std::cout << std::endl
+                  << "ERROR: Failed to Allocate Memory" << std::endl;
+        exit(1);
+    }
+    DentitiesList.PushEntity(static_cast<Entities::Entity *>(pAux));
+    std::vector<Entities::Arrow*>::iterator it;
+    for (it = pAux->getShots()->begin(); it != pAux->getShots()->end(); it++)
+    {
+        DentitiesList.PushEntity(static_cast<Entities::Entity *>(*it));
+    }
 }
 
 void Levels::Level::CreateGround(const sf::Vector2f pos)
@@ -139,6 +155,8 @@ void Levels::Level::CreateEntity(char id, sf::Vector2f pos)
         break;
     case 'L':
         CreateLava(pos);
+    case 'A':
+        CreateArcher(pos);
         break;
     }
 }
@@ -168,6 +186,7 @@ void Levels::Level::Draw()
 {
     Math::EntityTList::Iterator it;
 
+    /* teste */
     DentitiesList.DrawEntities();
 
     it = SentitiesList.begin();    

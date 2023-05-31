@@ -7,7 +7,8 @@ enum ID
 {
     empty           =-1,
     player          = 0,
-    enemy           = 2,
+    archer          = 1,
+    warrior         = 2,
     obstacle        = 3,
     level           = 4,
     level1          = 5,
@@ -15,9 +16,9 @@ enum ID
     menu            = 7,
     buttom          = 8,
     projectile      = 9,
-    ice		    =10,
-    lava	    =11,
-    ground	    =12
+    ice		        =10,
+    lava	        =11,
+    ground	        =12
 };
 
 

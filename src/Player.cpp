@@ -20,7 +20,7 @@ Entities::Characters::Player::Player(const sf::Vector2f pos) :
 {
 	for(int i = 0; i < 10; i++)
 	{
-		Projectile* pAux = new Projectile(sf::Vector2f(0,0), sf::Vector2f(0,0), this);
+		Entities::PlayerProjectile* pAux = new Entities::PlayerProjectile(sf::Vector2f(0,0), sf::Vector2f(0,0), this);
 		if(!pAux)
 		{
 			std::cout << std::endl << "ERROR: Failed to Memory Allocate" << std::endl;
@@ -260,6 +260,6 @@ void Entities::Characters::Player::Save(std::ofstream& savefile)
 	}
 }
 
-std::vector<Entities::Projectile*>* Entities::Characters::Player::getShots() {return &shots;}
+std::vector<Entities::PlayerProjectile*>* Entities::Characters::Player::getShots() {return &shots;}
 
 sf::Texture* Entities::Characters::Player::texture(Managers::GraphicManager::getInstance()->loadTexture("Assets/Player-Idle.png"));

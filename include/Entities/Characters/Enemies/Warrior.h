@@ -24,7 +24,6 @@ namespace Entities
             public:
                 Warrior(const sf::Vector2f pos = sf::Vector2f(0, 0));
                 ~Warrior();
-                void OnCollision(Entity* ent);
                 void Move();
                 void Update();
                 void Draw();

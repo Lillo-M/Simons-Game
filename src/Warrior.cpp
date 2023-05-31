@@ -1,12 +1,19 @@
 #include "../include/Entities/Characters/Enemies/Warrior.h"
+<<<<<<< HEAD
 #define SIZEX 35.f
 #define SIZEY 50.f
 #define ESPEED 0.1
 
 #define dEnemy Entities::Characters::Enemies
+=======
+#define dEnemy Entities::Characters::Enemies
+#define SIZEX 61.f
+#define SIZEY 100.f
+#define ESPEED 0.1
+>>>>>>> merge
 
 dEnemy::Warrior::Warrior(const sf::Vector2f pos):
-    Enemy(pos, sf::Vector2f(SIZEX, SIZEY), false, ID::enemy, 3),
+    Enemy(pos, sf::Vector2f(SIZEX, SIZEY), false, ID::warrior, 3),
 	directiontimer(0),
 	directionright(static_cast<bool>(rand()%2)),
 	isAttacking(false)
@@ -85,6 +92,7 @@ void dEnemy::Warrior::Attack(const bool b)
 	}
 }
 
+<<<<<<< HEAD
 void dEnemy::Warrior::OnCollision(Entities::Entity* ent)
 {
 	if(ent->getID() == ID::player)
@@ -145,4 +153,6 @@ void dEnemy::Warrior::Save(std::ofstream& savefile)
 	savefile << directionright << std::endl;
 }
 
+=======
+>>>>>>> merge
 sf::Texture* dEnemy::Warrior::texture(Managers::GraphicManager::getInstance()->loadTexture("Assets/Enemy-Warrior-Idle.png"));

@@ -6,19 +6,21 @@
 #include <vector>
 #include "../../GraphicElements/ComplexAnimation.h"
 #include "../Projectile.h"
+#include "../PlayerProjectile.h"
 #define LIVES 5
 #define MAXV 10
 #define ATRITO 0.45
 #define JUMPHEIGHT -15
 #define PSPEED 1
+
 namespace Entities
 {
 	namespace Characters
 	{
-		class Player: public Characters::Character
+		class Player: public Character
 		{
 		private:
-			std::vector<Projectile*> shots;
+			std::vector<PlayerProjectile*> shots;
 			int shotcount;
 			float maxVelocity;
 			bool BoolMoveRight;
@@ -50,7 +52,7 @@ namespace Entities
 			void Fall();
 			void Attack(const bool b);
 			void OnCollision(Entities::Entity* ent);
-			std::vector<Projectile*>* getShots();
+			std::vector<PlayerProjectile*>* getShots();
 		};
 	}
 }

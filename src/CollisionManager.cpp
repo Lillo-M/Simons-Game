@@ -71,31 +71,26 @@ void Managers::CollisionManager::Manage()
 	int i = 0;
 	for (Iterator_i = Dentities->begin(); Iterator_i != Dentities->end(); Iterator_i++)
 	{
-		if(Iterator_i->getID() != ID::obstacle)
+		if(Iterator_i->getID() == ID::projectile)
 		{
-			if(Iterator_i->getID() == ID::player || Iterator_i->getID() == ID::enemy)
-			{	if(!static_cast<Entities::Characters::Character*>(*Iterator_i)->getAlive())
-					continue;
-			}
-			else
-				if(static_cast<Entities::Projectile*>(*Iterator_i)->getCollided())
-					continue;
+			if(static_cast<Entities::Projectile*>(*Iterator_i)->getCollided())
+				continue;
 		}
+		else if(!static_cast<Entities::Characters::Character*>(*Iterator_i)->getAlive())
+				continue;
+
 		Iterator_j = Iterator_i;
 		Iterator_j++;
 		for (Iterator_j; Iterator_j != Dentities->end(); Iterator_j++)
 		{
-			if(Iterator_j->getID() != ID::obstacle)
+			if(Iterator_j->getID() == ID::projectile)
 			{
-				if(Iterator_j->getID() == ID::player || Iterator_j->getID() == ID::enemy)
-				{	
-					if(!static_cast<Entities::Characters::Character*>(*Iterator_j)->getAlive())
-						continue;
-				}
-				else
-					if(static_cast<Entities::Projectile*>(*Iterator_j)->getCollided())
-						continue;
+				if(static_cast<Entities::Projectile*>(*Iterator_j)->getCollided())
+					continue;
 			}
+			else if(!static_cast<Entities::Characters::Character*>(*Iterator_j)->getAlive())
+					continue;
+			
 			dist_x = Iterator_j->getPosition().x - Iterator_i->getPosition().x;
 			dist_y = Iterator_j->getPosition().y - Iterator_i->getPosition().y;
 			dx = Iterator_i->getSize().x / 2 + Iterator_j->getSize().x / 2;
