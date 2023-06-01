@@ -6,9 +6,9 @@ Entities::Arrow::~Arrow(){ }
 
 void Entities::Arrow::Move()
 {
-    velocity.y -= 1.f * gravity * dt * 60;
-    Position.y += velocity.y * dt * 60;
+    Velocity.y -= 1.f * gravity * dt * 60;
+    Position.y += Velocity.y * dt * 60;
     Gravity();
-    Position.x += velocity.x * dt * 60;
-    Position.y += velocity.y * dt * 60;
+    Position.x += Velocity.x * dt * 60;
+    Position.y += Velocity.y * dt * 60;
 }

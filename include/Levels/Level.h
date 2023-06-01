@@ -27,11 +27,8 @@ namespace Levels
         void CreateWarrior(const sf::Vector2f pos = sf::Vector2f(0, 0));
         void CreatePlayer(const sf::Vector2f pos = sf::Vector2f(0, 0));
         void CreateGround(const sf::Vector2f pos = sf::Vector2f(0, 0));
-<<<<<<< HEAD
         void CreateLava(const sf::Vector2f pos = sf::Vector2f(0, 0));
-=======
         void CreateArcher(const sf::Vector2f pos = sf::Vector2f(0, 0));
->>>>>>> merge
         virtual void CreateMap() = 0;
         void CreateEntity(char id, sf::Vector2f pos);
         Observers::PlayerInputManager* getPlayerInputManager() const;
@@ -40,7 +37,7 @@ namespace Levels
         void Reset();
         bool getLevelStarted() const;
     protected:
-        bool                       levelStarted;
+        bool                                levelStarted;
     	Managers::InputManager*             pIM;
         Observers::PlayerInputManager*      pPIM;
         Entities::Characters::Player*       pPlayer;

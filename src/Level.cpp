@@ -76,7 +76,7 @@ void Levels::Level::CreatePlayer(const sf::Vector2f pos)
         pPlayer2 = pAux;
         pPIM->setpPlayer2(pAux);
     }
-    DentitiesList.PushEntity(static_cast<Entities::Entity *>(pAux));
+
     std::vector<Entities::PlayerProjectile*>::iterator it;
     for(it = pAux->getShots()->begin(); it != pAux->getShots()->end(); it++)
     {
@@ -107,11 +107,11 @@ void Levels::Level::CreateArcher(const sf::Vector2f pos)
                   << "ERROR: Failed to Allocate Memory" << std::endl;
         exit(1);
     }
-    DentitiesList.PushEntity(static_cast<Entities::Entity *>(pAux));
+    DentitiesList.Push_BackEntity(static_cast<Entities::Entity *>(pAux));
     std::vector<Entities::Arrow*>::iterator it;
     for (it = pAux->getShots()->begin(); it != pAux->getShots()->end(); it++)
     {
-        DentitiesList.PushEntity(static_cast<Entities::Entity *>(*it));
+        DentitiesList.Push_BackEntity(static_cast<Entities::Entity *>(*it));
     }
 }
 
@@ -155,6 +155,7 @@ void Levels::Level::CreateEntity(char id, sf::Vector2f pos)
         break;
     case 'L':
         CreateLava(pos);
+        break;
     case 'A':
         CreateArcher(pos);
         break;
@@ -244,7 +245,7 @@ void Levels::Level::LoadLevel()
             it->setVelocity(x,y);
             savefile >> iread;
             static_cast<Entities::Characters::Player*>(*it)->setFacing(iread);
-            std::vector<Entities::Projectile*>* vshots = static_cast<Entities::Characters::Player*>(*it)->getShots();
+            std::vector<Entities::PlayerProjectile*>* vshots = static_cast<Entities::Characters::Player*>(*it)->getShots();
             it++;
             for(int j = 0; j < 10; j++)
             {
@@ -268,7 +269,7 @@ void Levels::Level::LoadLevel()
         it->setVelocity(x,y);
         savefile >> iread;
         static_cast<Entities::Characters::Player*>(*it)->setFacing(iread);
-        std::vector<Entities::Projectile*>* vshots = static_cast<Entities::Characters::Player*>(*it)->getShots();
+        std::vector<Entities::PlayerProjectile*>* vshots = static_cast<Entities::Characters::Player*>(*it)->getShots();
         it++;
         for(int j = 0; j < 10; j++)
         {

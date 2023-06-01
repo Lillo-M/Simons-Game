@@ -17,11 +17,6 @@ namespace Entities
         void Save(std::ofstream& savefile);
         void Load(std::ifstream& savefile);
         virtual void Move() = 0;
-    private:
-        void Shoot(sf::Vector2f pos, sf::Vector2f vel);
-        void OnCollision(Entities::Entity *ent);
-        const bool getCollided() const;
-
     protected:
         Entities::Characters::Character *owner;
         bool collided;

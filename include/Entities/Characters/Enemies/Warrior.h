@@ -28,6 +28,7 @@ namespace Entities
                 void Update();
                 void Draw();
                 void Attack(const bool b);
+                void OnCollision(Entity* ent);
                 void Load(std::ifstream& savefile);
                 void Save(std::ofstream& savefile);
             };

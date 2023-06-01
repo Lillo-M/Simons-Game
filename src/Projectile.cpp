@@ -1,11 +1,7 @@
 #include "../include/Entities/Projectile.h"
 
 
-<<<<<<< HEAD
-Entities::Projectile::Projectile(sf::Vector2f pos, sf::Vector2f Velocity, Entities::Characters::Character* owner):
-=======
 Entities::Projectile::Projectile(sf::Vector2f pos, sf::Vector2f velocity, Entities::Characters::Character* owner):
->>>>>>> merge
 	Entity(pos, sf::Vector2f(20,20), false, ID::projectile),
     owner(owner),
     collided(false)
@@ -18,18 +14,6 @@ Entities::Projectile::~Projectile()
 {
 }
 
-<<<<<<< HEAD
-void Entities::Projectile::Move()
-{
-    Gravity();
-    Velocity.y -= 1.f * gravity * dt * 60;
-    Position.x += Velocity.x * dt * 60;
-    Position.y += Velocity.y * dt * 60;
-}
-
-
-=======
->>>>>>> merge
 void Entities::Projectile::Update()
 {
     Move();

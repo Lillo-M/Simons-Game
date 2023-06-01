@@ -17,12 +17,8 @@ namespace Entities
             virtual void Move() = 0;
             virtual void Attack(const bool b) = 0;
             virtual void Update() = 0;
-<<<<<<< HEAD
             virtual void Draw() = 0;
             virtual void OnCollision(Entity* ent);
-=======
-            void OnCollision(Entity* ent);
->>>>>>> merge
         protected:
         };
         }
