@@ -28,7 +28,7 @@ void Entities::Projectile::Draw()
 
 void Entities::Projectile::OnCollision(Entities::Entity* ent)
 {
-    if(ent->getID() != owner->getID() && ent->getID() != ID::obstacle)
+    if(ent->getID() != owner->getID() && ent->getID() != ID::obstacle && ent->getID() != ID::lava && ent->getID() != ID::ice && ent->getID() != ID::ground)
     {
         static_cast<Entities::Characters::Character*>(ent)->Damage(true);
     }
