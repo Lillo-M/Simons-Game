@@ -19,6 +19,9 @@ namespace Entities
             private:
                 std::vector<Arrow*> aShots;
                 static sf::Texture* texture; 
+                int shotcount;
+                float attackTimer;
+                bool attackCD;
                 GraphicElements::ComplexAnimation animation;
             public:
                 Archer(const sf::Vector2f pos = sf::Vector2f(0, 0));

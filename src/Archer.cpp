@@ -7,7 +7,10 @@
 #define dEnemy Entities::Characters::Enemies
 
 dEnemy::Archer::Archer(const sf::Vector2f pos):
-    Enemy(pos, sf::Vector2f(SIZEX, SIZEY), false, ID::archer, 7)
+    Enemy(pos, sf::Vector2f(SIZEX, SIZEY), false, ID::archer, 7),
+	shotcount(0),
+	attackTimer(0),
+	attackCD(true)
 {
     HitBox.setOrigin(SIZEX / 2, SIZEY / 2);
 	HitBox.setTexture(texture);
@@ -31,10 +34,9 @@ dEnemy::Archer::~Archer()
 
 void dEnemy::Archer::Update()
 {
-	std::cout << lives << std::endl;
-	std::cout << alive << std::endl;
     this->Gravity();
 	this->Damage();
+	Attack(true);
 	HitBox.setPosition(Position);
 	animation.Update( GraphicElements::Animation_ID::idle,\
 	Position, false);
@@ -42,10 +44,21 @@ void dEnemy::Archer::Update()
 
 void dEnemy::Archer::Attack(const bool b)
 {
-    if (b)
-		HitBox.setFillColor(sf::Color(sf::Color::Red));
-	else
-		HitBox.setFillColor(sf::Color(sf::Color::White));
+	attackTimer += dt;
+	if(attackTimer >= 1.f)
+	{
+		attackCD = true;
+		attackTimer = 0;
+	}
+	if(attackCD)
+    {
+		aShots[shotcount]->Shoot(sf::Vector2f(Position.x\
+		- (SIZEX / 2 + aShots[shotcount]->getSize().x / 2), Position.y ), sf::Vector2f(-10,-15));
+		attackCD = false;
+	}
+	shotcount++;
+	if(shotcount >= 5)
+		shotcount = 0;
 }
 std::vector<Entities::Arrow*>* Entities::Characters::Enemies::Archer::getShots()
 {

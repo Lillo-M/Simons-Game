@@ -166,9 +166,6 @@ void Levels::Level::Update()
 {
     levelStarted = true;
     isRunning = true;
-    //std::cout << pPlayer->getPosition().y << "pos" << std::endl;
-    //std::cout << pPlayer->getAlive() << std::endl;
-    //std::cout<< "Update Entities" << std::endl;
     Math::EntityTList::Iterator it;
     DentitiesList.UpdateEntities();
 
