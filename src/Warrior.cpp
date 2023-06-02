@@ -55,11 +55,11 @@ void dEnemy::Warrior::Update()
 {
 	if(isAttacking)
 	{
-		attacktimer += pGM->getDeltaTime();
-		if( attacktimer >= 0.4f)
+		attackTimer += pGM->getDeltaTime();
+		if( attackTimer >= 0.4f)
 		{
 			isAttacking = false;
-			attacktimer = 0;
+			attackTimer = 0;
 		}
 		animation.Update(GraphicElements::Animation_ID::attack, Position, directionright);
 	}
@@ -80,7 +80,7 @@ void dEnemy::Warrior::Attack(const bool b)
 {
 	if(b && !isAttacking)
 	{
-		attacktimer = 0;
+		attackTimer = 0;
 		isAttacking = b;	
 	}
 }

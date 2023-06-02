@@ -45,7 +45,7 @@ void dEnemy::Archer::Update()
 void dEnemy::Archer::Attack(const bool b)
 {
 	attackTimer += dt;
-	if(attackTimer >= 1.f)
+	if(attackTimer >= 1.5f)
 	{
 		attackCD = true;
 		attackTimer = 0;

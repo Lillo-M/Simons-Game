@@ -8,9 +8,8 @@ namespace Entities
     {
         namespace Enemies
         {
-        class Enemy : public Characters::Character
+        class Enemy : public Character
         {
-        private:
         public:
             Enemy(const sf::Vector2f pos = sf::Vector2f(0, 0), const sf::Vector2f size = sf::Vector2f(0, 0), const bool isS = false, ID id = ID::empty, int lves = 0);
             virtual ~Enemy();
@@ -20,6 +19,8 @@ namespace Entities
             virtual void Draw() = 0;
             virtual void OnCollision(Entity* ent);
         protected:
+            float attackTimer;
+            GraphicElements::ComplexAnimation animation;
         };
         }
     }

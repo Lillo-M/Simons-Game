@@ -6,6 +6,8 @@
 #include <vector>
 #include "../../../GraphicElements/ComplexAnimation.h"
 #include "../../Arrow.h"
+#include "../Player.h"
+
 #define MULT 60
 
 namespace Entities
@@ -20,7 +22,6 @@ namespace Entities
                 std::vector<Arrow*> aShots;
                 static sf::Texture* texture; 
                 int shotcount;
-                float attackTimer;
                 bool attackCD;
                 GraphicElements::ComplexAnimation animation;
             public:

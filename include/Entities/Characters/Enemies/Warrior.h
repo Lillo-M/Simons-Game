@@ -17,10 +17,9 @@ namespace Entities
             private:
                 float directiontimer;
                 bool directionright;
-                float attacktimer;
+                float attackTimer;
                 bool isAttacking;
                 static sf::Texture* texture; // Implementar em Enemy tipo A/B/C
-                GraphicElements::ComplexAnimation animation;
             public:
                 Warrior(const sf::Vector2f pos = sf::Vector2f(0, 0));
                 ~Warrior();
