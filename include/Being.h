@@ -18,7 +18,8 @@ enum ID
     projectile      = 9,
     ice		        =10,
     lava	        =11,
-    ground	        =12
+    ground	        =12,
+    necromancer     =13
 };
 
 

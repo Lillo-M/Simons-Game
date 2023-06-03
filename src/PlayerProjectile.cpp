@@ -1,6 +1,9 @@
 #include "../include/Entities/PlayerProjectile.h"
 Entities::PlayerProjectile::PlayerProjectile(sf::Vector2f pos, sf::Vector2f velocity, Entities::Characters::Character *owner) 
-: Projectile (pos, velocity, owner){ }
+: Projectile (pos, velocity, owner)
+{ 
+    HitBox.setFillColor(sf::Color::Blue);
+}
 
 Entities::PlayerProjectile::~PlayerProjectile(){ } 
 

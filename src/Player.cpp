@@ -229,7 +229,7 @@ void Entities::Characters::Player::Attack(const bool b)
 
 void Entities::Characters::Player::setFacing(int side)
 {
-	HitBox.setScale(side, 1);
+	faceRight = static_cast<bool>(side);
 }
 
 void Entities::Characters::Player::OnCollision(Entities::Entity *ent)
@@ -253,13 +253,14 @@ void Entities::Characters::Player::Save(std::ofstream& savefile)
 	savefile << Position.y << std::endl; 
         savefile << Velocity.x << std::endl;
 	savefile << Velocity.y << std::endl;
-	savefile << HitBox.getScale().x << std::endl;
+	savefile << faceRight << std::endl;
 	for(int i = 0; i < shots.size(); i++)
 	{
 		shots[i]->Save(savefile);
 	}
 }
+void Entities::Characters::Player::Load(std::ifstream &savefile)
+{
+}
 
 std::vector<Entities::PlayerProjectile*>* Entities::Characters::Player::getShots() {return &shots;}
-
-sf::Texture* Entities::Characters::Player::texture(Managers::GraphicManager::getInstance()->loadTexture("Assets/Player-Idle.png"));

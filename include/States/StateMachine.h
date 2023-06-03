@@ -16,8 +16,6 @@ namespace States
         void push_State(States::State* pS);
     protected:
         States::stateID currentState;
-
-        std::map<stateID ,States::State*> statesMap;
-        //States::State* currentState;
+        std::map<stateID, States::State*> statesMap;
     };
 }

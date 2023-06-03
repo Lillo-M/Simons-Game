@@ -31,9 +31,6 @@ namespace Entities
 			bool faceRight;
 			bool isJumping;
 			bool onIce;
-			//bool isAttacking;
-			static sf::Texture* texture;
-			//GraphicElements::Animation animation;
 			GraphicElements::ComplexAnimation animation;
 			float attackcd;	
 		public:
@@ -43,6 +40,7 @@ namespace Entities
 			void Update();
 			void Draw();
 			void Save(std::ofstream& savefile);
+			void Load(std::ifstream& savefile);
 			sf::Vector2f getPosition();
 			const sf::Vector2f getVelocity() const;
 			void setFacing(int side);

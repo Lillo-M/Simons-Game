@@ -1,5 +1,6 @@
 #include "../include/Entities/Characters/Enemies/Enemy.h"
 #include "../Player.h"
+
 #define dEnemy Entities::Characters::Enemies::Enemy
 #define SIZEX 61.f
 #define SIZEY 100.f
@@ -7,7 +8,8 @@
 
 
 dEnemy::Enemy(const sf::Vector2f pos, const sf::Vector2f size, const bool isS, ID id, int lves):
-    Character(pos, size, isS, id, lves)
+    Character(pos, size, isS, id, lves),
+	attackTimer(0)
 {
 }
 
@@ -34,5 +36,5 @@ void dEnemy::Enemy::OnCollision(Entities::Entity* ent)
 	else
 	{
 		Attack(false);
-	}
+    }
 }

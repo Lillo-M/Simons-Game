@@ -9,6 +9,7 @@ States::NewGameState::NewGameState(States::StateMachine* pSMachine):
 
 States::NewGameState::~NewGameState()
 {
+    levels.clear();
 }
 
 void States::NewGameState::Update()

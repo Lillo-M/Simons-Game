@@ -38,7 +38,6 @@ void PlayerInputManager::notifyKeyPressed(std::string key)
 	if(key == "Esc")
 	{
 		currentState->changeState(States::stateID::pauseMenu);
-
 	}
 	mapIt = inputSetsPlayer.begin();
 	for (mapIt; mapIt != inputSetsPlayer.end(); mapIt++)

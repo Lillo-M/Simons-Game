@@ -15,7 +15,6 @@ dEnemy::Warrior::Warrior(const sf::Vector2f pos):
 	animation.pushAnimation(GraphicElements::Animation_ID::idle, "Assets/Warrior-Idle.png", sf::Vector2u(5,0), 0.2f);
 	animation.pushAnimation(GraphicElements::Animation_ID::walk, "Assets/Warrior-Walk.png", sf::Vector2u(7,0), 0.143f);
 	animation.pushAnimation(GraphicElements::Animation_ID::attack, "Assets/Warrior-Attack.png", sf::Vector2u(4,0), 0.1f);
-	HitBox.setTexture(texture);
 }
 
 dEnemy::Warrior::~Warrior()
@@ -111,6 +110,7 @@ void dEnemy::Warrior::Load(std::ifstream& savefile)
 	float x;
     float y;
     int iread;
+	//std::cout << " Warrior " << std::endl;
     savefile >> iread;
 	//std::cout << iread << " : iread"<< std::endl;
     savefile >> iread;
@@ -120,16 +120,17 @@ void dEnemy::Warrior::Load(std::ifstream& savefile)
 	//std::cout << iread << " : iread"<< std::endl;
     this->setAlive(static_cast<bool>(iread));
 	savefile >> x;
-	//std::cout << x << " : x"<< std::endl;
 	savefile >> y;
+	//std::cout << x << "," << y <<std::endl;
     this->setPosition(x,y);
     savefile >> x;
 	savefile >> y;
+	//std::cout << x << "," << y <<std::endl;
     this->setVelocity(x,y);
 	savefile >> x;
 	this->directiontimer = x;
 	savefile >> iread;
-	this->directionright = iread;
+	this->directionright = static_cast<bool>(iread);
 }
 
 void dEnemy::Warrior::Save(std::ofstream& savefile)
@@ -144,5 +145,3 @@ void dEnemy::Warrior::Save(std::ofstream& savefile)
 	savefile << directiontimer << std::endl;
 	savefile << directionright << std::endl;
 }
-
-sf::Texture* dEnemy::Warrior::texture(Managers::GraphicManager::getInstance()->loadTexture("Assets/Enemy-Warrior-Idle.png"));

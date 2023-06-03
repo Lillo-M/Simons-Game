@@ -3,7 +3,6 @@ Entities::Arrow::Arrow(sf::Vector2f pos, sf::Vector2f velocity, Entities::Charac
     Projectile (pos, velocity, owner)
 { 
     HitBox.setFillColor(sf::Color::Red);
-    HitBox.setOrigin(sf::Vector2f(10,10));
 }
 
 Entities::Arrow::~Arrow(){ } 

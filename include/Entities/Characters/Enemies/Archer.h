@@ -20,7 +20,6 @@ namespace Entities
             {
             private:
                 std::vector<Arrow*> aShots;
-                static sf::Texture* texture; 
                 int shotcount;
                 bool attackCD;
                 GraphicElements::ComplexAnimation animation;
@@ -31,6 +30,8 @@ namespace Entities
                 void Move();
                 void Draw();
                 void Attack(const bool b);
+                void Save(std::ofstream& savefile);
+                void Load(std::ifstream& savefile);
                 std::vector<Arrow*>* getShots();
             };
         }

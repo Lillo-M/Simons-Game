@@ -115,6 +115,18 @@ void Levels::Level::CreateArcher(const sf::Vector2f pos)
     }
 }
 
+void Levels::Level::CreateNecroMancer(const sf::Vector2f pos)
+{
+    Entities::Characters::Enemies::NecroMancer *pAux = new Entities::Characters::Enemies::NecroMancer(pos);
+    if (!pAux)
+    {
+        std::cout << std::endl
+                  << "ERROR: Failed to Allocate Memory" << std::endl;
+        exit(1);
+    }
+    DentitiesList.Push_BackEntity(static_cast<Entities::Entity *>(pAux));
+}
+
 void Levels::Level::CreateGround(const sf::Vector2f pos)
 {
     Entities::Obstacles::Ground *pAux = new Entities::Obstacles::Ground(pos);
@@ -158,6 +170,9 @@ void Levels::Level::CreateEntity(char id, sf::Vector2f pos)
         break;
     case 'A':
         CreateArcher(pos);
+        break;
+    case 'N':
+        CreateNecroMancer(pos);
         break;
     }
 }
@@ -278,7 +293,7 @@ void Levels::Level::LoadLevel()
     {
         if(it->getID() == ID::projectile)
             continue;
-        static_cast<Entities::Characters::Enemies::Warrior*>(*it)->Load(savefile);
+        static_cast<Entities::Characters::Character*>(*it)->Load(savefile);
     }
     savefile.close();
     /*  */
