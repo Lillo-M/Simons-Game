@@ -1,1 +1,1 @@
-"# The Wicher++" 
+"# The Wizard++" 
