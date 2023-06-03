@@ -1,13 +1,13 @@
 #include "../include/Entities/Characters/Enemies/NecroMancer.h"
 
 #define SIZEX 100
-#define SIZEY 60
+#define SIZEY 90
 #define SKELETONS 10
 #define ARCHERS 10
 
 
 Entities::Characters::Enemies::NecroMancer::NecroMancer(sf::Vector2f pos):
-    Enemy(pos, sf::Vector2f(SIZEX, SIZEY), false, ID::necromancer, 30)
+    Enemy(pos, sf::Vector2f(SIZEX, SIZEY), false, ID::necromancer, 5)
 {
 	animation.pushAnimation(GraphicElements::Animation_ID::idle, "Assets/demon-idle.png", sf::Vector2u(6,0), 0.166f);
 }

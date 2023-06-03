@@ -1,7 +1,3 @@
-// Tec Prog Jogo.cpp : Este arquivo contém a função 'main'. A execução do programa começa e termina ali.
-//
-
-//#include <SFML/Graphics.hpp>
 #include <iostream>
 
 

@@ -218,11 +218,11 @@ void Entities::Characters::Player::OnCollision(Entities::Entity *ent)
 void Entities::Characters::Player::Save(std::ofstream& savefile)
 {
 	savefile << this->getID() << std::endl;
-        savefile << lives << std::endl;
-        savefile << alive << std::endl;
+    savefile << lives << std::endl;
+    savefile << alive << std::endl;
 	savefile << Position.x << std::endl;
 	savefile << Position.y << std::endl; 
-        savefile << Velocity.x << std::endl;
+    savefile << Velocity.x << std::endl;
 	savefile << Velocity.y << std::endl;
 	savefile << faceRight << std::endl;
 	for(int i = 0; i < shots.size(); i++)

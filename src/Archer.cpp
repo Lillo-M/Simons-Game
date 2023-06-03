@@ -90,8 +90,6 @@ void dEnemy::Archer::Update()
 			attackcd -= 1.f;
 			attackcooled = true;
 		}
-		animation.Update(GraphicElements::Animation_ID::attack,
-						 Position, faceRight);
 	}
 	if (abs(getNearest()->getPosition().x - Position.x) <= DISTANCE_ARCHER_ATTACK && (getNearest()->getPosition().y - Position.y) <= 50)
 		Attack(true);
@@ -190,9 +188,8 @@ void dEnemy::Archer::Attack(const bool b)
 	aiming = true;
 	if (!shooting && attackcooled)
 	{
-<<<<<<< HEAD
 		shoottimer += dt;
-		if (shoottimer >= 0.86f) // tempo para passar 13 frames '(1/15)*13'
+		if (shoottimer >= 0.86f) // tempo para passar 13
 		{
 			shooting = true;
 		}
@@ -201,8 +198,6 @@ void dEnemy::Archer::Attack(const bool b)
 	}
 	if (shooting && attackcooled)
 	{
-=======
->>>>>>> origin/newProjectiles
 		animation.Update(GraphicElements::Animation_ID::attack,
 						 Position, faceRight);
 		attackcooled = false;
