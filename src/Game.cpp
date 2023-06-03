@@ -1,96 +1,77 @@
 #include "../include/Game.h"
 
-Game::Game() :
-	window(sf::VideoMode(WIDTH, HEIGHT), "Simon's Game"),
-	eManager(window)
+Game::Game():
+    pGM(Managers::GraphicManager::getInstance()),
+    eManager(new Managers::EventsManager()),
+    iManager(new Managers::InputManager())
 {
-	Entities::Entity* pAux;
-	player = new Entities::Player(sf::Vector2f(500.f, 592.f), sf::Vector2f(61.f, 100.f));
-	Dentities.insert_back(player);
-	eManager.setpPlayer(player);
-	for (int i = 0; i < 200; i++)
-	{
-		pAux = new Entities::Ground(sf::Vector2f(64.f + i * 128.f, 656.f), sf::Vector2f(128.f, 128.f));
-		if(pAux)
-			Sentities.insert_back(pAux);
-		else
-		{
-			std::cout << std::endl << "ERROR: Failed To Memory Allocate" << std::endl;
-		}
-		pAux = NULL;
-	}
-	pAux = new Entities::Ground(sf::Vector2f(300.f, 400.f), sf::Vector2f(128.f, 128.f));
-	if(pAux)
-		Sentities.insert_back(pAux);
-	else
-	{
-		std::cout << std::endl << "ERROR: Failed To Memory Allocate" << std::endl;
-	}
-	pAux = new Entities::Ground(sf::Vector2f(1000.f, 400.f), sf::Vector2f(128.f, 128.f));
-	if(pAux)
-		Sentities.insert_back(pAux);
-	else
-	{
-		std::cout << std::endl << "ERROR: Failed To Memory Allocate" << std::endl;
-	}
-	settings.antialiasingLevel = 16;
-	Ente::setWindow(window);
-	window.setFramerateLimit(FPS);
-	CManager.getSList(Sentities);
-	CManager.getDList(Dentities);
-	Executar();
+    eManager->setpInputManager(iManager);
+    try{statesMap[States::stateID::mainMenu] = static_cast<States::State*>(new Menus::MainMenu(static_cast<States::StateMachine*>(this), iManager));}
+    catch(int error){
+    if(!error)
+    {
+        std::cout << "ERROR: Failed to Memory Allocate" << std::endl;
+        exit(1);
+    }}
+    
+    try{statesMap[States::stateID::pauseMenu] = static_cast<States::State*>(new Menus::PauseMenu(static_cast<States::StateMachine*>(this), iManager));}
+    catch(int error){
+    if(!error)
+    {
+        std::cout << "ERROR: Failed to Memory Allocate" << std::endl;
+        exit(1);
+    }}
+    /* */
+    try{statesMap[States::stateID::level1] = static_cast<States::State*>(new Levels::Level1(static_cast<States::StateMachine*>(this), iManager));}
+    catch(int error){
+    if(!error)
+    {
+        std::cout << "ERROR: Failed to Memory Allocate" << std::endl;
+        exit(1);
+    }}
+
+    try{statesMap[States::stateID::loadGameState] = static_cast<States::State*>(new States::LoadGameState(static_cast<States::StateMachine*>(this)));}
+    catch(int error){
+    if(!error)
+    {
+        std::cout << "ERROR: Failed to Memory Allocate" << std::endl;
+        exit(1);
+    }}
+
+    try{statesMap[States::stateID::newGameState] = static_cast<States::State*>(new States::NewGameState(static_cast<States::StateMachine*>(this)));}
+    catch(int error){
+    if(!error)
+    {
+        std::cout << "ERROR: Failed to Memory Allocate" << std::endl;
+        exit(1);
+    }}
+
+    static_cast<States::LoadGameState*>(statesMap[States::stateID::loadGameState])->PushLevel(static_cast<Levels::Level*>(statesMap[States::stateID::level1]));
+
+    static_cast<States::NewGameState*>(statesMap[States::stateID::newGameState])->PushLevel(static_cast<Levels::Level*>(statesMap[States::stateID::level1]));
+    
+    currentState = States::stateID::mainMenu;
+    Run();
 }
 
 Game::~Game()
 {
-	for(int i = 0; i < Dentities.getSize(); i++ )
-	{
-		if(Dentities[i])
-			delete Dentities[i];
-	}
-	Dentities.clear();
-	for(int i = 0; i < Sentities.getSize(); i++ )
-	{
-		if(Sentities[i])
-			delete Sentities[i];
-	}
-	Sentities.clear();
+    std::map<States::stateID ,States::State*>::iterator it;
+    for(it = statesMap.begin(); it != statesMap.end(); it++)
+        delete it->second;
+    delete iManager;
+    delete eManager;
 }
 
-void Game::Executar()
-{ 
-	sf::Font font;
-	if(!font.loadFromFile("Assets/arial.ttf"))
-		std::cout << "fail to load font" << std::endl;
-	sf::Text fps("hello", font);
-	fps.setCharacterSize(30);
-	fps.setFillColor(sf::Color::Red);
-	fps.setPosition(sf::Vector2f(10.f,10.f));
-	fps.setStyle(sf::Text::Bold);
-	while (window.isOpen())
-	{
-		fps.setString(std::to_string(static_cast<int>(1/Entities::Entity::getDt())));
-		eManager.Manage();
-		for (int i = 0; i < Dentities.getSize(); i++)
-		{
-			Dentities[i]->Move();
-		}
-		for (int i = 0; i < Sentities.getSize(); i++)
-		{
-			Sentities[i]->Move();
-		}
-		Entities::Entity::updateDeltaTime();
-		CManager.Manage();
-		window.clear();
-		for (int i = 0; i < Dentities.getSize(); i++)
-		{
-			Dentities[i]->Draw();
-		}
-		for (int i = 0; i < Sentities.getSize(); i++)
-		{
-			Sentities[i]->Draw();
-		}
-		window.draw(fps);
-		window.display();
-	}
+
+void Game::Run()
+{
+    while(pGM->isWindowOpen())
+    {
+        pGM->Clear();
+        this->runCurrentState();
+        pGM->Display();
+        this->eManager->Manage();
+    }
 }
+

@@ -1,24 +1,33 @@
-#include "../include/Entities/Ground.h"
-
-Entities::Ground::Ground(const sf::Vector2f pos, const sf::Vector2f size):
-	Entity(pos,size,true)
+#include "../include/Entities/Obstacles/Ground.h"
+#define SIZEX 128.f
+#define SIZEY 128.f
+Entities::Obstacles::Ground::Ground(const sf::Vector2f pos):
+	Obstacle(pos, sf::Vector2f(SIZEX, SIZEY), true, ID::ground)
 {
-	HitBox.setOrigin(size.x / 2, size.y / 2);
-	if (texture.loadFromFile("Assets/Ground2.png"))
-	{
-		HitBox.setTexture(&texture);
-	}
-	else
-		std::cout << std::endl << "ERROR: FAIL TO LOAD PLAYER TEXTURE!" << std::endl;
+	HitBox.setOrigin(SIZEX / 2, SIZEY / 2);
+	
+	HitBox.setTexture(texture);
 }
 
-Entities::Ground::~Ground()
+Entities::Obstacles::Ground::~Ground()
 {
 }
 
-void Entities::Ground::Move()
+void Entities::Obstacles::Ground::OnCollision(Entities::Entity* ent)
 {
-	Gravity();
-	velocity.y -= velocity.y;
+}
+
+void Entities::Obstacles::Ground::Move()
+{
+    Gravity();
+    Velocity.y -= forca_empuxo * dt * MULT;
+    Position.y += Velocity.y;
+}
+
+void Entities::Obstacles::Ground::Update()
+{
+	this->Move();
 	HitBox.setPosition(Position);
 }
+
+sf::Texture* Entities::Obstacles::Ground::texture(Managers::GraphicManager::getInstance()->loadTexture("Assets/Ground2.png"));

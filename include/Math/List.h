@@ -1,15 +1,80 @@
 #pragma once
 #include <iostream>
-
+#include "../Entities/Entity.h"
 namespace Math
 {
+	/* Iterator Tutorial used: https://www.youtube.com/watch?v=F9eDv-YIOQ0 */
+	template<typename Element>
+	
+	class ListIterator
+	{
+	public:
+		using PointerType = Element*; 
+		using ValuePointer = typename Element::ValueType*;
+		using ValueReference = typename Element::ValueType&;
+	private:
+		Element* m_ptr;
+			
+	public:
+		ListIterator(PointerType ptr = NULL):
+		m_ptr(ptr)
+		{
+		}
+
+		~ListIterator()
+		{
+			m_ptr = NULL;
+		}
+
+		ListIterator& operator++()
+		{
+			m_ptr = m_ptr->next;
+			return *this;
+		}
+		
+		ListIterator operator++(int)
+		{
+			ListIterator it = *this;
+			++(*this);
+			return it;
+		}
+		
+		bool operator!=(ListIterator it)
+		{
+			return !((*this).m_ptr == it.m_ptr);
+		}
+			
+		//typename Element::ValueType& 
+		
+		ValuePointer operator*()
+		{
+			return m_ptr->data;
+		}
+
+		//typename Element::ValueType* 
+				
+		ValuePointer operator->()
+		{
+			return m_ptr->data;
+		}
+
+		void operator=(ListIterator it)
+		{
+			this->m_ptr = it.m_ptr;
+		}
+
+	};
+
 	template< typename T>
 	class List
 	{
-
-	private:
-		template <typename TE> class Element
+	public:
+		
+		template <typename TE> 
+		class Element
 		{
+		public:
+			using ValueType = TE;
 		public:
 			Element<TE>* next;
 			TE* data;
@@ -24,11 +89,17 @@ namespace Math
 				next = NULL;
 			}
 		};
-		int size;
+
 		Element<T>* pFirst;
 		Element<T>* pLast;
-	public:
+	
+	private:
+		int size;
 
+	public:
+		using Iterator = ListIterator<Element<T>>;
+		using ValueType = T;
+	public:
 		List():
 			pFirst(NULL),
 			pLast(NULL),
@@ -38,7 +109,7 @@ namespace Math
 
 		~List()
 		{
-			clear();
+			this->clear();
 			pFirst = NULL;
 			pLast = NULL;
 		}
@@ -47,13 +118,13 @@ namespace Math
 		{
 			if (!dt)
 			{
-				//std::cout << "ERROR: List NULL Insertion" << std::endl;
+				std::cout << "ERROR: List NULL Insertion" << std::endl;
 				return;
 			}
-			T* pAux = new Element<T>(dt);
+			Element<T>* pAux = new Element<T>(dt);
 			if (!pAux)
 			{
-				//std::cout << "ERROR: Failed to Allocate Memory" << std::endl;
+				std::cout << "ERROR: Failed to Allocate Memory" << std::endl;
 				return;
 			}
 			size++;
@@ -73,13 +144,13 @@ namespace Math
 		{
 			if (!dt)
 			{
-				//std::cout << "ERROR: List NULL Insertion" << std::endl;
+				std::cout << "ERROR: List NULL Insertion" << std::endl;
 				return;
 			}
 			Element<T>* pAux = new Element<T>(dt);
 			if (!pAux)
 			{
-				//std::cout << "ERROR: Failed to Allocate Memory" << std::endl;
+				std::cout << "ERROR: Failed to Allocate Memory" << std::endl;
 				return;
 			}
 			size++;
@@ -99,14 +170,14 @@ namespace Math
 		{
 			if (idx < 0 || idx > size)
 			{
-				//std::cout << "ERROR: List Segmentation Fault" << std::endl;
-				return NULL;
+				std::cout << "ERROR: List Segmentation Fault" << std::endl;
+				exit(1);
 			}
 			Element<T> *pAux = pFirst;
 			if(!pAux)
 			{
-				std::cout << "pica";
-				return NULL;
+				std::cout << "ERROR: NULL Pointer List Index";
+				exit(1);
 			}
 			for (int i = 0; i < idx; i++)
 			{
@@ -123,7 +194,7 @@ namespace Math
 		{
 			if (idx < 0 || idx > size)
 			{
-				//std::cout << "ERROR: List Segmentation Fault" << std::endl;
+				std::cout << "ERROR: List Segmentation Fault" << std::endl;
 				return;
 			}
 			if (empty())
@@ -137,7 +208,7 @@ namespace Math
 			}
 			if (!pAux)
 			{
-				//std::cout << "ERROR: Can't Remove a NULL Element" << std::endl;
+				std::cout << "ERROR: Can't Remove a NULL Element" << std::endl;
 				return;
 			}
 			if (!pAuxprev)
@@ -168,10 +239,22 @@ namespace Math
 			if (empty())
 				return;
 			Element<T>* pAux = NULL;
-			for (int i = 0; i < size; i++)
+			int size_aux = size;
+			for (int i = 0; i < size_aux; i++)
 			{
-				remove(i);
+				remove(0);
 			}
 		}
+
+		Iterator begin()
+		{
+			return Iterator(pFirst);
+		}	
+		
+		Iterator end()
+		{
+			return Iterator(pLast->next);
+		}
 	};
+	typedef List<Entities::Entity> EntityTList;
 }

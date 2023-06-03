@@ -1,32 +1,24 @@
 #pragma once
-
-#include <SFML/Graphics.hpp>
-#include "Entities/Characters/Player.h"
-#include "Entities/Ground.h"
 #include "Managers/EventsManager.h"
-#include <SFML/System.hpp>
-#include <SFML/Config.hpp>
-#define WIDTH 1280
-#define HEIGHT 720
 #define FPS 0
-#include <list>
-#include "Math/List.h"
-#include "Managers/CollisionManager.h"
 #include <iostream>
+#include "Levels/Level1.h"
+#include "States/StateMachine.h"
+#include "Managers/InputManager.h"
+#include "Menus/MainMenu.h"
+#include "Menus/PauseMenu.h"
+#include "States/LoadGameState.h"
+#include "States/NewGameState.h"
 
-class Game
+class Game: public States::StateMachine
 {
 public:
 	Game();
 	~Game();
-	void Executar();
+	void Run();
 
 private:
-	Managers::CollisionManager CManager;
-	sf::ContextSettings settings;
-	Managers::EventsManager eManager;
-	Math::List<Entities::Entity> Sentities;
-	Math::List<Entities::Entity> Dentities;
-	Entities::Player* player;
-	sf::RenderWindow window;
+	Managers::EventsManager* eManager;
+	Managers::GraphicManager* pGM;
+	Managers::InputManager* iManager;
 };
