@@ -113,7 +113,6 @@ void Levels::Level::CreateArcher(const sf::Vector2f pos)
     std::vector<Entities::Arrow*>::iterator it;
     for (it = pAux->getShots()->begin(); it != pAux->getShots()->end(); it++)
     {
-        //std::cout << (*it)->getOwner()->getID() << std::endl;
         DentitiesList.Push_BackEntity(static_cast<Entities::Entity *>(*it));
     }
 }

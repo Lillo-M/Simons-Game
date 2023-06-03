@@ -14,7 +14,7 @@ dEnemy::Warrior::Warrior(const sf::Vector2f pos):
 
 	animation.pushAnimation(GraphicElements::Animation_ID::idle, "Assets/Warrior-Idle.png", sf::Vector2u(5,0), 0.2f);
 	animation.pushAnimation(GraphicElements::Animation_ID::walk, "Assets/Warrior-Walk.png", sf::Vector2u(7,0), 0.143f);
-	animation.pushAnimation(GraphicElements::Animation_ID::attack, "Assets/Warrior-Attack.png", sf::Vector2u(4,0), 0.1f);
+	animation.pushAnimation(GraphicElements::Animation_ID::meleeattack, "Assets/Warrior-Attack.png", sf::Vector2u(4,0), 0.1f);
 }
 
 dEnemy::Warrior::~Warrior()
@@ -60,7 +60,7 @@ void dEnemy::Warrior::Update()
 			isAttacking = false;
 			attackTimer = 0;
 		}
-		animation.Update(GraphicElements::Animation_ID::attack, Position, directionright);
+		animation.Update(GraphicElements::Animation_ID::meleeattack, Position, directionright);
 	}
 	else
 		animation.Update(GraphicElements::Animation_ID::walk, Position, directionright);

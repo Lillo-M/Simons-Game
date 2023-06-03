@@ -1,7 +1,8 @@
 #include "../include/GraphicElements/ComplexAnimation.h"
 
 
-GraphicElements::ComplexAnimation::ComplexAnimation()
+GraphicElements::ComplexAnimation::ComplexAnimation():
+Animation()
 {
 }
 

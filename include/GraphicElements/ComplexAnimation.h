@@ -12,7 +12,8 @@ namespace GraphicElements
         jump =   2,
         attack = 3,
         hurt   = 4,
-        death  = 5
+        death  = 5,
+        meleeattack = 6
     };
 
     class ComplexAnimation : public Animation
