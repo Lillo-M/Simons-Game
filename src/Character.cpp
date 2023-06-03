@@ -32,7 +32,7 @@ void Entities::Characters::Character::Damage()
         return;
     timecont += dt;
     HitBox.setFillColor(sf::Color::Red);
-    if(timecont >= 0.3)
+    if(timecont >= 0.4)
     {
         HitBox.setFillColor(sf::Color::White);
         damaged = false;

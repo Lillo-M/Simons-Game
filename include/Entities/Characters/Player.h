@@ -31,11 +31,9 @@ namespace Entities
 			bool faceRight;
 			bool isJumping;
 			bool onIce;
-			//bool isAttacking;
 			static sf::Texture* texture;
-			//GraphicElements::Animation animation;
 			GraphicElements::ComplexAnimation animation;
-			float attackcd;	
+			float attackcd;	/*Cooldown do ataque*/
 		public:
 			Player(const sf::Vector2f pos = sf::Vector2f(0, 0));
 			~Player();

@@ -3,11 +3,13 @@
 #define SIZEX 30.f
 #define SIZEY 60.f
 #define ESPEED 0.1
-
+#define A_VELOCITY 20
 #define dEnemy Entities::Characters::Enemies
+#define dPlayer Entities::Characters::Player* 
 
 dEnemy::Archer::Archer(const sf::Vector2f pos):
-    Enemy(pos, sf::Vector2f(SIZEX, SIZEY), false, ID::archer, 7)
+count (0), faceRight(false), attackcd (0.f), attackcooled (true),
+Enemy(pos, sf::Vector2f(SIZEX, SIZEY), false, ID::archer, 7)
 {
     HitBox.setOrigin(SIZEX / 2, SIZEY / 2);
 	HitBox.setTexture(texture);
@@ -31,22 +33,23 @@ dEnemy::Archer::~Archer()
 
 void dEnemy::Archer::Update()
 {
-	std::cout << lives << std::endl;
-	std::cout << alive << std::endl;
     this->Gravity();
 	this->Damage();
 	HitBox.setPosition(Position);
 	animation.Update( GraphicElements::Animation_ID::idle,\
 	Position, false);
+	if (!attackcooled){
+		attackcd += dt;
+		if(attackcd >= 1.f)
+		{
+			attackcd -= 1.f;
+			attackcooled = true;
+		}
+	}
+	if (abs (getNearest()->getPosition().x - Position.x) <= DISTANCE_ARCHER_ATTACK && (getNearest()->getPosition().y - Position.y) <= 50)
+		Attack (true);
 }
 
-void dEnemy::Archer::Attack(const bool b)
-{
-    if (b)
-		HitBox.setFillColor(sf::Color(sf::Color::Red));
-	else
-		HitBox.setFillColor(sf::Color(sf::Color::White));
-}
 std::vector<Entities::Arrow*>* Entities::Characters::Enemies::Archer::getShots()
 {
     return &aShots;
@@ -62,4 +65,55 @@ void dEnemy::Archer::Draw()
 	animation.Draw();
 }
 
+void dEnemy::Archer::setPlayer (Player* pPlayer){
+	p1 = pPlayer;
+	std::cout << p1 << std::endl;
+}
+void dEnemy::Archer::setPlayer2 (Player* pPlayer2){
+	p2 = pPlayer2;
+	std::cout << p2 << std::endl;
+}
+Entities::Characters::Player* dEnemy::Archer::getNearest(){
+	if (p2){
+		if (abs (p1->getPosition().x - Position.x) > abs (p2->getPosition().x - Position.x))
+			return p2;
+		else 
+			return p1;
+	}
+	else 
+		return p1;
+}
+
+void dEnemy::Archer::Attack(const bool b)
+{	
+	if (attackcooled)
+	{
+		//animation.Update(GraphicElements::Animation_ID::attack, Position, faceRight);
+		attackcooled = false;
+		int h = (getNearest()->getPosition().y - Position.y); // Altura 
+		float dt = abs (getNearest()->getPosition().x - Position.x)/A_VELOCITY;
+		int vy;
+		int hf;
+
+		if (h < 0)
+		{
+			hf = h + (dt*dt/2);
+			vy = -hf/dt; // Velocidade em Y
+		}
+		else
+			vy = -(-hf)/dt;
+
+		aShots[count]->Shoot(sf::Vector2f(Position.x + \
+		( SIZEX / 2 + aShots[count]->getSize().x / 2 ) * (-1), Position.y), \
+	        sf::Vector2f((-1) * A_VELOCITY, vy));	
+		
+		count++;
+	
+		if(count >= aShots.size())
+			count = 0;
+	}
+}
+
 sf::Texture* dEnemy::Archer::texture(Managers::GraphicManager::getInstance()->loadTexture("Assets/Archer-Idle.png"));
+dPlayer Entities::Characters::Enemies::Archer::p1(NULL);
+dPlayer Entities::Characters::Enemies::Archer::p2(NULL);

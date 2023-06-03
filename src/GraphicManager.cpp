@@ -1,7 +1,7 @@
 #include "../include/Managers/GraphicManager.h"
 
 Managers::GraphicManager::GraphicManager(): 
-    window(sf::VideoMode(WIDTH, HEIGHT), "Simon's Game"), // incializa a janela
+    window(sf::VideoMode(WIDTH, HEIGHT), "The Wizard++"), // incializa a janela
     view(window.getView())
 {
     settings.antialiasingLevel = 16;
