@@ -1,7 +1,19 @@
 #include "../include/Entities/Characters/Player.h"
 
+#define IDLEPATH "Assets/Player/Idle.png"
+#define WALKPATH "Assets/Player/Walk.png"
+#define JUMPPATH "Assets/Player/Jump.png"
+#define ATTACKPATH "Assets/Player/Magic_arrow.png"
+#define HURTPATH "Assets/Player/Hurt.png"
+
 #define SIZEX 40.f
 #define SIZEY 66.f
+#define LIVES 100
+#define MAXV 10
+#define ATRITO 0.45
+#define JUMPHEIGHT -11.f
+#define PSPEED 1
+
 Entities::Characters::Player::Player(const sf::Vector2f pos) : 
 	Character(pos, sf::Vector2f(SIZEX, SIZEY), false, ID::player, LIVES),
 	maxVelocity(MAXV),
@@ -29,11 +41,11 @@ Entities::Characters::Player::Player(const sf::Vector2f pos) :
 	}
 	HitBox.setOrigin(0, 0);
 	
-	animation.pushAnimation(GraphicElements::Animation_ID::idle, "Assets/Idle.png", sf::Vector2u(8,0), 0.125f);
-	animation.pushAnimation(GraphicElements::Animation_ID::walk, "Assets/Walk.png", sf::Vector2u(7,0), 0.143f);
-	animation.pushAnimation(GraphicElements::Animation_ID::jump, "Assets/Jump.png", sf::Vector2u(8,0), 0.125f);
-	animation.pushAnimation(GraphicElements::Animation_ID::attack, "Assets/Magic_arrow.png", sf::Vector2u(6,0), 0.06f);
-	animation.pushAnimation(GraphicElements::Animation_ID::hurt, "Assets/Hurt.png", sf::Vector2u(4,0), 0.25f);
+	animation.pushAnimation(GraphicElements::Animation_ID::idle, IDLEPATH, sf::Vector2u(8,0), 0.125f);
+	animation.pushAnimation(GraphicElements::Animation_ID::walk, WALKPATH, sf::Vector2u(7,0), 0.143f);
+	animation.pushAnimation(GraphicElements::Animation_ID::jump, JUMPPATH, sf::Vector2u(8,0), 0.125f);
+	animation.pushAnimation(GraphicElements::Animation_ID::attack, ATTACKPATH, sf::Vector2u(6,0), 0.06f);
+	animation.pushAnimation(GraphicElements::Animation_ID::hurt, HURTPATH, sf::Vector2u(4,0), 0.25f);
 }
 
 Entities::Characters::Player::~Player()

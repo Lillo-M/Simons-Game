@@ -9,8 +9,6 @@ namespace Entities
 
     class Lava: public Obstacle 
     {
-    private:
-        GraphicElements::SimpleSprite animation;
     public:
         Lava(const sf::Vector2f pos);
         ~Lava();

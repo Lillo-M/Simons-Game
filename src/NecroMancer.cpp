@@ -5,11 +5,13 @@
 #define SKELETONS 10
 #define ARCHERS 10
 
+#define IDLEPATH "Assets/NecroMancer/demon-idle.png"
+#define ATTACKPATH "Assets/NecroMancer/. . ."
 
 Entities::Characters::Enemies::NecroMancer::NecroMancer(sf::Vector2f pos):
     Enemy(pos, sf::Vector2f(SIZEX, SIZEY), false, ID::necromancer, 5)
 {
-	animation.pushAnimation(GraphicElements::Animation_ID::idle, "Assets/demon-idle.png", sf::Vector2u(6,0), 0.166f);
+	animation.pushAnimation(GraphicElements::Animation_ID::idle, IDLEPATH, sf::Vector2u(6,0), 0.166f);
 }
 
 Entities::Characters::Enemies::NecroMancer::~NecroMancer()

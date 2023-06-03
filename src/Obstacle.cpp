@@ -19,7 +19,7 @@ void Entities::Obstacles::Obstacle::Save(std::ofstream& savefile)
 
 void Entities::Obstacles::Obstacle::Draw()
 {
-	pGM->Draw(HitBox);
+	animation.Draw();
 }
 
 const float Entities::Obstacles::Obstacle::forca_empuxo(gravity);

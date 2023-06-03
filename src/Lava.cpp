@@ -1,9 +1,12 @@
 #include "../include/Entities/Obstacles/Lava.h"
 
+#define TEXTUREPATH "Assets/Obstacles/Lava.png"
+
+
 Entities::Obstacles::Lava::Lava(const sf::Vector2f pos):
     Obstacle(pos, sf::Vector2f(128.f,128.f), true, ID::lava)
 {
-    animation.Reset("Assets/Lava.png", pos, sf::Vector2f(128.f,128.f));
+    animation.Reset(TEXTUREPATH, pos, sf::Vector2f(128.f,128.f));
 }
 
 Entities::Obstacles::Lava::~Lava()
@@ -12,16 +15,15 @@ Entities::Obstacles::Lava::~Lava()
 
 void Entities::Obstacles::Lava::Move()
 {
-    this->Move();
 	HitBox.setPosition(Position);
+    Gravity();
+    Velocity.y -= forca_empuxo * dt * MULT;
 }
 
 void Entities::Obstacles::Lava::Update()
 {
+    this->Move();
     animation.Update(Position);
-    animation.Draw();
-    Gravity();
-    Velocity.y -= forca_empuxo * dt * MULT;
     Position.y += Velocity.y;
 }
 #define JUMPHEIGHT -15

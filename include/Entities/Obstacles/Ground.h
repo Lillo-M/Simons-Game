@@ -1,6 +1,8 @@
 #pragma once
 #include "Obstacle.h"
 #include <iostream>
+#include "../../GraphicElements/SimpleSprite.h"
+
 namespace Entities
 {
 	namespace Obstacles

@@ -2,6 +2,11 @@
 #define SIZEX 35.f
 #define SIZEY 50.f
 #define ESPEED 0.1
+#define MAXV 10
+#define KNOCKBACK -11.f
+#define IDLEPATH "Assets/Warrior/Warrior-Idle.png"
+#define WALKPATH "Assets/Warrior/Warrior-Walk.png"
+#define MELEEATTACKPATH "Assets/Warrior/Warrior-Attack.png"
 
 #define dEnemy Entities::Characters::Enemies
 
@@ -12,9 +17,9 @@ dEnemy::Warrior::Warrior(const sf::Vector2f pos):
 	isAttacking(false)
 {
 
-	animation.pushAnimation(GraphicElements::Animation_ID::idle, "Assets/Warrior-Idle.png", sf::Vector2u(5,0), 0.2f);
-	animation.pushAnimation(GraphicElements::Animation_ID::walk, "Assets/Warrior-Walk.png", sf::Vector2u(7,0), 0.143f);
-	animation.pushAnimation(GraphicElements::Animation_ID::meleeattack, "Assets/Warrior-Attack.png", sf::Vector2u(4,0), 0.1f);
+	animation.pushAnimation(GraphicElements::Animation_ID::idle, IDLEPATH, sf::Vector2u(5,0), 0.2f);
+	animation.pushAnimation(GraphicElements::Animation_ID::walk, WALKPATH, sf::Vector2u(7,0), 0.143f);
+	animation.pushAnimation(GraphicElements::Animation_ID::meleeattack, MELEEATTACKPATH, sf::Vector2u(4,0), 0.1f);	
 }
 
 dEnemy::Warrior::~Warrior()
@@ -91,11 +96,11 @@ void dEnemy::Warrior::OnCollision(Entities::Entity* ent)
 		Attack(true);
 		Entities::Characters::Player* pPlayer = static_cast<Entities::Characters::Player*>(ent);
 		pPlayer->Damage(true);
-		sf::Vector2f vel = sf::Vector2f( 0, JUMPHEIGHT/2);
+		sf::Vector2f vel = sf::Vector2f( 0, KNOCKBACK/2);
 		if(pPlayer->getPosition().x > Position.x)
-			vel.x = -JUMPHEIGHT;
+			vel.x = -KNOCKBACK;
 		else
-			vel.x = JUMPHEIGHT;
+			vel.x = KNOCKBACK;
 		pPlayer->setVelocity(vel);
 		pPlayer = NULL;
 	}
