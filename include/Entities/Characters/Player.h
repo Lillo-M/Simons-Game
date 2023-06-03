@@ -7,7 +7,7 @@
 #include "../../GraphicElements/ComplexAnimation.h"
 #include "../Projectile.h"
 #include "../PlayerProjectile.h"
-#define LIVES 5
+#define LIVES 100
 #define MAXV 10
 #define ATRITO 0.45
 #define JUMPHEIGHT -11.f

@@ -26,6 +26,9 @@ namespace Entities
                 bool attackcooled;
                 bool faceRight;
                 bool meele;
+                bool shooting;
+                bool aiming;
+                float shoottimer;
                 float meeletimer;
                 float attackcd;
                 int count;
