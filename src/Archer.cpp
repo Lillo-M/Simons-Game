@@ -19,7 +19,7 @@ dEnemy::Archer::Archer(const sf::Vector2f pos) : Enemy(pos, sf::Vector2f(SIZEX, 
 	HitBox.setOrigin(SIZEX / 2, SIZEY / 2);
 	animation.pushAnimation(GraphicElements::Animation_ID::idle, "Assets/Archer-Idle.png", sf::Vector2u(7, 0), 0.2f);
 	animation.pushAnimation(GraphicElements::Animation_ID::meleeattack, "Assets/Archer-Attack.png", sf::Vector2u(4, 0), 0.08f);
-	//animation.pushAnimation(GraphicElements::Animation_ID::attack, "Assets/Shot-1.png", sf::Vector2u(15, 0), 0.07f);
+	animation.pushAnimation(GraphicElements::Animation_ID::attack, "Assets/Shot_1.png", sf::Vector2u(15, 0), 0.07f);
 	
 	for (int i = 0; i < ARROWS; i++)
 	{
@@ -70,6 +70,8 @@ void dEnemy::Archer::Update()
 			attackcd -= 1.f;
 			attackcooled = true;
 		}
+		animation.Update(GraphicElements::Animation_ID::attack,
+						 Position, faceRight);
 	}
 	if (abs(getNearest()->getPosition().x - Position.x) <= DISTANCE_ARCHER_ATTACK)
 	{
@@ -168,8 +170,8 @@ void dEnemy::Archer::Attack(const bool b)
 {
 	if (attackcooled)
 	{
-		/*animation.Update(GraphicElements::Animation_ID::attack,
-						 Position, faceRight);*/
+		animation.Update(GraphicElements::Animation_ID::attack,
+						 Position, faceRight);
 		attackcooled = false;
 		int h = (getNearest()->getPosition().y - Position.y); // Altura
 		float time = abs(getNearest()->getPosition().x - Position.x) / A_VELOCITY;
