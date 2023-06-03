@@ -7,7 +7,6 @@ Entities::Projectile::Projectile(sf::Vector2f pos, sf::Vector2f velocity, Entiti
     collided(false)
 {
     HitBox.setOrigin(sf::Vector2f(10,10));
-	HitBox.setFillColor(sf::Color::Blue);
 }
 
 Entities::Projectile::~Projectile()
@@ -28,8 +27,11 @@ void Entities::Projectile::Draw()
 
 void Entities::Projectile::OnCollision(Entities::Entity* ent)
 {
+    std::cout << ent->getID() << std::endl;
+    std::cout << owner->getID() << std::endl;
     if(ent->getID() != owner->getID() && ent->getID() != ID::obstacle && ent->getID() != ID::lava && ent->getID() != ID::ice && ent->getID() != ID::ground)
     {
+        std::cout << "Character collided" << std::endl;
         static_cast<Entities::Characters::Character*>(ent)->Damage(true);
     }
     collided = true;

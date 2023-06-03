@@ -70,13 +70,14 @@ void Levels::Level::CreatePlayer(const sf::Vector2f pos)
     {
         pPlayer = pAux;
         pPIM->setpPlayer(pAux);
+        Entities::Characters::Enemies::Archer::setPlayer(pPlayer);
     }
     else
     {
         pPlayer2 = pAux;
         pPIM->setpPlayer2(pAux);
+        Entities::Characters::Enemies::Archer::setPlayer2(pPlayer2);
     }
-
     std::vector<Entities::PlayerProjectile*>::iterator it;
     for(it = pAux->getShots()->begin(); it != pAux->getShots()->end(); it++)
     {

@@ -10,10 +10,6 @@ Entities::Characters::Enemies::NecroMancer::NecroMancer(sf::Vector2f pos):
     Enemy(pos, sf::Vector2f(SIZEX, SIZEY), false, ID::necromancer, 30)
 {
 	animation.pushAnimation(GraphicElements::Animation_ID::idle, "Assets/demon-idle.png", sf::Vector2u(6,0), 0.166f);
-	for(int i = 0; i < SKELETONS; i++)
-	{
-
-	}
 }
 
 Entities::Characters::Enemies::NecroMancer::~NecroMancer()

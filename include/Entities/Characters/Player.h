@@ -32,7 +32,7 @@ namespace Entities
 			bool isJumping;
 			bool onIce;
 			GraphicElements::ComplexAnimation animation;
-			float attackcd;	
+			float attackcd;	/*Cooldown do ataque*/
 		public:
 			Player(const sf::Vector2f pos = sf::Vector2f(0, 0));
 			~Player();

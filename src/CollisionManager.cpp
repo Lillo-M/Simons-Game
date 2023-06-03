@@ -68,7 +68,7 @@ void Managers::CollisionManager::Manage()
 	float dy = 0;
 	Math::EntityTList::Iterator Iterator_i;
 	Math::EntityTList::Iterator Iterator_j;
-	int i = 0;
+	
 	for (Iterator_i = Dentities->begin(); Iterator_i != Dentities->end(); Iterator_i++)
 	{
 		if(Iterator_i->getID() == ID::projectile)

@@ -16,7 +16,6 @@ Entities::Characters::Player::Player(const sf::Vector2f pos) :
 	faceRight(false),
 	isJumping(false),
 	onIce(false)
-	//isAttacking(false)
 {
 	for(int i = 0; i < 10; i++)
 	{
@@ -30,24 +29,15 @@ Entities::Characters::Player::Player(const sf::Vector2f pos) :
 	}
 	HitBox.setOrigin(0, 0);
 	
-	//HitBox.setTexture(texture);
 	animation.pushAnimation(GraphicElements::Animation_ID::idle, "Assets/Idle.png", sf::Vector2u(8,0), 0.125f);
 	animation.pushAnimation(GraphicElements::Animation_ID::walk, "Assets/Walk.png", sf::Vector2u(7,0), 0.143f);
 	animation.pushAnimation(GraphicElements::Animation_ID::jump, "Assets/Jump.png", sf::Vector2u(8,0), 0.125f);
 	animation.pushAnimation(GraphicElements::Animation_ID::attack, "Assets/Magic_arrow.png", sf::Vector2u(6,0), 0.06f);
 	animation.pushAnimation(GraphicElements::Animation_ID::hurt, "Assets/Hurt.png", sf::Vector2u(4,0), 0.25f);
-	//animation.AnimationReset(texture, sf::Vector2u(4,1), static_cast<float>(0.25));
-	//HitBox.setTextureRect(animation.uvRect);
 }
 
 Entities::Characters::Player::~Player()
 {
-	/*std::vector<Projectile*>::iterator it = shots.begin();
-	for(it; it != shots.end(); it++)
-	{
-		if(*it)
-			delete *it;
-	}*/
 	shots.clear();
 }
 
@@ -105,10 +95,6 @@ void Entities::Characters::Player::Move()
 		if (Velocity.x < 0)
 			Velocity.x = 0;
 	}
-	/*if(Velocity.x > 0)
-		HitBox.setScale(sf::Vector2f(-1, 1));
-	else if(Velocity.x < 0)
-		HitBox.setScale(sf::Vector2f(1, 1));*/
 	if(Velocity.x > 0)
 		faceRight = true;
 	else if(Velocity.x < 0)
@@ -124,15 +110,13 @@ void Entities::Characters::Player::Update()
 	if(!attackcooled)
 	{
 		attackcd += dt;
-		if(attackcd >= 0.36f)
+		if(attackcd >= 0.4f)
 		{
-			attackcd -= 0.36f;
+			attackcd -= 0.4f;
 			attackcooled = true;
 		}
 	}
 	Damage();
-	//animation.Update(GraphicElements::Animation_ID::walk, Position, faceRight);
-	//HitBox.setPosition(Position);
 
 	if(grounded)
 		isJumping = false;
@@ -156,9 +140,6 @@ void Entities::Characters::Player::Update()
 	else
 		animation.Update( GraphicElements::Animation_ID::idle,\
 	Position, faceRight);
-	/*  */
-	//animation.update(Position);
-	//HitBox.setTextureRect(animation.uvRect);
 }
 
 void Entities::Characters::Player::Draw()
@@ -187,21 +168,11 @@ void Entities::Characters::Player::Jump()
 
 void Entities::Characters::Player::MoveRight(const bool b)
 {
-	/*if (b)
-		HitBox.setScale(sf::Vector2f(-1, 1));
-	else if (BoolMoveLeft)
-		HitBox.setScale(sf::Vector2f(1, 1));
-	/**/
 	BoolMoveRight = b;
 }
 
 void Entities::Characters::Player::MoveLeft(const bool b)
 {
-	/*if (b)
-		HitBox.setScale(sf::Vector2f(1, 1));
-	else if (BoolMoveRight)
-		HitBox.setScale(sf::Vector2f(-1, 1));
-	/*  */
 	BoolMoveLeft = b;
 }
 

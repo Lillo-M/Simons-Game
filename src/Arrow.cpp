@@ -1,4 +1,5 @@
 #include "../include/Entities/Arrow.h"
+
 Entities::Arrow::Arrow(sf::Vector2f pos, sf::Vector2f velocity, Entities::Characters::Character *owner) : 
     Projectile (pos, velocity, owner)
 { 
