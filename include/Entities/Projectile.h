@@ -12,7 +12,7 @@ namespace Entities
         void Update();
         void Draw();
         void Shoot(sf::Vector2f pos, sf::Vector2f vel);
-        void OnCollision(Entities::Entity *ent);
+        virtual void OnCollision(Entities::Entity *ent) = 0;
         const bool getCollided() const;
         void Save(std::ofstream& savefile);
         void Load(std::ifstream& savefile);

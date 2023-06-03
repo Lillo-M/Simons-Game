@@ -24,19 +24,6 @@ void Entities::Projectile::Draw()
 	pGM->Draw(HitBox);
 }
 
-
-void Entities::Projectile::OnCollision(Entities::Entity* ent)
-{
-    //std::cout << ent->getID() << std::endl;
-    //std::cout << owner->getID() << std::endl;
-    if(ent->getID() != owner->getID() && ent->getID() != ID::obstacle && ent->getID() != ID::lava && ent->getID() != ID::ice && ent->getID() != ID::ground)
-    {
-        //std::cout << "Character collided" << std::endl;
-        static_cast<Entities::Characters::Character*>(ent)->Damage(true);
-    }
-    collided = true;
-}
-
 void Entities::Projectile::Shoot(sf::Vector2f pos, sf::Vector2f vel)
 {
     Position = pos;
