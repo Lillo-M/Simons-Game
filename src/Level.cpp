@@ -108,10 +108,12 @@ void Levels::Level::CreateArcher(const sf::Vector2f pos)
                   << "ERROR: Failed to Allocate Memory" << std::endl;
         exit(1);
     }
+    std::cout << pAux->getID() << std::endl;
     DentitiesList.Push_BackEntity(static_cast<Entities::Entity *>(pAux));
     std::vector<Entities::Arrow*>::iterator it;
     for (it = pAux->getShots()->begin(); it != pAux->getShots()->end(); it++)
     {
+        //std::cout << (*it)->getOwner()->getID() << std::endl;
         DentitiesList.Push_BackEntity(static_cast<Entities::Entity *>(*it));
     }
 }

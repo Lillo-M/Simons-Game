@@ -9,14 +9,17 @@
 #define dPlayer Entities::Characters::Player* 
 
 dEnemy::Archer::Archer(const sf::Vector2f pos):
-Enemy(pos, sf::Vector2f(SIZEX, SIZEY), false, ID::archer, 7),
+	Enemy(pos, sf::Vector2f(SIZEX, SIZEY), false, ID::archer, 7),
 	count (0),
 	faceRight(false),
 	attackcd (0.f),
-	attackcooled (true)
+	attackcooled (true),
+	meele(false),
+	meeletimer(0.f)
 {
 	HitBox.setOrigin(SIZEX / 2, SIZEY / 2);
 	animation.pushAnimation(GraphicElements::Animation_ID::idle, "Assets/Archer-Idle.png", sf::Vector2u(7, 0), 0.2f);
+	animation.pushAnimation(GraphicElements::Animation_ID::attack, "Assets/Archer-Attack.png", sf::Vector2u(4, 0), 0.08f);
 	for (int i = 0; i < ARROWS; i++)
 	{
 		Arrow *pAux = new Arrow(sf::Vector2f(0, 0), sf::Vector2f(0, 0), static_cast<Entities::Characters::Character*>(this));
@@ -40,7 +43,19 @@ void dEnemy::Archer::Update()
 	this->Move();
 	this->Damage();
 	HitBox.setPosition(Position);
-	animation.Update(GraphicElements::Animation_ID::idle,
+	if(meele)
+	{
+		meeletimer += dt;
+		if(meeletimer >= 0.32f)
+		{
+			meeletimer = 0;
+			meele = false;
+		}
+		animation.Update(GraphicElements::Animation_ID::attack,
+	Position, false);
+	}
+	else
+		animation.Update(GraphicElements::Animation_ID::idle,
 	Position, false);
 	if (!attackcooled){
 		attackcd += dt;
@@ -49,6 +64,11 @@ void dEnemy::Archer::Update()
 			attackcd -= 1.f;
 			attackcooled = true;
 		}
+	}
+	if ( abs(getNearest()->getPosition().x - Position.x) <= DISTANCE_ARCHER_ATTACK)
+	{
+	std::cout << DISTANCE_ARCHER_ATTACK << "maxdist" << std::endl;
+	std::cout << abs(getNearest()->getPosition().x - Position.x) << "dist"<< std::endl;
 	}
 	if ( abs(getNearest()->getPosition().x - Position.x) <= DISTANCE_ARCHER_ATTACK && (getNearest()->getPosition().y - Position.y) <= 50)
 		Attack (true);
@@ -61,7 +81,6 @@ std::vector<Entities::Arrow*>* Entities::Characters::Enemies::Archer::getShots()
 
 void dEnemy::Archer::Move()
 {
-	std::cout << Velocity.x << std::endl;
 	Position.x += Velocity.x * dt * MULT;
 	Position.y += Velocity.y * dt * MULT;
 	this->Gravity();
@@ -140,20 +159,20 @@ void dEnemy::Archer::Attack(const bool b)
 {	
 	if (attackcooled)
 	{
-		//animation.Update(GraphicElements::Animation_ID::attack, Position, faceRight);
 		attackcooled = false;
 		int h = (getNearest()->getPosition().y - Position.y); // Altura 
 		float time = abs (getNearest()->getPosition().x - Position.x)/A_VELOCITY;
 		int vy;
 		int hf = h + (time*time/2);
 
-		if (h < 0)
+		/*if (h < 0)
 		{
 			vy = -hf/time; // Velocidade em Y
 		}
 		else
-			vy = (-hf)/time;
-
+			vy = (-hf)/time; 
+		/* */
+		vy = -(gravity * time)/2;
 		aShots[count]->Shoot(sf::Vector2f(Position.x + \
 		( SIZEX / 2 + aShots[count]->getSize().x / 2 ) * (-1), Position.y), \
 	        sf::Vector2f((-1) * A_VELOCITY, vy));	
@@ -162,6 +181,24 @@ void dEnemy::Archer::Attack(const bool b)
 	
 		if(count >= aShots.size())
 			count = 0;
+	}
+}
+
+void dEnemy::Archer::OnCollision(Entities::Entity* ent) 
+{
+	if(ent->getID() == ID::player)
+	{
+		animation.Update(GraphicElements::Animation_ID::attack, Position, false);
+		meele = true;
+		Entities::Characters::Player* pPlayer = static_cast<Entities::Characters::Player*>(ent);
+		pPlayer->Damage(true);
+		sf::Vector2f vel = sf::Vector2f( 0, JUMPHEIGHT/2);
+		if(pPlayer->getPosition().x > Position.x)
+			vel.x = -JUMPHEIGHT;
+		else
+			vel.x = JUMPHEIGHT;
+		pPlayer->setVelocity(vel);
+		pPlayer = NULL;
 	}
 }
 

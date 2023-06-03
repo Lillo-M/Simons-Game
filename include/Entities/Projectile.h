@@ -17,6 +17,7 @@ namespace Entities
         void Save(std::ofstream& savefile);
         void Load(std::ifstream& savefile);
         virtual void Move() = 0;
+        Entities::Characters::Character* getOwner();
     protected:
         Entities::Characters::Character *owner;
         bool collided;

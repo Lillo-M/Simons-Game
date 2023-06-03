@@ -25,6 +25,8 @@ namespace Entities
                 static Player* p2;
                 bool attackcooled;
                 bool faceRight;
+                bool meele;
+                float meeletimer;
                 float attackcd;
                 int count;
             public:
@@ -40,6 +42,7 @@ namespace Entities
                 Player* getNearest ();
                 static void setPlayer (Player* pPlayer);
                 static void setPlayer2 (Player* pPlayer2);
+                void OnCollision(Entities::Entity* ent);
             };
         }
     }

@@ -24,8 +24,8 @@ namespace Entities
                 void Load(std::ifstream& savefile);
                 void SpawnDeadEnemies();
             private:
-                std::vector<Archer*> archers;
-                std::vector<Warrior*> warriors;
+                //std::vector<Archer*> archers;
+                //std::vector<Warrior*> warriors;
             };
         }
     }
