@@ -6,6 +6,10 @@ Levels::Level1::Level1(States::StateMachine* pSM, Managers::InputManager* pIM) :
     CreateMap();
     pCManager->setDList(DentitiesList.getTList());
     pCManager->setSList(SentitiesList);
+    texture = pGM->loadTexture("Assets/Nature.png");
+    background.setTexture(*texture);
+    background.setScale(2.22f, 2.37);
+    background.setOrigin(texture->getSize().x/(float)2, texture->getSize().y/(float)2);
 }
 
 Levels::Level1::~Level1()
@@ -36,4 +40,20 @@ void Levels::Level1::CreateMap()
         j++;
     }
     Map.close();
+}
+
+void Levels::Level1::Draw()
+{
+    Math::EntityTList::Iterator it;
+
+    /* teste */
+    background.setPosition(pGM->getViewCenter());
+    pGM->getWindow()->draw(background);
+    DentitiesList.DrawEntities();
+
+    it = SentitiesList.begin();    
+    for(it; it != SentitiesList.end(); it++)
+    {
+	    it->Draw();
+    }
 }

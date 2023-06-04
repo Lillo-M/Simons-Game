@@ -23,7 +23,7 @@ Entities::Characters::Player::Player(const sf::Vector2f pos) :
 	fall(false),
 	attackcd(0.f),
 	attackcooled(true),
-	shotcount(0),
+	shootCount(0),
 	animation(),
 	faceRight(false),
 	isJumping(false),
@@ -199,14 +199,14 @@ void Entities::Characters::Player::Attack(const bool b)
 	{
 		animation.Update(GraphicElements::Animation_ID::attack, Position, faceRight);
 		attackcooled = false;
-		shots[shotcount]->Shoot(sf::Vector2f(Position.x + \
-		( SIZEX / 2 + shots[shotcount]->getSize().x / 2 ) * (faceRight ? 1:-1), Position.y), \
+		shots[shootCount]->Shoot(sf::Vector2f(Position.x + \
+		( SIZEX / 2 + shots[shootCount]->getSize().x / 2 ) * (faceRight ? 1:-1), Position.y), \
 	        sf::Vector2f((faceRight ? 1:-1) * 15, 0));	
 	
-		shotcount++;
+		shootCount++;
 	
-		if(shotcount >= shots.size())
-			shotcount = 0;
+		if(shootCount >= shots.size())
+			shootCount = 0;
 	}
 }
 

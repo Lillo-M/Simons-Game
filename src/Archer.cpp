@@ -5,7 +5,7 @@
 #define ESPEED 0.1
 #define ARROWS 5
 #define A_VELOCITY 20
-#define MAX_ARROW_VELOCITY 30
+#define MAX_ARROW_VELOCITY 20
 #define KNOCKBACK -11.f
 
 #define IDLEPATH "Assets/Archer/Archer-Idle.png"
@@ -17,7 +17,7 @@
 #define dPlayer Entities::Characters::Player *
 
 dEnemy::Archer::Archer(const sf::Vector2f pos) : Enemy(pos, sf::Vector2f(SIZEX, SIZEY), false, ID::archer, 7),
-	count(0),
+	shootCount(0),
 	faceRight(false),
 	attackcd(0.f),
 	attackcooled(false),
@@ -99,10 +99,8 @@ void dEnemy::Archer::Update()
 			attackcooled = true;
 		}
 	}
-	if (abs(getNearest()->getPosition().x - Position.x) <= DISTANCE_ARCHER_ATTACK && (getNearest()->getPosition().y - Position.y) <= 100)
+	if ((abs(getNearest()->getPosition().x - Position.x) <= DISTANCE_ARCHER_ATTACK && (getNearest()->getPosition().y - Position.y) <= 100 ) || aiming)
 		Attack(true);
-	else
-		aiming = false;
 }
 
 std::vector<Entities::Arrow *> *Entities::Characters::Enemies::Archer::getShots()
@@ -209,24 +207,36 @@ void dEnemy::Archer::Attack(const bool b)
 		animation.Update(GraphicElements::Animation_ID::attack,
 						 Position, faceRight);
 		attackcooled = false;
+		aiming = false;
 		int h = (getNearest()->getPosition().y - Position.y); // Altura
-		float time = abs(getNearest()->getPosition().x - Position.x) / A_VELOCITY;
+		float dist = abs(getNearest()->getPosition().x - Position.x);
+		float time = dist / A_VELOCITY;
 		float vy;
-		
-		vy = (-(gravity * time) / 2) + h/time + (h >= 10 ? -40/time:30/time );
+		float vx = A_VELOCITY;
+		float posy = Position.y;
+		float posx = (10 + SIZEX / 2 + aShots[shootCount]->getSize().x / 2);
+		if(dist < SIZEX)
+		{
+			vx = 0;
+			posy -= (10 + SIZEY / 2 + aShots[shootCount]->getSize().y / 2);
+			posx = 0;
+		}
+
+		vy = (-(gravity * time) / 2) + h/time +\
+			 (h >= 1 ? -40/time:(h <= -1 ? -h/(2*time):h/(2*time)) );
+
 		if(vy <= -MAX_ARROW_VELOCITY)
 		{
 			vy = -MAX_ARROW_VELOCITY;
 		}
-		aShots[count]->Shoot(sf::Vector2f(Position.x +
-							(10 + SIZEX / 2 + aShots[count]->getSize().x / 2) * (faceRight ? 1 : -1),
-							Position.y),
-							sf::Vector2f((faceRight ? 1 : -1) * A_VELOCITY, vy));
+		aShots[shootCount]->Shoot(sf::Vector2f(Position.x + posx * (faceRight ? 1 : -1),
+							posy),
+							sf::Vector2f((faceRight ? 1 : -1) * vx, vy));
 
-		count++;
+		shootCount++;
 
-		if (count >= aShots.size())
-			count = 0;
+		if (shootCount >= aShots.size())
+			shootCount = 0;
 	}
 }
 

@@ -87,9 +87,3 @@ void Menus::MainMenu::MoveDown()
     buttons[currentButtom++]->UnSelected();
     buttons[currentButtom]->Selected();
 }
-
-void Menus::MainMenu::PushButtom(GraphicElements::Buttom* buttom)
-{
-    buttons.push_back(buttom);
-    buttomCont++;
-}

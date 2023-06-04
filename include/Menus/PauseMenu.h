@@ -16,7 +16,6 @@ namespace Menus
         void Update();
         void MoveUp();
         void MoveDown();
-        void PushButtom(GraphicElements::Buttom* buttom);
     private:
         Observers::MenuObserver* pMObserver;
         Managers::InputManager* pIM;

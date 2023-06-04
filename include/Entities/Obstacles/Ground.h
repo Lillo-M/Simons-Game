@@ -10,7 +10,7 @@ namespace Entities
 		class Ground : public Obstacles::Obstacle
 		{
 		private:
-			static sf::Texture* texture;
+			//float velocityMutiplier;
 		public:
 			Ground(const sf::Vector2f pos);
 			~Ground();

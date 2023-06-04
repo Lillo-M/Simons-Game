@@ -6,9 +6,7 @@
 Entities::Obstacles::Ground::Ground(const sf::Vector2f pos):
 	Obstacle(pos, sf::Vector2f(SIZEX, SIZEY), true, ID::ground)
 {
-	HitBox.setOrigin(SIZEX / 2, SIZEY / 2);
 	animation.Reset(TEXTUREPATH, pos, sf::Vector2f(128.f,128.f));
-	HitBox.setTexture(texture);
 }
 
 Entities::Obstacles::Ground::~Ground()
@@ -31,5 +29,3 @@ void Entities::Obstacles::Ground::Update()
 	this->Move();
 	animation.Update(Position);
 }
-
-sf::Texture* Entities::Obstacles::Ground::texture(Managers::GraphicManager::getInstance()->loadTexture("Assets/Ground2.png"));

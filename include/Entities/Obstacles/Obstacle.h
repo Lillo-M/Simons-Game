@@ -20,6 +20,7 @@ namespace Entities
             virtual void Update() = 0;
             void Draw();
             void Save(std::ofstream& savefile);
+            void Load(std::ifstream& savefile);
         };
     }
 }

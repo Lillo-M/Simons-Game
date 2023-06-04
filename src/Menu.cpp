@@ -34,10 +34,9 @@ void Menus::Menu::MoveDown()
     buttons[currentButtom++]->UnSelected();
     buttons[currentButtom]->Selected();
 }
-
+/* */
 void Menus::Menu::PushButtom(GraphicElements::Buttom* buttom)
 {
     buttons.push_back(buttom);
     buttomCont++;
 }
-/* */

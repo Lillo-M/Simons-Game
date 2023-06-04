@@ -20,7 +20,6 @@ namespace Entities
             {
             private:
                 std::vector<Arrow*> aShots;
-                GraphicElements::ComplexAnimation animation;
                 static Player* p1;
                 static Player* p2;
                 bool attackcooled;
@@ -31,7 +30,7 @@ namespace Entities
                 float shoottimer;
                 float meeletimer;
                 float attackcd;
-                int count;
+                int shootCount;
             public:
                 Archer(const sf::Vector2f pos = sf::Vector2f(0, 0));
                 ~Archer();

@@ -7,7 +7,9 @@ namespace Levels{
         void CreateMap();
         Level1(States::StateMachine* pSM = NULL, Managers::InputManager* pIM = NULL);
         ~Level1();
+        void Draw();
     private:
-        //sf::Image background;
+        sf::Sprite background;
+        sf::Texture* texture;
     };
 }

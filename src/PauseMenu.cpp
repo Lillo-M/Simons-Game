@@ -16,6 +16,11 @@ Menus::PauseMenu::PauseMenu(States::StateMachine *pSM, Managers::InputManager *p
 
 Menus::PauseMenu::~PauseMenu()
 {
+    for(int i = 0; i < buttomCont; i++)
+    {
+        if(buttons[i])
+            delete buttons[i];
+    }
     delete pMObserver;
     pIM->removeObserver(static_cast<Observers::Observer*>(pMObserver));
     pIM = NULL;
@@ -79,10 +84,4 @@ void Menus::PauseMenu::MoveDown()
         return;
     buttons[currentButtom++]->UnSelected();
     buttons[currentButtom]->Selected();
-}
-
-void Menus::PauseMenu::PushButtom(GraphicElements::Buttom* buttom)
-{
-    buttons.push_back(buttom);
-    buttomCont++;
 }

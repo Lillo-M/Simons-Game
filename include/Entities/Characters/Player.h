@@ -16,7 +16,7 @@ namespace Entities
 		{
 		private:
 			std::vector<PlayerProjectile*> shots;
-			int shotcount;
+			int shootCount;
 			float maxVelocity;
 			bool BoolMoveRight;
 			bool BoolMoveLeft;

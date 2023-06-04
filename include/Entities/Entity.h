@@ -16,6 +16,7 @@ namespace Entities
 		virtual void Move() = 0;
 		virtual void Update() = 0;
 		virtual void Save(std::ofstream& savefile) = 0;
+		virtual void Load(std::ifstream& savefile) = 0;
 		virtual void Draw() = 0;
 		void Gravity();
 		const bool getGrounded() const;

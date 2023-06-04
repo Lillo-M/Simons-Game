@@ -155,7 +155,7 @@ void Levels::Level::CreateLava(const sf::Vector2f pos)
 
 void Levels::Level::CreateEntity(char id, sf::Vector2f pos)
 {
-    pos = sf::Vector2f( 64 + pos.x * 64, pos.y * 64);
+    pos = sf::Vector2f( -64 + pos.x * 64, pos.y * 64);
     switch (id)
     {
     case 'P':

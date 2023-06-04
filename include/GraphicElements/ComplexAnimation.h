@@ -23,7 +23,7 @@ namespace GraphicElements
 
         ~ComplexAnimation();
 
-        void pushAnimation(Animation_ID id, const char* path, sf::Vector2u imageCount, const float switchTime = 0.2f);
+        void pushAnimation(Animation_ID id, const char* path, sf::Vector2u imageCount, const float switchTime);
 
         void Update(Animation_ID id, sf::Vector2f position, bool faceRight);
 

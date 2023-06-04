@@ -17,6 +17,10 @@ void Entities::Obstacles::Obstacle::Save(std::ofstream& savefile)
 {
 }
 
+void Entities::Obstacles::Obstacle::Load(std::ifstream& savefile)
+{
+}
+
 void Entities::Obstacles::Obstacle::Draw()
 {
 	animation.Draw();
