@@ -28,6 +28,7 @@ namespace Entities
 			bool onIce;
 			GraphicElements::ComplexAnimation animation;
 			float attackcd;	/*Cooldown do ataque*/
+			int Points;
 		public:
 			Player(const sf::Vector2f pos = sf::Vector2f(0, 0));
 			~Player();
@@ -45,6 +46,7 @@ namespace Entities
 			void Fall();
 			void Attack(const bool b);
 			void OnCollision(Entities::Entity* ent);
+			void Score(ID id);
 			std::vector<PlayerProjectile*>* getShots();
 		};
 	}

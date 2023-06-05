@@ -27,7 +27,8 @@ Entities::Characters::Player::Player(const sf::Vector2f pos) :
 	animation(),
 	faceRight(false),
 	isJumping(false),
-	onIce(false)
+	onIce(false),
+	Points(0)
 {
 	for(int i = 0; i < 10; i++)
 	{
@@ -40,7 +41,6 @@ Entities::Characters::Player::Player(const sf::Vector2f pos) :
 		shots.push_back(pAux);
 	}
 	HitBox.setOrigin(0, 0);
-	
 	animation.pushAnimation(GraphicElements::Animation_ID::idle, IDLEPATH, sf::Vector2u(8,0), 0.125f);
 	animation.pushAnimation(GraphicElements::Animation_ID::walk, WALKPATH, sf::Vector2u(7,0), 0.143f);
 	animation.pushAnimation(GraphicElements::Animation_ID::jump, JUMPPATH, sf::Vector2u(8,0), 0.125f);
@@ -118,6 +118,7 @@ void Entities::Characters::Player::Move()
 
 void Entities::Characters::Player::Update()
 {
+	std::cout << "Pontos: " << Points << std::endl;
 	this->Move();
 	if(!attackcooled)
 	{
@@ -200,7 +201,7 @@ void Entities::Characters::Player::Attack(const bool b)
 		animation.Update(GraphicElements::Animation_ID::attack, Position, faceRight);
 		attackcooled = false;
 		shots[shootCount]->Shoot(sf::Vector2f(Position.x + \
-		( SIZEX / 2 + shots[shootCount]->getSize().x / 2 ) * (faceRight ? 1:-1), Position.y), \
+		( SIZEX / 2 + shots[shootCount]->getSize().x / 2 ) * (faceRight ? 1:-1), Position.y - 15.f), \
 	        sf::Vector2f((faceRight ? 1:-1) * 15, 0));	
 	
 		shootCount++;
@@ -244,6 +245,22 @@ void Entities::Characters::Player::Save(std::ofstream& savefile)
 }
 void Entities::Characters::Player::Load(std::ifstream &savefile)
 {
+}
+
+void Entities::Characters::Player::Score(ID id)
+{
+	switch (id)
+	{
+	case ID::archer:
+		Points +=  5000;
+		break;
+	case ID::warrior:
+		Points +=  3000;
+		break;
+	case ID::necromancer:
+		Points += 15000;
+		break;
+	}
 }
 
 std::vector<Entities::PlayerProjectile*>* Entities::Characters::Player::getShots() {return &shots;}

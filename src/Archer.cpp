@@ -34,7 +34,7 @@ dEnemy::Archer::Archer(const sf::Vector2f pos) : Enemy(pos, sf::Vector2f(SIZEX, 
 	
 	for (int i = 0; i < ARROWS; i++)
 	{
-		Arrow *pAux = new Arrow(sf::Vector2f(0, 0), sf::Vector2f(0, 0), static_cast<Entities::Characters::Character *>(this));
+		Arrow *pAux = new Arrow(sf::Vector2f(0, 0), sf::Vector2f(0, 0), this);
 		if (!pAux)
 		{
 			std::cout << std::endl

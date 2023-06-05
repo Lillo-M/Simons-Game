@@ -23,3 +23,11 @@ void GraphicElements::SimpleSprite::Reset(const char* path, sf::Vector2f positio
     HitBox.setOrigin(size.x/2, size.y/2);
     HitBox.setPosition(position);
 }
+
+void GraphicElements::SimpleSprite::faceRight(bool b)
+{
+    if(b)
+        HitBox.setScale(1.f,1.f);
+    else
+        HitBox.setScale(-1.f,1.f);
+}

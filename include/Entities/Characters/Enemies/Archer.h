@@ -19,7 +19,7 @@ namespace Entities
             class Archer : public Enemy
             {
             private:
-                std::vector<Arrow*> aShots;
+                std::vector<Entities::Arrow*> aShots;
                 static Player* p1;
                 static Player* p2;
                 bool attackcooled;

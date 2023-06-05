@@ -71,6 +71,8 @@ void Managers::GraphicManager::CenterView(sf::Vector2f pos)
         pos = sf::Vector2f(pos.x, 3 * HEIGHT / 2);
     if (pos.x < WIDTH / 2)
         pos = sf::Vector2f(WIDTH / 2, pos.y);
+    if (pos.x > 6 * WIDTH)
+        pos = sf::Vector2f(6 * WIDTH, pos.y);
     view.setCenter(pos);
     window.setView(view);
 }

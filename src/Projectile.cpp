@@ -13,17 +13,6 @@ Entities::Projectile::~Projectile()
 {
 }
 
-void Entities::Projectile::Update()
-{
-    Move();
-    HitBox.setPosition(Position);
-}
-
-void Entities::Projectile::Draw()
-{
-	pGM->Draw(HitBox);
-}
-
 void Entities::Projectile::Shoot(sf::Vector2f pos, sf::Vector2f vel)
 {
     Position = pos;

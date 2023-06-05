@@ -4,6 +4,7 @@ Entities::Arrow::Arrow(sf::Vector2f pos, sf::Vector2f velocity, Entities::Charac
     Projectile (pos, velocity, owner)
 { 
     HitBox.setFillColor(sf::Color::Red);
+    animation.Reset("Assets/Archer/Arrow.png", pos, sf::Vector2f(30.f,100.f));
 }
 
 Entities::Arrow::~Arrow(){ } 
@@ -28,4 +29,16 @@ void Entities::Arrow::OnCollision(Entities::Entity* ent)
         static_cast<Entities::Characters::Character*>(ent)->Damage(true);
     }
     collided = true;
+}
+
+void Entities::Arrow::Update()
+{
+    Move();
+    (Velocity.x > 0 ? animation.faceRight(true):animation.faceRight(false));
+    animation.Update(Position);
+}
+
+void Entities::Arrow::Draw()
+{
+	animation.Draw();
 }
