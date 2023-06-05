@@ -39,7 +39,9 @@ namespace Levels
         void LoadLevel();
         void Reset();
         bool getLevelStarted() const;
+        int getScore() const;
     protected:
+        int                                 totalScore;
         bool                                levelStarted;
     	Managers::InputManager*             pIM;
         Observers::PlayerInputManager*      pPIM;

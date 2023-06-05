@@ -31,6 +31,7 @@ Managers::InputManager::InputManager()
 	keyMap[sf::Keyboard::Y] = 'Y';
 	keyMap[sf::Keyboard::Z] = 'Z';
 	keyMap[sf::Keyboard::Enter] = "Enter";
+	keyMap[sf::Keyboard::BackSpace] = "BackSpace";
 	keyMap[sf::Keyboard::LShift] = "LShift";
 	keyMap[sf::Keyboard::Space] = "Space";
 	keyMap[sf::Keyboard::LControl] = "lCtrl";

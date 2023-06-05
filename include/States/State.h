@@ -10,10 +10,11 @@ namespace States
         empty =        -1,
         mainMenu =      0,
         level1 =        1,
-        gameOver =      2,
+        gameOverState = 2,
         pauseMenu =     3,
         loadGameState = 4,
-        newGameState  = 5
+        newGameState  = 5,
+        leaderBoard   = 6
     };
 
     class State

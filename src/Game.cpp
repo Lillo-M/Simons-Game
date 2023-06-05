@@ -46,6 +46,22 @@ Game::Game():
         exit(1);
     }}
 
+    try{statesMap[States::stateID::leaderBoard] = static_cast<States::State*>(new Menus::LeaderBoard(static_cast<States::StateMachine*>(this),iManager));}
+    catch(int error){
+    if(!error)
+    {
+        std::cout << "ERROR: Failed to Memory Allocate" << std::endl;
+        exit(1);
+    }}
+
+    try{statesMap[States::stateID::gameOverState] = static_cast<States::State*>(new States::GameOverState(static_cast<States::StateMachine*>(this),iManager));}
+    catch(int error){
+    if(!error)
+    {
+        std::cout << "ERROR: Failed to Memory Allocate" << std::endl;
+        exit(1);
+    }}
+
     static_cast<States::LoadGameState*>(statesMap[States::stateID::loadGameState])->PushLevel(static_cast<Levels::Level*>(statesMap[States::stateID::level1]));
 
     static_cast<States::NewGameState*>(statesMap[States::stateID::newGameState])->PushLevel(static_cast<Levels::Level*>(statesMap[States::stateID::level1]));

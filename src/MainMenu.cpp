@@ -41,7 +41,9 @@ void Menus::MainMenu::Select()
         break;
 
     case 2:
+        changeState(States::stateID::leaderBoard);
         break;
+
     case 3:
         pGM->Close();
         break;
@@ -49,6 +51,9 @@ void Menus::MainMenu::Select()
     default:
         break;
     }
+    buttons[currentButtom--]->UnSelected();
+    currentButtom = 0;
+    buttons[currentButtom]->Selected();
 }
 
 void Menus::MainMenu::Draw()
@@ -61,6 +66,7 @@ void Menus::MainMenu::Draw()
 
 void Menus::MainMenu::Update()
 {
+    pGM->CenterView(sf::Vector2f(0,0));
     isRunning = true;
     for(int i = 0; i < buttomCont; i++)
     {

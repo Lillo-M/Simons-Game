@@ -7,8 +7,10 @@
 #include "Managers/InputManager.h"
 #include "Menus/MainMenu.h"
 #include "Menus/PauseMenu.h"
+#include "Menus/LeaderBoard.h"
 #include "States/LoadGameState.h"
 #include "States/NewGameState.h"
+#include "States/GameOverState.h"
 
 class Game: public States::StateMachine
 {

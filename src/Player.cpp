@@ -8,7 +8,7 @@
 
 #define SIZEX 40.f
 #define SIZEY 66.f
-#define LIVES 100
+#define LIVES 3
 #define MAXV 10
 #define ATRITO 0.45
 #define JUMPHEIGHT -11.f
@@ -118,7 +118,7 @@ void Entities::Characters::Player::Move()
 
 void Entities::Characters::Player::Update()
 {
-	std::cout << "Pontos: " << Points << std::endl;
+	//std::cout << "Pontos: " << Points << std::endl;
 	this->Move();
 	if(!attackcooled)
 	{
@@ -262,5 +262,7 @@ void Entities::Characters::Player::Score(ID id)
 		break;
 	}
 }
+
+const int Entities::Characters::Player::getPoints() const {return Points;}
 
 std::vector<Entities::PlayerProjectile*>* Entities::Characters::Player::getShots() {return &shots;}

@@ -47,6 +47,9 @@ void Menus::PauseMenu::Select()
     default:
         break;
     }
+    buttons[currentButtom]->UnSelected();
+    currentButtom = 0;
+    buttons[currentButtom]->Selected();
 }
 
 void Menus::PauseMenu::Draw()
@@ -59,6 +62,7 @@ void Menus::PauseMenu::Draw()
 
 void Menus::PauseMenu::Update()
 {
+    pGM->CenterView(sf::Vector2f(0,0));
     isRunning = true;
     for(int i = 0; i < buttomCont; i++)
     {

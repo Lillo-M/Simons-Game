@@ -6,7 +6,8 @@ Levels::Level::Level(const ID id, States::StateMachine* pSM, Managers::InputMana
     pIM(pIM),
     pPlayer(NULL),
     pPlayer2(NULL),
-    levelStarted(false)
+    levelStarted(false),
+    totalScore(0)
 {
     try{
         pCManager = new Managers::CollisionManager;
@@ -210,6 +211,22 @@ void Levels::Level::Update()
     Managers::GraphicManager::updateDeltaTime();
     pCManager->Manage();
     pGM->CenterView(pPlayer->getPosition());
+    if(!pPlayer->getAlive())
+    {
+        if(pPlayer2)
+        {
+            if(!pPlayer2->getAlive())
+            {
+                totalScore = pPlayer->getPoints() + pPlayer2->getPoints();
+                changeState(States::stateID::gameOverState);    
+            }
+        }
+        else
+        {
+            totalScore = pPlayer->getPoints();
+            changeState(States::stateID::gameOverState);   
+        }
+    }
 }
 
 void Levels::Level::Draw()
@@ -333,6 +350,8 @@ void Levels::Level::Reset()
     this->CreateMap();
     //std::cout<< "Reset Complete" << std::endl;
 }
+
+int Levels::Level::getScore() const {return totalScore;}
 
 bool Levels::Level::getLevelStarted() const {return levelStarted;}
 
