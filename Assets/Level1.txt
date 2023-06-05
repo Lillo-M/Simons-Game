@@ -1,4 +1,4 @@
-G                                       
+G                                     
 G                                   
 G                                   
 G                                       
@@ -9,18 +9,18 @@ G
 G                                       
 G                                       
 G                                       
-G                                       
+G                                      
 G                                       
 G                                       
 G                                       
 G                                       
 G                                       
 G                                        
-G   P                                    
-G                                                                       G
-G           N                                                           
-G                                                                     G G G
-G                      N  A             A              A                         A
-G G G G G G GW      G G G G L L L G G G G GW      G G G GW       G G G G G G G   G G G G       G G G G G       G G G G G G 
-             G G G G       G G G G         G G G G       G G G G G        G G G G       G G G G         G G G G       
+G                                      
+G                                                                                                                                                               P    P                                                                  
+G   
 
+
+
+G                                                                                                                                                           
+G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G
