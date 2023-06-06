@@ -104,10 +104,11 @@ void States::GameOverState::SaveData()
         std::cout << "ERROR: Failed to Open 'leaderboard.txt'" << std::endl;
         exit(1);
     }
-
+    int min = 0;
     selection_sort(points, leadersCount, names);
-
-    for(int i = leadersCount - 1; i >= 0; i--)
+    if(leadersCount >= 7)
+        min = leadersCount - 7;
+    for(int i = leadersCount - 1; i >= min; i--)
     {
         oleadersArchive << names[i] << std::endl;
         oleadersArchive << points[i] << std::endl;
