@@ -4,15 +4,12 @@ using namespace Entities;
 
 Entity::Entity(const sf::Vector2f pos, const sf::Vector2f size, const bool isS, ID id) : 
 	Being(id),
-	HitBox(size),
 	Position(pos.x, pos.y),
 	grounded(false),
 	Velocity(sf::Vector2f(0, 0)),
 	isStatic(isS),
 	Size(size)
 {
-	HitBox.setFillColor(sf::Color(sf::Color::White)); // RGBA de Teste
-	HitBox.setPosition(Position);
 	Cont++;
 }
 Entity::~Entity()

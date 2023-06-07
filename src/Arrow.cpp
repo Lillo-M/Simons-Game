@@ -3,7 +3,6 @@
 Entities::Arrow::Arrow(sf::Vector2f pos, sf::Vector2f velocity, Entities::Characters::Character *owner) : 
     Projectile (pos, velocity, owner)
 { 
-    HitBox.setFillColor(sf::Color::Red);
     animation.Reset("Assets/Archer/Arrow.png", pos, sf::Vector2f(30.f,100.f));
 }
 

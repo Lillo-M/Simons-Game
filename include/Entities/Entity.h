@@ -43,6 +43,6 @@ namespace Entities
 		sf::Vector2f Size;
 		static const float gravity;
 		bool grounded;
-		sf::RectangleShape HitBox;
+		//sf::RectangleShape HitBox;
 	};
 }
