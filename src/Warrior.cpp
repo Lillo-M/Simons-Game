@@ -71,7 +71,6 @@ void dEnemy::Warrior::Update()
 		animation.Update(GraphicElements::Animation_ID::walk, Position, directionright);
 	this->Move();
 	this->Damage();
-	HitBox.setPosition(Position);
 }
 
 void dEnemy::Warrior::Draw()

@@ -70,10 +70,6 @@ bool Entity::getisStatic()
 	return isStatic;
 }
 
-void Entity::OnCollision(Entity *ent)
-{
-}
-
 void Entity::updateDeltaTime(float dt)
 {
 	Entity::dt = dt; 

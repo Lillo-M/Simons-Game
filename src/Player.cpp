@@ -10,9 +10,9 @@
 #define SIZEY 66.f
 #define LIVES 3
 #define MAXV 10
-#define ATRITO 0.45
+#define ATRITO 0.30
 #define JUMPHEIGHT -11.f
-#define PSPEED 1
+#define PSPEED 0.8
 
 Entities::Characters::Player::Player(const sf::Vector2f pos) : 
 	Character(pos, sf::Vector2f(SIZEX, SIZEY), false, ID::player, LIVES),
@@ -40,7 +40,6 @@ Entities::Characters::Player::Player(const sf::Vector2f pos) :
 		}
 		shots.push_back(pAux);
 	}
-	HitBox.setOrigin(0, 0);
 	animation.pushAnimation(GraphicElements::Animation_ID::idle, IDLEPATH, sf::Vector2u(8,0), 0.125f);
 	animation.pushAnimation(GraphicElements::Animation_ID::walk, WALKPATH, sf::Vector2u(7,0), 0.143f);
 	animation.pushAnimation(GraphicElements::Animation_ID::jump, JUMPPATH, sf::Vector2u(8,0), 0.125f);
@@ -64,7 +63,7 @@ void Entities::Characters::Player::Move()
 {
 	if(onIce)
 	{
-		maxVelocity = 2 * MAXV;
+		maxVelocity = 1.25f * MAXV;
 	}
 	else
 		maxVelocity = MAXV;
@@ -95,15 +94,15 @@ void Entities::Characters::Player::Move()
 			fall = false;
 	}
 
-	if (Velocity.x < 0 && !BoolMoveLeft && !BoolMoveRight) // Atrito
+	if (Velocity.x < 0) // Atrito
 	{
-		Velocity.x += ATRITO * dt * MULT;
+		Velocity.x += friction * dt * MULT;
 		if (Velocity.x > 0)
 			Velocity.x = 0;
 	}
-	else if (Velocity.x > 0 && !BoolMoveLeft && !BoolMoveRight) // Atrito
+	else if (Velocity.x > 0) // Atrito
 	{
-		Velocity.x -= ATRITO * dt * MULT;
+		Velocity.x -= friction * dt * MULT;
 		if (Velocity.x < 0)
 			Velocity.x = 0;
 	}
@@ -118,7 +117,6 @@ void Entities::Characters::Player::Move()
 
 void Entities::Characters::Player::Update()
 {
-	//std::cout << "Pontos: " << Points << std::endl;
 	this->Move();
 	if(!attackcooled)
 	{
@@ -285,6 +283,8 @@ void Entities::Characters::Player::Score(ID id)
 		break;
 	}
 }
+
+void Entities::Characters::Player::setFriction(float friction) {this->friction = friction;}
 
 const int Entities::Characters::Player::getPoints() const {return Points;}
 

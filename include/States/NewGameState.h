@@ -1,4 +1,4 @@
-#pragma once
+/*#pragma once
 
 #include "State.h"
 #include "../Levels/Level.h"
@@ -6,15 +6,15 @@
 
 namespace States
 {
-    class NewGameState: public State
+    class SwitchLevelState: public State
     {
     public:
-        NewGameState(States::StateMachine* pSMachine);
-        ~NewGameState();
+        SwitchLevelState(States::StateMachine* pSMachine);
+        ~SwitchLevelState();
         void Update();
         void Draw();
         void PushLevel(Levels::Level* level);
     private:
         std::list<Levels::Level*> levels;
     };
-}
+}*/

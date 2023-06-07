@@ -178,13 +178,15 @@ void dEnemy::Archer::setPlayer2(Player *pPlayer2)
 
 dPlayer dEnemy::Archer::getNearest()
 {
-	if (p2)
+	if (p2->getAlive() && p1->getAlive())
 	{
 		if (abs(p1->getPosition().x - Position.x) > abs(p2->getPosition().x - Position.x))
 			return p2;
 		else
 			return p1;
 	}
+	else if(p2->getAlive())
+		return p2;
 	else
 		return p1;
 }

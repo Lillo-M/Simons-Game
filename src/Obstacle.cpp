@@ -9,10 +9,6 @@ Entities::Obstacles::Obstacle::~Obstacle()
 {
 }
 
-void Entities::Obstacles::Obstacle::OnCollision(Entities::Entity* ent)
-{
-}
-
 void Entities::Obstacles::Obstacle::Save(std::ofstream& savefile)
 {
 }
@@ -25,5 +21,3 @@ void Entities::Obstacles::Obstacle::Draw()
 {
 	animation.Draw();
 }
-
-const float Entities::Obstacles::Obstacle::forca_empuxo(gravity);

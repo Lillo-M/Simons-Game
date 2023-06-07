@@ -1,12 +1,12 @@
 #include "Level.h"
 #include <fstream>
 namespace Levels{
-    class Level1 : public Levels::Level
+    class Level2 : public Levels::Level
     {
     public:
+        Level2(States::StateMachine* pSM = NULL, Managers::InputManager* pIM = NULL);
+        ~Level2();
         void CreateMap();
-        Level1(States::StateMachine* pSM = NULL, Managers::InputManager* pIM = NULL);
-        ~Level1();
         void Draw();
         void Update();
     private:

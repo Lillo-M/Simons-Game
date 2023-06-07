@@ -1,7 +1,7 @@
 #include "../include/Levels/Level.h"
 
-Levels::Level::Level(const ID id, States::StateMachine* pSM, Managers::InputManager* pIM) : 
-    State(pSM, States::stateID::level1),
+Levels::Level::Level(const ID id, const States::stateID sid, States::StateMachine* pSM, Managers::InputManager* pIM) : 
+    State(pSM, sid),
     Being(id),
     pIM(pIM),
     pPlayer(NULL),
@@ -71,13 +71,11 @@ void Levels::Level::CreatePlayer(const sf::Vector2f pos)
     {
         pPlayer = pAux;
         pPIM->setpPlayer(pAux);
-        Entities::Characters::Enemies::Archer::setPlayer(pPlayer);
     }
     else
     {
         pPlayer2 = pAux;
         pPIM->setpPlayer2(pAux);
-        Entities::Characters::Enemies::Archer::setPlayer2(pPlayer2);
     }
     std::vector<Entities::PlayerProjectile*>::iterator it;
     for(it = pAux->getShots()->begin(); it != pAux->getShots()->end(); it++)
@@ -195,8 +193,14 @@ void Levels::Level::CreateEntity(char id, sf::Vector2f pos)
     }
 }
 
-void Levels::Level::Update()
+/*void Levels::Level::Update()
 {
+    if(!isRunning)
+    {
+        Entities::Characters::Enemies::Archer::setPlayer(pPlayer);
+        if(twoPlayers)
+            Entities::Characters::Enemies::Archer::setPlayer2(pPlayer2);
+    }
     levelStarted = true;
     isRunning = true;
     Math::EntityTList::Iterator it;
@@ -213,13 +217,10 @@ void Levels::Level::Update()
     pGM->CenterView(pPlayer->getPosition());
     if(!pPlayer->getAlive())
     {
-        if(pPlayer2)
+        if(twoPlayers && !pPlayer2->getAlive())
         {
-            if(!pPlayer2->getAlive())
-            {
-                totalScore = pPlayer->getPoints() + pPlayer2->getPoints();
-                changeState(States::stateID::gameOverState);    
-            }
+            totalScore = pPlayer->getPoints() + pPlayer2->getPoints();
+            changeState(States::stateID::gameOverState);    
         }
         else
         {
@@ -228,12 +229,12 @@ void Levels::Level::Update()
         }
     }
 }
+/*  */
 
-void Levels::Level::Draw()
+/*void Levels::Level::Draw()
 {
     Math::EntityTList::Iterator it;
 
-    /* teste */
     DentitiesList.DrawEntities();
 
     it = SentitiesList.begin();    
@@ -243,12 +244,13 @@ void Levels::Level::Draw()
     }
 
 }
-
+/*  */
 void Levels::Level::SaveLevel()
 {
     std::ofstream savefile("Assets/savefile.txt", std::ofstream::binary);
 	std::string line;
 	savefile << this->getID() << std::endl;
+    savefile << twoPlayers << std::endl;
     DentitiesList.Save(savefile);
     savefile << "end" << std::endl;
     savefile.close();
@@ -260,8 +262,10 @@ void Levels::Level::LoadLevel()
     float x;
     float y;
     std::ifstream savefile("Assets/savefile.txt", std::ifstream::binary);
-    std::string line; // Brincando com persistencia de objetos . . . 
+    std::string line;
     savefile >> iread;
+    savefile >> iread;
+    twoPlayers = static_cast<bool>(iread);
     Math::EntityTList::Iterator it = DentitiesList.getTList().begin();
     for(it; it != DentitiesList.getTList().end(); it++)
     {
@@ -293,6 +297,14 @@ void Levels::Level::Reset()
 
 int Levels::Level::getScore() const {return totalScore;}
 
+int Levels::Level::getPlayerScore() const {return pPlayer->getPoints();}
+
+int Levels::Level::getPlayer2Score() const {return pPlayer2->getPoints();}
+
 bool Levels::Level::getLevelStarted() const {return levelStarted;}
 
+void Levels::Level::setTwoPlayers(bool twoPlayers) {Levels::Level::twoPlayers = twoPlayers;}
+
 Observers::PlayerInputManager* Levels::Level::getPlayerInputManager() const { return pPIM;}
+
+bool Levels::Level::twoPlayers(false);

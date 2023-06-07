@@ -31,7 +31,7 @@ namespace Entities
 		void setPosition(float x, float y);
 		void setVelocity(sf::Vector2f vel);
 		void setVelocity(float x, float y);
-		virtual void OnCollision(Entity* ent);
+		virtual void OnCollision(Entity* ent) = 0;
 		static void updateDeltaTime(float dt);
 	private:
 		static unsigned int Cont;
