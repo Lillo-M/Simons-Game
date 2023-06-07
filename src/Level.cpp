@@ -249,12 +249,6 @@ void Levels::Level::SaveLevel()
     std::ofstream savefile("Assets/savefile.txt", std::ofstream::binary);
 	std::string line;
 	savefile << this->getID() << std::endl;
-    if(pPlayer2)
-    {
-        savefile << 1 << std::endl;
-    }
-    else
-        savefile << 0 << std::endl;
     DentitiesList.Save(savefile);
     savefile << "end" << std::endl;
     savefile.close();
@@ -268,61 +262,7 @@ void Levels::Level::LoadLevel()
     std::ifstream savefile("Assets/savefile.txt", std::ifstream::binary);
     std::string line; // Brincando com persistencia de objetos . . . 
     savefile >> iread;
-    savefile >> iread;
-    bool player2 = static_cast<bool>(iread);
-    savefile >> iread;
     Math::EntityTList::Iterator it = DentitiesList.getTList().begin();
-
-    if(player2)
-    {
-        //std::cout << "2 players" << std::endl;
-        for(int i = 0; i < 2; i++)
-        {
-            savefile >> iread;
-            static_cast<Entities::Characters::Player*>(*it)->setLives(iread);
-            savefile >> iread;
-            static_cast<Entities::Characters::Player*>(*it)->setAlive(static_cast<bool>(iread));
-            savefile >> x;
-            savefile >> y;
-            //std::cout << x << "," << y <<std::endl;
-            it->setPosition(x,y);
-            savefile >> x;
-            savefile >> y;
-            it->setVelocity(x,y);
-            savefile >> iread;
-            static_cast<Entities::Characters::Player*>(*it)->setFacing(iread);
-            std::vector<Entities::PlayerProjectile*>* vshots = static_cast<Entities::Characters::Player*>(*it)->getShots();
-            it++;
-            for(int j = 0; j < 10; j++)
-            {
-                vshots->operator[](j)->Load(savefile);
-                it++;
-            }
-            savefile >> iread;
-        }
-    }
-    else
-    {
-        savefile >> iread;
-        static_cast<Entities::Characters::Player*>(*it)->setLives(iread);
-        savefile >> iread;
-        static_cast<Entities::Characters::Player*>(*it)->setAlive(static_cast<bool>(iread));
-        savefile >> x;
-        savefile >> y;
-        it->setPosition(x,y);
-        savefile >> x;
-        savefile >> y;
-        it->setVelocity(x,y);
-        savefile >> iread;
-        static_cast<Entities::Characters::Player*>(*it)->setFacing(iread);
-        std::vector<Entities::PlayerProjectile*>* vshots = static_cast<Entities::Characters::Player*>(*it)->getShots();
-        it++;
-        for(int j = 0; j < 10; j++)
-        {
-            vshots->operator[](j)->Load(savefile);
-            it++;
-        }
-    }
     for(it; it != DentitiesList.getTList().end(); it++)
     {
         if(it->getID() == ID::projectile)

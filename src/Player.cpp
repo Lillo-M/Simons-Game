@@ -238,6 +238,7 @@ void Entities::Characters::Player::Save(std::ofstream& savefile)
     savefile << Velocity.x << std::endl;
 	savefile << Velocity.y << std::endl;
 	savefile << faceRight << std::endl;
+	savefile << Points << std::endl;
 	for(int i = 0; i < shots.size(); i++)
 	{
 		shots[i]->Save(savefile);
@@ -245,6 +246,28 @@ void Entities::Characters::Player::Save(std::ofstream& savefile)
 }
 void Entities::Characters::Player::Load(std::ifstream &savefile)
 {
+	float x, y;
+	int iread;
+	savefile >> iread;
+	savefile >> iread;
+    this->setLives(iread);
+    savefile >> iread;
+    this->setAlive(static_cast<bool>(iread));
+	savefile >> x;
+    savefile >> y;
+    this->setPosition(x,y);
+    savefile >> x;
+    savefile >> y;
+    this->setVelocity(x,y);
+    savefile >> iread;
+    this->setFacing(iread);
+    savefile >> iread;
+    this->setPoints(iread);
+    std::vector<Entities::PlayerProjectile*>* vshots = this->getShots();
+    for(int j = 0; j < 10; j++)
+    {
+        vshots->operator[](j)->Load(savefile);
+    }
 }
 
 void Entities::Characters::Player::Score(ID id)
@@ -264,5 +287,7 @@ void Entities::Characters::Player::Score(ID id)
 }
 
 const int Entities::Characters::Player::getPoints() const {return Points;}
+
+void Entities::Characters::Player::setPoints(int Points) {this->Points = Points;}
 
 std::vector<Entities::PlayerProjectile*>* Entities::Characters::Player::getShots() {return &shots;}

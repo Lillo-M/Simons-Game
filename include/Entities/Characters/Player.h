@@ -47,6 +47,7 @@ namespace Entities
 			void Attack(const bool b);
 			void OnCollision(Entities::Entity* ent);
 			void Score(ID id);
+			void setPoints(int Points);
 			const int getPoints() const;
 			std::vector<PlayerProjectile*>* getShots();
 		};
