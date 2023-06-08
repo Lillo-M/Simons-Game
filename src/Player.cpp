@@ -8,7 +8,7 @@
 
 #define SIZEX 40.f
 #define SIZEY 66.f
-#define LIVES 5
+#define LIVES 100
 #define MAXV 10
 #define ATRITO 0.30
 #define JUMPHEIGHT -11.f

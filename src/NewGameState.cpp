@@ -36,7 +36,7 @@ void States::SwitchLevelState::Update()
         (*it)->Reset();
     }
     changeState(stateID::level1);
-    /*  */
+    /*  
 }
 
 void States::SwitchLevelState::Draw()

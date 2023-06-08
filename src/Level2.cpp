@@ -70,6 +70,9 @@ void Levels::Level2::Update()
         }
         Entities::Characters::Enemies::Archer::setPlayer(pPlayer);
         Entities::Characters::Enemies::Archer::setPlayer2(pPlayer2);
+        Entities::Characters::Enemies::NecroMancer::NMsetPlayer(pPlayer);
+        Entities::Characters::Enemies::NecroMancer::NMsetPlayer2(pPlayer2);
+
         if(!twoPlayers)
             pPlayer2->setAlive(false);
     }

@@ -6,9 +6,9 @@ DA
 5000
 CLEAR
 5000
-DA
+W
 0
 FF
 0
-W
+DA
 0

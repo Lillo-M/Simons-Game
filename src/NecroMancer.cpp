@@ -136,6 +136,18 @@ void Entities::Characters::Enemies::NecroMancer::Load(std::ifstream &savefile)
 	savefile >> y;
 	// std::cout << x << "," << y <<std::endl;
 	this->setVelocity(x, y);
+	savefile >> iread;
+	this->faceLeft = static_cast<bool>(iread);
+	savefile >> x;
+	this->dashCharged = x;
+	savefile >> y;
+	this->dTime = y;
+	savefile >> iread;
+	this->vulnerable = static_cast<bool>(iread);
+	savefile >> iread;
+	this->crash = static_cast<bool>(iread);
+	savefile >> iread;
+	this->attacking = static_cast<bool>(iread);
 }
 void Entities::Characters::Enemies::NecroMancer::Save(std::ofstream &savefile)
 {
@@ -147,6 +159,11 @@ void Entities::Characters::Enemies::NecroMancer::Save(std::ofstream &savefile)
 	savefile << Velocity.x << std::endl;
 	savefile << Velocity.y << std::endl;
 	savefile << faceLeft << std::endl;
+	savefile << dashCharged << std::endl;
+	savefile << vulnerable << std::endl;
+	savefile << crash << std::endl;
+	savefile << attacking << std::endl;
+	savefile << dTime << std::endl;
 }
 
 void Entities::Characters::Enemies::NecroMancer::OnCollision(Entities::Entity *ent)
