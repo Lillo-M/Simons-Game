@@ -44,4 +44,5 @@ void GraphicElements::ComplexAnimation::Update(Animation_ID id, sf::Vector2f pos
     HitBox.setPosition(position);
     HitBox.setTextureRect(animationMap[currentAnimation]->getSize());
     HitBox.setTexture(animationMap[currentAnimation]->getTexture());
+    //HitBox.setScale(2,2);
 }

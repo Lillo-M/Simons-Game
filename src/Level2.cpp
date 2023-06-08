@@ -6,7 +6,7 @@ Levels::Level2::Level2(States::StateMachine* pSM, Managers::InputManager* pIM) :
     CreateMap();
     pCManager->setDList(DentitiesList.getTList());
     pCManager->setSList(SentitiesList);
-    texture = pGM->loadTexture("Assets/Vulcano.jpg");
+    texture = pGM->loadTexture("Assets/Vulcano.png");
     background.setTexture(*texture);
     background.setScale(1.25f, 0.75f);
     background.setOrigin(texture->getSize().x/(float)2, texture->getSize().y/(float)2);
