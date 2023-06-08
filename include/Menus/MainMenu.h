@@ -2,6 +2,7 @@
 #include "Menu.h"
 #include "../Observers/MenuObserver.h"
 #include "../States/State.h"
+#include "../Levels/Level.h"
 
 namespace Menus
 {
@@ -18,6 +19,7 @@ namespace Menus
     private:
         Observers::MenuObserver* pMObserver;
         Managers::InputManager* pIM;
+        bool twoPlayers;
         //sf::Image background;
     };
 }

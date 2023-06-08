@@ -15,6 +15,8 @@ Entities::Obstacles::Ground::~Ground()
 
 void Entities::Obstacles::Ground::OnCollision(Entities::Entity* ent)
 {
+    if(ent->getID() == ID::player)
+        static_cast<Entities::Characters::Player*>(ent)->setFriction(friction);
 }
 
 void Entities::Obstacles::Ground::Move()
@@ -29,3 +31,6 @@ void Entities::Obstacles::Ground::Update()
 	this->Move();
 	animation.Update(Position);
 }
+
+const float Entities::Obstacles::Ground::forca_empuxo(gravity);
+const float Entities::Obstacles::Ground::friction(0.45);

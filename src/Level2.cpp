@@ -1,30 +1,31 @@
-#include "../include/Levels/Level1.h"
+#include "Levels/Level2.h"
 
-Levels::Level1::Level1(States::StateMachine* pSM, Managers::InputManager* pIM) : 
-    Level(ID::level1, States::stateID::level1, pSM, pIM)
+Levels::Level2::Level2(States::StateMachine* pSM, Managers::InputManager* pIM) : 
+    Level(ID::level2, States::stateID::level2, pSM, pIM)
 {
     CreateMap();
     pCManager->setDList(DentitiesList.getTList());
     pCManager->setSList(SentitiesList);
-    texture = pGM->loadTexture("Assets/Alaska.png");
+    texture = pGM->loadTexture("Assets/Vulcano.jpg");
     background.setTexture(*texture);
-    background.setScale(0.45f, 0.47f);
+    background.setScale(1.25f, 0.75f);
     background.setOrigin(texture->getSize().x/(float)2, texture->getSize().y/(float)2);
+    /* */
 }
 
-Levels::Level1::~Level1()
+Levels::Level2::~Level2()
 {
 }
 
-void Levels::Level1::CreateMap()
+void Levels::Level2::CreateMap()
 {
     std::ifstream Map;
     std::string str;
     int j = 0;
-    Map.open("Assets/Level1.txt");
+    Map.open("Assets/Level2.txt");
     if (!Map.is_open())
     {
-        std::cout << "ERROR: Failed to Open 'Level1.txt'" << std::endl;
+        std::cout << "ERROR: Failed to Open 'Level2.txt'" << std::endl;
         exit(1);
     }
 
@@ -42,7 +43,7 @@ void Levels::Level1::CreateMap()
     Map.close();
 }
 
-void Levels::Level1::Draw()
+void Levels::Level2::Draw()
 {
     Math::EntityTList::Iterator it;
 
@@ -58,10 +59,15 @@ void Levels::Level1::Draw()
     }
 }
 
-void Levels::Level1::Update()
+void Levels::Level2::Update()
 {
     if(!isRunning)
     {
+        if (previousState->getStateID() == States::stateID::level1)
+        {
+            pPlayer->setPoints(static_cast<Levels::Level*>(previousState)->getPlayerScore());
+            pPlayer2->setPoints(static_cast<Levels::Level*>(previousState)->getPlayer2Score());
+        }
         Entities::Characters::Enemies::Archer::setPlayer(pPlayer);
         Entities::Characters::Enemies::Archer::setPlayer2(pPlayer2);
         if(!twoPlayers)
@@ -96,14 +102,12 @@ void Levels::Level1::Update()
         if(twoPlayers)
         {
             totalScore = pPlayer->getPoints() + pPlayer2->getPoints();
-            changeState(States::stateID::gameOverState);
+            changeState(States::stateID::gameOverState);    
         }
         else
         {
             totalScore = pPlayer->getPoints();
-            changeState(States::stateID::gameOverState);
+            changeState(States::stateID::gameOverState);   
         }
     }
-    if(pPlayer->getPosition().x >= 6 * WIDTH + WIDTH/2 - 64.f || twoPlayers && pPlayer2->getPosition().x >= 6 * WIDTH + WIDTH/2 - 64.f )
-        changeState(States::stateID::level2);
 }

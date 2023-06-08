@@ -30,6 +30,14 @@ Game::Game():
         exit(1);
     }}
 
+    try{statesMap[States::stateID::level2] = static_cast<States::State*>(new Levels::Level2(static_cast<States::StateMachine*>(this), iManager));}
+    catch(int error){
+    if(!error)
+    {
+        std::cout << "ERROR: Failed to Memory Allocate" << std::endl;
+        exit(1);
+    }}
+
     try{statesMap[States::stateID::loadGameState] = static_cast<States::State*>(new States::LoadGameState(static_cast<States::StateMachine*>(this)));}
     catch(int error){
     if(!error)
@@ -38,7 +46,7 @@ Game::Game():
         exit(1);
     }}
 
-    try{statesMap[States::stateID::newGameState] = static_cast<States::State*>(new States::NewGameState(static_cast<States::StateMachine*>(this)));}
+    try{statesMap[States::stateID::newGameMenu] = static_cast<States::State*>(new Menus::NewGameMenu(static_cast<States::StateMachine*>(this),iManager));}
     catch(int error){
     if(!error)
     {
@@ -64,7 +72,11 @@ Game::Game():
 
     static_cast<States::LoadGameState*>(statesMap[States::stateID::loadGameState])->PushLevel(static_cast<Levels::Level*>(statesMap[States::stateID::level1]));
 
-    static_cast<States::NewGameState*>(statesMap[States::stateID::newGameState])->PushLevel(static_cast<Levels::Level*>(statesMap[States::stateID::level1]));
+    static_cast<States::LoadGameState*>(statesMap[States::stateID::loadGameState])->PushLevel(static_cast<Levels::Level*>(statesMap[States::stateID::level2]));
+
+    static_cast<Menus::NewGameMenu*>(statesMap[States::stateID::newGameMenu])->PushLevel(static_cast<Levels::Level*>(statesMap[States::stateID::level1]));
+
+    static_cast<Menus::NewGameMenu*>(statesMap[States::stateID::newGameMenu])->PushLevel(static_cast<Levels::Level*>(statesMap[States::stateID::level2]));
     
     currentState = States::stateID::mainMenu;
     Run();

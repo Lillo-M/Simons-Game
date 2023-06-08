@@ -10,9 +10,9 @@
 #define SIZEY 66.f
 #define LIVES 5
 #define MAXV 10
-#define ATRITO 0.45
-#define JUMPHEIGHT -10.f
-#define PSPEED 1
+#define ATRITO 0.30
+#define JUMPHEIGHT -11.f
+#define PSPEED 0.8
 
 Entities::Characters::Player::Player(const sf::Vector2f pos) : 
 	Character(pos, sf::Vector2f(SIZEX, SIZEY), false, ID::player, LIVES),
@@ -40,7 +40,6 @@ Entities::Characters::Player::Player(const sf::Vector2f pos) :
 		}
 		shots.push_back(pAux);
 	}
-	HitBox.setOrigin(0, 0);
 	animation.pushAnimation(GraphicElements::Animation_ID::idle, IDLEPATH, sf::Vector2u(8,0), 0.125f);
 	animation.pushAnimation(GraphicElements::Animation_ID::walk, WALKPATH, sf::Vector2u(7,0), 0.143f);
 	animation.pushAnimation(GraphicElements::Animation_ID::jump, JUMPPATH, sf::Vector2u(8,0), 0.125f);
@@ -64,7 +63,7 @@ void Entities::Characters::Player::Move()
 {
 	if(onIce)
 	{
-		maxVelocity = 2 * MAXV;
+		maxVelocity = 1.25f * MAXV;
 	}
 	else
 		maxVelocity = MAXV;
@@ -95,15 +94,15 @@ void Entities::Characters::Player::Move()
 			fall = false;
 	}
 
-	if (Velocity.x < 0 && !BoolMoveLeft && !BoolMoveRight) // Atrito
+	if (Velocity.x < 0) // Atrito
 	{
-		Velocity.x += ATRITO * dt * MULT;
+		Velocity.x += friction * dt * MULT;
 		if (Velocity.x > 0)
 			Velocity.x = 0;
 	}
-	else if (Velocity.x > 0 && !BoolMoveLeft && !BoolMoveRight) // Atrito
+	else if (Velocity.x > 0) // Atrito
 	{
-		Velocity.x -= ATRITO * dt * MULT;
+		Velocity.x -= friction * dt * MULT;
 		if (Velocity.x < 0)
 			Velocity.x = 0;
 	}
@@ -118,7 +117,6 @@ void Entities::Characters::Player::Move()
 
 void Entities::Characters::Player::Update()
 {
-	//std::cout << "Pontos: " << Points << std::endl;
 	this->Move();
 	if(!attackcooled)
 	{
@@ -238,6 +236,7 @@ void Entities::Characters::Player::Save(std::ofstream& savefile)
     savefile << Velocity.x << std::endl;
 	savefile << Velocity.y << std::endl;
 	savefile << faceRight << std::endl;
+	savefile << Points << std::endl;
 	for(int i = 0; i < shots.size(); i++)
 	{
 		shots[i]->Save(savefile);
@@ -245,6 +244,28 @@ void Entities::Characters::Player::Save(std::ofstream& savefile)
 }
 void Entities::Characters::Player::Load(std::ifstream &savefile)
 {
+	float x, y;
+	int iread;
+	savefile >> iread;
+	savefile >> iread;
+    this->setLives(iread);
+    savefile >> iread;
+    this->setAlive(static_cast<bool>(iread));
+	savefile >> x;
+    savefile >> y;
+    this->setPosition(x,y);
+    savefile >> x;
+    savefile >> y;
+    this->setVelocity(x,y);
+    savefile >> iread;
+    this->setFacing(iread);
+    savefile >> iread;
+    this->setPoints(iread);
+    std::vector<Entities::PlayerProjectile*>* vshots = this->getShots();
+    for(int j = 0; j < 10; j++)
+    {
+        vshots->operator[](j)->Load(savefile);
+    }
 }
 
 void Entities::Characters::Player::Score(ID id)
@@ -263,6 +284,10 @@ void Entities::Characters::Player::Score(ID id)
 	}
 }
 
+void Entities::Characters::Player::setFriction(float friction) {this->friction = friction;}
+
 const int Entities::Characters::Player::getPoints() const {return Points;}
+
+void Entities::Characters::Player::setPoints(int Points) {this->Points = Points;}
 
 std::vector<Entities::PlayerProjectile*>* Entities::Characters::Player::getShots() {return &shots;}

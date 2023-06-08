@@ -3,7 +3,6 @@
 Entities::Arrow::Arrow(sf::Vector2f pos, sf::Vector2f velocity, Entities::Characters::Character *owner) : 
     Projectile (pos, velocity, owner)
 { 
-    HitBox.setFillColor(sf::Color::Red);
     animation.Reset("Assets/Archer/Arrow.png", pos, sf::Vector2f(30.f,100.f));
 }
 
@@ -23,7 +22,8 @@ void Entities::Arrow::OnCollision(Entities::Entity* ent)
 {
     //std::cout << ent->getID() << std::endl;
     //std::cout << owner->getID() << std::endl;
-    if(ent->getID() != owner->getID() && ent->getID() != ID::obstacle && ent->getID() != ID::lava && ent->getID() != ID::ice && ent->getID() != ID::ground && ent->getID() != ID::warrior && ent->getID() != ID::necromancer && ent->getID() != ID::projectile)
+    int targetID = ent->getID();
+    if(targetID == ID::player)
     {
         //std::cout << "Character collided" << std::endl;
         static_cast<Entities::Characters::Character*>(ent)->Damage(true);

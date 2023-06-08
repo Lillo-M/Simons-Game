@@ -39,3 +39,8 @@ void GraphicElements::Buttom::UnSelected()
 {
     text.setFillColor(sf::Color::White);
 }
+
+void GraphicElements::Buttom::changeText(std::string newtext)
+{
+    text.setString(newtext);
+}

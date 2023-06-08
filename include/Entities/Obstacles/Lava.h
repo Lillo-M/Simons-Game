@@ -9,6 +9,9 @@ namespace Entities
 
     class Lava: public Obstacle 
     {
+    private:
+        const int Damage;
+        const static float forca_empuxo;
     public:
         Lava(const sf::Vector2f pos);
         ~Lava();

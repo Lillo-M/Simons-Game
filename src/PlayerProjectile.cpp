@@ -3,8 +3,7 @@
 
 Entities::PlayerProjectile::PlayerProjectile(sf::Vector2f pos, sf::Vector2f velocity, Entities::Characters::Character *owner): 
     Projectile (pos, velocity, owner)
-{ 
-    HitBox.setFillColor(sf::Color::Blue);
+{
     animation.pushAnimation(GraphicElements::Animation_ID::idle, "Assets/Player/Charge_2.png", sf::Vector2u(6,0), 0.16f);
     animation.pushAnimation(GraphicElements::Animation_ID::attack, "Assets/Player/Charge_1.png", sf::Vector2u(6,0), 0.16f);
 }
@@ -23,7 +22,7 @@ void Entities::PlayerProjectile::OnCollision(Entities::Entity* ent)
     //std::cout << targetID << std::endl;
     //std::cout << owner->getID() << std::endl;
     int targetID = ent->getID();
-    if(targetID != ID::player && targetID != ID::obstacle && targetID != ID::lava && targetID != ID::ice && targetID != ID::ground && targetID != ID::projectile)
+    if(targetID == ID::warrior || targetID == ID::archer || targetID == ID::necromancer )
     {
         //std::cout << "Character collided" << std::endl;
         if (ent->getID() != ID::necromancer)
@@ -41,7 +40,6 @@ void Entities::PlayerProjectile::Update()
 {
     Move();
     animation.Update(GraphicElements::Animation_ID::idle, Position, (Velocity.x > 0 ? true:false));
-    //HitBox.setPosition(Position);
 }
 
 void Entities::PlayerProjectile::Draw()

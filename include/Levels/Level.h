@@ -21,10 +21,10 @@ namespace Levels
     class Level: public Being, public States::State
     {
     public:
-        Level(const ID id = ID::level, States::StateMachine* pSM = NULL, Managers::InputManager* pIM = NULL);
+        Level(const ID id = ID::level, const States::stateID sid = States::stateID::empty, States::StateMachine* pSM = NULL, Managers::InputManager* pIM = NULL);
         virtual ~Level();
-        virtual void Draw();
-        virtual void Update();
+        virtual void Draw() = 0;
+        virtual void Update() = 0;
         void CreateWarrior(const sf::Vector2f pos = sf::Vector2f(0, 0));
         void CreatePlayer(const sf::Vector2f pos = sf::Vector2f(0, 0));
         void CreateGround(const sf::Vector2f pos = sf::Vector2f(0, 0));
@@ -40,7 +40,11 @@ namespace Levels
         void Reset();
         bool getLevelStarted() const;
         int getScore() const;
+        int getPlayerScore() const;
+        int getPlayer2Score() const;
+        static void setTwoPlayers(bool twoPlayers);
     protected:
+        static bool                         twoPlayers;
         int                                 totalScore;
         bool                                levelStarted;
     	Managers::InputManager*             pIM;

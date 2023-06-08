@@ -18,6 +18,7 @@ namespace Entities
 			std::vector<PlayerProjectile*> shots;
 			int shootCount;
 			float maxVelocity;
+			float friction;
 			bool BoolMoveRight;
 			bool BoolMoveLeft;
 			bool secondJump;
@@ -47,6 +48,8 @@ namespace Entities
 			void Attack(const bool b);
 			void OnCollision(Entities::Entity* ent);
 			void Score(ID id);
+			void setPoints(int Points);
+			void setFriction(float friction);
 			const int getPoints() const;
 			std::vector<PlayerProjectile*>* getShots();
 		};

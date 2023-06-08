@@ -6,7 +6,6 @@ Entities::Projectile::Projectile(sf::Vector2f pos, sf::Vector2f velocity, Entiti
     owner(owner),
     collided(false)
 {
-    HitBox.setOrigin(sf::Vector2f(10,10));
 }
 
 Entities::Projectile::~Projectile()

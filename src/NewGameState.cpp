@@ -1,18 +1,18 @@
-#include "../include/States/NewGameState.h"
+/*#include "../include/States/NewGameState.h"
 
 
 
-States::NewGameState::NewGameState(States::StateMachine* pSMachine):
-    State(pSMachine, States::stateID::newGameState)
+States::SwitchLevelState::SwitchLevelState(States::StateMachine* pSMachine):
+    State(pSMachine, States::stateID::newGameMenu)
 {
 }
 
-States::NewGameState::~NewGameState()
+States::SwitchLevelState::~SwitchLevelState()
 {
     levels.clear();
 }
 
-void States::NewGameState::Update()
+void States::SwitchLevelState::Update()
 {
     std::cout<< "NewGame" << std::endl;
     std::list<Levels::Level*>::iterator it;
@@ -39,11 +39,11 @@ void States::NewGameState::Update()
     /*  */
 }
 
-void States::NewGameState::Draw()
+void States::SwitchLevelState::Draw()
 {
 }
 
-void States::NewGameState::PushLevel(Levels::Level* level)
+void States::SwitchLevelState::PushLevel(Levels::Level* level)
 {
     levels.push_back(level);
-}
+} */

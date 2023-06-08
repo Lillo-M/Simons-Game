@@ -13,8 +13,9 @@ namespace States
         gameOverState = 2,
         pauseMenu =     3,
         loadGameState = 4,
-        newGameState  = 5,
-        leaderBoard   = 6
+        newGameMenu  =  5,
+        leaderBoard   = 6,
+        level2 =        7
     };
 
     class State

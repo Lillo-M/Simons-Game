@@ -27,7 +27,6 @@ dEnemy::Archer::Archer(const sf::Vector2f pos) : Enemy(pos, sf::Vector2f(SIZEX, 
 	shoottimer(0),
 	aiming(false)
 {
-	HitBox.setOrigin(SIZEX / 2, SIZEY / 2);
 	animation.pushAnimation(GraphicElements::Animation_ID::idle, IDLEPATH, sf::Vector2u(7, 0), 0.2f);
 	animation.pushAnimation(GraphicElements::Animation_ID::meleeattack, MELEEATTACKPATH, sf::Vector2u(4, 0), 0.08f);
 	animation.pushAnimation(GraphicElements::Animation_ID::attack, ATTACKPATH, sf::Vector2u(15, 0), 0.067f);
@@ -54,7 +53,6 @@ void dEnemy::Archer::Update()
 {
 	this->Move();
 	this->Damage();
-	HitBox.setPosition(Position);
 	if (getNearest()->getPosition().x - Position.x >= 0)
 		faceRight = true;
 	else
@@ -173,19 +171,21 @@ void dEnemy::Archer::setPlayer(Player *pPlayer)
 void dEnemy::Archer::setPlayer2(Player *pPlayer2)
 {
 	p2 = pPlayer2;
-	std::cout << p2 << std::endl;
+	std::cout << pPlayer2 << std::endl;
 }
 
 dPlayer dEnemy::Archer::getNearest()
 {
-	if (p2)
+	if (p2->getAlive() && p1->getAlive())
 	{
 		if (abs(p1->getPosition().x - Position.x) > abs(p2->getPosition().x - Position.x))
 			return p2;
 		else
 			return p1;
 	}
-	else
+	else if(p2->getAlive())
+		return p2;
+	else/**/
 		return p1;
 }
 
