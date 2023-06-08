@@ -63,12 +63,9 @@ void Levels::Level1::Update()
     if(!isRunning)
     {
         Entities::Characters::Enemies::Archer::setPlayer(pPlayer);
-        if(twoPlayers)
-            Entities::Characters::Enemies::Archer::setPlayer2(pPlayer2);
-        else
-        {
+        Entities::Characters::Enemies::Archer::setPlayer2(pPlayer2);
+        if(!twoPlayers)
             pPlayer2->setAlive(false);
-        }
     }
     levelStarted = true;
     isRunning = true;

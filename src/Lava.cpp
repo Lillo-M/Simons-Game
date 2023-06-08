@@ -33,6 +33,8 @@ void Entities::Obstacles::Lava::Update()
 
 void Entities::Obstacles::Lava::OnCollision(Entities::Entity* ent)
 {
+	if(ent->getID() == ID::projectile)
+		return;
     Entities::Characters::Character* pChar = static_cast<Entities::Characters::Character*>(ent);
 	pChar->Damage(Damage);
 	sf::Vector2f vel = sf::Vector2f( 0, JUMPHEIGHT/2);

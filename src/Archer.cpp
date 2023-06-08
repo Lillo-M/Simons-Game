@@ -171,7 +171,7 @@ void dEnemy::Archer::setPlayer(Player *pPlayer)
 void dEnemy::Archer::setPlayer2(Player *pPlayer2)
 {
 	p2 = pPlayer2;
-	std::cout << p2 << std::endl;
+	std::cout << pPlayer2 << std::endl;
 }
 
 dPlayer dEnemy::Archer::getNearest()
@@ -185,7 +185,7 @@ dPlayer dEnemy::Archer::getNearest()
 	}
 	else if(p2->getAlive())
 		return p2;
-	else
+	else/**/
 		return p1;
 }
 
