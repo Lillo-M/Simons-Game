@@ -23,7 +23,7 @@ void Entities::Arrow::OnCollision(Entities::Entity* ent)
 {
     //std::cout << ent->getID() << std::endl;
     //std::cout << owner->getID() << std::endl;
-    if(ent->getID() != owner->getID() && ent->getID() != ID::obstacle && ent->getID() != ID::lava && ent->getID() != ID::ice && ent->getID() != ID::ground && ent->getID() != ID::warrior && ent->getID() != ID::necromancer)
+    if(ent->getID() != owner->getID() && ent->getID() != ID::obstacle && ent->getID() != ID::lava && ent->getID() != ID::ice && ent->getID() != ID::ground && ent->getID() != ID::warrior && ent->getID() != ID::necromancer && ent->getID() != ID::projectile)
     {
         //std::cout << "Character collided" << std::endl;
         static_cast<Entities::Characters::Character*>(ent)->Damage(true);

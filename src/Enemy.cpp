@@ -18,23 +18,4 @@ dEnemy::Enemy::~Enemy()
 {
 }
 
-void dEnemy::Enemy::OnCollision(Entities::Entity* ent) 
-{
-	if(ent->getID() == ID::player)
-	{
-		Attack(true);
-		Entities::Characters::Player* pPlayer = static_cast<Entities::Characters::Player*>(ent);
-		pPlayer->Damage(true);
-		sf::Vector2f vel = sf::Vector2f( 0, KNOCKBACK/2);
-		if(pPlayer->getPosition().x > Position.x)
-			vel.x = -KNOCKBACK;
-		else
-			vel.x = KNOCKBACK;
-		pPlayer->setVelocity(vel);
-		pPlayer = NULL;
-	}
-	else
-	{
-		Attack(false);
-    }
-}
+

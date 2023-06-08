@@ -18,8 +18,8 @@ namespace Entities
             virtual void Load(std::ifstream& savefile) = 0;
             const bool getAlive() const;
             virtual void OnCollision(Entity *ent);
-            void Damage();
-            void Damage(bool b);
+            virtual void Damage();
+            virtual void Damage(bool b);
             void setAlive(bool alive);
             void setLives(int lives);
         protected:

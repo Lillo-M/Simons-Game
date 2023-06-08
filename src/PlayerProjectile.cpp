@@ -23,10 +23,14 @@ void Entities::PlayerProjectile::OnCollision(Entities::Entity* ent)
     //std::cout << targetID << std::endl;
     //std::cout << owner->getID() << std::endl;
     int targetID = ent->getID();
-    if(targetID != ID::player && targetID != ID::obstacle && targetID != ID::lava && targetID != ID::ice && targetID != ID::ground)
+    if(targetID != ID::player && targetID != ID::obstacle && targetID != ID::lava && targetID != ID::ice && targetID != ID::ground && targetID != ID::projectile)
     {
         //std::cout << "Character collided" << std::endl;
-        static_cast<Entities::Characters::Character*>(ent)->Damage(true);
+        if (ent->getID() != ID::necromancer)
+            static_cast<Entities::Characters::Character*>(ent)->Damage(true);
+        else
+            static_cast<Entities::Characters::Character*>(ent)->Damage();
+        
         if(!static_cast<Entities::Characters::Character*>(ent)->getAlive())
             static_cast<Entities::Characters::Player*>(owner)->Score(static_cast<Entities::Characters::Character*>(ent)->getID());
     }

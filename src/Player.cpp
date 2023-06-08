@@ -8,10 +8,10 @@
 
 #define SIZEX 40.f
 #define SIZEY 66.f
-#define LIVES 3
+#define LIVES 5
 #define MAXV 10
 #define ATRITO 0.45
-#define JUMPHEIGHT -11.f
+#define JUMPHEIGHT -10.f
 #define PSPEED 1
 
 Entities::Characters::Player::Player(const sf::Vector2f pos) : 

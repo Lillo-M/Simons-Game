@@ -17,7 +17,7 @@ namespace Entities
             virtual void Attack(const bool b) = 0;
             virtual void Update() = 0;
             virtual void Draw() = 0;
-            virtual void OnCollision(Entity* ent);
+            virtual void OnCollision(Entity* ent) = 0;
             virtual void Save(std::ofstream& savefile) = 0;
             virtual void Load(std::ifstream& savefile) = 0;
         protected:

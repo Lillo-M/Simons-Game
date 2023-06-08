@@ -81,6 +81,7 @@ void Managers::CollisionManager::Manage()
 
 		Iterator_j = Iterator_i;
 		Iterator_j++;
+
 		for (Iterator_j; Iterator_j != Dentities->end(); Iterator_j++)
 		{
 			if(Iterator_j->getID() == ID::projectile)
@@ -96,11 +97,12 @@ void Managers::CollisionManager::Manage()
 			dx = Iterator_i->getSize().x / 2 + Iterator_j->getSize().x / 2;
 			dy = Iterator_i->getSize().y / 2 + Iterator_j->getSize().y / 2;
 
-			
 			if (abs(dist_x) < dx && abs(dist_y) < dy)
 			{
-				normalCollision(*Iterator_i, dist_x, dist_y, dx, dy, Iterator_j->getID());
-				normalCollision(*Iterator_j, -dist_x, -dist_y, dx, dy, Iterator_i->getID());
+				if ((Iterator_i->getID() != ID::necromancer) && (Iterator_j->getID() != ID::necromancer)){	
+					normalCollision(*Iterator_i, dist_x, dist_y, dx, dy, Iterator_j->getID());
+					normalCollision(*Iterator_j, -dist_x, -dist_y, dx, dy, Iterator_i->getID());
+				}
 				Iterator_i->OnCollision(*Iterator_j);
 				Iterator_j->OnCollision(*Iterator_i);
 			}

@@ -3,6 +3,7 @@
 #include "Enemy.h"
 #include "Warrior.h"
 #include "Archer.h"
+#include "../Player.h"
 #include <vector>
 
 namespace Entities
@@ -20,12 +21,22 @@ namespace Entities
                 void Attack(const bool b);
                 void Update();
                 void Draw();
+                void OnCollision(Entities::Entity* ent);
                 void Save(std::ofstream& savefile);
                 void Load(std::ifstream& savefile);
-                void SpawnDeadEnemies();
+                void Damage();
+                static void NMsetPlayer(Player* p1);
+                static void NMsetPlayer2(Player* p2);
+                Player* getNearest ();
             private:
-                //std::vector<Archer*> archers;
-                //std::vector<Warrior*> warriors;
+                static Player* p1;
+                static Player* p2;
+                bool faceLeft;
+                float dashCharged;
+                bool vulnerable;
+                bool crash;
+                bool attacking;
+                float dTime;
             };
         }
     }

@@ -23,7 +23,7 @@ void Entities::Characters::Character::Damage(bool b)
     damaged = b;
     this->operator--();
     timecont = 0;
-    Damage();
+    this->Damage();
 }
 
 void Entities::Characters::Character::Damage()
