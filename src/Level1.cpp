@@ -8,7 +8,7 @@ Levels::Level1::Level1(States::StateMachine* pSM, Managers::InputManager* pIM) :
     pCManager->setSList(SentitiesList);
     texture = pGM->loadTexture("Assets/Alaska.png");
     background.setTexture(*texture);
-    background.setScale(0.45f, 0.47f);
+    background.setScale(1.25f, 0.75f);
     background.setOrigin(texture->getSize().x/(float)2, texture->getSize().y/(float)2);
 }
 

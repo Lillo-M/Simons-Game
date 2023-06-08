@@ -6,7 +6,7 @@
 #define ARCHERS 10
 
 #define IDLEPATH "Assets/NecroMancer/demon-idle.png"
-#define ATTACKPATH "Assets/NecroMancer/. . ."
+#define ATTACKPATH "Assets/NecroMancer/demon-attack.png"
 
 Entities::Characters::Enemies::NecroMancer::NecroMancer(sf::Vector2f pos):
     Enemy(pos, sf::Vector2f(SIZEX, SIZEY), false, ID::necromancer, 5)

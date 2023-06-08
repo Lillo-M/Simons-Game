@@ -32,7 +32,7 @@ void GraphicElements::SimpleAnimation::Update(sf::Vector2f Position, bool faceRi
 
     uvRect.left = currentImage.x * uvRect.width;
 
-    HitBox.setPosition(Position);
+    //HitBox.setPosition(Position);
 
     if(faceRight)
     {
