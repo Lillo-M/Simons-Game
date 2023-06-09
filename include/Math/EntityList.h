@@ -18,6 +18,9 @@ namespace Math
 		void Clear();
 		void DeleteEntities();
 		void Save(std::ofstream& savefile);
+		void Load(std::ifstream& savefile);
+		int Size();
+		Entities::Entity* operator[](int idx);
 		Math::List<Entities::Entity>& getTList();
 		/* **Terminar esta Classe . . .*/
 	private:

@@ -12,11 +12,11 @@ namespace Entities
     {
         namespace Enemies
         {
-            class NecroMancer : public Enemy
+            class Horse : public Enemy
             {
             public:
-                NecroMancer(sf::Vector2f pos);
-                ~NecroMancer();
+                Horse(sf::Vector2f pos);
+                ~Horse();
                 void Move();
                 void Attack(const bool b);
                 void Update();
@@ -24,18 +24,20 @@ namespace Entities
                 void OnCollision(Entities::Entity* ent);
                 void Save(std::ofstream& savefile);
                 void Load(std::ifstream& savefile);
-                void Damage();
+                void Damage(bool b);
                 static void NMsetPlayer(Player* p1);
                 static void NMsetPlayer2(Player* p2);
                 Player* getNearest ();
             private:
                 static Player* p1;
                 static Player* p2;
-                bool faceLeft;
+                bool faceRight;
                 float dashCharged;
+                int damage;
                 bool vulnerable;
                 bool crash;
                 bool attacking;
+                bool fury;
                 float dTime;
             };
         }

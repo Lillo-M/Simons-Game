@@ -97,7 +97,7 @@ void dEnemy::Archer::Update()
 			attackcooled = true;
 		}
 	}
-	if ((abs(getNearest()->getPosition().x - Position.x) <= DISTANCE_ARCHER_ATTACK && (getNearest()->getPosition().y - Position.y) <= 100 ) || aiming)
+	if ((absolute(getNearest()->getPosition().x - Position.x) <= DISTANCE_ARCHER_ATTACK && (getNearest()->getPosition().y - Position.y) <= 100 ) || aiming)
 		Attack(true);
 }
 
@@ -178,7 +178,7 @@ dPlayer dEnemy::Archer::getNearest()
 {
 	if (p2->getAlive() && p1->getAlive())
 	{
-		if (abs(p1->getPosition().x - Position.x) > abs(p2->getPosition().x - Position.x))
+		if (absolute(p1->getPosition().x - Position.x) > absolute(p2->getPosition().x - Position.x))
 			return p2;
 		else
 			return p1;
@@ -209,7 +209,7 @@ void dEnemy::Archer::Attack(const bool b)
 		attackcooled = false;
 		aiming = false;
 		int h = (getNearest()->getPosition().y - Position.y); // Altura
-		float dist = abs(getNearest()->getPosition().x - Position.x);
+		float dist = absolute(getNearest()->getPosition().x - Position.x);
 		float time = dist / A_VELOCITY;
 		float vy;
 		float vx = A_VELOCITY;

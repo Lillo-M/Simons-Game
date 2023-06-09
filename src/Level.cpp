@@ -7,7 +7,8 @@ Levels::Level::Level(const ID id, const States::stateID sid, States::StateMachin
     pPlayer(NULL),
     pPlayer2(NULL),
     levelStarted(false),
-    totalScore(0)
+    totalScore(0),
+    ArcherInstances(0)
 {
     try{
         pCManager = new Managers::CollisionManager;
@@ -46,13 +47,8 @@ Levels::Level::~Level()
     DentitiesList.clear();
     /* teste  */
     DentitiesList.DeleteEntities();
+    SentitiesList.DeleteEntities();
     /*  */
-    for (int i = 0; i < SentitiesList.getSize(); i++)
-    {
-        if (SentitiesList[i])
-            delete SentitiesList[i];
-    }
-    SentitiesList.clear();   
     if(pCManager)
         delete pCManager;
     pCManager = NULL;
@@ -86,19 +82,7 @@ void Levels::Level::CreatePlayer(const sf::Vector2f pos)
     DentitiesList.Push_FrontEntity(static_cast<Entities::Entity *>(pAux));
 }
 
-void Levels::Level::CreateWarrior(const sf::Vector2f pos)
-{
-    Entities::Characters::Enemies::Warrior *pAux = new Entities::Characters::Enemies::Warrior(pos);
-    if (!pAux)
-    {
-        std::cout << std::endl
-                  << "ERROR: Failed to Allocate Memory" << std::endl;
-        exit(1);
-    }
-    DentitiesList.Push_BackEntity(static_cast<Entities::Entity *>(pAux));
-}
-
-void Levels::Level::CreateArcher(const sf::Vector2f pos)
+void Levels::Level::CreateArcher(const sf::Vector2f pos, bool isRandom)
 {
     Entities::Characters::Enemies::Archer *pAux = new Entities::Characters::Enemies::Archer(pos);
     if (!pAux)
@@ -114,18 +98,11 @@ void Levels::Level::CreateArcher(const sf::Vector2f pos)
     {
         DentitiesList.Push_BackEntity(static_cast<Entities::Entity *>(*it));
     }
-}
 
-void Levels::Level::CreateNecroMancer(const sf::Vector2f pos)
-{
-    Entities::Characters::Enemies::NecroMancer *pAux = new Entities::Characters::Enemies::NecroMancer(pos);
-    if (!pAux)
-    {
-        std::cout << std::endl
-                  << "ERROR: Failed to Allocate Memory" << std::endl;
-        exit(1);
-    }
-    DentitiesList.Push_BackEntity(static_cast<Entities::Entity *>(pAux));
+    srand(time(NULL) + rand());
+    if(isRandom && rand() % 2)
+        pAux->setAlive(false);
+    pAux = NULL;
 }
 
 void Levels::Level::CreateGround(const sf::Vector2f pos)
@@ -137,122 +114,21 @@ void Levels::Level::CreateGround(const sf::Vector2f pos)
                   << "ERROR: Failed to Allocate Memory" << std::endl;
         exit(1);
     }
-    SentitiesList.insert_back(static_cast<Entities::Entity *>(pAux));
+    SentitiesList.Push_BackEntity(static_cast<Entities::Entity *>(pAux));
 }
 
-void Levels::Level::CreateLava(const sf::Vector2f pos)
-{
-    Entities::Obstacles::Lava *pAux = new Entities::Obstacles::Lava(pos);
-    if (!pAux)
-    {
-        std::cout << std::endl
-                  << "ERROR: Failed to Allocate Memory" << std::endl;
-        exit(1);
-    }
-    SentitiesList.insert_back(static_cast<Entities::Entity *>(pAux));
-}
-
-void Levels::Level::CreateIce(const sf::Vector2f pos)
-{
-    Entities::Obstacles::Ice *pAux = new Entities::Obstacles::Ice(pos);
-    if (!pAux)
-    {
-        std::cout << std::endl
-                  << "ERROR: Failed to Allocate Memory" << std::endl;
-        exit(1);
-    }
-    SentitiesList.insert_back(static_cast<Entities::Entity *>(pAux));
-}
-
-void Levels::Level::CreateEntity(char id, sf::Vector2f pos)
-{
-    pos = sf::Vector2f( -64 + pos.x * 64, pos.y * 64);
-    switch (id)
-    {
-    case 'P':
-        CreatePlayer(pos);
-        break;
-    case 'W':
-        CreateWarrior(pos);
-        break;
-    case 'G':
-        CreateGround(pos);
-        break;
-    case 'L':
-        CreateLava(pos);
-        break;
-    case 'A':
-        CreateArcher(pos);
-        break;
-    case 'N':
-        CreateNecroMancer(pos);
-        break;
-    case 'I':
-        CreateIce(pos);
-        break;
-    }
-}
-
-/*void Levels::Level::Update()
-{
-    if(!isRunning)
-    {
-        Entities::Characters::Enemies::Archer::setPlayer(pPlayer);
-        if(twoPlayers)
-            Entities::Characters::Enemies::Archer::setPlayer2(pPlayer2);
-    }
-    levelStarted = true;
-    isRunning = true;
-    Math::EntityTList::Iterator it;
-    DentitiesList.UpdateEntities();
-
-    for (it = SentitiesList.begin(); it != SentitiesList.end(); it++)
-    {
-        it->Update();
-    }
-
-    Entities::Entity::updateDeltaTime(Managers::GraphicManager::getDeltaTime());
-    Managers::GraphicManager::updateDeltaTime();
-    pCManager->Manage();
-    pGM->CenterView(pPlayer->getPosition());
-    if(!pPlayer->getAlive())
-    {
-        if(twoPlayers && !pPlayer2->getAlive())
-        {
-            totalScore = pPlayer->getPoints() + pPlayer2->getPoints();
-            changeState(States::stateID::gameOverState);    
-        }
-        else
-        {
-            totalScore = pPlayer->getPoints();
-            changeState(States::stateID::gameOverState);   
-        }
-    }
-}
-/*  */
-
-/*void Levels::Level::Draw()
-{
-    Math::EntityTList::Iterator it;
-
-    DentitiesList.DrawEntities();
-
-    it = SentitiesList.begin();    
-    for(it; it != SentitiesList.end(); it++)
-    {
-	    it->Draw();
-    }
-
-}
-/*  */
 void Levels::Level::SaveLevel()
 {
-    std::ofstream savefile("Assets/savefile.txt", std::ofstream::binary);
+    std::ofstream savefile("Assets/levelSave.txt", std::ofstream::binary);
 	std::string line;
 	savefile << this->getID() << std::endl;
     savefile << twoPlayers << std::endl;
+    savefile.close();
+    savefile.open("Assets/dynamicEntitiesSave.txt", std::ofstream::binary);
     DentitiesList.Save(savefile);
-    savefile << "end" << std::endl;
+    savefile.close();
+    savefile.open("Assets/staticEntitiesSave.txt", std::ofstream::binary);
+    SentitiesList.Save(savefile);
     savefile.close();
 }
 
@@ -266,29 +142,24 @@ void Levels::Level::LoadLevel()
     savefile >> iread;
     savefile >> iread;
     twoPlayers = static_cast<bool>(iread);
-    Math::EntityTList::Iterator it = DentitiesList.getTList().begin();
-    for(it; it != DentitiesList.getTList().end(); it++)
-    {
-        if(it->getID() == ID::projectile)
-            continue;
-        static_cast<Entities::Characters::Character*>(*it)->Load(savefile);
-    }
+    savefile.close();
+    savefile.open("Assets/dynamicEntitiesSave.txt", std::ifstream::binary);
+    DentitiesList.Load(savefile);
+    savefile.close();
+    savefile.open("Assets/staticEntitiesSave.txt", std::ifstream::binary);
+    SentitiesList.Load(savefile);
     savefile.close();
     /*  */
 }
 
 void Levels::Level::Reset()
 {
+    ArcherInstances = 0;
     //std::cout<< "reset" << std::endl;
     DentitiesList.DeleteEntities();
+    SentitiesList.DeleteEntities();
     /*  */
-    for (int i = 0; i < SentitiesList.getSize(); i++)
-    {
-        if (SentitiesList[i])
-            delete SentitiesList[i];
-    }
-    //std::cout<< "Delete" << std::endl;
-    SentitiesList.clear();
+
     pPlayer = NULL;
     pPlayer2 = NULL;
     this->CreateMap();

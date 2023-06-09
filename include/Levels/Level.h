@@ -1,5 +1,7 @@
 #pragma once
-//#include <vector>
+
+#include <stdlib.h>
+
 #include "../Managers/CollisionManager.h"
 #include "../Managers/EventsManager.h"
 #include "../Math/List.h"// remover se a classe EntityList funcionar (e estiver corretamente implementado)
@@ -8,7 +10,7 @@
 #include "../Entities/Arrow.h"
 #include "../Entities/Characters/Enemies/Warrior.h"
 #include "../Entities/Characters/Enemies/Archer.h"
-#include "../Entities/Characters/Enemies/NecroMancer.h"
+#include "../Entities/Characters/Enemies/Horse.h"
 #include "../Entities/Obstacles/Ground.h"
 #include "../Entities/Obstacles/Lava.h"
 #include "../Entities/Obstacles/Ice.h"
@@ -25,15 +27,11 @@ namespace Levels
         virtual ~Level();
         virtual void Draw() = 0;
         virtual void Update() = 0;
-        void CreateWarrior(const sf::Vector2f pos = sf::Vector2f(0, 0));
+        virtual void CreateEntity(char id, sf::Vector2f pos) = 0;
         void CreatePlayer(const sf::Vector2f pos = sf::Vector2f(0, 0));
         void CreateGround(const sf::Vector2f pos = sf::Vector2f(0, 0));
-        void CreateLava(const sf::Vector2f pos = sf::Vector2f(0, 0));
-        void CreateIce(const sf::Vector2f pos = sf::Vector2f(0, 0));
-        void CreateArcher(const sf::Vector2f pos = sf::Vector2f(0, 0));
-        void CreateNecroMancer(const sf::Vector2f pos);
+        void CreateArcher(const sf::Vector2f pos = sf::Vector2f(0, 0), bool isRandom = false);
         virtual void CreateMap() = 0;
-        void CreateEntity(char id, sf::Vector2f pos);
         Observers::PlayerInputManager* getPlayerInputManager() const;
         void SaveLevel();
         void LoadLevel();
@@ -44,6 +42,7 @@ namespace Levels
         int getPlayer2Score() const;
         static void setTwoPlayers(bool twoPlayers);
     protected:
+        int ArcherInstances;
         static bool                         twoPlayers;
         int                                 totalScore;
         bool                                levelStarted;
@@ -52,8 +51,9 @@ namespace Levels
         Entities::Characters::Player*       pPlayer;
         Entities::Characters::Player*       pPlayer2;
         Managers::CollisionManager*         pCManager;
-        Math::EntityTList                   SentitiesList;
+        //Math::EntityTList                   SentitiesList;
         //Math::EntityTList                   DentitiesList;
 	    Math::EntityList		            DentitiesList;
+        Math::EntityList		            SentitiesList;
     };
 }

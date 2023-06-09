@@ -27,6 +27,8 @@ namespace Managers
         static void updateDeltaTime();
         static float getDeltaTime();
         sf::Texture* loadTexture(const char* path);
+        void setLeftLimit(float limit);
+        void setRightLimit(float limit);
     private:
         GraphicManager();
         static GraphicManager* Instance;
@@ -36,5 +38,7 @@ namespace Managers
         static float dt;
         sf::ContextSettings settings;
         std::map<const char*, sf::Texture*> textureMap;
+        float LeftLimit;
+        float RightLimit;
     };
 }

@@ -2,7 +2,9 @@
 
 Managers::GraphicManager::GraphicManager(): 
     window(sf::VideoMode(WIDTH, HEIGHT), "The Wizard++"), // incializa a janela
-    view(window.getView())
+    view(window.getView()),
+    LeftLimit(WIDTH / 2),
+    RightLimit(WIDTH / 2)
 {
     settings.antialiasingLevel = 16;
 }
@@ -69,10 +71,10 @@ void Managers::GraphicManager::CenterView(sf::Vector2f pos)
         pos = sf::Vector2f(pos.x, 3 * HEIGHT / 2 - (3 * HEIGHT / 2 - pos.y));
     else 
         pos = sf::Vector2f(pos.x, 3 * HEIGHT / 2);
-    if (pos.x < WIDTH / 2)
-        pos = sf::Vector2f(WIDTH / 2, pos.y);
-    if (pos.x > 6 * WIDTH)
-        pos = sf::Vector2f(6 * WIDTH, pos.y);
+    if (pos.x < LeftLimit)
+        pos = sf::Vector2f(LeftLimit, pos.y);
+    if (pos.x > RightLimit)
+        pos = sf::Vector2f(RightLimit, pos.y);
     view.setCenter(pos);
     window.setView(view);
 }
@@ -120,6 +122,16 @@ sf::Texture *Managers::GraphicManager::loadTexture(const char *path)
     }
 
     return textureMap[path];
+}
+
+void Managers::GraphicManager::setLeftLimit(float limit)
+{
+    LeftLimit = limit;
+}
+
+void Managers::GraphicManager::setRightLimit(float limit)
+{
+    RightLimit = limit;
 }
 
 Managers::GraphicManager *Managers::GraphicManager::Instance(NULL); // incializa o ponteiro estatico para a instancia de Gerenciador grafico

@@ -2,8 +2,8 @@
 #define FPS 0
 #include "Managers/EventsManager.h"
 #include <iostream>
-#include "Levels/Level1.h"
-#include "Levels/Level2.h"
+#include "Levels/Alaska.h"
+#include "Levels/Vulcano.h"
 #include "States/StateMachine.h"
 #include "Managers/InputManager.h"
 #include "Menus/MainMenu.h"

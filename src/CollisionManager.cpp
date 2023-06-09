@@ -1,5 +1,19 @@
 #include "../include/Managers/CollisionManager.h"
 #include <iostream>
+
+#define J_AND_I_R_PLAYERPROJECTILES static_cast<Entities::Projectile*>(*Iterator_j)->getOwner()->getID() == Iterator_i->getID()\
+				|| static_cast<Entities::Projectile*>(*Iterator_j)->getOwner()->getID()\
+				== ID::player && Iterator_i->getID() == ID::projectile &&\
+				static_cast<Entities::Projectile*>(*Iterator_j)->getOwner()->getID() == ID::player
+#define I_AND_J_R_PLAYERPROJECTILES Iterator_i->getID() == ID::projectile && ( Iterator_i->getID() == ID::projectile &&\
+				(static_cast<Entities::Projectile*>(*Iterator_i)->getOwner()->getID()\
+				== ID::player && Iterator_j->getID() == ID::player\
+				|| static_cast<Entities::Projectile*>(*Iterator_i)->getOwner()->getID()\
+				== ID::player && Iterator_j->getID() == ID::projectile &&\
+				static_cast<Entities::Projectile*>(*Iterator_i)->getOwner()->getID()\
+				== ID::player))
+
+
 Managers::CollisionManager::CollisionManager()
 {
 	Sentities = NULL;
@@ -24,7 +38,7 @@ void Managers::CollisionManager::setDList(Math::List<Entities::Entity>& ents)
 
 void Managers::CollisionManager::normalCollision(Entities::Entity* ent, float dist_x, float dist_y, float size_x, float size_y, ID id)
 {
-	if (abs(dist_x) - size_x > abs(dist_y) - size_y)
+	if (absolute(dist_x) - size_x > absolute(dist_y) - size_y)
 	{
 		if (dist_x > 0)
 		{
@@ -86,20 +100,26 @@ void Managers::CollisionManager::Manage()
 		{
 			if(Iterator_j->getID() == ID::projectile)
 			{
+				if(J_AND_I_R_PLAYERPROJECTILES)
+					continue;
+				
 				if(static_cast<Entities::Projectile*>(*Iterator_j)->getCollided())
 					continue;
 			}
 			else if(!static_cast<Entities::Characters::Character*>(*Iterator_j)->getAlive())
 					continue;
 			
+			if(I_AND_J_R_PLAYERPROJECTILES)
+				continue;
+
 			dist_x = Iterator_j->getPosition().x - Iterator_i->getPosition().x;
 			dist_y = Iterator_j->getPosition().y - Iterator_i->getPosition().y;
 			dx = Iterator_i->getSize().x / 2 + Iterator_j->getSize().x / 2;
 			dy = Iterator_i->getSize().y / 2 + Iterator_j->getSize().y / 2;
 
-			if (abs(dist_x) < dx && abs(dist_y) < dy)
+			if (absolute(dist_x) < dx && absolute(dist_y) < dy)
 			{
-				if ((Iterator_i->getID() != ID::necromancer) && (Iterator_j->getID() != ID::necromancer)){	
+				if ((Iterator_i->getID() != ID::horse) && (Iterator_j->getID() != ID::horse)){	
 					normalCollision(*Iterator_i, dist_x, dist_y, dx, dy, Iterator_j->getID());
 					normalCollision(*Iterator_j, -dist_x, -dist_y, dx, dy, Iterator_i->getID());
 				}
@@ -114,7 +134,7 @@ void Managers::CollisionManager::Manage()
 			dist_y = Iterator_j->getPosition().y - Iterator_i->getPosition().y;
 			dx = Iterator_i->getSize().x / 2 + Iterator_j->getSize().x / 2;
 			dy = Iterator_i->getSize().y / 2 + Iterator_j->getSize().y / 2;
-			if (abs(dist_x) < dx && abs(dist_y) < dy)
+			if (absolute(dist_x) < dx && absolute(dist_y) < dy)
 			{
 				normalCollision(*Iterator_i, dist_x, dist_y, dx, dy, Iterator_j->getID());
 				Iterator_i->OnCollision(*Iterator_j);

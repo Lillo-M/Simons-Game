@@ -278,7 +278,7 @@ void Entities::Characters::Player::Score(ID id)
 	case ID::warrior:
 		Points +=  3000;
 		break;
-	case ID::necromancer:
+	case ID::horse:
 		Points += 15000;
 		break;
 	}

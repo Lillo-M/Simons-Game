@@ -1,11 +1,14 @@
 #include "../include/Entities/PlayerProjectile.h"
 #include "../include/Entities/Characters/Player.h"
 
+#define ATTACKPATH "Assets/Player/Charge_1.png"
+#define IDLEPATH "Assets/Player/Charge_2.png"
+
 Entities::PlayerProjectile::PlayerProjectile(sf::Vector2f pos, sf::Vector2f velocity, Entities::Characters::Character *owner): 
     Projectile (pos, velocity, owner)
 {
-    animation.pushAnimation(GraphicElements::Animation_ID::idle, "Assets/Player/Charge_2.png", sf::Vector2u(6,0), 0.16f);
-    animation.pushAnimation(GraphicElements::Animation_ID::attack, "Assets/Player/Charge_1.png", sf::Vector2u(6,0), 0.16f);
+    animation.pushAnimation(GraphicElements::Animation_ID::idle, IDLEPATH, sf::Vector2u(6,0), 0.16f);
+    animation.pushAnimation(GraphicElements::Animation_ID::attack, ATTACKPATH, sf::Vector2u(6,0), 0.16f);
 }
 
 Entities::PlayerProjectile::~PlayerProjectile(){ } 
@@ -19,17 +22,11 @@ void Entities::PlayerProjectile::Move()
 }
 void Entities::PlayerProjectile::OnCollision(Entities::Entity* ent)
 {
-    //std::cout << targetID << std::endl;
-    //std::cout << owner->getID() << std::endl;
     int targetID = ent->getID();
-    if(targetID == ID::warrior || targetID == ID::archer || targetID == ID::necromancer )
+    if(targetID == ID::warrior || targetID == ID::archer || targetID == ID::horse )
     {
-        //std::cout << "Character collided" << std::endl;
-        if (ent->getID() != ID::necromancer)
-            static_cast<Entities::Characters::Character*>(ent)->Damage(true);
-        else
-            static_cast<Entities::Characters::Character*>(ent)->Damage();
-        
+        static_cast<Entities::Characters::Character*>(ent)->Damage(true);
+
         if(!static_cast<Entities::Characters::Character*>(ent)->getAlive())
             static_cast<Entities::Characters::Player*>(owner)->Score(static_cast<Entities::Characters::Character*>(ent)->getID());
     }

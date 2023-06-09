@@ -4,7 +4,7 @@
 #include "../Being.h"
 #include <iostream>
 #include <fstream>
-#include <math.h> //Fazer uma Fun��o ABS
+#include "../Math/Math.h"//Fazer uma Fun��o ABS
 #define MULT 60
 namespace Entities
 {

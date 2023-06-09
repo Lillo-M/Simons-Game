@@ -20,5 +20,5 @@ G                                                                       G       
 G                                                                                                                                   G
 G                                                                     G G G                                                         G
 G                         A             A              A                           A                                N               G
-G G G G G G G L L L G G G G L L L G G G G G       G G G G        G G G G G G G L G G G G L L L G G G G G       G G G G G G G G G GG
-              G G G         G G G G         G G G G       G G G G G        G G G G       G G G G         G G G G       
+G G G G G G G C C C G G G G C C C G G G G G C C C G G G G C C C G G G G G G G G G G G G L L L G G G G G C C C G G G G G G G G G G G
+              G G G         G G G G         G G G         G G G                        G G G G         G G G G       

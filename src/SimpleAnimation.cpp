@@ -37,12 +37,12 @@ void GraphicElements::SimpleAnimation::Update(sf::Vector2f Position, bool faceRi
     if(faceRight)
     {
         uvRect.left = (currentImage.x) * uvRect.width;
-        uvRect.width = abs(uvRect.width);
+        uvRect.width = absolute(uvRect.width);
     }
     else
     {
-        uvRect.left = (currentImage.x + 1) * abs(uvRect.width);
-        uvRect.width = -abs(uvRect.width);
+        uvRect.left = (currentImage.x + 1) * absolute(uvRect.width);
+        uvRect.width = -absolute(uvRect.width);
     }
 
 }

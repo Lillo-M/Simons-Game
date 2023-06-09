@@ -22,7 +22,7 @@ Game::Game():
         exit(1);
     }}
     /* */
-    try{statesMap[States::stateID::level1] = static_cast<States::State*>(new Levels::Level1(static_cast<States::StateMachine*>(this), iManager));}
+    try{statesMap[States::stateID::alaska] = static_cast<States::State*>(new Levels::Alaska(static_cast<States::StateMachine*>(this), iManager));}
     catch(int error){
     if(!error)
     {
@@ -30,7 +30,7 @@ Game::Game():
         exit(1);
     }}
 
-    try{statesMap[States::stateID::level2] = static_cast<States::State*>(new Levels::Level2(static_cast<States::StateMachine*>(this), iManager));}
+    try{statesMap[States::stateID::vulcano] = static_cast<States::State*>(new Levels::Vulcano(static_cast<States::StateMachine*>(this), iManager));}
     catch(int error){
     if(!error)
     {
@@ -70,13 +70,13 @@ Game::Game():
         exit(1);
     }}
 
-    static_cast<States::LoadGameState*>(statesMap[States::stateID::loadGameState])->PushLevel(static_cast<Levels::Level*>(statesMap[States::stateID::level1]));
+    static_cast<States::LoadGameState*>(statesMap[States::stateID::loadGameState])->PushLevel(static_cast<Levels::Level*>(statesMap[States::stateID::alaska]));
 
-    static_cast<States::LoadGameState*>(statesMap[States::stateID::loadGameState])->PushLevel(static_cast<Levels::Level*>(statesMap[States::stateID::level2]));
+    static_cast<States::LoadGameState*>(statesMap[States::stateID::loadGameState])->PushLevel(static_cast<Levels::Level*>(statesMap[States::stateID::vulcano]));
 
-    static_cast<Menus::NewGameMenu*>(statesMap[States::stateID::newGameMenu])->PushLevel(static_cast<Levels::Level*>(statesMap[States::stateID::level1]));
+    static_cast<Menus::NewGameMenu*>(statesMap[States::stateID::newGameMenu])->PushLevel(static_cast<Levels::Level*>(statesMap[States::stateID::alaska]));
 
-    static_cast<Menus::NewGameMenu*>(statesMap[States::stateID::newGameMenu])->PushLevel(static_cast<Levels::Level*>(statesMap[States::stateID::level2]));
+    static_cast<Menus::NewGameMenu*>(statesMap[States::stateID::newGameMenu])->PushLevel(static_cast<Levels::Level*>(statesMap[States::stateID::vulcano]));
     
     currentState = States::stateID::mainMenu;
     Run();

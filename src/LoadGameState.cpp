@@ -13,7 +13,7 @@ States::LoadGameState::~LoadGameState()
 
 void States::LoadGameState::Update()
 {
-    std::ifstream savefile("Assets/savefile.txt", std::ifstream::binary);
+    std::ifstream savefile("Assets/levelSave.txt", std::ifstream::binary);
     int read;
     savefile >> read;
     

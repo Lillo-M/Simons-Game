@@ -97,16 +97,16 @@ void Menus::NewGameMenu::MoveDown()
 
 void Menus::NewGameMenu::LoadLevel2()
 {
-    std::cout<< "NewGame Level2" << std::endl;
+    std::cout<< "NewGame Vulcano" << std::endl;
     std::list<Levels::Level*>::iterator it;
     for(it = levels.begin(); it != levels.end(); it++)
     {
-        if((*it)->getStateID() == States::stateID::level2)
+        if((*it)->getStateID() == States::stateID::vulcano)
         {
             if(!(*it)->getLevelStarted())
             {
                 std::cout<< "Change State" << std::endl;
-                changeState(States::stateID::level2);
+                changeState(States::stateID::vulcano);
                 return;
             }
             else
@@ -118,7 +118,7 @@ void Menus::NewGameMenu::LoadLevel2()
     {
         (*it)->Reset();
     }
-    changeState(States::stateID::level2);
+    changeState(States::stateID::vulcano);
 }
 
 void Menus::NewGameMenu::LoadLevel1()
@@ -127,12 +127,12 @@ void Menus::NewGameMenu::LoadLevel1()
     std::list<Levels::Level*>::iterator it;
     for(it = levels.begin(); it != levels.end(); it++)
     {
-        if((*it)->getStateID() == States::stateID::level1)
+        if((*it)->getStateID() == States::stateID::alaska)
         {
             if(!(*it)->getLevelStarted())
             {
                 std::cout<< "Change State" << std::endl;
-                changeState(States::stateID::level1);
+                changeState(States::stateID::alaska);
                 return;
             }
             else
@@ -144,6 +144,6 @@ void Menus::NewGameMenu::LoadLevel1()
     {
         (*it)->Reset();
     }
-    changeState(States::stateID::level1);
+    changeState(States::stateID::alaska);
     /*  */
 }
