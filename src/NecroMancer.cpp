@@ -94,14 +94,16 @@ void Entities::Characters::Enemies::NecroMancer::Attack(const bool b)
 }
 dPlayer Entities::Characters::Enemies::NecroMancer::getNearest()
 {
-	if (p2)
+	if (p2->getAlive() && p1->getAlive())
 	{
 		if (abs(p1->getPosition().x - Position.x) > abs(p2->getPosition().x - Position.x))
 			return p2;
 		else
 			return p1;
 	}
-	else
+	else if(p2->getAlive())
+		return p2;
+	else /*  */
 		return p1;
 }
 
