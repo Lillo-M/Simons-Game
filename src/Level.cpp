@@ -39,16 +39,8 @@ Levels::Level::~Level()
     if(pPIM)
         delete pPIM;
     pPIM = NULL;
-    /*for (int i = 0; i < DentitiesList.getSize(); i++)
-    {
-        if (DentitiesList[i])
-            delete DentitiesList[i];
-    }
-    DentitiesList.clear();
-    /* teste  */
     DentitiesList.DeleteEntities();
     SentitiesList.DeleteEntities();
-    /*  */
     if(pCManager)
         delete pCManager;
     pCManager = NULL;
@@ -73,13 +65,14 @@ void Levels::Level::CreatePlayer(const sf::Vector2f pos)
         pPlayer2 = pAux;
         pPIM->setpPlayer2(pAux);
     }
-    std::vector<Entities::PlayerProjectile*>::iterator it;
+    std::vector<Entities::Projectiles::PlayerProjectile*>::iterator it;
     for(it = pAux->getShots()->begin(); it != pAux->getShots()->end(); it++)
     {
 	    DentitiesList.Push_FrontEntity(static_cast<Entities::Entity *>(*it));
     }
 
     DentitiesList.Push_FrontEntity(static_cast<Entities::Entity *>(pAux));
+    pAux = NULL;
 }
 
 void Levels::Level::CreateArcher(const sf::Vector2f pos, bool isRandom)
@@ -93,7 +86,7 @@ void Levels::Level::CreateArcher(const sf::Vector2f pos, bool isRandom)
     }
     std::cout << pAux->getID() << std::endl;
     DentitiesList.Push_BackEntity(static_cast<Entities::Entity *>(pAux));
-    std::vector<Entities::Arrow*>::iterator it;
+    std::vector<Entities::Projectiles::Arrow*>::iterator it;
     for (it = pAux->getShots()->begin(); it != pAux->getShots()->end(); it++)
     {
         DentitiesList.Push_BackEntity(static_cast<Entities::Entity *>(*it));
@@ -115,6 +108,7 @@ void Levels::Level::CreateGround(const sf::Vector2f pos)
         exit(1);
     }
     SentitiesList.Push_BackEntity(static_cast<Entities::Entity *>(pAux));
+    pAux = NULL;
 }
 
 void Levels::Level::SaveLevel()

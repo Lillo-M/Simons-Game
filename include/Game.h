@@ -16,11 +16,12 @@
 class Game: public States::StateMachine
 {
 public:
-	Game();
 	~Game();
-	void Run();
-
+	static Game* getInstance();
 private:
+	void Run();
+	Game();
+	static Game* Instance;
 	Managers::EventsManager* eManager;
 	Managers::GraphicManager* pGM;
 	Managers::InputManager* iManager;

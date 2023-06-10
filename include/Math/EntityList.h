@@ -1,7 +1,7 @@
 #pragma once
 #include "List.h"
 #include "../Entities/Characters/Character.h"
-#include "../Entities/Projectile.h"
+#include "../Entities/Projectiles/Projectile.h"
 #include <iostream>
 
 namespace Math

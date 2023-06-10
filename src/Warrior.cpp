@@ -4,6 +4,7 @@
 #define ESPEED 0.1
 #define MAXV 10
 #define KNOCKBACK -11.f
+#define LIVES 3
 #define IDLEPATH "Assets/Warrior/Warrior-Idle.png"
 #define WALKPATH "Assets/Warrior/Warrior-Walk.png"
 #define MELEEATTACKPATH "Assets/Warrior/Warrior-Attack.png"
@@ -11,7 +12,7 @@
 #define dEnemy Entities::Characters::Enemies
 
 dEnemy::Warrior::Warrior(const sf::Vector2f pos):
-    Enemy(pos, sf::Vector2f(SIZEX, SIZEY), false, ID::warrior, 3),
+    Enemy(pos, sf::Vector2f(SIZEX, SIZEY), false, ID::warrior, LIVES),
 	directiontimer(0),
 	directionright(static_cast<bool>(rand()%2)),
 	isAttacking(false)

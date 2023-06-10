@@ -28,11 +28,12 @@ Entities::Characters::Player::Player(const sf::Vector2f pos) :
 	faceRight(false),
 	isJumping(false),
 	onIce(false),
-	Points(0)
+	Points(0),
+	friction(0)
 {
 	for(int i = 0; i < 10; i++)
 	{
-		Entities::PlayerProjectile* pAux = new Entities::PlayerProjectile(sf::Vector2f(0,0), sf::Vector2f(0,0), this);
+		Entities::Projectiles::PlayerProjectile* pAux = new Entities::Projectiles::PlayerProjectile(sf::Vector2f(0,0), sf::Vector2f(0,0), this);
 		if(!pAux)
 		{
 			std::cout << std::endl << "ERROR: Failed to Memory Allocate" << std::endl;
@@ -261,7 +262,7 @@ void Entities::Characters::Player::Load(std::ifstream &savefile)
     this->setFacing(iread);
     savefile >> iread;
     this->setPoints(iread);
-    std::vector<Entities::PlayerProjectile*>* vshots = this->getShots();
+    std::vector<Entities::Projectiles::PlayerProjectile*>* vshots = this->getShots();
     for(int j = 0; j < 10; j++)
     {
         vshots->operator[](j)->Load(savefile);
@@ -290,4 +291,4 @@ const int Entities::Characters::Player::getPoints() const {return Points;}
 
 void Entities::Characters::Player::setPoints(int Points) {this->Points = Points;}
 
-std::vector<Entities::PlayerProjectile*>* Entities::Characters::Player::getShots() {return &shots;}
+std::vector<Entities::Projectiles::PlayerProjectile*>* Entities::Characters::Player::getShots() {return &shots;}

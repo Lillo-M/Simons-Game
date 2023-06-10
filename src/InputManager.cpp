@@ -49,6 +49,9 @@ Managers::InputManager::~InputManager()
 {
     subObservers.clear();
     keyMap.clear();
+	if(Instance)
+		delete Instance;
+	Instance = NULL;
 }
 
 void Managers::InputManager::pressedInput(sf::Event::KeyEvent key)
@@ -84,3 +87,18 @@ void Managers::InputManager::removeObserver(Observers::Observer* observer)
 			subObservers.erase(listIt);
     }
 }
+
+Managers::InputManager* Managers::InputManager::getInstance()
+{
+	if(!Instance)
+	{
+		try { Instance = new Managers::InputManager();} catch(int error)
+		{ if(!error){
+			std::cout << "ERROR: Failed to Memory Allocate" << std::endl;
+        	exit(1);
+		}}
+	}
+	return Instance;
+}
+
+Managers::InputManager* Managers::InputManager::Instance(NULL);

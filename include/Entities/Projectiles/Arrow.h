@@ -1,10 +1,10 @@
 #pragma once
 
 #include "Projectile.h"
-#include "../GraphicElements/SimpleSprite.h"
+#include "../../GraphicElements/SimpleSprite.h"
 
-namespace Entities{
-    class Arrow : public Entities::Projectile {
+namespace Entities::Projectiles{
+    class Arrow : public Projectile {
     private:
         GraphicElements::SimpleSprite animation;
     public:

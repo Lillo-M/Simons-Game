@@ -1,24 +1,24 @@
-#include "../include/Entities/Arrow.h"
+#include "../include/Entities/Projectiles/Arrow.h"
 
-Entities::Arrow::Arrow(sf::Vector2f pos, sf::Vector2f velocity, Entities::Characters::Character *owner) : 
+Entities::Projectiles::Arrow::Arrow(sf::Vector2f pos, sf::Vector2f velocity, Entities::Characters::Character *owner) : 
     Projectile (pos, velocity, owner)
 { 
     animation.Reset("Assets/Archer/Arrow.png", pos, sf::Vector2f(30.f,100.f));
 }
 
-Entities::Arrow::~Arrow(){ } 
+Entities::Projectiles::Arrow::~Arrow(){ } 
 
 
-void Entities::Arrow::Move()
+void Entities::Projectiles::Arrow::Move()
 {
     Velocity.y -= 0.f * gravity * dt * 60;
-    Position.y += Velocity.y * dt * 60;
+   // Position.y += Velocity.y * dt * 60;
     Position.x += Velocity.x * dt * 60;
     Position.y += Velocity.y * dt * 60;
     Gravity();
 }
 
-void Entities::Arrow::OnCollision(Entities::Entity* ent)
+void Entities::Projectiles::Arrow::OnCollision(Entities::Entity* ent)
 {
     //std::cout << ent->getID() << std::endl;
     //std::cout << owner->getID() << std::endl;
@@ -31,14 +31,14 @@ void Entities::Arrow::OnCollision(Entities::Entity* ent)
     collided = true;
 }
 
-void Entities::Arrow::Update()
+void Entities::Projectiles::Arrow::Update()
 {
     Move();
     (Velocity.x > 0 ? animation.faceRight(true):animation.faceRight(false));
     animation.Update(Position);
 }
 
-void Entities::Arrow::Draw()
+void Entities::Projectiles::Arrow::Draw()
 {
 	animation.Draw();
 }

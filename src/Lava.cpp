@@ -33,7 +33,7 @@ void Entities::Obstacles::Lava::Update()
 
 void Entities::Obstacles::Lava::OnCollision(Entities::Entity* ent)
 {
-	if(ent->getID() == ID::projectile)
+	if(ent->getID() != ID::player)
 		return;
     Entities::Characters::Character* pChar = static_cast<Entities::Characters::Character*>(ent);
 	pChar->Damage(Damage);

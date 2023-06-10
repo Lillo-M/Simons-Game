@@ -10,9 +10,10 @@ namespace Levels{
         void Draw();
         void Update();
         void CreateEntity(char id, sf::Vector2f pos);
-        void CreateNecroMancer(const sf::Vector2f pos = sf::Vector2f(0, 0));
+        void CreateHorse(const sf::Vector2f pos = sf::Vector2f(0, 0));
         void CreateLava(const sf::Vector2f pos = sf::Vector2f(0, 0));
     private:
+        Entities::Characters::Enemies::Horse* Boss;
         int pool;
         bool isLavaPool;
         sf::Sprite background;

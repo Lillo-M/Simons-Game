@@ -4,6 +4,7 @@
 #include "Warrior.h"
 #include "Archer.h"
 #include "../Player.h"
+#include "../../Projectiles/Skull.h"
 #include <vector>
 
 namespace Entities
@@ -25,10 +26,13 @@ namespace Entities
                 void Save(std::ofstream& savefile);
                 void Load(std::ifstream& savefile);
                 void Damage(bool b);
-                static void NMsetPlayer(Player* p1);
-                static void NMsetPlayer2(Player* p2);
+                static void setPlayer(Player* p1);
+                static void setPlayer2(Player* p2);
                 Player* getNearest ();
+                std::vector<Entities::Projectiles::Skull*>* getShots();
             private:
+                int shotcount;
+                std::vector<Entities::Projectiles::Skull*> balls;
                 static Player* p1;
                 static Player* p2;
                 bool faceRight;

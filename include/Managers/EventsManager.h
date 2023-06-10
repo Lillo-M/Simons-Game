@@ -9,11 +9,13 @@ namespace Managers
 	class EventsManager
 	{
 	public:
-		EventsManager();
 		~EventsManager();
 		void Manage();
 		void setpInputManager(Managers::InputManager* pIM);
+		static EventsManager* getInstance();
 	private:
+		EventsManager();
+		static EventsManager* Instance;
 		Managers::GraphicManager* pGM;
 		Managers::InputManager* pIM;
 	};

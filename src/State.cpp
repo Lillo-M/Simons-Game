@@ -4,7 +4,8 @@
 
 States::State::State(StateMachine* pSMachine, States::stateID id):
     pSMachine(pSMachine),
-    id(id)
+    id(id),
+    isRunning(false)
 {
 }
 

@@ -23,7 +23,7 @@ void Math::EntityList::UpdateEntities()
 				if (!static_cast<Entities::Characters::Character *>(*listIt)->getAlive())
 					continue;
 			}
-			else if (static_cast<Entities::Projectile *>(*listIt)->getCollided())
+			else if (static_cast<Entities::Projectiles::Projectile *>(*listIt)->getCollided())
 				continue;
 		}
 		listIt->Update();
@@ -38,7 +38,7 @@ void Math::EntityList::DrawEntities()
 		int id = listIt->getID();
 		if (id == ID::projectile)
 		{
-			if (static_cast<Entities::Projectile *>(*listIt)->getCollided())
+			if (static_cast<Entities::Projectiles::Projectile *>(*listIt)->getCollided())
 				continue;
 		}
 		else if ((id == ID::player || id == ID::archer || id == ID::horse || id == ID::warrior)\

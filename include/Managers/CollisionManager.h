@@ -1,7 +1,7 @@
 #pragma once
 #include "../Entities/Entity.h"
 #include "../Entities/Characters/Character.h"
-#include "../Entities/Projectile.h"
+#include "../Entities/Projectiles/Projectile.h"
 #include "../Math/List.h"
 
 namespace Managers

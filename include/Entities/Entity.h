@@ -17,6 +17,7 @@ namespace Entities
 		virtual void Update() = 0;
 		virtual void Save(std::ofstream& savefile) = 0;
 		virtual void Load(std::ifstream& savefile) = 0;
+		virtual void OnCollision(Entity* ent) = 0;
 		virtual void Draw() = 0;
 		void Gravity();
 		const bool getGrounded() const;
@@ -31,7 +32,6 @@ namespace Entities
 		void setPosition(float x, float y);
 		void setVelocity(sf::Vector2f vel);
 		void setVelocity(float x, float y);
-		virtual void OnCollision(Entity* ent) = 0;
 		static void updateDeltaTime(float dt);
 	private:
 		static unsigned int Cont;

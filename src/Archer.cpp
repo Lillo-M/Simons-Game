@@ -33,7 +33,7 @@ dEnemy::Archer::Archer(const sf::Vector2f pos) : Enemy(pos, sf::Vector2f(SIZEX, 
 	
 	for (int i = 0; i < ARROWS; i++)
 	{
-		Arrow *pAux = new Arrow(sf::Vector2f(0, 0), sf::Vector2f(0, 0), this);
+		Entities::Projectiles::Arrow *pAux = new Entities::Projectiles::Arrow(sf::Vector2f(0, 0), sf::Vector2f(0, 0), this);
 		if (!pAux)
 		{
 			std::cout << std::endl
@@ -101,7 +101,7 @@ void dEnemy::Archer::Update()
 		Attack(true);
 }
 
-std::vector<Entities::Arrow *> *Entities::Characters::Enemies::Archer::getShots()
+std::vector<Entities::Projectiles::Arrow *> *Entities::Characters::Enemies::Archer::getShots()
 {
 	return &aShots;
 }

@@ -1,24 +1,27 @@
 #include "../include/Managers/EventsManager.h"
 
-using namespace Managers;
-
-EventsManager::~EventsManager()
+Managers::EventsManager::~EventsManager()
 {
 	pGM = NULL;
+	if(Instance)
+	{
+		delete Instance;
+	}
+	Instance = NULL;
 }
 
-EventsManager::EventsManager():
+Managers::EventsManager::EventsManager():
 	pGM(Managers::GraphicManager::getInstance())
 {
 }
 
-void EventsManager::setpInputManager(Managers::InputManager* pIM)
+void Managers::EventsManager::setpInputManager(Managers::InputManager* pIM)
 {
 	if(pIM)
 		this->pIM = pIM;
 }
 
-void EventsManager::Manage()
+void Managers::EventsManager::Manage()
 {
 	sf::Event event;
 	while (pGM->getWindow()->pollEvent(event))
@@ -36,3 +39,17 @@ void EventsManager::Manage()
 	}
 }
 
+Managers::EventsManager* Managers::EventsManager::getInstance()
+{
+	if(!Instance)
+	{
+		try { Instance = new EventsManager();} catch(int error)
+		{ if(!error){
+			std::cout << "ERROR: Failed to Memory Allocate" << std::endl;
+        	exit(1);
+		}}
+	}
+	return Instance;
+}
+
+Managers::EventsManager* Managers::EventsManager::Instance(NULL);

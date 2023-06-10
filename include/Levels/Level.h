@@ -7,7 +7,7 @@
 #include "../Math/List.h"// remover se a classe EntityList funcionar (e estiver corretamente implementado)
 #include "../Math/EntityList.h"
 #include "../Entities/Characters/Player.h"
-#include "../Entities/Arrow.h"
+#include "../Entities/Projectiles/Arrow.h"
 #include "../Entities/Characters/Enemies/Warrior.h"
 #include "../Entities/Characters/Enemies/Archer.h"
 #include "../Entities/Characters/Enemies/Horse.h"

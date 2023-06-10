@@ -1,7 +1,7 @@
 #pragma once
 #include "Observer.h"
 #include "../Entities/Characters/Player.h"
-#include "../States/StateMachine.h"
+#include "../States/State.h"
 
 namespace Observers
 {

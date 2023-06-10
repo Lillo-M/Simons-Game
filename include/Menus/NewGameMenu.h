@@ -19,8 +19,8 @@ namespace Menus
         void Draw();
         void Update();
         void PushLevel(Levels::Level* level);
-        void LoadLevel1();
-        void LoadLevel2();
+        void LoadAlaska();
+        void LoadVulcano();
     private:
         std::list<Levels::Level*> levels;
         Observers::MenuObserver* pMObserver;

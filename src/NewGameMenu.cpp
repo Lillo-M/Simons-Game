@@ -39,11 +39,11 @@ void Menus::NewGameMenu::Select()
     switch (currentButtom)
     {
     case 0:
-        LoadLevel1();
+        LoadAlaska();
         break;
 
     case 1:
-        LoadLevel2();
+        LoadVulcano();
         break;
 
     case 2:
@@ -95,7 +95,7 @@ void Menus::NewGameMenu::MoveDown()
     buttons[currentButtom]->Selected();
 }
 
-void Menus::NewGameMenu::LoadLevel2()
+void Menus::NewGameMenu::LoadVulcano()
 {
     std::cout<< "NewGame Vulcano" << std::endl;
     std::list<Levels::Level*>::iterator it;
@@ -121,7 +121,7 @@ void Menus::NewGameMenu::LoadLevel2()
     changeState(States::stateID::vulcano);
 }
 
-void Menus::NewGameMenu::LoadLevel1()
+void Menus::NewGameMenu::LoadAlaska()
 {
     std::cout<< "NewGame Level 1" << std::endl;
     std::list<Levels::Level*>::iterator it;

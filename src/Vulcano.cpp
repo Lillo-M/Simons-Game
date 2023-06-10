@@ -46,8 +46,6 @@ void Levels::Vulcano::CreateMap()
 
 void Levels::Vulcano::Draw()
 {
-    Math::EntityTList::Iterator it;
-
     background.setPosition(pGM->getViewCenter());
     pGM->getWindow()->draw(background);
     DentitiesList.DrawEntities();
@@ -65,8 +63,8 @@ void Levels::Vulcano::Update()
         }
         Entities::Characters::Enemies::Archer::setPlayer(pPlayer);
         Entities::Characters::Enemies::Archer::setPlayer2(pPlayer2);
-        Entities::Characters::Enemies::Horse::NMsetPlayer(pPlayer);
-        Entities::Characters::Enemies::Horse::NMsetPlayer2(pPlayer2);
+        Entities::Characters::Enemies::Horse::setPlayer(pPlayer);
+        Entities::Characters::Enemies::Horse::setPlayer2(pPlayer2);
 
         pGM->setRightLimit(6 * WIDTH);
 
@@ -75,7 +73,6 @@ void Levels::Vulcano::Update()
     }
     levelStarted = true;
     isRunning = true;
-    Math::EntityTList::Iterator it;
     DentitiesList.UpdateEntities();
     SentitiesList.UpdateEntities();
 
@@ -93,7 +90,7 @@ void Levels::Vulcano::Update()
     }
     pGM->CenterView(viewcenter);
     
-    if(!pPlayer->getAlive() && !pPlayer2->getAlive())
+    if(!pPlayer->getAlive() && !pPlayer2->getAlive() || !Boss->getAlive())
     {
         if(twoPlayers)
         {
@@ -108,7 +105,7 @@ void Levels::Vulcano::Update()
     }
 }
 
-void Levels::Vulcano::CreateNecroMancer(const sf::Vector2f pos)
+void Levels::Vulcano::CreateHorse(const sf::Vector2f pos)
 {
     Entities::Characters::Enemies::Horse *pAux = new Entities::Characters::Enemies::Horse(pos);
     if (!pAux)
@@ -117,7 +114,15 @@ void Levels::Vulcano::CreateNecroMancer(const sf::Vector2f pos)
                   << "ERROR: Failed to Allocate Memory" << std::endl;
         exit(1);
     }
+    std::vector<Entities::Projectiles::Skull*>* shots = pAux->getShots();
     DentitiesList.Push_BackEntity(static_cast<Entities::Entity *>(pAux));
+    for(int i = 0; i < 10; i++)
+    {
+        DentitiesList.Push_BackEntity(shots->operator[](i));
+    }
+    Boss = pAux;
+    pAux = NULL;
+    /* */
 }
 
 void Levels::Vulcano::CreateLava(const sf::Vector2f pos)
@@ -130,6 +135,7 @@ void Levels::Vulcano::CreateLava(const sf::Vector2f pos)
         exit(1);
     }
     SentitiesList.Push_BackEntity(static_cast<Entities::Entity *>(pAux));
+    pAux = NULL;
 }
 
 void Levels::Vulcano::CreateEntity(char id, sf::Vector2f pos)
@@ -185,7 +191,7 @@ void Levels::Vulcano::CreateEntity(char id, sf::Vector2f pos)
         CreateArcher(pos, true);
         break;
     case 'N':
-        CreateNecroMancer(pos);
+        CreateHorse(pos);
         break;
     }
 }

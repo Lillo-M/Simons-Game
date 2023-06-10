@@ -1,9 +1,9 @@
 #pragma once
 
 #include "Projectile.h"
-#include "../GraphicElements/ComplexAnimation.h"
+#include "../../GraphicElements/ComplexAnimation.h"
 
-namespace Entities{
+namespace Entities::Projectiles{
     class PlayerProjectile : public Projectile {
     private:
         GraphicElements::ComplexAnimation animation;

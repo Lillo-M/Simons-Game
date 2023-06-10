@@ -2,8 +2,8 @@
 
 Game::Game():
     pGM(Managers::GraphicManager::getInstance()),
-    eManager(new Managers::EventsManager()),
-    iManager(new Managers::InputManager())
+    eManager(Managers::EventsManager::getInstance()),
+    iManager(Managers::InputManager::getInstance())
 {
     eManager->setpInputManager(iManager);
     try{statesMap[States::stateID::mainMenu] = static_cast<States::State*>(new Menus::MainMenu(static_cast<States::StateMachine*>(this), iManager));}
@@ -29,7 +29,7 @@ Game::Game():
         std::cout << "ERROR: Failed to Memory Allocate" << std::endl;
         exit(1);
     }}
-
+    /* */
     try{statesMap[States::stateID::vulcano] = static_cast<States::State*>(new Levels::Vulcano(static_cast<States::StateMachine*>(this), iManager));}
     catch(int error){
     if(!error)
@@ -87,8 +87,14 @@ Game::~Game()
     std::map<States::stateID ,States::State*>::iterator it;
     for(it = statesMap.begin(); it != statesMap.end(); it++)
         delete it->second;
-    delete iManager;
-    delete eManager;
+    iManager->~InputManager();
+    eManager->~EventsManager();
+    eManager = NULL;
+    pGM->~GraphicManager();
+    pGM = NULL;
+    if(Instance)
+        delete Instance;
+    Instance = NULL;
 }
 
 
@@ -103,3 +109,17 @@ void Game::Run()
     }
 }
 
+Game* Game::getInstance()
+{
+    if(!Instance)
+	{
+		try { Instance = new Game();} catch(int error)
+		{ if(!error){
+			std::cout << "ERROR: Failed to Memory Allocate" << std::endl;
+        	exit(1);
+		}}
+	}
+	return Instance;
+}
+
+Game* Game::Instance(NULL);

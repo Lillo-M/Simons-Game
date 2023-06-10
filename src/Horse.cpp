@@ -8,6 +8,9 @@
 #define NMSPEED 10
 #define DAMAGE 2
 #define ACCELERATION 1.f
+#define SHOTCOUNT 10
+#define LIVES 40
+#define KNOCKBACK -11.f
 #define IDLEPATH "Assets/Horse/nightmare-idle.png"
 #define ATTACKPATH "Assets/Horse/nightmare-galloping.png"
 
@@ -17,10 +20,16 @@ Entities::Characters::Enemies::Horse::Horse(sf::Vector2f pos) : attacking(false)
 	vulnerable(false),
 	dashCharged(0.f), 
 	faceRight(true),
-	Enemy(pos, sf::Vector2f(SIZEX, SIZEY), false, ID::horse, 40),
+	Enemy(pos, sf::Vector2f(SIZEX, SIZEY), false, ID::horse, LIVES),
 	fury(false),
-	damage(DAMAGE)
+	damage(DAMAGE),
+	shotcount(0)
 {
+	balls.clear();
+	for(int i = 0; i < SHOTCOUNT ; i++)
+	{
+		balls.push_back(new Entities::Projectiles::Skull(sf::Vector2f(0,0), sf::Vector2f(0,0), this));
+	}
 	animation.pushAnimation(GraphicElements::Animation_ID::idle, IDLEPATH, sf::Vector2u(4, 0), 0.25f);
 	animation.pushAnimation(GraphicElements::Animation_ID::meleeattack, ATTACKPATH, sf::Vector2u(4, 0), 0.25f);
 }
@@ -39,24 +48,31 @@ void Entities::Characters::Enemies::Horse::Draw()
 }
 
 void Entities::Characters::Enemies::Horse::Update()
-{
-	float absDist = (absolute(getNearest()->getPosition().x - Position.x));
-	
+{	
     if (attacking)
 		animation.Update(GraphicElements::Animation_ID::meleeattack, Position, faceRight);
 	else
 		animation.Update(GraphicElements::Animation_ID::idle, Position, faceRight);
 
-	if (absDist <= DISTANCE_NM_ATTACK || attacking || fury)
-		this->Move();
+	this->Move();
 
 }
 
 void Entities::Characters::Enemies::Horse::Move()
 {
+	this->Gravity();
+
 	dashCharged += dt;
 	
-	if (dashCharged >= 2.f) {
+	float absDist = (absolute(getNearest()->getPosition().x - Position.x));
+
+	if ((absDist <= DISTANCE_NM_ATTACK || attacking || fury) && dashCharged >= 2.f) {
+		if(!attacking) {
+		if(Position.x > getNearest()->getPosition().x)
+				faceRight = true;
+			else
+				faceRight = false;
+		}
 		attacking = true;
 		if (faceRight){
 			Velocity.x -= MULT * ACCELERATION * dt;
@@ -69,15 +85,15 @@ void Entities::Characters::Enemies::Horse::Move()
 				Velocity.x = MAXVELOCITY;
 		}
 		
-		Position.x += Velocity.x * dt * MULT;
-		Position.y += Velocity.y * dt * MULT;
 		
 		
-		this->Gravity();
 		dTime += dt;
 		vulnerable = false;
 		this->Attack(true);
 	}
+
+	Position.x += Velocity.x * dt * MULT;
+	Position.y += Velocity.y * dt * MULT;
 }
 
 void Entities::Characters::Enemies::Horse::Attack(const bool b)
@@ -96,6 +112,12 @@ void Entities::Characters::Enemies::Horse::Attack(const bool b)
 		else
 			faceRight = false;
 		Velocity.x = 0;
+		balls[shotcount]->Shoot(sf::Vector2f(Position.x +\
+		(Size.x/2 + balls[shotcount]->getSize().x/2) * ( faceRight ? -1:1)\
+		,Position.y - Size.y/2), sf::Vector2f(5 * ( faceRight ? -1:1), -20));
+		shotcount++;
+		if(shotcount >= SHOTCOUNT)
+			shotcount = 0;
 	}
 }
 dPlayer Entities::Characters::Enemies::Horse::getNearest()
@@ -113,11 +135,11 @@ dPlayer Entities::Characters::Enemies::Horse::getNearest()
 		return p1;
 }
 
-void Entities::Characters::Enemies::Horse::NMsetPlayer(Player *player1)
+void Entities::Characters::Enemies::Horse::setPlayer(Player *player1)
 {
 	p1 = player1;
 }
-void Entities::Characters::Enemies::Horse::NMsetPlayer2(Player *player2)
+void Entities::Characters::Enemies::Horse::setPlayer2(Player *player2)
 {
 	p2 = player2;
 }
@@ -183,9 +205,24 @@ void Entities::Characters::Enemies::Horse::OnCollision(Entities::Entity *ent)
 		this->Attack(true);
 		Entities::Characters::Player *pPlayer = static_cast<Entities::Characters::Player *>(ent);
 		pPlayer->Damage(damage);
+		sf::Vector2f vel = sf::Vector2f(0, KNOCKBACK / 2);
+		if (pPlayer->getPosition().x > Position.x)
+			vel.x = -KNOCKBACK;
+		else
+			vel.x = KNOCKBACK;
+		pPlayer->setVelocity(vel);
 		if(!pPlayer->getAlive())
 			fury = false;
 		pPlayer = NULL;
+		return;
+	}
+	sf::Vector2f pos = ent->getPosition() -  Position;
+	sf::Vector2f size = ent->getSize() -  Size;
+	size.x /= 2;
+	size.y /= 2;
+	if((ent->getID() == ID::ground || ent->getID() == ID::lava) && attacking && Velocity.x == 0)
+	{
+		Velocity.y = -5;
 	}
 }
 
@@ -194,6 +231,11 @@ void Entities::Characters::Enemies::Horse::Damage(bool b)
 	if (vulnerable)
 		this->operator--();
 	std::cout << "life :" << this->lives << std::endl;
+}
+
+std::vector<Entities::Projectiles::Skull*>* Entities::Characters::Enemies::Horse::getShots()
+{
+	return &balls;
 }
 
 

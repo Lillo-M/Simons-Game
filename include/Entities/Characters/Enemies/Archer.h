@@ -4,7 +4,7 @@
 #include <iostream>
 #include <vector>
 #include "../../../GraphicElements/ComplexAnimation.h"
-#include "../../Arrow.h"
+#include "../../Projectiles/Arrow.h"
 #include "../Player.h"
 
 #define MULT 60
@@ -19,7 +19,7 @@ namespace Entities
             class Archer : public Enemy
             {
             private:
-                std::vector<Entities::Arrow*> aShots;
+                std::vector<Entities::Projectiles::Arrow*> aShots;
                 static Player* p1;
                 static Player* p2;
                 bool attackcooled;
@@ -40,7 +40,7 @@ namespace Entities
                 void Attack(const bool b);
                 void Save(std::ofstream& savefile);
                 void Load(std::ifstream& savefile);
-                std::vector<Arrow*>* getShots();
+                std::vector<Entities::Projectiles::Arrow*>* getShots();
                 Player* getNearest ();
                 static void setPlayer (Player* pPlayer);
                 static void setPlayer2 (Player* pPlayer2);

@@ -5,8 +5,7 @@
 #include <iostream>
 #include <vector>
 #include "../../GraphicElements/ComplexAnimation.h"
-#include "../Projectile.h"
-#include "../PlayerProjectile.h"
+#include "../Projectiles/PlayerProjectile.h"
 
 namespace Entities
 {
@@ -15,7 +14,7 @@ namespace Entities
 		class Player: public Character
 		{
 		private:
-			std::vector<PlayerProjectile*> shots;
+			std::vector<Entities::Projectiles::PlayerProjectile*> shots;
 			int shootCount;
 			float maxVelocity;
 			float friction;
@@ -51,7 +50,7 @@ namespace Entities
 			void setPoints(int Points);
 			void setFriction(float friction);
 			const int getPoints() const;
-			std::vector<PlayerProjectile*>* getShots();
+			std::vector<Entities::Projectiles::PlayerProjectile*>* getShots();
 		};
 	}
 }

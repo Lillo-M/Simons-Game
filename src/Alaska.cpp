@@ -46,8 +46,6 @@ void Levels::Alaska::CreateMap()
 
 void Levels::Alaska::Draw()
 {
-    Math::EntityTList::Iterator it;
-
     background.setPosition(pGM->getViewCenter());
     pGM->getWindow()->draw(background);
     DentitiesList.DrawEntities();
@@ -66,7 +64,6 @@ void Levels::Alaska::Update()
     }
     levelStarted = true;
     isRunning = true;
-    Math::EntityTList::Iterator it;
     DentitiesList.UpdateEntities();
     SentitiesList.UpdateEntities();
 
