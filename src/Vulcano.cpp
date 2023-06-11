@@ -67,7 +67,8 @@ void Levels::Vulcano::Update()
         Entities::Characters::Enemies::Horse::setPlayer2(pPlayer2);
 
         pGM->setRightLimit(6 * WIDTH);
-
+        pGM->setBottomLimit(4 * HEIGHT);
+        
         if(!twoPlayers)
             pPlayer2->setAlive(false);
     }
@@ -88,6 +89,7 @@ void Levels::Vulcano::Update()
         if(!pPlayer->getAlive())
             viewcenter = pPlayer2->getPosition();
     }
+    std::cout << viewcenter.x << "aaaa" << viewcenter.y << std::endl;
     pGM->CenterView(viewcenter);
     
     if(!pPlayer->getAlive() && !pPlayer2->getAlive() || !Boss->getAlive())

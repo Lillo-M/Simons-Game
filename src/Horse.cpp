@@ -41,10 +41,6 @@ Entities::Characters::Enemies::Horse::~Horse()
 void Entities::Characters::Enemies::Horse::Draw()
 {
 	animation.Draw();
-	sf::RectangleShape shape(sf::Vector2f(5.f, 5.f));
-    shape.setFillColor(sf::Color::Blue);
-    shape.setPosition(Position.x, Position.y - this->getSize().y / 2 );
-	pGM->Draw(shape);
 }
 
 void Entities::Characters::Enemies::Horse::Update()

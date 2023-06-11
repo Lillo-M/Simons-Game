@@ -29,6 +29,7 @@ namespace Managers
         sf::Texture* loadTexture(const char* path);
         void setLeftLimit(float limit);
         void setRightLimit(float limit);
+        void setBottomLimit(float limit);
     private:
         GraphicManager();
         static GraphicManager* Instance;
@@ -40,5 +41,6 @@ namespace Managers
         std::map<const char*, sf::Texture*> textureMap;
         float LeftLimit;
         float RightLimit;
+        float BottomLimit;
     };
 }

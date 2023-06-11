@@ -62,6 +62,7 @@ const sf::Vector2f Entities::Characters::Player::getVelocity() const { return Ve
 
 void Entities::Characters::Player::Move()
 {
+	std::cout << Position.x << "aa" << Position.y << std::endl;
 	if(onIce)
 	{
 		maxVelocity = 1.25f * MAXV;
