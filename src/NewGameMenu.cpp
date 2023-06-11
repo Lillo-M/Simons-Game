@@ -5,10 +5,10 @@ Menus::NewGameMenu::NewGameMenu(States::StateMachine* pSM, Managers::InputManage
     State(pSM, States::stateID::newGameMenu),
     pIM(pIM)
 {
-    PushButtom(new GraphicElements::Buttom(sf::Vector2f(WIDTH/2 - 90,-30), 30, "Alaska"));
-    PushButtom(new GraphicElements::Buttom(sf::Vector2f(WIDTH/2 - 90,0), 30, "Vulcano"));
-    PushButtom(new GraphicElements::Buttom(sf::Vector2f(WIDTH/2 - 90,30), 30, "Quit To MainMenu"));
-    buttons[currentButtom]->Selected();
+    PushButton(new GraphicElements::Button(sf::Vector2f(WIDTH/2 - 90,-30), 30, "Alaska"));
+    PushButton(new GraphicElements::Button(sf::Vector2f(WIDTH/2 - 90,0), 30, "Vulcano"));
+    PushButton(new GraphicElements::Button(sf::Vector2f(WIDTH/2 - 90,30), 30, "Quit To MainMenu"));
+    buttons[currentButton]->Selected();
     pIM->addObserver(static_cast<Observers::Observer*>(pMObserver));
 }
 
@@ -18,7 +18,7 @@ Menus::NewGameMenu::~NewGameMenu()
     levels.clear();
     pIM->removeObserver(static_cast<Observers::Observer*>(pMObserver));
     pIM = NULL;
-    for(int i = 0; i < buttomCont; i++)
+    for(int i = 0; i < buttonCont; i++)
     {
         if(buttons[i])
             delete buttons[i];
@@ -35,7 +35,7 @@ void Menus::NewGameMenu::Select()
 {
     if(!this->getIsRunning())
         return;
-    switch (currentButtom)
+    switch (currentButton)
     {
     case 0:
         LoadAlaska();
@@ -51,14 +51,14 @@ void Menus::NewGameMenu::Select()
     default:
         break;
     }
-    buttons[currentButtom--]->UnSelected();
-    currentButtom = 0;
-    buttons[currentButtom]->Selected();
+    buttons[currentButton--]->UnSelected();
+    currentButton = 0;
+    buttons[currentButton]->Selected();
 }
 
 void Menus::NewGameMenu::Draw()
 {
-    for(int i = 0; i < buttomCont; i++)
+    for(int i = 0; i < buttonCont; i++)
     {
         buttons[i]->Draw();
     }
@@ -68,7 +68,7 @@ void Menus::NewGameMenu::Update()
 {
     pGM->CenterView(sf::Vector2f(0,0));
     isRunning = true;
-    for(int i = 0; i < buttomCont; i++)
+    for(int i = 0; i < buttonCont; i++)
     {
         buttons[i]->Update();
     }
@@ -78,20 +78,20 @@ void Menus::NewGameMenu::MoveUp()
 {
     if(!this->getIsRunning())
         return;
-    if(currentButtom <= 0)
+    if(currentButton <= 0)
         return;
-    buttons[currentButtom--]->UnSelected();
-    buttons[currentButtom]->Selected();
+    buttons[currentButton--]->UnSelected();
+    buttons[currentButton]->Selected();
 }
 
 void Menus::NewGameMenu::MoveDown()
 {
     if(!this->getIsRunning())
         return;
-    if(currentButtom >= (buttomCont - 1))
+    if(currentButton >= (buttonCont - 1))
         return;
-    buttons[currentButtom++]->UnSelected();
-    buttons[currentButtom]->Selected();
+    buttons[currentButton++]->UnSelected();
+    buttons[currentButton]->Selected();
 }
 
 void Menus::NewGameMenu::LoadVulcano()

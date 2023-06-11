@@ -6,12 +6,12 @@ Menus::MainMenu::MainMenu(States::StateMachine* pSM, Managers::InputManager* pIM
     pIM(pIM),
     twoPlayers(false)
 {
-    PushButtom(new GraphicElements::Button(sf::Vector2f(WIDTH/2 - 90,-30), 30, "New Game"));
-    PushButtom(new GraphicElements::Button(sf::Vector2f(WIDTH/2 - 90,0), 30, "Load Game"));
-    PushButtom(new GraphicElements::Button(sf::Vector2f(WIDTH/2 - 90,30), 30, "LeaderBoard"));
-    PushButtom(new GraphicElements::Button(sf::Vector2f(WIDTH/2 - 90,60), 30, "2 Players: OFF"));
-    PushButtom(new GraphicElements::Button(sf::Vector2f(WIDTH/2 - 90,90), 30, "Quit Game"));
-    buttons[currentButtom]->Selected();
+    PushButton(new GraphicElements::Button(sf::Vector2f(WIDTH/2 - 90,-30), 30, "New Game"));
+    PushButton(new GraphicElements::Button(sf::Vector2f(WIDTH/2 - 90,0), 30, "Load Game"));
+    PushButton(new GraphicElements::Button(sf::Vector2f(WIDTH/2 - 90,30), 30, "LeaderBoard"));
+    PushButton(new GraphicElements::Button(sf::Vector2f(WIDTH/2 - 90,60), 30, "2 Players: OFF"));
+    PushButton(new GraphicElements::Button(sf::Vector2f(WIDTH/2 - 90,90), 30, "Quit Game"));
+    buttons[currentButton]->Selected();
     pIM->addObserver(static_cast<Observers::Observer*>(pMObserver));
 }
 Menus::MainMenu::~MainMenu()
@@ -19,7 +19,7 @@ Menus::MainMenu::~MainMenu()
     std::cout << "MainMenu Destructor" << std::endl;
     pIM->removeObserver(static_cast<Observers::Observer*>(pMObserver));
     pIM = NULL;
-    for(int i = 0; i < buttomCont; i++)
+    for(int i = 0; i < buttonCont; i++)
     {
         if(buttons[i])
             delete buttons[i];
@@ -31,27 +31,27 @@ void Menus::MainMenu::Select()
 {
     if(!this->getIsRunning())
         return;
-    switch (currentButtom)
+    switch (currentButton)
     {
     case 0:
         changeState(States::stateID::newGameMenu);
-        buttons[currentButtom--]->UnSelected();
-        currentButtom = 0;
-        buttons[currentButtom]->Selected();
+        buttons[currentButton--]->UnSelected();
+        currentButton = 0;
+        buttons[currentButton]->Selected();
         break;
 
     case 1:
         changeState(States::stateID::loadGameState);
-            buttons[currentButtom--]->UnSelected();
-        currentButtom = 0;
-        buttons[currentButtom]->Selected();
+            buttons[currentButton--]->UnSelected();
+        currentButton = 0;
+        buttons[currentButton]->Selected();
         break;
 
     case 2:
         changeState(States::stateID::leaderBoard);
-            buttons[currentButtom--]->UnSelected();
-        currentButtom = 0;
-        buttons[currentButtom]->Selected();
+            buttons[currentButton--]->UnSelected();
+        currentButton = 0;
+        buttons[currentButton]->Selected();
         break;
 
     case 3:
@@ -70,7 +70,7 @@ void Menus::MainMenu::Select()
 
 void Menus::MainMenu::Draw()
 {
-    for(int i = 0; i < buttomCont; i++)
+    for(int i = 0; i < buttonCont; i++)
     {
         buttons[i]->Draw();
     }
@@ -80,7 +80,7 @@ void Menus::MainMenu::Update()
 {
     pGM->CenterView(sf::Vector2f(0,0));
     isRunning = true;
-    for(int i = 0; i < buttomCont; i++)
+    for(int i = 0; i < buttonCont; i++)
     {
         buttons[i]->Update();
     }
@@ -91,18 +91,18 @@ void Menus::MainMenu::MoveUp()
 {
     if(!this->getIsRunning())
         return;
-    if(currentButtom <= 0)
+    if(currentButton <= 0)
         return;
-    buttons[currentButtom--]->UnSelected();
-    buttons[currentButtom]->Selected();
+    buttons[currentButton--]->UnSelected();
+    buttons[currentButton]->Selected();
 }
 
 void Menus::MainMenu::MoveDown()
 {
     if(!this->getIsRunning())
         return;
-    if(currentButtom >= (buttomCont - 1))
+    if(currentButton >= (buttonCont - 1))
         return;
-    buttons[currentButtom++]->UnSelected();
-    buttons[currentButtom]->Selected();
+    buttons[currentButton++]->UnSelected();
+    buttons[currentButton]->Selected();
 }

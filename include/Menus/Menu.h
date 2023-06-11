@@ -21,12 +21,12 @@ namespace Menus
         virtual void Select() = 0;
         virtual void Draw() = 0;
         virtual void Update() = 0;
-        void PushButtom(GraphicElements::Button* button);
+        void PushButton(GraphicElements::Button* button);
         const Observers::Observer* getObserver() const;
     protected:
         Observers::MenuObserver* pMObserver;
         std::vector<GraphicElements::Button*> buttons;
-        int buttomCont;
-        int currentButtom;
+        int buttonCont;
+        int currentButton;
     };
 }

@@ -7,8 +7,8 @@ Menus::LeaderBoard::LeaderBoard(States::StateMachine* pSM, Managers::InputManage
     textCount(0)
 {
     font.loadFromFile("Assets/arial.ttf");
-    PushButtom(new GraphicElements::Button(sf::Vector2f(WIDTH/2 - 90,340), 30, "Go Back"));
-    buttons[currentButtom]->Selected();
+    PushButton(new GraphicElements::Button(sf::Vector2f(WIDTH/2 - 90,340), 30, "Go Back"));
+    buttons[currentButton]->Selected();
     std::ifstream leadersArchive;
     std::string str;
     leadersArchive.open("Assets/leaderboard.txt");
@@ -46,7 +46,7 @@ Menus::LeaderBoard::~LeaderBoard()
     if(pMObserver)
         delete pMObserver;
     pMObserver = NULL;
-    for(int i = 0; i < buttomCont; i++)
+    for(int i = 0; i < buttonCont; i++)
     {
         if(buttons[i])
             delete buttons[i];
@@ -84,7 +84,7 @@ void Menus::LeaderBoard::Update()
     }
     pGM->CenterView(sf::Vector2f(0,0));
     isRunning = true;
-    for(int i = 0; i < buttomCont; i++)
+    for(int i = 0; i < buttonCont; i++)
     {
         buttons[i]->Update();
     }
@@ -92,7 +92,7 @@ void Menus::LeaderBoard::Update()
 
 void Menus::LeaderBoard::Draw()
 {
-    for(int i = 0; i < buttomCont; i++)
+    for(int i = 0; i < buttonCont; i++)
     {
         buttons[i]->Draw();
     }

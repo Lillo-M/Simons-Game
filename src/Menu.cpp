@@ -3,8 +3,8 @@
 
 Menus::Menu::Menu():
     Being(ID::menu),
-    currentButtom(0),
-    buttomCont(0),
+    currentButton(0),
+    buttonCont(0),
     pMObserver(new Observers::MenuObserver(static_cast<Menus::Menu*>(this)))
 {
 }
@@ -16,10 +16,10 @@ Menus::Menu::~Menu()
         delete pMObserver;
 }
 
-void Menus::Menu::PushButtom(GraphicElements::Button* button)
+void Menus::Menu::PushButton(GraphicElements::Button* button)
 {
     buttons.push_back(button);
-    buttomCont++;
+    buttonCont++;
 }
 
 const Observers::Observer* Menus::Menu::getObserver() const {return static_cast<Observers::Observer*>(pMObserver);}
