@@ -12,7 +12,7 @@
 #define dEnemy Entities::Characters::Enemies
 
 dEnemy::Warrior::Warrior(const sf::Vector2f pos):
-    Enemy(pos, sf::Vector2f(SIZEX, SIZEY), false, ID::warrior, LIVES),
+    Enemy(pos, sf::Vector2f(SIZEX, SIZEY), ID::warrior, LIVES),
 	directiontimer(0),
 	directionright(static_cast<bool>(rand()%2)),
 	isAttacking(false)

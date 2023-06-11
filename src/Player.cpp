@@ -10,12 +10,13 @@
 #define SIZEY 66.f
 #define LIVES 100
 #define MAXV 10
+#define PLASMABALLS 10
 #define ATRITO 0.30
 #define JUMPHEIGHT -11.f
 #define PSPEED 0.8
 
 Entities::Characters::Player::Player(const sf::Vector2f pos) : 
-	Character(pos, sf::Vector2f(SIZEX, SIZEY), false, ID::player, LIVES),
+	Character(pos, sf::Vector2f(SIZEX, SIZEY), ID::player, LIVES),
 	maxVelocity(MAXV),
 	BoolMoveLeft(false),
 	BoolMoveRight(false),
@@ -31,9 +32,9 @@ Entities::Characters::Player::Player(const sf::Vector2f pos) :
 	Points(0),
 	friction(0)
 {
-	for(int i = 0; i < 10; i++)
+	for(int i = 0; i < PLASMABALLS; i++)
 	{
-		Entities::Projectiles::PlayerProjectile* pAux = new Entities::Projectiles::PlayerProjectile(sf::Vector2f(0,0), sf::Vector2f(0,0), this);
+		Entities::Projectiles::PlasmaBall* pAux = new Entities::Projectiles::PlasmaBall(sf::Vector2f(0,0), sf::Vector2f(0,0), this);
 		if(!pAux)
 		{
 			std::cout << std::endl << "ERROR: Failed to Memory Allocate" << std::endl;
@@ -50,15 +51,9 @@ Entities::Characters::Player::Player(const sf::Vector2f pos) :
 
 Entities::Characters::Player::~Player()
 {
+	std::cout << "Player Destructor" << std::endl;
 	shots.clear();
 }
-
-sf::Vector2f Entities::Characters::Player::getPosition() // botar na entidade
-{
-	return Position;
-}
-
-const sf::Vector2f Entities::Characters::Player::getVelocity() const { return Velocity; } // botar na entidade
 
 void Entities::Characters::Player::Move()
 {
@@ -262,10 +257,9 @@ void Entities::Characters::Player::Load(std::ifstream &savefile)
     this->setFacing(iread);
     savefile >> iread;
     this->setPoints(iread);
-    std::vector<Entities::Projectiles::PlayerProjectile*>* vshots = this->getShots();
-    for(int j = 0; j < 10; j++)
+    for(int j = 0; j < PLASMABALLS; j++)
     {
-        vshots->operator[](j)->Load(savefile);
+        shots[j]->Load(savefile);
     }
 }
 
@@ -280,7 +274,7 @@ void Entities::Characters::Player::Score(ID id)
 		Points +=  3000;
 		break;
 	case ID::horse:
-		Points += 15000;
+		Points += 50000;
 		break;
 	}
 }
@@ -291,4 +285,4 @@ const int Entities::Characters::Player::getPoints() const {return Points;}
 
 void Entities::Characters::Player::setPoints(int Points) {this->Points = Points;}
 
-std::vector<Entities::Projectiles::PlayerProjectile*>* Entities::Characters::Player::getShots() {return &shots;}
+std::vector<Entities::Projectiles::PlasmaBall*>* Entities::Characters::Player::getShots() {return &shots;}

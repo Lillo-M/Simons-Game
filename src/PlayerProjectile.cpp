@@ -4,23 +4,23 @@
 #define ATTACKPATH "Assets/Player/Charge_1.png"
 #define IDLEPATH "Assets/Player/Charge_2.png"
 
-Entities::Projectiles::PlayerProjectile::PlayerProjectile(sf::Vector2f pos, sf::Vector2f velocity, Entities::Characters::Character *owner): 
+Entities::Projectiles::PlasmaBall::PlasmaBall(sf::Vector2f pos, sf::Vector2f velocity, Entities::Characters::Character *owner): 
     Projectile (pos, velocity, owner)
 {
     animation.pushAnimation(GraphicElements::Animation_ID::idle, IDLEPATH, sf::Vector2u(6,0), 0.16f);
     animation.pushAnimation(GraphicElements::Animation_ID::attack, ATTACKPATH, sf::Vector2u(6,0), 0.16f);
 }
 
-Entities::Projectiles::PlayerProjectile::~PlayerProjectile(){ } 
+Entities::Projectiles::PlasmaBall::~PlasmaBall(){ } 
 
-void Entities::Projectiles::PlayerProjectile::Move()
+void Entities::Projectiles::PlasmaBall::Move()
 {
     Gravity();
     Velocity.y -= 1.f * gravity * dt * 60;
     Position.x += Velocity.x * dt * 60;
     Position.y += Velocity.y * dt * 60;
 }
-void Entities::Projectiles::PlayerProjectile::OnCollision(Entities::Entity* ent)
+void Entities::Projectiles::PlasmaBall::OnCollision(Entities::Entity* ent)
 {
     int targetID = ent->getID();
     if(targetID == ID::warrior || targetID == ID::archer || targetID == ID::horse )
@@ -33,18 +33,18 @@ void Entities::Projectiles::PlayerProjectile::OnCollision(Entities::Entity* ent)
     collided = true;
 }
 
-void Entities::Projectiles::PlayerProjectile::Update()
+void Entities::Projectiles::PlasmaBall::Update()
 {
     Move();
     animation.Update(GraphicElements::Animation_ID::idle, Position, (Velocity.x > 0 ? true:false));
 }
 
-void Entities::Projectiles::PlayerProjectile::Draw()
+void Entities::Projectiles::PlasmaBall::Draw()
 {
     animation.Draw();
 }
 
-void Entities::Projectiles::PlayerProjectile::Shoot(sf::Vector2f pos, sf::Vector2f vel)
+void Entities::Projectiles::PlasmaBall::Shoot(sf::Vector2f pos, sf::Vector2f vel)
 {
     Position = pos;
     Velocity = vel;

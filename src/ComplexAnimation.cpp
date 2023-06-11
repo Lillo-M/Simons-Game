@@ -8,6 +8,7 @@ Animation()
 
 GraphicElements::ComplexAnimation::~ComplexAnimation()
 {
+    std::cout << "ComplexAnimation Destructor" << std::endl;
     std::map<Animation_ID, SimpleAnimation*>::iterator it;
     for (it = animationMap.begin(); it != animationMap.end(); it++)
     {

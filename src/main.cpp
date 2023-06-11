@@ -8,7 +8,8 @@ int main()
     std::cout << "inciando jogo" << std::endl;
     Game* game;
     game = Game::getInstance();
-    game->~Game();
+    if(game)
+        delete game;
     game = NULL;
     return 0;
 }

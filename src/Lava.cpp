@@ -6,7 +6,7 @@
 #define SIZEX 128.f
 
 Entities::Obstacles::Lava::Lava(const sf::Vector2f pos):
-    Obstacle(pos, sf::Vector2f(SIZEX,SIZEY), true, ID::lava),
+    Obstacle(pos, sf::Vector2f(SIZEX,SIZEY), ID::lava),
 	Damage(1)
 {
     animation.Reset(TEXTUREPATH, pos, sf::Vector2f(SIZEX,SIZEY));

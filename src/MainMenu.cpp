@@ -3,7 +3,6 @@
 Menus::MainMenu::MainMenu(States::StateMachine* pSM, Managers::InputManager* pIM):
     Menu(),
     State(pSM, States::stateID::mainMenu),
-    pMObserver(new Observers::MenuObserver(static_cast<Menus::Menu*>(this))),
     pIM(pIM),
     twoPlayers(false)
 {
@@ -17,7 +16,7 @@ Menus::MainMenu::MainMenu(States::StateMachine* pSM, Managers::InputManager* pIM
 }
 Menus::MainMenu::~MainMenu()
 {
-    delete pMObserver;
+    std::cout << "MainMenu Destructor" << std::endl;
     pIM->removeObserver(static_cast<Observers::Observer*>(pMObserver));
     pIM = NULL;
     for(int i = 0; i < buttomCont; i++)

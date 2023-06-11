@@ -34,6 +34,7 @@ States::GameOverState::GameOverState(States::StateMachine* pSMachine, Managers::
 
 States::GameOverState::~GameOverState()
 {
+    std::cout << "GameOverState Destructor" << std::endl;
     pIM->removeObserver(tIObserver);
     if(tIObserver)
         delete tIObserver;

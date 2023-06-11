@@ -36,7 +36,7 @@ namespace Levels
         void SaveLevel();
         void LoadLevel();
         void Reset();
-        bool getLevelStarted() const;
+        const bool getLevelStarted() const;
         int getScore() const;
         int getPlayerScore() const;
         int getPlayer2Score() const;

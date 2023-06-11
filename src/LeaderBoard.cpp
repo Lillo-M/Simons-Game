@@ -3,7 +3,6 @@
 Menus::LeaderBoard::LeaderBoard(States::StateMachine* pSM, Managers::InputManager* pIM):
     Menu(),
     State(pSM, States::stateID::leaderBoard),
-    pMObserver(new Observers::MenuObserver(static_cast<Menus::Menu*>(this))),
     pIM(pIM),
     textCount(0)
 {
@@ -42,6 +41,7 @@ Menus::LeaderBoard::LeaderBoard(States::StateMachine* pSM, Managers::InputManage
 
 Menus::LeaderBoard::~LeaderBoard()
 {
+    std::cout << "LeaderBoard Destructor" << std::endl;
     pIM->removeObserver(pMObserver);
     if(pMObserver)
         delete pMObserver;

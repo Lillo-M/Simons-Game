@@ -11,14 +11,13 @@ Managers::GraphicManager::GraphicManager():
 
 Managers::GraphicManager::~GraphicManager()
 {
+    std::cout << "GraphicManager Destructor" << std::endl;
     std::map<const char *, sf::Texture *>::iterator it;
     for (it = textureMap.begin(); it != textureMap.end(); it++)
     {
         if (it->second)
             delete it->second;
     }
-    if (Instance)
-        delete Instance;
     Instance = NULL;
 }
 

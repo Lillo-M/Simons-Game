@@ -7,8 +7,8 @@
 #define ESPEED 0.1
 #define KNOCKBACK -11.f
 
-dEnemy::Enemy(const sf::Vector2f pos, const sf::Vector2f size, const bool isS, ID id, int lves):
-    Character(pos, size, isS, id, lves),
+dEnemy::Enemy(const sf::Vector2f pos, const sf::Vector2f size, ID id, int lves):
+    Character(pos, size, id, lves),
 	attackTimer(0)
 {
 }

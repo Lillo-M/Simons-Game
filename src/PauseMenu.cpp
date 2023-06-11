@@ -3,9 +3,14 @@
 Menus::PauseMenu::PauseMenu(States::StateMachine *pSM, Managers::InputManager *pIM):
     Menu(),
     State(pSM, States::stateID::pauseMenu),
-    pMObserver(new Observers::MenuObserver(static_cast<Menus::Menu*>(this))),
     pIM(pIM)
 {
+    font.loadFromFile("Assets/arial.ttf");
+    text.setFont(font);
+    text.setFillColor(sf::Color::White);
+    text.setStyle(sf::Text::Bold);
+    text.setString("Game Paused");
+    text.setPosition(sf::Vector2f(WIDTH/2 - 100,-340));
     PushButtom(new GraphicElements::Buttom(sf::Vector2f(WIDTH/2 - 90,-30), 30, "Resume"));
     PushButtom(new GraphicElements::Buttom(sf::Vector2f(WIDTH/2 - 90,0), 30, "Save Game"));
     PushButtom(new GraphicElements::Buttom(sf::Vector2f(WIDTH/2 - 90,30), 30, "Main Menu"));
@@ -16,12 +21,12 @@ Menus::PauseMenu::PauseMenu(States::StateMachine *pSM, Managers::InputManager *p
 
 Menus::PauseMenu::~PauseMenu()
 {
+    std::cout << "PauseMenu Destructor" << std::endl;
     for(int i = 0; i < buttomCont; i++)
     {
         if(buttons[i])
             delete buttons[i];
     }
-    delete pMObserver;
     pIM->removeObserver(static_cast<Observers::Observer*>(pMObserver));
     pIM = NULL;
 }
@@ -54,6 +59,7 @@ void Menus::PauseMenu::Select()
 
 void Menus::PauseMenu::Draw()
 {
+    pGM->Draw(text);
     for(int i = 0; i < buttomCont; i++)
     {
         buttons[i]->Draw();

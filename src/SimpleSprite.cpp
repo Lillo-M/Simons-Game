@@ -8,6 +8,7 @@ GraphicElements::SimpleSprite::SimpleSprite():
 
 GraphicElements::SimpleSprite::~SimpleSprite()
 {
+    std::cout << "SimpleSprite Destructor" << std::endl;
 }
 
 void GraphicElements::SimpleSprite::Update(sf::Vector2f Position)

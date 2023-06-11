@@ -14,7 +14,8 @@ namespace Entities
 		class Player: public Character
 		{
 		private:
-			std::vector<Entities::Projectiles::PlayerProjectile*> shots;
+			std::vector<Entities::Projectiles::PlasmaBall*> shots;
+			GraphicElements::ComplexAnimation animation;
 			int shootCount;
 			float maxVelocity;
 			float friction;
@@ -26,8 +27,7 @@ namespace Entities
 			bool faceRight;
 			bool isJumping;
 			bool onIce;
-			GraphicElements::ComplexAnimation animation;
-			float attackcd;	/*Cooldown do ataque*/
+			float attackcd;
 			int Points;
 		public:
 			Player(const sf::Vector2f pos = sf::Vector2f(0, 0));
@@ -37,8 +37,6 @@ namespace Entities
 			void Draw();
 			void Save(std::ofstream& savefile);
 			void Load(std::ifstream& savefile);
-			sf::Vector2f getPosition();
-			const sf::Vector2f getVelocity() const;
 			void setFacing(int side);
 			void Jump();
 			void MoveRight(const bool b);
@@ -50,7 +48,7 @@ namespace Entities
 			void setPoints(int Points);
 			void setFriction(float friction);
 			const int getPoints() const;
-			std::vector<Entities::Projectiles::PlayerProjectile*>* getShots();
+			std::vector<Entities::Projectiles::PlasmaBall*>* getShots();
 		};
 	}
 }

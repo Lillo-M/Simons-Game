@@ -22,9 +22,7 @@ namespace Observers
 		States::State* currentState;
 		Entities::Characters::Player* pPlayer;
 		Entities::Characters::Player* pPlayer2;
-		std::map<std::string, std::string> inputSetsPlayer;
 		std::map<std::string, std::string> inputSetsPlayer2;
-		std::map<std::string, std::string>::const_iterator mapIt;
 		std::map<std::string, std::string>::const_iterator mapIt2;
     };
 }

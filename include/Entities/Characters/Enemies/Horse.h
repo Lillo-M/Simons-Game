@@ -29,10 +29,10 @@ namespace Entities
                 static void setPlayer(Player* p1);
                 static void setPlayer2(Player* p2);
                 Player* getNearest ();
-                std::vector<Entities::Projectiles::Skull*>* getShots();
+                std::vector<Entities::Projectiles::Skull*>* getSkulls();
             private:
                 int shotcount;
-                std::vector<Entities::Projectiles::Skull*> balls;
+                std::vector<Entities::Projectiles::Skull*> Skulls;
                 static Player* p1;
                 static Player* p2;
                 bool faceRight;

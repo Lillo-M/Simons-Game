@@ -4,12 +4,12 @@
 #include "../../GraphicElements/ComplexAnimation.h"
 
 namespace Entities::Projectiles{
-    class PlayerProjectile : public Projectile {
+    class PlasmaBall : public Projectile {
     private:
         GraphicElements::ComplexAnimation animation;
     public:
-        PlayerProjectile (sf::Vector2f pos = sf::Vector2f(0, 0), sf::Vector2f velocity = sf::Vector2f(0, 0), Entities::Characters::Character *owner = NULL);
-        ~PlayerProjectile ();
+        PlasmaBall (sf::Vector2f pos = sf::Vector2f(0, 0), sf::Vector2f velocity = sf::Vector2f(0, 0), Entities::Characters::Character *owner = NULL);
+        ~PlasmaBall ();
         void Shoot(sf::Vector2f pos, sf::Vector2f vel);
         void Move();
         void Update();

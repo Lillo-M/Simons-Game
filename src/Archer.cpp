@@ -16,7 +16,8 @@
 #define dEnemy Entities::Characters::Enemies
 #define dPlayer Entities::Characters::Player *
 
-dEnemy::Archer::Archer(const sf::Vector2f pos) : Enemy(pos, sf::Vector2f(SIZEX, SIZEY), false, ID::archer, 7),
+dEnemy::Archer::Archer(const sf::Vector2f pos) : 
+	Enemy(pos, sf::Vector2f(SIZEX, SIZEY), ID::archer, 7),
 	shootCount(0),
 	faceRight(false),
 	attackcd(0.f),

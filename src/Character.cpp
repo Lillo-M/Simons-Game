@@ -1,7 +1,7 @@
 #include "../include/Entities/Characters/Character.h"
 
-Entities::Characters::Character::Character(const sf::Vector2f pos, const sf::Vector2f size, const bool isS, ID id, int lves):
-    Entity(pos, size, false, id),
+Entities::Characters::Character::Character(const sf::Vector2f pos, const sf::Vector2f size, ID id, int lves):
+    Entity(pos, size, id),
     alive(true),
     damaged(false),
     lives(lves)

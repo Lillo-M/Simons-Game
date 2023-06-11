@@ -35,6 +35,7 @@ Levels::Level::Level(const ID id, const States::stateID sid, States::StateMachin
 
 Levels::Level::~Level()
 {
+    std::cout << "Abstract Level Destructor" << std::endl;
     this->pIM->removeObserver(static_cast<Observers::Observer*>(pPIM));
     if(pPIM)
         delete pPIM;
@@ -44,6 +45,7 @@ Levels::Level::~Level()
     if(pCManager)
         delete pCManager;
     pCManager = NULL;
+    /* */
 }
 
 void Levels::Level::CreatePlayer(const sf::Vector2f pos)
@@ -65,7 +67,7 @@ void Levels::Level::CreatePlayer(const sf::Vector2f pos)
         pPlayer2 = pAux;
         pPIM->setpPlayer2(pAux);
     }
-    std::vector<Entities::Projectiles::PlayerProjectile*>::iterator it;
+    std::vector<Entities::Projectiles::PlasmaBall*>::iterator it;
     for(it = pAux->getShots()->begin(); it != pAux->getShots()->end(); it++)
     {
 	    DentitiesList.Push_FrontEntity(static_cast<Entities::Entity *>(*it));
@@ -166,7 +168,7 @@ int Levels::Level::getPlayerScore() const {return pPlayer->getPoints();}
 
 int Levels::Level::getPlayer2Score() const {return pPlayer2->getPoints();}
 
-bool Levels::Level::getLevelStarted() const {return levelStarted;}
+const bool Levels::Level::getLevelStarted() const {return levelStarted;}
 
 void Levels::Level::setTwoPlayers(bool twoPlayers) {Levels::Level::twoPlayers = twoPlayers;}
 

@@ -3,7 +3,6 @@
 Menus::NewGameMenu::NewGameMenu(States::StateMachine* pSM, Managers::InputManager* pIM):
     Menu(),
     State(pSM, States::stateID::newGameMenu),
-    pMObserver(new Observers::MenuObserver(static_cast<Menus::Menu*>(this))),
     pIM(pIM)
 {
     PushButtom(new GraphicElements::Buttom(sf::Vector2f(WIDTH/2 - 90,-30), 30, "Level 1"));
@@ -15,8 +14,8 @@ Menus::NewGameMenu::NewGameMenu(States::StateMachine* pSM, Managers::InputManage
 
 Menus::NewGameMenu::~NewGameMenu()
 {
+    std::cout << "NewGameMenu Destructor" << std::endl;
     levels.clear();
-    delete pMObserver;
     pIM->removeObserver(static_cast<Observers::Observer*>(pMObserver));
     pIM = NULL;
     for(int i = 0; i < buttomCont; i++)

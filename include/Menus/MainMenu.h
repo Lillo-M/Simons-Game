@@ -17,7 +17,6 @@ namespace Menus
         void MoveUp();
         void MoveDown();
     private:
-        Observers::MenuObserver* pMObserver;
         Managers::InputManager* pIM;
         bool twoPlayers;
         //sf::Image background;

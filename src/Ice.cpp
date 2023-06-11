@@ -3,7 +3,7 @@
 #define PATH "Assets/Obstacles/Ice.png"
 
 Entities::Obstacles::Ice::Ice(const sf::Vector2f pos):
-    Obstacle(pos, sf::Vector2f(128.f,128.f), true, ID::ice)
+    Obstacle(pos, sf::Vector2f(128.f,128.f), ID::ice)
 {
     animation.Reset(PATH, pos, sf::Vector2f(128.f,128.f));
 }

@@ -20,7 +20,6 @@ namespace Menus
         void Reset();
     private:
         int textCount;
-        Observers::MenuObserver* pMObserver;
         Managers::InputManager* pIM;
         std::vector<sf::Text*> Leaders;
         std::vector<std::string> names;

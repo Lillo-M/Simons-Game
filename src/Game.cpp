@@ -84,16 +84,19 @@ Game::Game():
 
 Game::~Game()
 {
+    std::cout << "Game Destructor" << std::endl;
     std::map<States::stateID ,States::State*>::iterator it;
     for(it = statesMap.begin(); it != statesMap.end(); it++)
         delete it->second;
-    iManager->~InputManager();
-    eManager->~EventsManager();
+    if(iManager)
+        delete iManager;
+    iManager = NULL;
+    if(eManager)
+        delete eManager;
     eManager = NULL;
-    pGM->~GraphicManager();
+    if(pGM)
+        delete pGM;
     pGM = NULL;
-    if(Instance)
-        delete Instance;
     Instance = NULL;
 }
 

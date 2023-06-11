@@ -16,11 +16,11 @@ G                                                                               
 G                                                                                                                                   G
 G                                                                                                                                   G
 G                                                                                                                                   G
-G   P P                                                                 A                                                           G
+G   P P                                                                                                                            G
 G                                                                       G                                                           G
 G                                                                                                                                   G
 G                                                                     G G G                                                         G
-G           H             A             A              A                           A                   A             A              G
-G G G G G G G C C C C G G G C C C C G G G G G C C C C G G G GW       G G G G G G G G G G G G       G G G G G       G G G G G G G G G 
+G                                                                                                                            G
+G G G G G G G C C C C G G G C C C C G G G G G C C C C G G G        G G G G G G G G G G G G       G G G G G       G G G G G G G G G 
 
               G G G G       G G G G          G G G G G       G G G G                        G G G G         G G G G       

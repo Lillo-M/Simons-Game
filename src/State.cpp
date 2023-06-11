@@ -1,5 +1,4 @@
 #include "../include/States/State.h"
-
 #include "../include/States/StateMachine.h"
 
 States::State::State(StateMachine* pSMachine, States::stateID id):

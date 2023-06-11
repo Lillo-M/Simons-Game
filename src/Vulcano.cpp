@@ -114,7 +114,7 @@ void Levels::Vulcano::CreateHorse(const sf::Vector2f pos)
                   << "ERROR: Failed to Allocate Memory" << std::endl;
         exit(1);
     }
-    std::vector<Entities::Projectiles::Skull*>* shots = pAux->getShots();
+    std::vector<Entities::Projectiles::Skull*>* shots = pAux->getSkulls();
     DentitiesList.Push_BackEntity(static_cast<Entities::Entity *>(pAux));
     for(int i = 0; i < 10; i++)
     {

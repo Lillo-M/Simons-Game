@@ -1,7 +1,6 @@
 #pragma once
 #include "Observer.h"
 #include "../States/GameOverState.h"
-#include <map>
 
 namespace Observers
 {

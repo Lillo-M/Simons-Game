@@ -1,6 +1,6 @@
 #pragma once
 #include <string>
-
+#include <map>
 namespace Observers
 {
     class Observer
@@ -10,7 +10,8 @@ namespace Observers
         virtual ~Observer();
         virtual void notifyKeyPressed(std::string key) = 0;
         virtual void notifyKeyReleased(std::string key) = 0;
-        //virtual void notifyPlayerDeath();
     protected:
+    	std::map<std::string, std::string> inputSets;
+        std::map<std::string, std::string>::iterator mapIt;
     };
 }

@@ -20,15 +20,15 @@ Entities::Characters::Enemies::Horse::Horse(sf::Vector2f pos) : attacking(false)
 	vulnerable(false),
 	dashCharged(0.f), 
 	faceRight(true),
-	Enemy(pos, sf::Vector2f(SIZEX, SIZEY), false, ID::horse, LIVES),
+	Enemy(pos, sf::Vector2f(SIZEX, SIZEY), ID::horse, LIVES),
 	fury(false),
 	damage(DAMAGE),
 	shotcount(0)
 {
-	balls.clear();
+	Skulls.clear();
 	for(int i = 0; i < SHOTCOUNT ; i++)
 	{
-		balls.push_back(new Entities::Projectiles::Skull(sf::Vector2f(0,0), sf::Vector2f(0,0), this));
+		Skulls.push_back(new Entities::Projectiles::Skull(sf::Vector2f(0,0), sf::Vector2f(0,0), this));
 	}
 	animation.pushAnimation(GraphicElements::Animation_ID::idle, IDLEPATH, sf::Vector2u(4, 0), 0.25f);
 	animation.pushAnimation(GraphicElements::Animation_ID::meleeattack, ATTACKPATH, sf::Vector2u(4, 0), 0.25f);
@@ -36,6 +36,8 @@ Entities::Characters::Enemies::Horse::Horse(sf::Vector2f pos) : attacking(false)
 
 Entities::Characters::Enemies::Horse::~Horse()
 {
+	std::cout << "Horse Destructor" << std::endl;
+	Skulls.clear();
 }
 
 void Entities::Characters::Enemies::Horse::Draw()
@@ -112,8 +114,8 @@ void Entities::Characters::Enemies::Horse::Attack(const bool b)
 		else
 			faceRight = false;
 		Velocity.x = 0;
-		balls[shotcount]->Shoot(sf::Vector2f(Position.x +\
-		(Size.x/2 + balls[shotcount]->getSize().x/2) * ( faceRight ? -1:1)\
+		Skulls[shotcount]->Shoot(sf::Vector2f(Position.x +\
+		(Size.x/2 + Skulls[shotcount]->getSize().x/2) * ( faceRight ? -1:1)\
 		,Position.y - Size.y/2), sf::Vector2f(5 * ( faceRight ? -1:1), -20));
 		shotcount++;
 		if(shotcount >= SHOTCOUNT)
@@ -198,7 +200,6 @@ void Entities::Characters::Enemies::Horse::Save(std::ofstream &savefile)
 
 void Entities::Characters::Enemies::Horse::OnCollision(Entities::Entity *ent)
 {
-	//animation.Update(GraphicElements::Animation_ID::meleeattack, Position, faceRight); descobrir como fzr funcionar isso
 	if (ent->getID() == ID::player)
 	{
 		crash = true;
@@ -233,9 +234,9 @@ void Entities::Characters::Enemies::Horse::Damage(bool b)
 	std::cout << "life :" << this->lives << std::endl;
 }
 
-std::vector<Entities::Projectiles::Skull*>* Entities::Characters::Enemies::Horse::getShots()
+std::vector<Entities::Projectiles::Skull*>* Entities::Characters::Enemies::Horse::getSkulls()
 {
-	return &balls;
+	return &Skulls;
 }
 
 

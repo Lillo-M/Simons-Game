@@ -23,7 +23,6 @@ namespace Menus
         void LoadVulcano();
     private:
         std::list<Levels::Level*> levels;
-        Observers::MenuObserver* pMObserver;
         Managers::InputManager* pIM;
     };
 }

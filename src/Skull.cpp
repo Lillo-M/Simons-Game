@@ -49,11 +49,13 @@ void Entities::Projectiles::Skull::OnCollision(Entities::Entity* ent)
         //std::cout << "Character collided" << std::endl;
         static_cast<Entities::Characters::Character*>(ent)->Damage(true);
         collided = true;
+        timeCont = 0;
         return;
     }
     if(targetID == ID::projectile)
     {
         collided = true;
+        timeCont = 0;
         return;
     }
     sf::Vector2f dist = ent->getPosition() - Position;

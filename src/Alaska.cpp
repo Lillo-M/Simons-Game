@@ -94,7 +94,7 @@ void Levels::Alaska::Update()
             changeState(States::stateID::gameOverState);
         }
     }
-    if(pPlayer->getPosition().x >= 6 * WIDTH + WIDTH/2 - 64.f || twoPlayers && pPlayer2->getPosition().x >= 6 * WIDTH + WIDTH/2 - 64.f )
+    if(pPlayer->getPosition().x >= 6 * WIDTH + WIDTH/2 - 64.f || (twoPlayers && pPlayer2->getPosition().x >= 6 * WIDTH + WIDTH/2 - 64.f) )
         changeState(States::stateID::vulcano);
 }
 
