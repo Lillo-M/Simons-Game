@@ -51,8 +51,6 @@ namespace Levels
         Entities::Characters::Player*       pPlayer;
         Entities::Characters::Player*       pPlayer2;
         Managers::CollisionManager*         pCManager;
-        //Math::EntityTList                   SentitiesList;
-        //Math::EntityTList                   DentitiesList;
 	    Math::EntityList		            DentitiesList;
         Math::EntityList		            SentitiesList;
     };

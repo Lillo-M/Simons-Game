@@ -5,8 +5,8 @@ Menus::NewGameMenu::NewGameMenu(States::StateMachine* pSM, Managers::InputManage
     State(pSM, States::stateID::newGameMenu),
     pIM(pIM)
 {
-    PushButtom(new GraphicElements::Buttom(sf::Vector2f(WIDTH/2 - 90,-30), 30, "Level 1"));
-    PushButtom(new GraphicElements::Buttom(sf::Vector2f(WIDTH/2 - 90,0), 30, "Level 2"));
+    PushButtom(new GraphicElements::Buttom(sf::Vector2f(WIDTH/2 - 90,-30), 30, "Alaska"));
+    PushButtom(new GraphicElements::Buttom(sf::Vector2f(WIDTH/2 - 90,0), 30, "Vulcano"));
     PushButtom(new GraphicElements::Buttom(sf::Vector2f(WIDTH/2 - 90,30), 30, "Quit To MainMenu"));
     buttons[currentButtom]->Selected();
     pIM->addObserver(static_cast<Observers::Observer*>(pMObserver));
