@@ -1,7 +1,7 @@
 #pragma once
 #include "../Being.h"
 #include <vector>
-#include "../GraphicElements/Buttom.h"
+#include "../GraphicElements/Button.h"
 #include "../Managers/InputManager.h"
 
 namespace Observers
@@ -21,11 +21,11 @@ namespace Menus
         virtual void Select() = 0;
         virtual void Draw() = 0;
         virtual void Update() = 0;
-        void PushButtom(GraphicElements::Buttom* buttom);
+        void PushButtom(GraphicElements::Button* button);
         const Observers::Observer* getObserver() const;
     protected:
         Observers::MenuObserver* pMObserver;
-        std::vector<GraphicElements::Buttom*> buttons;
+        std::vector<GraphicElements::Button*> buttons;
         int buttomCont;
         int currentButtom;
     };

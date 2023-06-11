@@ -7,7 +7,7 @@ Menus::LeaderBoard::LeaderBoard(States::StateMachine* pSM, Managers::InputManage
     textCount(0)
 {
     font.loadFromFile("Assets/arial.ttf");
-    PushButtom(new GraphicElements::Buttom(sf::Vector2f(WIDTH/2 - 90,340), 30, "Go Back"));
+    PushButtom(new GraphicElements::Button(sf::Vector2f(WIDTH/2 - 90,340), 30, "Go Back"));
     buttons[currentButtom]->Selected();
     std::ifstream leadersArchive;
     std::string str;

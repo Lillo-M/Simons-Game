@@ -4,11 +4,11 @@
 
 namespace GraphicElements
 {
-    class Buttom : public Being
+    class Button : public Being
     {
     public:
-        Buttom(sf::Vector2f pos, unsigned int size, const std::string text);
-        ~Buttom();
+        Button(sf::Vector2f pos, unsigned int size, const std::string text);
+        ~Button();
         void Draw();
         void Update();
         void Selected();

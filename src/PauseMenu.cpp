@@ -11,9 +11,9 @@ Menus::PauseMenu::PauseMenu(States::StateMachine *pSM, Managers::InputManager *p
     text.setStyle(sf::Text::Bold);
     text.setString("Game Paused");
     text.setPosition(sf::Vector2f(WIDTH/2 - 100,-340));
-    PushButtom(new GraphicElements::Buttom(sf::Vector2f(WIDTH/2 - 90,-30), 30, "Resume"));
-    PushButtom(new GraphicElements::Buttom(sf::Vector2f(WIDTH/2 - 90,0), 30, "Save Game"));
-    PushButtom(new GraphicElements::Buttom(sf::Vector2f(WIDTH/2 - 90,30), 30, "Main Menu"));
+    PushButtom(new GraphicElements::Button(sf::Vector2f(WIDTH/2 - 90,-30), 30, "Resume"));
+    PushButtom(new GraphicElements::Button(sf::Vector2f(WIDTH/2 - 90,0), 30, "Save Game"));
+    PushButtom(new GraphicElements::Button(sf::Vector2f(WIDTH/2 - 90,30), 30, "Main Menu"));
     buttons[currentButtom]->Selected();
     pIM->addObserver(static_cast<Observers::Observer*>(pMObserver));
 

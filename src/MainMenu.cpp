@@ -6,11 +6,11 @@ Menus::MainMenu::MainMenu(States::StateMachine* pSM, Managers::InputManager* pIM
     pIM(pIM),
     twoPlayers(false)
 {
-    PushButtom(new GraphicElements::Buttom(sf::Vector2f(WIDTH/2 - 90,-30), 30, "New Game"));
-    PushButtom(new GraphicElements::Buttom(sf::Vector2f(WIDTH/2 - 90,0), 30, "Load Game"));
-    PushButtom(new GraphicElements::Buttom(sf::Vector2f(WIDTH/2 - 90,30), 30, "LeaderBoard"));
-    PushButtom(new GraphicElements::Buttom(sf::Vector2f(WIDTH/2 - 90,60), 30, "2 Players: OFF"));
-    PushButtom(new GraphicElements::Buttom(sf::Vector2f(WIDTH/2 - 90,90), 30, "Quit Game"));
+    PushButtom(new GraphicElements::Button(sf::Vector2f(WIDTH/2 - 90,-30), 30, "New Game"));
+    PushButtom(new GraphicElements::Button(sf::Vector2f(WIDTH/2 - 90,0), 30, "Load Game"));
+    PushButtom(new GraphicElements::Button(sf::Vector2f(WIDTH/2 - 90,30), 30, "LeaderBoard"));
+    PushButtom(new GraphicElements::Button(sf::Vector2f(WIDTH/2 - 90,60), 30, "2 Players: OFF"));
+    PushButtom(new GraphicElements::Button(sf::Vector2f(WIDTH/2 - 90,90), 30, "Quit Game"));
     buttons[currentButtom]->Selected();
     pIM->addObserver(static_cast<Observers::Observer*>(pMObserver));
 }

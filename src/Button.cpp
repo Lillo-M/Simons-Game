@@ -1,7 +1,7 @@
-#include "../include/GraphicElements/Buttom.h"
+#include "../include/GraphicElements/Button.h"
 
-GraphicElements::Buttom::Buttom(sf::Vector2f pos, unsigned int size, const std::string text):
-    Being(ID::buttom)
+GraphicElements::Button::Button(sf::Vector2f pos, unsigned int size, const std::string text):
+    Being(ID::button)
 {
     if(!f.loadFromFile("Assets/arial.ttf"))
     {
@@ -16,31 +16,31 @@ GraphicElements::Buttom::Buttom(sf::Vector2f pos, unsigned int size, const std::
     Position = pos;
 }
 
-GraphicElements::Buttom::~Buttom()
+GraphicElements::Button::~Button()
 {
 }
 
-void GraphicElements::Buttom::Update()
+void GraphicElements::Button::Update()
 {
     text.setPosition(Position);
 }
 
-void GraphicElements::Buttom::Draw()
+void GraphicElements::Button::Draw()
 {
     pGM->Draw(text);
 }
 
-void GraphicElements::Buttom::Selected()
+void GraphicElements::Button::Selected()
 {
     text.setFillColor(sf::Color::Red);
 }
 
-void GraphicElements::Buttom::UnSelected()
+void GraphicElements::Button::UnSelected()
 {
     text.setFillColor(sf::Color::White);
 }
 
-void GraphicElements::Buttom::changeText(std::string newtext)
+void GraphicElements::Button::changeText(std::string newtext)
 {
     text.setString(newtext);
 }

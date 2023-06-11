@@ -16,9 +16,9 @@ Menus::Menu::~Menu()
         delete pMObserver;
 }
 
-void Menus::Menu::PushButtom(GraphicElements::Buttom* buttom)
+void Menus::Menu::PushButtom(GraphicElements::Button* button)
 {
-    buttons.push_back(buttom);
+    buttons.push_back(button);
     buttomCont++;
 }
 
