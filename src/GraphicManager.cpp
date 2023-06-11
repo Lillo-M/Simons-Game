@@ -4,7 +4,8 @@ Managers::GraphicManager::GraphicManager():
     window(sf::VideoMode(WIDTH, HEIGHT), "The Wizard++"), // incializa a janela
     view(window.getView()),
     LeftLimit(WIDTH / 2),
-    RightLimit(WIDTH / 2)
+    RightLimit(WIDTH / 2),
+    BottomLimit(HEIGHT / 2)
 {
     settings.antialiasingLevel = 16;
 }
@@ -66,15 +67,17 @@ const bool Managers::GraphicManager::isWindowOpen() const { return window.isOpen
 
 void Managers::GraphicManager::CenterView(sf::Vector2f pos)
 {
-    if (pos.y < 3 * HEIGHT / 2)
-        pos = sf::Vector2f(pos.x, 3 * HEIGHT / 2 - (3 * HEIGHT / 2 - pos.y));
+    std::cout << pos.x << "a" << pos.y << std::endl;
+    if (pos.y < BottomLimit)
+        pos = sf::Vector2f(pos.x, BottomLimit - (BottomLimit - pos.y));
     else 
-        pos = sf::Vector2f(pos.x, 3 * HEIGHT / 2);
+        pos = sf::Vector2f(pos.x, BottomLimit);
     if (pos.x < LeftLimit)
         pos = sf::Vector2f(LeftLimit, pos.y);
     if (pos.x > RightLimit)
         pos = sf::Vector2f(RightLimit, pos.y);
     /*  */
+    
     view.setCenter(pos);
     window.setView(view);
 }
@@ -134,6 +137,11 @@ void Managers::GraphicManager::setRightLimit(float limit)
     RightLimit = limit;
 }
 
+void Managers::GraphicManager::setBottomLimit(float limit)
+{
+    BottomLimit = limit;
+}
+
 Managers::GraphicManager *Managers::GraphicManager::Instance(NULL); // incializa o ponteiro estatico para a instancia de Gerenciador grafico
-float Managers::GraphicManager::dt = 0;
+float Managers::GraphicManager::dt(0);
 sf::Clock Managers::GraphicManager::clock;

@@ -98,7 +98,7 @@ void dEnemy::Archer::Update()
 			attackcooled = true;
 		}
 	}
-	if ((absolute(getNearest()->getPosition().x - Position.x) <= DISTANCE_ARCHER_ATTACK && (getNearest()->getPosition().y - Position.y) <= 100 ) || aiming)
+	if ((absolute(getNearest()->getPosition().x - Position.x) <= DISTANCE_ARCHER_ATTACK && (getNearest()->getPosition().y - Position.y) >= -100 ) || aiming)
 		Attack(true);
 }
 
@@ -166,13 +166,11 @@ void dEnemy::Archer::Load(std::ifstream &savefile)
 void dEnemy::Archer::setPlayer(Player *pPlayer)
 {
 	p1 = pPlayer;
-	std::cout << p1 << std::endl;
 }
 
 void dEnemy::Archer::setPlayer2(Player *pPlayer2)
 {
 	p2 = pPlayer2;
-	std::cout << pPlayer2 << std::endl;
 }
 
 dPlayer dEnemy::Archer::getNearest()
@@ -186,7 +184,7 @@ dPlayer dEnemy::Archer::getNearest()
 	}
 	else if(p2->getAlive())
 		return p2;
-	else/**/
+	else
 		return p1;
 }
 

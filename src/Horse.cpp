@@ -43,10 +43,6 @@ Entities::Characters::Enemies::Horse::~Horse()
 void Entities::Characters::Enemies::Horse::Draw()
 {
 	animation.Draw();
-	sf::RectangleShape shape(sf::Vector2f(5.f, 5.f));
-    shape.setFillColor(sf::Color::Blue);
-    shape.setPosition(Position.x, Position.y - this->getSize().y / 2 );
-	pGM->Draw(shape);
 }
 
 void Entities::Characters::Enemies::Horse::Update()
@@ -66,9 +62,11 @@ void Entities::Characters::Enemies::Horse::Move()
 
 	dashCharged += dt;
 	
-	float absDist = (absolute(getNearest()->getPosition().x - Position.x));
+	float absDist_x = (absolute(getNearest()->getPosition().x - Position.x));
+	float absDist_y = (absolute(getNearest()->getPosition().y - Position.y));
 
-	if ((absDist <= DISTANCE_NM_ATTACK || attacking || fury) && dashCharged >= 2.f) {
+	if (((absDist_x <= DISTANCE_NM_ATTACK && absDist_y <= WIDTH/2)\
+	|| attacking || fury) && dashCharged >= 2.f) {
 		if(!attacking) {
 		if(Position.x > getNearest()->getPosition().x)
 				faceRight = true;

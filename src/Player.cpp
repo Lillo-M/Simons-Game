@@ -57,6 +57,7 @@ Entities::Characters::Player::~Player()
 
 void Entities::Characters::Player::Move()
 {
+	std::cout << Position.x << "aa" << Position.y << std::endl;
 	if(onIce)
 	{
 		maxVelocity = 1.25f * MAXV;

@@ -59,6 +59,7 @@ void Levels::Alaska::Update()
         Entities::Characters::Enemies::Archer::setPlayer(pPlayer);
         Entities::Characters::Enemies::Archer::setPlayer2(pPlayer2);
         pGM->setRightLimit(6 * WIDTH);
+        pGM->setBottomLimit(4 * HEIGHT);
         if(!twoPlayers)
             pPlayer2->setAlive(false);
     }
