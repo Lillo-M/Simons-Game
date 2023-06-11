@@ -16,7 +16,6 @@
 #include "../Entities/Obstacles/Ice.h"
 #include "../States/State.h"
 #include "../Observers/PlayerInputManager.h"
-#include "../GraphicElements/Buttom.h"
 
 namespace Levels
 {

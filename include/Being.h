@@ -15,7 +15,7 @@ enum ID
     alaska          = 5,
     vulcano         = 6,
     menu            = 7,
-    buttom          = 8,
+    button          = 8,
     projectile      = 9,
     ice		        =10,
     lava	        =11,
