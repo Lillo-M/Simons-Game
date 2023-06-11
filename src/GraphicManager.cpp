@@ -2,21 +2,23 @@
 
 Managers::GraphicManager::GraphicManager(): 
     window(sf::VideoMode(WIDTH, HEIGHT), "The Wizard++"), // incializa a janela
-    view(window.getView())
+    view(window.getView()),
+    LeftLimit(WIDTH / 2),
+    RightLimit(WIDTH / 2),
+    BottomLimit(HEIGHT / 2)
 {
     settings.antialiasingLevel = 16;
 }
 
 Managers::GraphicManager::~GraphicManager()
 {
+    std::cout << "GraphicManager Destructor" << std::endl;
     std::map<const char *, sf::Texture *>::iterator it;
     for (it = textureMap.begin(); it != textureMap.end(); it++)
     {
         if (it->second)
             delete it->second;
     }
-    if (Instance)
-        delete Instance;
     Instance = NULL;
 }
 
@@ -65,12 +67,16 @@ const bool Managers::GraphicManager::isWindowOpen() const { return window.isOpen
 
 void Managers::GraphicManager::CenterView(sf::Vector2f pos)
 {
-    if (pos.y < 3 * HEIGHT / 2)
-        pos = sf::Vector2f(pos.x, 3 * HEIGHT / 2 - (3 * HEIGHT / 2 - pos.y));
+    if (pos.y < BottomLimit)
+        pos = sf::Vector2f(pos.x, BottomLimit - (BottomLimit - pos.y));
     else 
-        pos = sf::Vector2f(pos.x, 3 * HEIGHT / 2);
-    if (pos.x < WIDTH / 2)
-        pos = sf::Vector2f(WIDTH / 2, pos.y);
+        pos = sf::Vector2f(pos.x, BottomLimit);
+    if (pos.x < LeftLimit)
+        pos = sf::Vector2f(LeftLimit, pos.y);
+    if (pos.x > RightLimit)
+        pos = sf::Vector2f(RightLimit, pos.y);
+    /*  */
+    
     view.setCenter(pos);
     window.setView(view);
 }
@@ -120,6 +126,21 @@ sf::Texture *Managers::GraphicManager::loadTexture(const char *path)
     return textureMap[path];
 }
 
+void Managers::GraphicManager::setLeftLimit(float limit)
+{
+    LeftLimit = limit;
+}
+
+void Managers::GraphicManager::setRightLimit(float limit)
+{
+    RightLimit = limit;
+}
+
+void Managers::GraphicManager::setBottomLimit(float limit)
+{
+    BottomLimit = limit;
+}
+
 Managers::GraphicManager *Managers::GraphicManager::Instance(NULL); // incializa o ponteiro estatico para a instancia de Gerenciador grafico
-float Managers::GraphicManager::dt = 0;
+float Managers::GraphicManager::dt(0);
 sf::Clock Managers::GraphicManager::clock;

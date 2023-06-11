@@ -2,22 +2,16 @@
 
 using namespace Entities;
 
-Entity::Entity(const sf::Vector2f pos, const sf::Vector2f size, const bool isS, ID id) : 
+Entity::Entity(const sf::Vector2f pos, const sf::Vector2f size, ID id) : 
 	Being(id),
-	HitBox(size),
 	Position(pos.x, pos.y),
 	grounded(false),
 	Velocity(sf::Vector2f(0, 0)),
-	isStatic(isS),
 	Size(size)
 {
-	HitBox.setFillColor(sf::Color(sf::Color::White)); // RGBA de Teste
-	HitBox.setPosition(Position);
-	Cont++;
 }
 Entity::~Entity()
 {
-	Cont--;
 }
 
 void Entity::Gravity()
@@ -65,23 +59,9 @@ sf::Vector2f Entity::getSize() const
 	return Size;
 }
 
-bool Entity::getisStatic()
-{
-	return isStatic;
-}
-
-void Entity::OnCollision(Entity *ent)
-{
-}
-
 void Entity::updateDeltaTime(float dt)
 {
 	Entity::dt = dt; 
-}
-
-unsigned int Entity::getContEntities()
-{
-	return Entity::Cont;
 }
 
 float Entities::Entity::getDt()
@@ -91,7 +71,6 @@ float Entities::Entity::getDt()
 
 const bool Entity::getGrounded() const { return grounded; }
 
-float Entity::dt = 0;
-unsigned int Entity::Cont(0);
-const float Entity::gravity(static_cast<float>(0.78)); // 8.166 valor de teste
+float Entity::dt(0);
+const float Entity::gravity(0.78f); // 8.166 valor de teste
 

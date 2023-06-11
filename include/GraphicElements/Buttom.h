@@ -13,6 +13,7 @@ namespace GraphicElements
         void Update();
         void Selected();
         void UnSelected();
+        void changeText(std::string newtext);
     private:
         sf::Vector2f Position;
         sf::Text text;

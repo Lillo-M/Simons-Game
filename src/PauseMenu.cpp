@@ -3,9 +3,14 @@
 Menus::PauseMenu::PauseMenu(States::StateMachine *pSM, Managers::InputManager *pIM):
     Menu(),
     State(pSM, States::stateID::pauseMenu),
-    pMObserver(new Observers::MenuObserver(static_cast<Menus::Menu*>(this))),
     pIM(pIM)
 {
+    font.loadFromFile("Assets/arial.ttf");
+    text.setFont(font);
+    text.setFillColor(sf::Color::White);
+    text.setStyle(sf::Text::Bold);
+    text.setString("Game Paused");
+    text.setPosition(sf::Vector2f(WIDTH/2 - 100,-340));
     PushButtom(new GraphicElements::Buttom(sf::Vector2f(WIDTH/2 - 90,-30), 30, "Resume"));
     PushButtom(new GraphicElements::Buttom(sf::Vector2f(WIDTH/2 - 90,0), 30, "Save Game"));
     PushButtom(new GraphicElements::Buttom(sf::Vector2f(WIDTH/2 - 90,30), 30, "Main Menu"));
@@ -16,7 +21,12 @@ Menus::PauseMenu::PauseMenu(States::StateMachine *pSM, Managers::InputManager *p
 
 Menus::PauseMenu::~PauseMenu()
 {
-    delete pMObserver;
+    std::cout << "PauseMenu Destructor" << std::endl;
+    for(int i = 0; i < buttomCont; i++)
+    {
+        if(buttons[i])
+            delete buttons[i];
+    }
     pIM->removeObserver(static_cast<Observers::Observer*>(pMObserver));
     pIM = NULL;
 }
@@ -42,10 +52,14 @@ void Menus::PauseMenu::Select()
     default:
         break;
     }
+    buttons[currentButtom]->UnSelected();
+    currentButtom = 0;
+    buttons[currentButtom]->Selected();
 }
 
 void Menus::PauseMenu::Draw()
 {
+    pGM->Draw(text);
     for(int i = 0; i < buttomCont; i++)
     {
         buttons[i]->Draw();
@@ -54,6 +68,7 @@ void Menus::PauseMenu::Draw()
 
 void Menus::PauseMenu::Update()
 {
+    pGM->CenterView(sf::Vector2f(0,0));
     isRunning = true;
     for(int i = 0; i < buttomCont; i++)
     {
@@ -79,10 +94,4 @@ void Menus::PauseMenu::MoveDown()
         return;
     buttons[currentButtom++]->UnSelected();
     buttons[currentButtom]->Selected();
-}
-
-void Menus::PauseMenu::PushButtom(GraphicElements::Buttom* buttom)
-{
-    buttons.push_back(buttom);
-    buttomCont++;
 }

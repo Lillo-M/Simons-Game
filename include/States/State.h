@@ -9,11 +9,13 @@ namespace States
     {
         empty =        -1,
         mainMenu =      0,
-        level1 =        1,
-        gameOver =      2,
+        alaska =        1,
+        gameOverState = 2,
         pauseMenu =     3,
         loadGameState = 4,
-        newGameState  = 5
+        newGameMenu  =  5,
+        leaderBoard   = 6,
+        vulcano =        7
     };
 
     class State

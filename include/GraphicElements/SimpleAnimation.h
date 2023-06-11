@@ -1,5 +1,6 @@
 #pragma once
 #include "Animation.h"
+#include "../Math/Math.h"
 namespace GraphicElements
 {
     class SimpleAnimation

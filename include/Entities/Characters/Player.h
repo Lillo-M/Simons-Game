@@ -5,13 +5,7 @@
 #include <iostream>
 #include <vector>
 #include "../../GraphicElements/ComplexAnimation.h"
-#include "../Projectile.h"
-#include "../PlayerProjectile.h"
-#define LIVES 100
-#define MAXV 10
-#define ATRITO 0.45
-#define JUMPHEIGHT -11.f
-#define PSPEED 1
+#include "../Projectiles/PlayerProjectile.h"
 
 namespace Entities
 {
@@ -20,9 +14,11 @@ namespace Entities
 		class Player: public Character
 		{
 		private:
-			std::vector<PlayerProjectile*> shots;
-			int shotcount;
+			std::vector<Entities::Projectiles::PlasmaBall*> shots;
+			GraphicElements::ComplexAnimation animation;
+			int shootCount;
 			float maxVelocity;
+			float friction;
 			bool BoolMoveRight;
 			bool BoolMoveLeft;
 			bool secondJump;
@@ -31,8 +27,8 @@ namespace Entities
 			bool faceRight;
 			bool isJumping;
 			bool onIce;
-			GraphicElements::ComplexAnimation animation;
-			float attackcd;	/*Cooldown do ataque*/
+			float attackcd;
+			int Points;
 		public:
 			Player(const sf::Vector2f pos = sf::Vector2f(0, 0));
 			~Player();
@@ -41,8 +37,6 @@ namespace Entities
 			void Draw();
 			void Save(std::ofstream& savefile);
 			void Load(std::ifstream& savefile);
-			sf::Vector2f getPosition();
-			const sf::Vector2f getVelocity() const;
 			void setFacing(int side);
 			void Jump();
 			void MoveRight(const bool b);
@@ -50,7 +44,11 @@ namespace Entities
 			void Fall();
 			void Attack(const bool b);
 			void OnCollision(Entities::Entity* ent);
-			std::vector<PlayerProjectile*>* getShots();
+			void Score(ID id);
+			void setPoints(int Points);
+			void setFriction(float friction);
+			const int getPoints() const;
+			std::vector<Entities::Projectiles::PlasmaBall*>* getShots();
 		};
 	}
 }

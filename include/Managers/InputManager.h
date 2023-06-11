@@ -11,14 +11,16 @@ namespace Managers
 	class InputManager
 	{
 	public:
-		InputManager();
 		~InputManager();
 		void pressedInput(sf::Event::KeyEvent key);
 		void releasedInput(sf::Event::KeyEvent key);
         void addObserver(Observers::Observer* observer);
 		void removeObserver(Observers::Observer* observer);
+		static InputManager* getInstance();
 	private:
-        std::list<Observers::Observer*> subObservers;
+		InputManager();
+        static InputManager* Instance;
+		std::list<Observers::Observer*> subObservers;
         std::list<Observers::Observer*>::iterator listIt;
     	std::map<sf::Keyboard::Key, std::string> keyMap;
 		std::map<sf::Keyboard::Key, std::string>::const_iterator mapIt;

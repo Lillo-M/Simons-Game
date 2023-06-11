@@ -1,7 +1,7 @@
 #pragma once
 #include "List.h"
 #include "../Entities/Characters/Character.h"
-#include "../Entities/Projectile.h"
+#include "../Entities/Projectiles/Projectile.h"
 #include <iostream>
 
 namespace Math
@@ -18,6 +18,9 @@ namespace Math
 		void Clear();
 		void DeleteEntities();
 		void Save(std::ofstream& savefile);
+		void Load(std::ifstream& savefile);
+		int Size();
+		Entities::Entity* operator[](int idx);
 		Math::List<Entities::Entity>& getTList();
 		/* **Terminar esta Classe . . .*/
 	private:

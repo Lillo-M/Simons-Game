@@ -1,14 +1,18 @@
 #pragma once
 #include "Obstacle.h"
 #include <iostream>
+#include "../../GraphicElements/SimpleSprite.h"
+#include "../Characters/Player.h"
+
 namespace Entities
 {
 	namespace Obstacles
 	{
-		class Ground : public Obstacles::Obstacle
+		class Ground : public Obstacle
 		{
 		private:
-			static sf::Texture* texture;
+			const static float friction;
+			const static float forca_empuxo;
 		public:
 			Ground(const sf::Vector2f pos);
 			~Ground();

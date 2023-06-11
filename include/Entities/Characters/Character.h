@@ -7,7 +7,7 @@ namespace Entities
         class Character : public Entities::Entity
         {    
         public:
-            Character(const sf::Vector2f pos = sf::Vector2f(0, 0), const sf::Vector2f size = sf::Vector2f(0, 0), const bool isS = false, ID id = ID::empty, int lves = 0);
+            Character(const sf::Vector2f pos = sf::Vector2f(0, 0), const sf::Vector2f size = sf::Vector2f(0, 0), ID id = ID::empty, int lves = 0);
             virtual ~Character();
             void operator--();
             virtual void Move() = 0;
@@ -16,10 +16,11 @@ namespace Entities
             virtual void Draw() = 0;
             virtual void Save(std::ofstream& savefile) = 0;
             virtual void Load(std::ifstream& savefile) = 0;
+            virtual void OnCollision(Entity *ent) = 0;
             const bool getAlive() const;
-            virtual void OnCollision(Entity *ent);
-            void Damage();
-            void Damage(bool b);
+            virtual void Damage();
+            virtual void Damage(bool b);
+            virtual void Damage(int damage);
             void setAlive(bool alive);
             void setLives(int lives);
         protected:

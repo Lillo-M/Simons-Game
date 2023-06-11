@@ -1,37 +1,25 @@
-#include "../include/Entities/Projectile.h"
+#include "../include/Entities/Projectiles/Projectile.h"
 
 
-Entities::Projectile::Projectile(sf::Vector2f pos, sf::Vector2f velocity, Entities::Characters::Character* owner):
-	Entity(pos, sf::Vector2f(20,20), false, ID::projectile),
+Entities::Projectiles::Projectile::Projectile(sf::Vector2f pos, sf::Vector2f velocity, Entities::Characters::Character* owner):
+	Entity(pos, sf::Vector2f(20,20), ID::projectile),
     owner(owner),
     collided(false)
 {
-    HitBox.setOrigin(sf::Vector2f(10,10));
 }
 
-Entities::Projectile::~Projectile()
+Entities::Projectiles::Projectile::~Projectile()
 {
 }
 
-void Entities::Projectile::Update()
-{
-    Move();
-    HitBox.setPosition(Position);
-}
-
-void Entities::Projectile::Draw()
-{
-	pGM->Draw(HitBox);
-}
-
-void Entities::Projectile::Shoot(sf::Vector2f pos, sf::Vector2f vel)
+void Entities::Projectiles::Projectile::Shoot(sf::Vector2f pos, sf::Vector2f vel)
 {
     Position = pos;
     Velocity = vel;
     collided = false;
 }
 
-void Entities::Projectile::Save(std::ofstream& savefile)
+void Entities::Projectiles::Projectile::Save(std::ofstream& savefile)
 {
     savefile << this->getID() << std::endl;
     savefile << collided << std::endl;
@@ -41,7 +29,7 @@ void Entities::Projectile::Save(std::ofstream& savefile)
 	savefile << Velocity.y << std::endl; 
 }
 
-void Entities::Projectile::Load(std::ifstream& savefile)
+void Entities::Projectiles::Projectile::Load(std::ifstream& savefile)
 {
     float x;
     float y;
@@ -57,6 +45,6 @@ void Entities::Projectile::Load(std::ifstream& savefile)
     this->setVelocity(x,y);
 }
 
-Entities::Characters::Character* Entities::Projectile::getOwner() {return owner;}
+Entities::Characters::Character* Entities::Projectiles::Projectile::getOwner() {return owner;}
 
-const bool Entities::Projectile::getCollided() const { return collided;}
+const bool Entities::Projectiles::Projectile::getCollided() const { return collided;}

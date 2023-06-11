@@ -2,8 +2,8 @@
 
 Game::Game():
     pGM(Managers::GraphicManager::getInstance()),
-    eManager(new Managers::EventsManager()),
-    iManager(new Managers::InputManager())
+    eManager(Managers::EventsManager::getInstance()),
+    iManager(Managers::InputManager::getInstance())
 {
     eManager->setpInputManager(iManager);
     try{statesMap[States::stateID::mainMenu] = static_cast<States::State*>(new Menus::MainMenu(static_cast<States::StateMachine*>(this), iManager));}
@@ -22,7 +22,15 @@ Game::Game():
         exit(1);
     }}
     /* */
-    try{statesMap[States::stateID::level1] = static_cast<States::State*>(new Levels::Level1(static_cast<States::StateMachine*>(this), iManager));}
+    try{statesMap[States::stateID::alaska] = static_cast<States::State*>(new Levels::Alaska(static_cast<States::StateMachine*>(this), iManager));}
+    catch(int error){
+    if(!error)
+    {
+        std::cout << "ERROR: Failed to Memory Allocate" << std::endl;
+        exit(1);
+    }}
+    /* */
+    try{statesMap[States::stateID::vulcano] = static_cast<States::State*>(new Levels::Vulcano(static_cast<States::StateMachine*>(this), iManager));}
     catch(int error){
     if(!error)
     {
@@ -38,7 +46,7 @@ Game::Game():
         exit(1);
     }}
 
-    try{statesMap[States::stateID::newGameState] = static_cast<States::State*>(new States::NewGameState(static_cast<States::StateMachine*>(this)));}
+    try{statesMap[States::stateID::newGameMenu] = static_cast<States::State*>(new Menus::NewGameMenu(static_cast<States::StateMachine*>(this),iManager));}
     catch(int error){
     if(!error)
     {
@@ -46,9 +54,29 @@ Game::Game():
         exit(1);
     }}
 
-    static_cast<States::LoadGameState*>(statesMap[States::stateID::loadGameState])->PushLevel(static_cast<Levels::Level*>(statesMap[States::stateID::level1]));
+    try{statesMap[States::stateID::leaderBoard] = static_cast<States::State*>(new Menus::LeaderBoard(static_cast<States::StateMachine*>(this),iManager));}
+    catch(int error){
+    if(!error)
+    {
+        std::cout << "ERROR: Failed to Memory Allocate" << std::endl;
+        exit(1);
+    }}
 
-    static_cast<States::NewGameState*>(statesMap[States::stateID::newGameState])->PushLevel(static_cast<Levels::Level*>(statesMap[States::stateID::level1]));
+    try{statesMap[States::stateID::gameOverState] = static_cast<States::State*>(new States::GameOverState(static_cast<States::StateMachine*>(this),iManager));}
+    catch(int error){
+    if(!error)
+    {
+        std::cout << "ERROR: Failed to Memory Allocate" << std::endl;
+        exit(1);
+    }}
+
+    static_cast<States::LoadGameState*>(statesMap[States::stateID::loadGameState])->PushLevel(static_cast<Levels::Level*>(statesMap[States::stateID::alaska]));
+
+    static_cast<States::LoadGameState*>(statesMap[States::stateID::loadGameState])->PushLevel(static_cast<Levels::Level*>(statesMap[States::stateID::vulcano]));
+
+    static_cast<Menus::NewGameMenu*>(statesMap[States::stateID::newGameMenu])->PushLevel(static_cast<Levels::Level*>(statesMap[States::stateID::alaska]));
+
+    static_cast<Menus::NewGameMenu*>(statesMap[States::stateID::newGameMenu])->PushLevel(static_cast<Levels::Level*>(statesMap[States::stateID::vulcano]));
     
     currentState = States::stateID::mainMenu;
     Run();
@@ -56,11 +84,20 @@ Game::Game():
 
 Game::~Game()
 {
+    std::cout << "Game Destructor" << std::endl;
     std::map<States::stateID ,States::State*>::iterator it;
     for(it = statesMap.begin(); it != statesMap.end(); it++)
         delete it->second;
-    delete iManager;
-    delete eManager;
+    if(iManager)
+        delete iManager;
+    iManager = NULL;
+    if(eManager)
+        delete eManager;
+    eManager = NULL;
+    if(pGM)
+        delete pGM;
+    pGM = NULL;
+    Instance = NULL;
 }
 
 
@@ -68,6 +105,7 @@ void Game::Run()
 {
     while(pGM->isWindowOpen())
     {
+        std::cout << 1.f/pGM->getDeltaTime() << std::endl;
         pGM->Clear();
         this->runCurrentState();
         pGM->Display();
@@ -75,3 +113,17 @@ void Game::Run()
     }
 }
 
+Game* Game::getInstance()
+{
+    if(!Instance)
+	{
+		try { Instance = new Game();} catch(int error)
+		{ if(!error){
+			std::cout << "ERROR: Failed to Memory Allocate" << std::endl;
+        	exit(1);
+		}}
+	}
+	return Instance;
+}
+
+Game* Game::Instance(NULL);

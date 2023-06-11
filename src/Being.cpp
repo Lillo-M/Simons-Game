@@ -1,5 +1,4 @@
 #include "../include/Being.h"
-#include <iostream>
 
 Being::Being(ID _id) : 
 	id(_id)

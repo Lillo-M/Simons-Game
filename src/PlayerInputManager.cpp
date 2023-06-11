@@ -11,22 +11,24 @@ PlayerInputManager::PlayerInputManager(Entities::Characters::Player *pP, Entitie
 	attackKeyReleased2(true),
 	currentState(currentState)
 {
-	inputSetsPlayer["Jump"] = "W";
-	inputSetsPlayer["Right"] = "D";
-	inputSetsPlayer["Left"] = "A";
-	inputSetsPlayer["Down"] = "S";
-	inputSetsPlayer["Attack"] = "F";
+	inputSets["Jump"] = "W";
+	inputSets["Right"] = "D";
+	inputSets["Left"] = "A";
+	inputSets["Down"] = "S";
+	inputSets["Attack"] = "F";
 	inputSetsPlayer2["Jump"] = "Up";
 	inputSetsPlayer2["Right"] = "Right";
 	inputSetsPlayer2["Left"] = "Left";
 	inputSetsPlayer2["Down"] = "Down";
 	inputSetsPlayer2["Attack"] = "rCtrl";
-	mapIt = inputSetsPlayer.begin();
+	mapIt = inputSets.begin();
 	mapIt2 = inputSetsPlayer2.begin();
 }
 
 PlayerInputManager::~PlayerInputManager()
 {
+	inputSets.clear();
+	inputSetsPlayer2.clear();
 	pPlayer = NULL;
 	pPlayer2 = NULL;
 }
@@ -39,8 +41,8 @@ void PlayerInputManager::notifyKeyPressed(std::string key)
 	{
 		currentState->changeState(States::stateID::pauseMenu);
 	}
-	mapIt = inputSetsPlayer.begin();
-	for (mapIt; mapIt != inputSetsPlayer.end(); mapIt++)
+	mapIt = inputSets.begin();
+	for (mapIt; mapIt != inputSets.end(); mapIt++)
 	{
 		if (mapIt->second == key)
 		{
@@ -128,8 +130,8 @@ void PlayerInputManager::notifyKeyReleased(std::string key)
 {
 	if(!currentState->getIsRunning())
 		return;
-	mapIt = inputSetsPlayer.begin();
-	for (mapIt; mapIt != inputSetsPlayer.end(); mapIt++)
+	mapIt = inputSets.begin();
+	for (mapIt; mapIt != inputSets.end(); mapIt++)
 	{
 		if (mapIt->second == key)
 		{

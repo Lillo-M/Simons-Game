@@ -23,7 +23,6 @@ GraphicElements::Buttom::~Buttom()
 void GraphicElements::Buttom::Update()
 {
     text.setPosition(Position);
-    pGM->CenterView(sf::Vector2f(0,0));
 }
 
 void GraphicElements::Buttom::Draw()
@@ -39,4 +38,9 @@ void GraphicElements::Buttom::Selected()
 void GraphicElements::Buttom::UnSelected()
 {
     text.setFillColor(sf::Color::White);
+}
+
+void GraphicElements::Buttom::changeText(std::string newtext)
+{
+    text.setString(newtext);
 }

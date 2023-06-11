@@ -1,12 +1,12 @@
 #include "../include/Entities/Obstacles/Ground.h"
 #define SIZEX 128.f
 #define SIZEY 128.f
+#define TEXTUREPATH "Assets/Obstacles/Ground2.png"
+
 Entities::Obstacles::Ground::Ground(const sf::Vector2f pos):
-	Obstacle(pos, sf::Vector2f(SIZEX, SIZEY), true, ID::ground)
+	Obstacle(pos, sf::Vector2f(SIZEX, SIZEY), ID::ground)
 {
-	HitBox.setOrigin(SIZEX / 2, SIZEY / 2);
-	
-	HitBox.setTexture(texture);
+	animation.Reset(TEXTUREPATH, pos, sf::Vector2f(128.f,128.f));
 }
 
 Entities::Obstacles::Ground::~Ground()
@@ -15,6 +15,8 @@ Entities::Obstacles::Ground::~Ground()
 
 void Entities::Obstacles::Ground::OnCollision(Entities::Entity* ent)
 {
+    if(ent->getID() == ID::player)
+        static_cast<Entities::Characters::Player*>(ent)->setFriction(friction);
 }
 
 void Entities::Obstacles::Ground::Move()
@@ -27,7 +29,8 @@ void Entities::Obstacles::Ground::Move()
 void Entities::Obstacles::Ground::Update()
 {
 	this->Move();
-	HitBox.setPosition(Position);
+	animation.Update(Position);
 }
 
-sf::Texture* Entities::Obstacles::Ground::texture(Managers::GraphicManager::getInstance()->loadTexture("Assets/Ground2.png"));
+const float Entities::Obstacles::Ground::forca_empuxo(gravity);
+const float Entities::Obstacles::Ground::friction(0.45);

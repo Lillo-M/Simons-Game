@@ -1,6 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include "Managers/GraphicManager.h"
+#include <iostream>
 #include <string>
 
 enum ID
@@ -11,15 +12,15 @@ enum ID
     warrior         = 2,
     obstacle        = 3,
     level           = 4,
-    level1          = 5,
-    level2          = 6,
+    alaska          = 5,
+    vulcano         = 6,
     menu            = 7,
     buttom          = 8,
     projectile      = 9,
     ice		        =10,
     lava	        =11,
     ground	        =12,
-    necromancer     =13
+    horse           =13
 };
 
 

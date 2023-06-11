@@ -1,7 +1,6 @@
 #pragma once
 #include "Observer.h"
 #include "../Menus/Menu.h"
-#include <map>
 
 namespace Observers
 {
@@ -14,7 +13,5 @@ namespace Observers
         void notifyKeyReleased(std::string key);
     private:
         Menus::Menu* menu;
-    	std::map<std::string, std::string> inputSets;
-        std::map<std::string, std::string>::iterator mapIt;
     };
 }

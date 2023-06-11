@@ -1,9 +1,22 @@
 #include "../include/Entities/Characters/Player.h"
 
+#define IDLEPATH "Assets/Player/Idle.png"
+#define WALKPATH "Assets/Player/Walk.png"
+#define JUMPPATH "Assets/Player/Jump.png"
+#define ATTACKPATH "Assets/Player/Magic_arrow.png"
+#define HURTPATH "Assets/Player/Hurt.png"
+
 #define SIZEX 40.f
 #define SIZEY 66.f
+#define LIVES 100
+#define MAXV 10
+#define PLASMABALLS 10
+#define ATRITO 0.30
+#define JUMPHEIGHT -11.f
+#define PSPEED 0.8
+
 Entities::Characters::Player::Player(const sf::Vector2f pos) : 
-	Character(pos, sf::Vector2f(SIZEX, SIZEY), false, ID::player, LIVES),
+	Character(pos, sf::Vector2f(SIZEX, SIZEY), ID::player, LIVES),
 	maxVelocity(MAXV),
 	BoolMoveLeft(false),
 	BoolMoveRight(false),
@@ -11,15 +24,17 @@ Entities::Characters::Player::Player(const sf::Vector2f pos) :
 	fall(false),
 	attackcd(0.f),
 	attackcooled(true),
-	shotcount(0),
+	shootCount(0),
 	animation(),
 	faceRight(false),
 	isJumping(false),
-	onIce(false)
+	onIce(false),
+	Points(0),
+	friction(0)
 {
-	for(int i = 0; i < 10; i++)
+	for(int i = 0; i < PLASMABALLS; i++)
 	{
-		Entities::PlayerProjectile* pAux = new Entities::PlayerProjectile(sf::Vector2f(0,0), sf::Vector2f(0,0), this);
+		Entities::Projectiles::PlasmaBall* pAux = new Entities::Projectiles::PlasmaBall(sf::Vector2f(0,0), sf::Vector2f(0,0), this);
 		if(!pAux)
 		{
 			std::cout << std::endl << "ERROR: Failed to Memory Allocate" << std::endl;
@@ -27,32 +42,24 @@ Entities::Characters::Player::Player(const sf::Vector2f pos) :
 		}
 		shots.push_back(pAux);
 	}
-	HitBox.setOrigin(0, 0);
-	
-	animation.pushAnimation(GraphicElements::Animation_ID::idle, "Assets/Idle.png", sf::Vector2u(8,0), 0.125f);
-	animation.pushAnimation(GraphicElements::Animation_ID::walk, "Assets/Walk.png", sf::Vector2u(7,0), 0.143f);
-	animation.pushAnimation(GraphicElements::Animation_ID::jump, "Assets/Jump.png", sf::Vector2u(8,0), 0.125f);
-	animation.pushAnimation(GraphicElements::Animation_ID::attack, "Assets/Magic_arrow.png", sf::Vector2u(6,0), 0.06f);
-	animation.pushAnimation(GraphicElements::Animation_ID::hurt, "Assets/Hurt.png", sf::Vector2u(4,0), 0.25f);
+	animation.pushAnimation(GraphicElements::Animation_ID::idle, IDLEPATH, sf::Vector2u(8,0), 0.125f);
+	animation.pushAnimation(GraphicElements::Animation_ID::walk, WALKPATH, sf::Vector2u(7,0), 0.143f);
+	animation.pushAnimation(GraphicElements::Animation_ID::jump, JUMPPATH, sf::Vector2u(8,0), 0.125f);
+	animation.pushAnimation(GraphicElements::Animation_ID::attack, ATTACKPATH, sf::Vector2u(6,0), 0.06f);
+	animation.pushAnimation(GraphicElements::Animation_ID::hurt, HURTPATH, sf::Vector2u(4,0), 0.25f);
 }
 
 Entities::Characters::Player::~Player()
 {
+	std::cout << "Player Destructor" << std::endl;
 	shots.clear();
 }
-
-sf::Vector2f Entities::Characters::Player::getPosition() // botar na entidade
-{
-	return Position;
-}
-
-const sf::Vector2f Entities::Characters::Player::getVelocity() const { return Velocity; } // botar na entidade
 
 void Entities::Characters::Player::Move()
 {
 	if(onIce)
 	{
-		maxVelocity = 2 * MAXV;
+		maxVelocity = 1.25f * MAXV;
 	}
 	else
 		maxVelocity = MAXV;
@@ -60,38 +67,38 @@ void Entities::Characters::Player::Move()
 	if (BoolMoveLeft)
 	{
 		if (Velocity.x > -maxVelocity)
-			Velocity.x -= PSPEED * dt * MULT; // Velocidade De Teste
+			Velocity.x -= PSPEED * dt * MULT;
 		else
-			Velocity.x = -maxVelocity; // Velocidade De Teste
+			Velocity.x = -maxVelocity;
 		if (Velocity.x < -maxVelocity)
 			Velocity.x = -maxVelocity;
 	}
 	if (BoolMoveRight)
 	{
 		if (Velocity.x < maxVelocity)
-			Velocity.x += PSPEED * dt * MULT; // Velocidade De Teste
+			Velocity.x += PSPEED * dt * MULT;
 		else
-			Velocity.x = maxVelocity; // Velocidade De Teste
+			Velocity.x = maxVelocity;
 		if (Velocity.x > maxVelocity)
 			Velocity.x = maxVelocity;
 	}
 	if (fall)
 	{
 		if (!grounded)
-			Velocity.y -= JUMPHEIGHT / 8 * dt * MULT; // Valores de Teste
+			Velocity.y -= JUMPHEIGHT / 8 * dt * MULT;
 		else
 			fall = false;
 	}
 
-	if (Velocity.x < 0 && !BoolMoveLeft && !BoolMoveRight) // Atrito
+	if (Velocity.x < 0) // Atrito
 	{
-		Velocity.x += ATRITO * dt * MULT;
+		Velocity.x += friction * dt * MULT;
 		if (Velocity.x > 0)
 			Velocity.x = 0;
 	}
-	else if (Velocity.x > 0 && !BoolMoveLeft && !BoolMoveRight) // Atrito
+	else if (Velocity.x > 0) // Atrito
 	{
-		Velocity.x -= ATRITO * dt * MULT;
+		Velocity.x -= friction * dt * MULT;
 		if (Velocity.x < 0)
 			Velocity.x = 0;
 	}
@@ -155,14 +162,14 @@ void Entities::Characters::Player::Jump()
 		isJumping = true;
 		secondJump = true;
 		fall = false;
-		Velocity.y = JUMPHEIGHT; // Valor De Teste
+		Velocity.y = JUMPHEIGHT;
 	}
 	else if (secondJump)
 	{
 		isJumping = true;
 		fall = false;
 		secondJump = false;
-		Velocity.y = JUMPHEIGHT; // Valor De Teste
+		Velocity.y = JUMPHEIGHT;
 	}
 }
 
@@ -187,14 +194,14 @@ void Entities::Characters::Player::Attack(const bool b)
 	{
 		animation.Update(GraphicElements::Animation_ID::attack, Position, faceRight);
 		attackcooled = false;
-		shots[shotcount]->Shoot(sf::Vector2f(Position.x + \
-		( SIZEX / 2 + shots[shotcount]->getSize().x / 2 ) * (faceRight ? 1:-1), Position.y), \
+		shots[shootCount]->Shoot(sf::Vector2f(Position.x + \
+		( SIZEX / 2 + shots[shootCount]->getSize().x / 2 ) * (faceRight ? 1:-1), Position.y - 15.f), \
 	        sf::Vector2f((faceRight ? 1:-1) * 15, 0));	
 	
-		shotcount++;
+		shootCount++;
 	
-		if(shotcount >= shots.size())
-			shotcount = 0;
+		if(shootCount >= shots.size())
+			shootCount = 0;
 	}
 }
 
@@ -225,6 +232,7 @@ void Entities::Characters::Player::Save(std::ofstream& savefile)
     savefile << Velocity.x << std::endl;
 	savefile << Velocity.y << std::endl;
 	savefile << faceRight << std::endl;
+	savefile << Points << std::endl;
 	for(int i = 0; i < shots.size(); i++)
 	{
 		shots[i]->Save(savefile);
@@ -232,6 +240,49 @@ void Entities::Characters::Player::Save(std::ofstream& savefile)
 }
 void Entities::Characters::Player::Load(std::ifstream &savefile)
 {
+	float x, y;
+	int iread;
+	savefile >> iread;
+	savefile >> iread;
+    this->setLives(iread);
+    savefile >> iread;
+    this->setAlive(static_cast<bool>(iread));
+	savefile >> x;
+    savefile >> y;
+    this->setPosition(x,y);
+    savefile >> x;
+    savefile >> y;
+    this->setVelocity(x,y);
+    savefile >> iread;
+    this->setFacing(iread);
+    savefile >> iread;
+    this->setPoints(iread);
+    for(int j = 0; j < PLASMABALLS; j++)
+    {
+        shots[j]->Load(savefile);
+    }
 }
 
-std::vector<Entities::PlayerProjectile*>* Entities::Characters::Player::getShots() {return &shots;}
+void Entities::Characters::Player::Score(ID id)
+{
+	switch (id)
+	{
+	case ID::archer:
+		Points +=  5000;
+		break;
+	case ID::warrior:
+		Points +=  3000;
+		break;
+	case ID::horse:
+		Points += 50000;
+		break;
+	}
+}
+
+void Entities::Characters::Player::setFriction(float friction) {this->friction = friction;}
+
+const int Entities::Characters::Player::getPoints() const {return Points;}
+
+void Entities::Characters::Player::setPoints(int Points) {this->Points = Points;}
+
+std::vector<Entities::Projectiles::PlasmaBall*>* Entities::Characters::Player::getShots() {return &shots;}

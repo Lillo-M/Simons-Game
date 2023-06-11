@@ -13,24 +13,34 @@ States::LoadGameState::~LoadGameState()
 
 void States::LoadGameState::Update()
 {
-    std::ifstream savefile("Assets/savefile.txt", std::ifstream::binary);
+    std::ifstream savefile("Assets/levelSave.txt", std::ifstream::binary);
     int read;
     savefile >> read;
     
+    if(savefile.eof())
+    {
+        std::cout << "ERROR: No Savefile Founded" << std::endl;
+        changeState(States::stateID::mainMenu);
+        return;
+    }
+
+    Levels::Level* pAux = NULL;
+
     std::list<Levels::Level*>::iterator it = levels.begin();
     while(it != levels.end())
     {
         if((*it)->getID() == read)
         {
-            break;
+            pAux = *it;
         }
+        (*it)->Reset();
         it++;
     }
 
     savefile.close();
-    (*it)->LoadLevel();
-    std::cout << "entrou" << std::endl;
-    changeState((*it)->getStateID());
+    pAux->LoadLevel();
+    changeState(pAux->getStateID());
+    pAux = NULL;
     /*  */
 }
 

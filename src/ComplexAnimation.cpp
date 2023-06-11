@@ -8,6 +8,7 @@ Animation()
 
 GraphicElements::ComplexAnimation::~ComplexAnimation()
 {
+    std::cout << "ComplexAnimation Destructor" << std::endl;
     std::map<Animation_ID, SimpleAnimation*>::iterator it;
     for (it = animationMap.begin(); it != animationMap.end(); it++)
     {
@@ -44,4 +45,5 @@ void GraphicElements::ComplexAnimation::Update(Animation_ID id, sf::Vector2f pos
     HitBox.setPosition(position);
     HitBox.setTextureRect(animationMap[currentAnimation]->getSize());
     HitBox.setTexture(animationMap[currentAnimation]->getTexture());
+    //HitBox.setScale(2,2);
 }

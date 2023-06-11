@@ -31,6 +31,7 @@ Managers::InputManager::InputManager()
 	keyMap[sf::Keyboard::Y] = 'Y';
 	keyMap[sf::Keyboard::Z] = 'Z';
 	keyMap[sf::Keyboard::Enter] = "Enter";
+	keyMap[sf::Keyboard::BackSpace] = "BackSpace";
 	keyMap[sf::Keyboard::LShift] = "LShift";
 	keyMap[sf::Keyboard::Space] = "Space";
 	keyMap[sf::Keyboard::LControl] = "lCtrl";
@@ -46,8 +47,10 @@ Managers::InputManager::InputManager()
 
 Managers::InputManager::~InputManager()
 {
+	std::cout << "InputManager Destructor" << std::endl;
     subObservers.clear();
     keyMap.clear();
+	Instance = NULL;
 }
 
 void Managers::InputManager::pressedInput(sf::Event::KeyEvent key)
@@ -83,3 +86,18 @@ void Managers::InputManager::removeObserver(Observers::Observer* observer)
 			subObservers.erase(listIt);
     }
 }
+
+Managers::InputManager* Managers::InputManager::getInstance()
+{
+	if(!Instance)
+	{
+		try { Instance = new Managers::InputManager();} catch(int error)
+		{ if(!error){
+			std::cout << "ERROR: Failed to Memory Allocate" << std::endl;
+        	exit(1);
+		}}
+	}
+	return Instance;
+}
+
+Managers::InputManager* Managers::InputManager::Instance(NULL);

@@ -1,0 +1,47 @@
+G                                                                                                                   G               G                                                                                                                
+G                                                                                                                   G               G                                                                                                                          
+G                                                                                                                   G               G
+G                                                                                                                   G               G
+G                                                                                                                   G               G
+G                                                                                                                   G G G G G G G G G                
+G                                                                                                                   G               
+G                                                                                                                   G G G G G G G G G                
+G                                                                                                                   G                
+G                                                                                                                   G G G G G G G G G               
+G  P P                                                                                                              G                
+G                                                                                                                   G G G G G G G G G                
+G                            W               R              R                  A                       H            G                 
+G G G G G G G G G G G G G G G G C C C C C C C C C C C C C G G G G G G G G G G G G G G G G G G G G G G G             G G G G G G G G G
+G                                                                                                                   G 
+G                                                                                                                   G G G G G G G G G
+G                                                                                                                   G 
+G                        R    W                           W       W                 H      W          W     R       G G G G G G G G G
+G                 G G G G G G G I I I                   G G G G G G C C C C         G G G G G G G I I I I I I I I G G 
+G                G                    G                                                                             G G G G G G G G G
+G               G                      G                                       G                                    G 
+G             G G                      G G                                     G G                                  G G G G G G G G G
+G           G G G                      G G G          A           W            G G G    A                      A    G               G
+G           G G G G G G G G G G G G G G G G G G G I I I C C C C G G C C C C G G G G G C C C C G G G G G G G G G G G G G G G G G G G G                   
+G           G                                                                                                       G               G
+G           G                                                                                                       G G G G G G G G G               
+G                                                                                                                   G               G
+G                       A            W                 A           W                  A     W     W                 G G G G G G G G G                                                                                         
+G                                                                                                                   G               G
+G G G I I I I I I I I I I C C C C G G G G G G G G G G G G G G G C C C C I I I G G G G G G G G G G G G G G           G G G G G G G G G                                                                                                                     
+G                                                                                                                   G               G
+G                                                                                                                   G G G G G G G G G              
+G                                                                                           A        W           W  G               G
+G                                                                                           G G G G G G G G G G G G G G G G G G G G G                 
+G                                                                                                                   G               G
+G                                                                                                                   G G G G G G G G G                 
+G                             A                W             R                R                 R                   G               G
+G               G G I I I I I I I I C C C C G G G G G G G G G G G G G G G G G C C C C I I I G G G G G G G G G G G G G G G G G G G G G                                                                                                      
+G                                                                                                                                   G
+G                                                                                                                                   G
+G                                                                                                                                   G
+G   H        R         A              W          H            W          A              W               W              A            G
+G G G G G G G C C C C G G G C C C C G G G G G C C C C G G G G G G G G G G G G G C C C C C C C C G G G G C C C C G G G G G G G G G G G
+
+G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G                          
+
+G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G 

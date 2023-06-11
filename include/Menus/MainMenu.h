@@ -2,6 +2,7 @@
 #include "Menu.h"
 #include "../Observers/MenuObserver.h"
 #include "../States/State.h"
+#include "../Levels/Level.h"
 
 namespace Menus
 {
@@ -15,10 +16,9 @@ namespace Menus
         void Update();
         void MoveUp();
         void MoveDown();
-        void PushButtom(GraphicElements::Buttom* buttom);
     private:
-        Observers::MenuObserver* pMObserver;
         Managers::InputManager* pIM;
+        bool twoPlayers;
         //sf::Image background;
     };
 }
