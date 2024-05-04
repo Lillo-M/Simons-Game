@@ -114,7 +114,7 @@ void Menus::LeaderBoard::Reset()
     textCount = 0;
     std::ifstream leadersArchive;
     std::string str;
-    leadersArchive.open("Assets/leaderboard.txt");
+    leadersArchive.open(std::string(THE_WIZARD_PATH) + std::string("/Assets/leaderboard.txt"));
     if (!leadersArchive.is_open())
     {
         std::cout << "ERROR: Failed to Open 'leaderboard.txt'" << std::endl;

@@ -45,8 +45,8 @@ void States::LoadGameState::Update()
     }
 
     savefile.close();
-    pAux->LoadLevel();
     changeState(pAux->getStateID());
+    pAux->LoadLevel();
     pAux = NULL;
     /*  */
 }
