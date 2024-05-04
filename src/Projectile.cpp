@@ -4,7 +4,7 @@
 Entities::Projectiles::Projectile::Projectile(sf::Vector2f pos, sf::Vector2f velocity, Entities::Characters::Character* owner):
 	Entity(pos, sf::Vector2f(20,20), ID::projectile),
     owner(owner),
-    collided(false)
+    collided(true)
 {
 }
 
