@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.15)
 
-project(TheWizard VERSION 1.0)
+project(TheWizard VERSION 1.0 LANGUAGES CXX)
 
 set(cpp_source_files  src/Alaska.cpp src/Animation.cpp src/Archer.cpp src/Arrow.cpp src/Being.cpp
  src/Button.cpp src/Character.cpp src/CollisionManager.cpp src/ComplexAnimation.cpp src/Enemy.cpp
@@ -29,5 +29,5 @@ target_link_libraries(TheWizard PUBLIC ${PROJECT_SOURCE_DIR}/SFML-2.5.1/lib/libs
 target_link_libraries(TheWizard PUBLIC ${PROJECT_SOURCE_DIR}/SFML-2.5.1/lib/libsfml-window-d.a)
 target_link_libraries(TheWizard PUBLIC ${PROJECT_SOURCE_DIR}/SFML-2.5.1/lib/libsfml-system-d.a)
 
-install(TARGETS TheWizard DESTINATION ${PROJECT_SOURCE_DIR}/TheWizard_Build/bin)
-install(FILES "${PROJECT_BINARY_DIR}/include/Defines/SOURCEDIR.h" DESTINATION ${PROJECT_SOURCE_DIR}/TheWizard_Build/include)
+#install(TARGETS TheWizard DESTINATION ${PROJECT_SOURCE_DIR}/TheWizard_Build/bin)
+#install(FILES "${PROJECT_BINARY_DIR}/include/Defines/SOURCEDIR.h" DESTINATION ${PROJECT_SOURCE_DIR}/TheWizard_Build/include)

@@ -1,0 +1,3 @@
+C:/Users/Lillo/Documents/thewizard/TheWizard_Build_MinGW/CMakeFiles/TheWizard.dir
+C:/Users/Lillo/Documents/thewizard/TheWizard_Build_MinGW/CMakeFiles/edit_cache.dir
+C:/Users/Lillo/Documents/thewizard/TheWizard_Build_MinGW/CMakeFiles/rebuild_cache.dir
