@@ -3,7 +3,7 @@
 GraphicElements::Button::Button(sf::Vector2f pos, unsigned int size, const std::string text):
     Being(ID::button)
 {
-    if(!f.loadFromFile("Assets/arial.ttf"))
+    if(!f.loadFromFile(std::string(THE_WIZARD_PATH) + std::string("/Assets/arial.ttf")))
     {
         std::cout << "ERROR: Failed to load font\n";
         exit(1);

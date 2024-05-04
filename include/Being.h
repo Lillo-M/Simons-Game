@@ -3,6 +3,7 @@
 #include "Managers/GraphicManager.h"
 #include <iostream>
 #include <string>
+#include "SOURCEDIR.h"
 
 enum ID
 {

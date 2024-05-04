@@ -14,7 +14,7 @@ Menus::NewGameMenu::NewGameMenu(States::StateMachine* pSM, Managers::InputManage
 
 Menus::NewGameMenu::~NewGameMenu()
 {
-    std::cout << "NewGameMenu Destructor" << std::endl;
+    //std::cout << "NewGameMenu Destructor" << std::endl;
     levels.clear();
     pIM->removeObserver(static_cast<Observers::Observer*>(pMObserver));
     pIM = NULL;

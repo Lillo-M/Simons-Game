@@ -47,7 +47,7 @@ Managers::InputManager::InputManager()
 
 Managers::InputManager::~InputManager()
 {
-	std::cout << "InputManager Destructor" << std::endl;
+	//std::cout << "InputManager Destructor" << std::endl;
     subObservers.clear();
     keyMap.clear();
 	Instance = NULL;

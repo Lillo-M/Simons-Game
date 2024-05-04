@@ -12,7 +12,7 @@ Managers::GraphicManager::GraphicManager():
 
 Managers::GraphicManager::~GraphicManager()
 {
-    std::cout << "GraphicManager Destructor" << std::endl;
+    //std::cout << "GraphicManager Destructor" << std::endl;
     std::map<const char *, sf::Texture *>::iterator it;
     for (it = textureMap.begin(); it != textureMap.end(); it++)
     {
@@ -102,6 +102,7 @@ sf::Vector2f Managers::GraphicManager::getViewCenter() const {return view.getCen
 
 sf::Texture *Managers::GraphicManager::loadTexture(const char *path)
 {
+    std::string texture_path = std::string(THE_WIZARD_PATH) + "/" + std::string(path);
     std::map<const char *, sf::Texture *>::iterator it;
     for (it = textureMap.begin(); it != textureMap.end(); it++)
     {
@@ -112,7 +113,7 @@ sf::Texture *Managers::GraphicManager::loadTexture(const char *path)
     textureMap[path] = texture;
     try
     {
-        textureMap[path]->loadFromFile(path);
+        textureMap[path]->loadFromFile(texture_path);
     }
     catch (int error)
     {

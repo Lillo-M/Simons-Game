@@ -2,7 +2,7 @@
 
 Managers::EventsManager::~EventsManager()
 {
-	std::cout << "EventsManager Destructor" << std::endl;
+	//std::cout << "EventsManager Destructor" << std::endl;
 	pGM = NULL;
 	Instance = NULL;
 }

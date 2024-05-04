@@ -84,7 +84,7 @@ Game::Game():
 
 Game::~Game()
 {
-    std::cout << "Game Destructor" << std::endl;
+    //std::cout << "Game Destructor" << std::endl;
     std::map<States::stateID ,States::State*>::iterator it;
     for(it = statesMap.begin(); it != statesMap.end(); it++)
         delete it->second;
@@ -105,7 +105,7 @@ void Game::Run()
 {
     while(pGM->isWindowOpen())
     {
-        std::cout << 1.f/pGM->getDeltaTime() << std::endl;
+        //std::cout << 1.f/pGM->getDeltaTime() << std::endl;
         pGM->Clear();
         this->runCurrentState();
         pGM->Display();

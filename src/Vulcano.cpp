@@ -23,7 +23,7 @@ void Levels::Vulcano::CreateMap()
     std::ifstream Map;
     std::string str;
     int j = 0;
-    Map.open("Assets/Vulcano.txt");
+    Map.open(std::string(THE_WIZARD_PATH) + std::string("/Assets/Vulcano.txt"));
     if (!Map.is_open())
     {
         std::cout << "ERROR: Failed to Open 'Vulcano.txt'" << std::endl;

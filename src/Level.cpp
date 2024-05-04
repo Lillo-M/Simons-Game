@@ -35,7 +35,7 @@ Levels::Level::Level(const ID id, const States::stateID sid, States::StateMachin
 
 Levels::Level::~Level()
 {
-    std::cout << "Abstract Level Destructor" << std::endl;
+    //std::cout << "Abstract Level Destructor" << std::endl;
     this->pIM->removeObserver(static_cast<Observers::Observer*>(pPIM));
     if(pPIM)
         delete pPIM;
@@ -86,7 +86,7 @@ void Levels::Level::CreateArcher(const sf::Vector2f pos, bool isRandom)
                   << "ERROR: Failed to Allocate Memory" << std::endl;
         exit(1);
     }
-    std::cout << pAux->getID() << std::endl;
+    //std::cout << pAux->getID() << std::endl;
     DentitiesList.Push_BackEntity(static_cast<Entities::Entity *>(pAux));
     std::vector<Entities::Projectiles::Arrow*>::iterator it;
     for (it = pAux->getShots()->begin(); it != pAux->getShots()->end(); it++)
@@ -115,15 +115,15 @@ void Levels::Level::CreateGround(const sf::Vector2f pos)
 
 void Levels::Level::SaveLevel()
 {
-    std::ofstream savefile("Assets/levelSave.txt", std::ofstream::binary);
+    std::ofstream savefile(std::string(THE_WIZARD_PATH) + std::string("/Assets/levelSave.txt"), std::ofstream::binary);
 	std::string line;
 	savefile << this->getID() << std::endl;
     savefile << twoPlayers << std::endl;
     savefile.close();
-    savefile.open("Assets/dynamicEntitiesSave.txt", std::ofstream::binary);
+    savefile.open(std::string(THE_WIZARD_PATH) + std::string("/Assets/dynamicEntitiesSave.txt"), std::ofstream::binary);
     DentitiesList.Save(savefile);
     savefile.close();
-    savefile.open("Assets/staticEntitiesSave.txt", std::ofstream::binary);
+    savefile.open(std::string(THE_WIZARD_PATH) + std::string("/Assets/staticEntitiesSave.txt"), std::ofstream::binary);
     SentitiesList.Save(savefile);
     savefile.close();
 }
@@ -133,16 +133,32 @@ void Levels::Level::LoadLevel()
     int iread;
     float x;
     float y;
-    std::ifstream savefile("Assets/levelSave.txt", std::ifstream::binary);
+    std::ifstream savefile(std::string(THE_WIZARD_PATH) + std::string("/Assets/levelSave.txt"), std::ifstream::binary);
     std::string line;
     savefile >> iread;
     savefile >> iread;
     twoPlayers = static_cast<bool>(iread);
     savefile.close();
-    savefile.open("Assets/dynamicEntitiesSave.txt", std::ifstream::binary);
+    savefile.open(std::string(THE_WIZARD_PATH) + std::string("/Assets/dynamicEntitiesSave.txt"), std::ifstream::binary);
+
+    if(!savefile.good())
+    {
+        std::cout << "ERROR: No 'Dynamic Entities' Savefile Founded" << std::endl;
+        changeState(States::stateID::mainMenu);
+        return;
+    }
+
     DentitiesList.Load(savefile);
     savefile.close();
-    savefile.open("Assets/staticEntitiesSave.txt", std::ifstream::binary);
+    savefile.open(std::string(THE_WIZARD_PATH) + std::string("/Assets/staticEntitiesSave.txt"), std::ifstream::binary);
+
+    if(!savefile.good())
+    {
+        std::cout << "ERROR: No 'Static Entities' Savefile Founded" << std::endl;
+        changeState(States::stateID::mainMenu);
+        return;
+    }
+
     SentitiesList.Load(savefile);
     savefile.close();
     /*  */

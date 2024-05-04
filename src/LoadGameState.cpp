@@ -13,13 +13,20 @@ States::LoadGameState::~LoadGameState()
 
 void States::LoadGameState::Update()
 {
-    std::ifstream savefile("Assets/levelSave.txt", std::ifstream::binary);
+    std::ifstream savefile(std::string(THE_WIZARD_PATH) + std::string("/Assets/levelSave.txt"), std::ifstream::binary);
+    if(!savefile.good())
+    {
+        std::cout << "ERROR: No 'Level' Savefile Founded" << std::endl;
+        changeState(States::stateID::mainMenu);
+        return;
+    }
+
     int read;
     savefile >> read;
     
     if(savefile.eof())
     {
-        std::cout << "ERROR: No Savefile Founded" << std::endl;
+        std::cout << "ERROR: 'Level' Savefile Founded but Empty" << std::endl;
         changeState(States::stateID::mainMenu);
         return;
     }

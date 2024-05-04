@@ -5,7 +5,7 @@ Menus::PauseMenu::PauseMenu(States::StateMachine *pSM, Managers::InputManager *p
     State(pSM, States::stateID::pauseMenu),
     pIM(pIM)
 {
-    font.loadFromFile("Assets/arial.ttf");
+    font.loadFromFile(std::string(THE_WIZARD_PATH) + std::string("/Assets/arial.ttf"));
     text.setFont(font);
     text.setFillColor(sf::Color::White);
     text.setStyle(sf::Text::Bold);
@@ -21,7 +21,7 @@ Menus::PauseMenu::PauseMenu(States::StateMachine *pSM, Managers::InputManager *p
 
 Menus::PauseMenu::~PauseMenu()
 {
-    std::cout << "PauseMenu Destructor" << std::endl;
+    //std::cout << "PauseMenu Destructor" << std::endl;
     for(int i = 0; i < buttonCont; i++)
     {
         if(buttons[i])

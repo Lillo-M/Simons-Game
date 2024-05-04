@@ -11,7 +11,7 @@ Menus::Menu::Menu():
 
 Menus::Menu::~Menu()
 {
-    std::cout << "Abstract Menu Destructor" << std::endl;
+    //std::cout << "Abstract Menu Destructor" << std::endl;
     if(pMObserver)
         delete pMObserver;
 }

@@ -36,7 +36,7 @@ Entities::Characters::Enemies::Horse::Horse(sf::Vector2f pos) : attacking(false)
 
 Entities::Characters::Enemies::Horse::~Horse()
 {
-	std::cout << "Horse Destructor" << std::endl;
+	//std::cout << "Horse Destructor" << std::endl;
 	Skulls.clear();
 }
 

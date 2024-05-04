@@ -6,12 +6,12 @@ Menus::LeaderBoard::LeaderBoard(States::StateMachine* pSM, Managers::InputManage
     pIM(pIM),
     textCount(0)
 {
-    font.loadFromFile("Assets/arial.ttf");
+    font.loadFromFile(std::string(THE_WIZARD_PATH) + std::string("/Assets/arial.ttf"));
     PushButton(new GraphicElements::Button(sf::Vector2f(WIDTH/2 - 90,340), 30, "Go Back"));
     buttons[currentButton]->Selected();
     std::ifstream leadersArchive;
     std::string str;
-    leadersArchive.open("Assets/leaderboard.txt");
+    leadersArchive.open(std::string(THE_WIZARD_PATH) + std::string("/Assets/leaderboard.txt"));
     if (!leadersArchive.is_open())
     {
         std::cout << "ERROR: Failed to Open 'leaderboard.txt'" << std::endl;
@@ -20,14 +20,13 @@ Menus::LeaderBoard::LeaderBoard(States::StateMachine* pSM, Managers::InputManage
     
     while (std::getline(leadersArchive, str))
     {
-        std::cout << str << std::endl;
+        //std::cout << str << std::endl;
         names.push_back(str);
         std::getline(leadersArchive, str);
         points.push_back(stoi(str));
         textCount++;
     }
 
-    std::cout << "Chegou até aqui" << std::endl;
     leadersArchive.close();
     for(int i = 0; i < textCount; i++)
     {
@@ -35,13 +34,13 @@ Menus::LeaderBoard::LeaderBoard(States::StateMachine* pSM, Managers::InputManage
         pAux->setPosition(sf::Vector2f(WIDTH/2 - 90,-340 + i * 30));
         Leaders.push_back(pAux);
     }
-    std::cout << "Chegou até aqui" << std::endl;
+
     pIM->addObserver(static_cast<Observers::Observer*>(pMObserver));
 }
 
 Menus::LeaderBoard::~LeaderBoard()
 {
-    std::cout << "LeaderBoard Destructor" << std::endl;
+    //std::cout << "LeaderBoard Destructor" << std::endl;
     pIM->removeObserver(pMObserver);
     if(pMObserver)
         delete pMObserver;

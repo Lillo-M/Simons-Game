@@ -4,6 +4,7 @@
 #include <map>
 #include <string>
 #include <string.h>
+#include "SOURCEDIR.h"
 
 #define WIDTH 1280
 #define HEIGHT 768

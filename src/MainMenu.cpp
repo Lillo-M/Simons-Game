@@ -16,7 +16,7 @@ Menus::MainMenu::MainMenu(States::StateMachine* pSM, Managers::InputManager* pIM
 }
 Menus::MainMenu::~MainMenu()
 {
-    std::cout << "MainMenu Destructor" << std::endl;
+    //std::cout << "MainMenu Destructor" << std::endl;
     pIM->removeObserver(static_cast<Observers::Observer*>(pMObserver));
     pIM = NULL;
     for(int i = 0; i < buttonCont; i++)

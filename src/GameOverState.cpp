@@ -12,7 +12,7 @@ States::GameOverState::GameOverState(States::StateMachine* pSMachine, Managers::
         std::cout << "ERROR: Failed to Memory Allocate" << std::endl;
         exit(1);}}
     
-    font.loadFromFile("Assets/arial.ttf");
+    font.loadFromFile(std::string(THE_WIZARD_PATH) + std::string("/Assets/arial.ttf"));
     gameOver.setFont(font);
     gameOver.setCharacterSize(30);
     gameOver.setStyle(sf::Text::Bold);
@@ -34,7 +34,7 @@ States::GameOverState::GameOverState(States::StateMachine* pSMachine, Managers::
 
 States::GameOverState::~GameOverState()
 {
-    std::cout << "GameOverState Destructor" << std::endl;
+    //std::cout << "GameOverState Destructor" << std::endl;
     pIM->removeObserver(tIObserver);
     if(tIObserver)
         delete tIObserver;

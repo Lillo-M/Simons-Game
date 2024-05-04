@@ -51,7 +51,7 @@ Entities::Characters::Player::Player(const sf::Vector2f pos) :
 
 Entities::Characters::Player::~Player()
 {
-	std::cout << "Player Destructor" << std::endl;
+	//std::cout << "Player Destructor" << std::endl;
 	shots.clear();
 }
 

@@ -23,7 +23,7 @@ void Levels::Alaska::CreateMap()
     std::ifstream Map;
     std::string str;
     int j = 0;
-    Map.open("Assets/Alaska.txt");
+    Map.open(std::string(THE_WIZARD_PATH) + std::string("/Assets/Alaska.txt"));
     if (!Map.is_open())
     {
         std::cout << "ERROR: Failed to Open 'Alaska.txt'" << std::endl;
