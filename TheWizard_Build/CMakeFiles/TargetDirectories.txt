@@ -1,7 +1,0 @@
-C:/Users/Lillo/Documents/thewizard/TheWizard_Build/CMakeFiles/TheWizard.dir
-C:/Users/Lillo/Documents/thewizard/TheWizard_Build/CMakeFiles/edit_cache.dir
-C:/Users/Lillo/Documents/thewizard/TheWizard_Build/CMakeFiles/rebuild_cache.dir
-C:/Users/Lillo/Documents/thewizard/TheWizard_Build/CMakeFiles/list_install_components.dir
-C:/Users/Lillo/Documents/thewizard/TheWizard_Build/CMakeFiles/install.dir
-C:/Users/Lillo/Documents/thewizard/TheWizard_Build/CMakeFiles/install/local.dir
-C:/Users/Lillo/Documents/thewizard/TheWizard_Build/CMakeFiles/install/strip.dir
