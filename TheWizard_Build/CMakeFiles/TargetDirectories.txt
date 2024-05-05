@@ -1,3 +1,0 @@
-C:/Users/Lillo/Documents/thewizard/TheWizard_Build/CMakeFiles/TheWizard.dir
-C:/Users/Lillo/Documents/thewizard/TheWizard_Build/CMakeFiles/edit_cache.dir
-C:/Users/Lillo/Documents/thewizard/TheWizard_Build/CMakeFiles/rebuild_cache.dir
