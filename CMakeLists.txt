@@ -14,7 +14,7 @@ set(cpp_source_files  src/Alaska.cpp src/Animation.cpp src/Archer.cpp src/Arrow.
 
 set(THE_WIZARD_PATH ${PROJECT_SOURCE_DIR})
 
-add_executable(TheWizard ${cpp_source_files})
+add_executable(${PROJECT_NAME} ${cpp_source_files})
 
 include_directories("${PROJECT_SOURCE_DIR}/SFML-2.5.1/include/SFML" "${PROJECT_SOURCE_DIR}/SFML-2.5.1/include/" 
 "${PROJECT_SOURCE_DIR}/include" "${PROJECT_SOURCE_DIR}/include/Entities" "${PROJECT_SOURCE_DIR}/include/Entities/Characters"
@@ -25,9 +25,14 @@ include_directories("${PROJECT_SOURCE_DIR}/SFML-2.5.1/include/SFML" "${PROJECT_S
 
 configure_file(${PROJECT_SOURCE_DIR}/include/Defines/SOURCEDIR.h.in ${PROJECT_SOURCE_DIR}/include/Defines/SOURCEDIR.h)
 
-target_link_libraries(TheWizard PUBLIC ${PROJECT_SOURCE_DIR}/SFML-2.5.1/lib/libsfml-graphics-d.a)
-target_link_libraries(TheWizard PUBLIC ${PROJECT_SOURCE_DIR}/SFML-2.5.1/lib/libsfml-window-d.a)
-target_link_libraries(TheWizard PUBLIC ${PROJECT_SOURCE_DIR}/SFML-2.5.1/lib/libsfml-system-d.a)
+if(WIN32)
 
-install(TARGETS TheWizard DESTINATION ${PROJECT_SOURCE_DIR}/TheWizard_Build/bin)
-install(FILES "${PROJECT_BINARY_DIR}/include/Defines/SOURCEDIR.h" DESTINATION ${PROJECT_SOURCE_DIR}/TheWizard_Build/include)
+  target_link_libraries(${PROJECT_NAME} PUBLIC ${PROJECT_SOURCE_DIR}/SFML-2.5.1/lib/libsfml-graphics-d.a)
+  target_link_libraries(${PROJECT_NAME} PUBLIC ${PROJECT_SOURCE_DIR}/SFML-2.5.1/lib/libsfml-window-d.a)
+  target_link_libraries(${PROJECT_NAME} PUBLIC ${PROJECT_SOURCE_DIR}/SFML-2.5.1/lib/libsfml-system-d.a)
+
+else()
+
+  target_link_libraries(${PROJECT_NAME} sfml-graphics sfml-window sfml-system)
+
+endif()
