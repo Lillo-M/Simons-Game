@@ -13,3 +13,5 @@ Jogo
 TheWizard_Build/*
 
 !TheWizard_Build/.gitkeep
+
+TheWizard_Debug
