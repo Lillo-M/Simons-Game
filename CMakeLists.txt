@@ -2,15 +2,17 @@ cmake_minimum_required(VERSION 3.15)
 
 project(TheWizard VERSION 1.0)
 
-set(cpp_source_files  src/Alaska.cpp src/Animation.cpp src/Archer.cpp src/Arrow.cpp src/Being.cpp
- src/Button.cpp src/Character.cpp src/CollisionManager.cpp src/ComplexAnimation.cpp src/Enemy.cpp
- src/Entity.cpp src/EntityList.cpp src/EventsManager.cpp src/Game.cpp src/GameOverState.cpp 
- src/GraphicManager.cpp src/Ground.cpp src/Horse.cpp src/Ice.cpp src/InputManager.cpp src/Lava.cpp 
- src/LeaderBoard.cpp src/Level.cpp src/LoadGameState.cpp src/main.cpp src/MainMenu.cpp src/Math.cpp 
- src/Menu.cpp src/MenuObserver.cpp src/NewGameMenu.cpp src/Observer.cpp src/Obstacle.cpp src/PauseMenu.cpp 
- src/Player.cpp src/PlayerInputManager.cpp src/PlayerProjectile.cpp src/Projectile.cpp src/SimpleAnimation.cpp 
- src/SimpleSprite.cpp src/Skull.cpp src/State.cpp src/StateMachine.cpp src/TextInputObserver.cpp src/Vulcano.cpp 
- src/Warrior.cpp)
+#set(cpp_source_files  src/Alaska.cpp src/Animation.cpp src/Archer.cpp src/Arrow.cpp src/Being.cpp
+# src/Button.cpp src/Character.cpp src/CollisionManager.cpp src/ComplexAnimation.cpp src/Enemy.cpp
+# src/Entity.cpp src/EntityList.cpp src/EventsManager.cpp src/Game.cpp src/GameOverState.cpp 
+# src/GraphicManager.cpp src/Ground.cpp src/Horse.cpp src/Ice.cpp src/InputManager.cpp src/Lava.cpp 
+# src/LeaderBoard.cpp src/Level.cpp src/LoadGameState.cpp src/main.cpp src/MainMenu.cpp src/Math.cpp 
+# src/Menu.cpp src/MenuObserver.cpp src/NewGameMenu.cpp src/Observer.cpp src/Obstacle.cpp src/PauseMenu.cpp 
+# src/Player.cpp src/PlayerInputManager.cpp src/PlayerProjectile.cpp src/Projectile.cpp src/SimpleAnimation.cpp 
+# src/SimpleSprite.cpp src/Skull.cpp src/State.cpp src/StateMachine.cpp src/TextInputObserver.cpp src/Vulcano.cpp 
+# src/Warrior.cpp)
+
+file(GLOB cpp_source_files ${PROJECT_SOURCE_DIR}/src/*.cpp)
 
 set(THE_WIZARD_PATH ${PROJECT_SOURCE_DIR})
 
@@ -26,13 +28,9 @@ include_directories("${PROJECT_SOURCE_DIR}/SFML-2.5.1/include/SFML" "${PROJECT_S
 configure_file(${PROJECT_SOURCE_DIR}/include/Defines/SOURCEDIR.h.in ${PROJECT_SOURCE_DIR}/include/Defines/SOURCEDIR.h)
 
 if(WIN32)
-
   target_link_libraries(${PROJECT_NAME} PUBLIC ${PROJECT_SOURCE_DIR}/SFML-2.5.1/lib/libsfml-graphics-d.a)
   target_link_libraries(${PROJECT_NAME} PUBLIC ${PROJECT_SOURCE_DIR}/SFML-2.5.1/lib/libsfml-window-d.a)
   target_link_libraries(${PROJECT_NAME} PUBLIC ${PROJECT_SOURCE_DIR}/SFML-2.5.1/lib/libsfml-system-d.a)
-
 else()
-
   target_link_libraries(${PROJECT_NAME} sfml-graphics sfml-window sfml-system)
-
 endif()
