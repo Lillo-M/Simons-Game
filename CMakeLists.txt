@@ -7,7 +7,16 @@ project(TheWizard VERSION 1.0)
 add_executable(${PROJECT_NAME})
 
 
+# ---- exemplo de FetchContent
+include(FetchContent)
+FetchContent_Declare(sfml-dep
+    GIT_REPOSITORY https://github.com/SFML/SFML.git
+    GIT_TAG 2.5.x)
+FetchContent_MakeAvailable(sfml-dep)
+# ----- FetchContent
+
 #- Metodo recomendado para projetos com mais de um Dev
+
 #target_sources(${PROJECT_NAME} PRIVATE  src/Alaska.cpp src/Animation.cpp src/Archer.cpp src/Arrow.cpp src/Being.cpp
 # src/Button.cpp src/Character.cpp src/CollisionManager.cpp src/ComplexAnimation.cpp src/Enemy.cpp
 # src/Entity.cpp src/EntityList.cpp src/EventsManager.cpp src/Game.cpp src/GameOverState.cpp 
@@ -35,7 +44,7 @@ set(THE_WIZARD_PATH ${PROJECT_SOURCE_DIR})
 #Isso eh interessante pois faz com que nao seja necessario dar include no 'Relative_Path', ou seja,
 #se um arquivo src/Foo.c quer incluir Bar.h inves de dar include em "../include/Bar.h"
 #Foo.c pode incluir apenas "Bar.h" se "include" estiver definido como diretorio de include
-target_include_directories(${PROJECT_NAME} PUBLIC "${PROJECT_SOURCE_DIR}/SFML-2.5.1/include/SFML" "${PROJECT_SOURCE_DIR}/SFML-2.5.1/include/" 
+target_include_directories(${PROJECT_NAME} PUBLIC #"${PROJECT_SOURCE_DIR}/SFML-2.5.1/include/SFML" "${PROJECT_SOURCE_DIR}/SFML-2.5.1/include/" 
 "${PROJECT_SOURCE_DIR}/include" "${PROJECT_SOURCE_DIR}/include/Entities" "${PROJECT_SOURCE_DIR}/include/Entities/Characters"
 "${PROJECT_SOURCE_DIR}/include/Entities/Obstacles" "${PROJECT_SOURCE_DIR}/include/Entities/Projectiles" 
 "${PROJECT_SOURCE_DIR}/include/Entities/Characters/Enemies" "${PROJECT_SOURCE_DIR}/include/Math"
@@ -48,18 +57,18 @@ configure_file(${PROJECT_SOURCE_DIR}/include/Defines/SOURCEDIR.h.in ${PROJECT_SO
 
 #Exemplo de biblioteca de interface, uma biblioteca de interface eh uma biblioteca que nao tem
 #especificacoes de construcao, elas tem apenas requisitos de uso.
-add_library(SFML INTERFACE)
+#add_library(SFML INTERFACE)
 
 #exemplo de estrutura condicional
-if(WIN32)
+#if(WIN32)
   #Define as Bibliotecas, Neste caso a biblioteca eh um arquivo lib do tipo lib**.a mas poderia ser lib**.so ou simplificar para
   # **.lib, ainda, bibliotecas podem ser arquivos .cxx, .cpp, etc...
-  target_link_libraries(SFML INTERFACE ${PROJECT_SOURCE_DIR}/SFML-2.5.1/lib/libsfml-graphics-d.a)
-  target_link_libraries(SFML INTERFACE ${PROJECT_SOURCE_DIR}/SFML-2.5.1/lib/libsfml-window-d.a)
-  target_link_libraries(SFML INTERFACE ${PROJECT_SOURCE_DIR}/SFML-2.5.1/lib/libsfml-system-d.a)
-else()
+#  target_link_libraries(SFML INTERFACE ${PROJECT_SOURCE_DIR}/SFML-2.5.1/lib/libsfml-graphics-d.a)
+#  target_link_libraries(SFML INTERFACE ${PROJECT_SOURCE_DIR}/SFML-2.5.1/lib/libsfml-window-d.a)
+#  target_link_libraries(SFML INTERFACE ${PROJECT_SOURCE_DIR}/SFML-2.5.1/lib/libsfml-system-d.a)
+#else()
   #exemplo de uso de bibliotecas em 'Path Padrao'
-  target_link_libraries(SFML INTERFACE sfml-graphics sfml-window sfml-system)
-endif()
-
-target_link_libraries(${PROJECT_NAME} PUBLIC SFML)
+	 #target_link_libraries(SFML INTERFACE sfml-graphics sfml-window sfml-system)
+#endif()
+target_link_libraries(${PROJECT_NAME} PUBLIC sfml-graphics sfml-window sfml-system)
+#target_link_libraries(${PROJECT_NAME} PUBLIC SFML)

@@ -19,7 +19,7 @@ CFLAGS= $(IDIR) -ISFML-2.5.1/include
 #libs ------------------------- Colocar diretorio da bilioteca SFML -----------------------------------
 LDIR =-LSFML-2.5.1/lib
 #libraries usadas
-LIBS=-lsfml-graphics-s -lsfml-window-s -lsfml-system -lopengl32 -lfreetype -lwinmm -lgdi32 -mwindows
+LIBS=-lsfml-graphics -lsfml-window -lsfml-system 
 
 vpath %.h  $(patsubst -Iinclude%,include%,$(IDIR))
 

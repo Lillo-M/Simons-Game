@@ -83,7 +83,7 @@ void States::GameOverState::SaveData()
 
     std::ifstream ileadersArchive;
     std::string str;
-    ileadersArchive.open("Assets/leaderboard.txt");
+    ileadersArchive.open(std::string(THE_WIZARD_PATH) + std::string("/Assets/leaderboard.txt"));
     if (!ileadersArchive.is_open())
     {
         std::cout << "ERROR: Failed to Open 'leaderboard.txt'" << std::endl;
@@ -99,7 +99,7 @@ void States::GameOverState::SaveData()
     }
     ileadersArchive.close();
     std::ofstream oleadersArchive;
-    oleadersArchive.open("Assets/leaderboard.txt");
+    oleadersArchive.open(std::string(THE_WIZARD_PATH) + std::string("/Assets/leaderboard.txt"));
     if (!oleadersArchive.is_open())
     {
         std::cout << "ERROR: Failed to Open 'leaderboard.txt'" << std::endl;
