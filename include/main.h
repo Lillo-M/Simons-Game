@@ -1,2 +1,2 @@
-#include <iostream>
-#include "../include/Game.h"
+#pragma once
+#include "Game.h"

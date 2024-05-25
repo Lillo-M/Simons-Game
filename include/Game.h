@@ -1,5 +1,4 @@
 #pragma once
-#define FPS 0
 #include "Managers/EventsManager.h"
 #include <iostream>
 #include "Levels/Alaska.h"

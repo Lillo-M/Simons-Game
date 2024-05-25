@@ -1,6 +1,6 @@
 #pragma once
 #include "Observer.h"
-#include "../Menus/Menu.h"
+#include "Menus/Menu.h"
 
 namespace Observers
 {

@@ -1,8 +1,5 @@
 #pragma once
-#include <SFML/Graphics.hpp>
 #include "Managers/GraphicManager.h"
-#include <iostream>
-#include <string>
 #include "SOURCEDIR.h"
 
 enum ID

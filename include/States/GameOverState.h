@@ -1,8 +1,8 @@
 #pragma once
 #include "State.h"
-#include "../Managers/GraphicManager.h"
-#include "../Managers/InputManager.h"
-#include "../Levels/Level.h"
+#include "Managers/GraphicManager.h"
+#include "Managers/InputManager.h"
+#include "Levels/Level.h"
 #include <string>
 #include <vector>
 #include <fstream>

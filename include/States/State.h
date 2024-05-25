@@ -1,5 +1,4 @@
 #pragma once
-#include <stdlib.h>
 
 namespace States
 {
@@ -21,7 +20,7 @@ namespace States
     class State
     {
     public:
-        State(StateMachine* pSMachine = NULL, States::stateID id = empty);
+        State(StateMachine* pSMachine = nullptr, States::stateID id = empty);
         virtual ~State();
         void setStateMachine(StateMachine* pSMachine);
         void changeState(States::stateID sID);

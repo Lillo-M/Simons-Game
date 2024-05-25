@@ -1,8 +1,8 @@
 #pragma once
 #include "Menu.h"
-#include "../Observers/MenuObserver.h"
-#include "../States/State.h"
-#include "../Levels/Level.h"
+#include "Observers/MenuObserver.h"
+#include "States/State.h"
+#include "Levels/Level.h"
 
 namespace Menus
 {

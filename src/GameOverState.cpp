@@ -1,5 +1,5 @@
-#include "../include/States/GameOverState.h"
-#include "../Observers/TextInputObserver.h"
+#include "States/GameOverState.h"
+#include "Observers/TextInputObserver.h"
 #include <iostream>
 States::GameOverState::GameOverState(States::StateMachine* pSMachine, Managers::InputManager* pIM):
     State(pSMachine, States::stateID::gameOverState),
@@ -34,7 +34,6 @@ States::GameOverState::GameOverState(States::StateMachine* pSMachine, Managers::
 
 States::GameOverState::~GameOverState()
 {
-    //std::cout << "GameOverState Destructor" << std::endl;
     pIM->removeObserver(tIObserver);
     if(tIObserver)
         delete tIObserver;
@@ -121,31 +120,31 @@ void States::GameOverState::SaveData()
     name.clear();
 }
 
-void States::GameOverState::selection_sort (std::vector<int> &A, int n, std::vector<std::string> &B) {
-  if(n <= 1)
+void States::GameOverState::selection_sort (std::vector<int> &pointsVector, int size, std::vector<std::string> &namesVector) {
+  if(size <= 1)
     return;
   int key = 0;
   int i = 0, j = 0;
-  for(i = 0;i < n; i++)
+  for(i = 0;i < size; i++)
   {
     key = i;
-    for(j = i + 1; j < n; j++)
+    for(j = i + 1; j < size; j++)
     {
-      if(A[key] > A[j])
+      if(pointsVector[key] > pointsVector[j])
       {
         key = j;
       }
     }
-    swap(A,i,key, B);
+    swap(pointsVector,i,key, namesVector);
   }
 }
 
-void States::GameOverState::swap(std::vector<int> &A, int i, int j, std::vector<std::string> &B)
+void States::GameOverState::swap(std::vector<int> &pointsVector, int i, int j, std::vector<std::string> &namesVector)
 {
-    std::string temp = B[i];
-    int k = A[i];
-    A[i] = A[j];
-    A[j] = k;
-    B[i] = B[j];
-    B[j] = temp;
+    std::string temp = namesVector[i];
+    int k = pointsVector[i];
+    pointsVector[i] = pointsVector[j];
+    pointsVector[j] = k;
+    namesVector[i] = namesVector[j];
+    namesVector[j] = temp;
 }

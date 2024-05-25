@@ -1,8 +1,8 @@
 #pragma once
-#include "../Being.h"
+#include "Being.h"
 #include <vector>
-#include "../GraphicElements/Button.h"
-#include "../Managers/InputManager.h"
+#include "GraphicElements/Button.h"
+#include "Managers/InputManager.h"
 
 namespace Observers
 {

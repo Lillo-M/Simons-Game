@@ -1,1 +1,1 @@
-#define THE_WIZARD_PATH "C:/Users/Lillo/Documents/thewizard"
+#define THE_WIZARD_PATH "/home/lillo/thewizard"

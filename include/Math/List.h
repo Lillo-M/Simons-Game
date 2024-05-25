@@ -1,6 +1,6 @@
 #pragma once
 #include <iostream>
-#include "../Entities/Entity.h"
+#include "Entities/Entity.h"
 namespace Math
 {
 	/* Iterator Tutorial used: https://www.youtube.com/watch?v=F9eDv-YIOQ0 */

@@ -1,7 +1,7 @@
 #pragma once
 #include "Menu.h"
-#include "../States/State.h"
-#include "../Observers/MenuObserver.h"
+#include "States/State.h"
+#include "Observers/MenuObserver.h"
 #include <vector>
 #include <fstream>
 

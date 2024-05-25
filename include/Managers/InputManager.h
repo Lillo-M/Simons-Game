@@ -1,9 +1,10 @@
 #pragma once
 #include <map>
 #include <iostream>
-#include <SFML/Window.hpp>
+#include <SFML/Window/Keyboard.hpp>
+#include <SFML/Window/Event.hpp>
 #include <list>
-#include "../Observers/Observer.h"
+#include "Observers/Observer.h"
 
 namespace Managers
 {
