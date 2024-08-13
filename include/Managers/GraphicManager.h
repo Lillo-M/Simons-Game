@@ -6,8 +6,8 @@
 #include <string.h>
 #include "SOURCEDIR.h"
 
-#define WIDTH 1280
-#define HEIGHT 768
+#define WIDTH 1280.f
+#define HEIGHT 768.f
 
 namespace Managers
 {

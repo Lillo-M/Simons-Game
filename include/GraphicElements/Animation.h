@@ -1,7 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-#include "../Managers/GraphicManager.h"
-#include "../Being.h"
+#include "Managers/GraphicManager.h"
+#include "Being.h"
 
 namespace GraphicElements
 {

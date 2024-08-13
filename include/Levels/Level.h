@@ -2,20 +2,20 @@
 
 #include <stdlib.h>
 
-#include "../Managers/CollisionManager.h"
-#include "../Managers/EventsManager.h"
-#include "../Math/List.h"// remover se a classe EntityList funcionar (e estiver corretamente implementado)
-#include "../Math/EntityList.h"
-#include "../Entities/Characters/Player.h"
-#include "../Entities/Projectiles/Arrow.h"
-#include "../Entities/Characters/Enemies/Warrior.h"
-#include "../Entities/Characters/Enemies/Archer.h"
-#include "../Entities/Characters/Enemies/Horse.h"
-#include "../Entities/Obstacles/Ground.h"
-#include "../Entities/Obstacles/Lava.h"
-#include "../Entities/Obstacles/Ice.h"
-#include "../States/State.h"
-#include "../Observers/PlayerInputManager.h"
+#include "Managers/CollisionManager.h"
+#include "Managers/EventsManager.h"
+#include "Math/List.h"
+#include "Math/EntityList.h"
+#include "Entities/Characters/Player.h"
+#include "Entities/Projectiles/Arrow.h"
+#include "Entities/Characters/Enemies/Warrior.h"
+#include "Entities/Characters/Enemies/Archer.h"
+#include "Entities/Characters/Enemies/Horse.h"
+#include "Entities/Obstacles/Ground.h"
+#include "Entities/Obstacles/Lava.h"
+#include "Entities/Obstacles/Ice.h"
+#include "States/State.h"
+#include "Observers/PlayerInputManager.h"
 
 namespace Levels
 {
@@ -45,12 +45,12 @@ namespace Levels
         static bool                         twoPlayers;
         int                                 totalScore;
         bool                                levelStarted;
-    	Managers::InputManager*             pIM;
+      	Managers::InputManager*             pIM;
         Observers::PlayerInputManager*      pPIM;
         Entities::Characters::Player*       pPlayer;
         Entities::Characters::Player*       pPlayer2;
         Managers::CollisionManager*         pCManager;
-	    Math::EntityList		            DentitiesList;
+	      Math::EntityList		            DentitiesList;
         Math::EntityList		            SentitiesList;
     };
 }

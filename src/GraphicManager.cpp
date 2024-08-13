@@ -1,11 +1,11 @@
 #include "../include/Managers/GraphicManager.h"
 
 Managers::GraphicManager::GraphicManager(): 
-    window(sf::VideoMode(WIDTH, HEIGHT), "The Wizard++"), // incializa a janela
+    window(sf::VideoMode(WIDTH, HEIGHT), "The Wizard++", sf::Style::Titlebar | sf::Style::Close), // incializa a janela
     view(window.getView()),
-    LeftLimit(WIDTH / 2),
-    RightLimit(WIDTH / 2),
-    BottomLimit(HEIGHT / 2)
+    LeftLimit   ((int)(WIDTH / 2)),
+    RightLimit  ((int)(WIDTH / 2)),
+    BottomLimit ((int)(HEIGHT / 2))
 {
     settings.antialiasingLevel = 16;
 }

@@ -1,5 +1,5 @@
 #pragma once
-#include "../Being.h"
+#include "Being.h"
 #include <string>
 
 namespace GraphicElements

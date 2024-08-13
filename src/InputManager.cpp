@@ -1,4 +1,4 @@
-#include "../include/Managers/InputManager.h"
+#include "Managers/InputManager.h"
 
 Managers::InputManager::InputManager()
 {
@@ -82,9 +82,11 @@ void Managers::InputManager::removeObserver(Observers::Observer* observer)
     listIt = subObservers.begin();
     for(listIt; listIt != subObservers.end(); listIt++)
     {
-        if((*listIt) == observer)
-			subObservers.erase(listIt);
-    }
+        if((*listIt) == observer){
+					subObservers.erase(listIt);
+					break;
+    		}
+		}
 }
 
 Managers::InputManager* Managers::InputManager::getInstance()

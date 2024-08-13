@@ -149,9 +149,9 @@ void Entities::Characters::Player::Update()
   else if(isJumping)
   {
     animation.Update( GraphicElements::Animation_ID::jump,\
-	Position, faceRight);
-	}
-	else if(Velocity.x)
+        Position, faceRight);
+  }
+  else if(Velocity.x)
 		animation.Update( GraphicElements::Animation_ID::walk,\
 	Position, faceRight);
 	else

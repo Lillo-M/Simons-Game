@@ -18,6 +18,7 @@ GraphicElements::Button::Button(sf::Vector2f pos, unsigned int size, const std::
 
 GraphicElements::Button::~Button()
 {
+
 }
 
 void GraphicElements::Button::Update()

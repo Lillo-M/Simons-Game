@@ -1,5 +1,3 @@
-Makefile
-
 *.o
 
 *.exe
@@ -12,6 +10,22 @@ obj
 
 Jogo
 
+<<<<<<< HEAD
 TheWizard_Build/*
 
 !TheWizard_Build/.gitkeep
+=======
+Build
+
+build
+
+TheWizard_Build/*
+
+!TheWizard_Build/.gitkeep
+
+TheWizard_Debug
+
+tags
+
+.cache
+>>>>>>> teste

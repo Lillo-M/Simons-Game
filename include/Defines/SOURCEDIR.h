@@ -1,3 +1,1 @@
-// the configured options and settings for Tutorial
-// TODO 10: Define Tutorial_VERSION_MAJOR and Tutorial_VERSION_MINOR
-#define THE_WIZARD_PATH "C:/Users/Lillo/Documents/thewizard"
+#define THE_WIZARD_PATH "/home/lillo/thewizard"

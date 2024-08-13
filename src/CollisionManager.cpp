@@ -1,4 +1,4 @@
-#include "../include/Managers/CollisionManager.h"
+#include "Managers/CollisionManager.h"
 #include <iostream>
 
 #define J_AND_I_R_PLAYERPROJECTILES static_cast<Entities::Projectiles::Projectile*>(*Iterator_j)->getOwner()->getID() == Iterator_i->getID()\

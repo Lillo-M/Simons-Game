@@ -1,0 +1,21 @@
+# ninja log v6
+1	18	1723570304185705941	sfml-dep-populate-prefix/src/sfml-dep-populate-stamp/sfml-dep-populate-mkdir	63009b3319544734
+1	18	1723570304185705941	/home/lillo/Documents/thewizard/build2/_deps/sfml-dep-subbuild/sfml-dep-populate-prefix/src/sfml-dep-populate-stamp/sfml-dep-populate-mkdir	63009b3319544734
+18	18398	1723570322565705493	sfml-dep-populate-prefix/src/sfml-dep-populate-stamp/sfml-dep-populate-download	bf84a8b75088f4c
+18	18398	1723570322565705493	/home/lillo/Documents/thewizard/build2/_deps/sfml-dep-subbuild/sfml-dep-populate-prefix/src/sfml-dep-populate-stamp/sfml-dep-populate-download	bf84a8b75088f4c
+18398	19252	1723570322569038827	sfml-dep-populate-prefix/src/sfml-dep-populate-stamp/sfml-dep-populate-update	8702865dad3de14
+18398	19252	1723570322569038827	/home/lillo/Documents/thewizard/build2/_deps/sfml-dep-subbuild/sfml-dep-populate-prefix/src/sfml-dep-populate-stamp/sfml-dep-populate-update	8702865dad3de14
+19252	19270	1723570323439038805	sfml-dep-populate-prefix/src/sfml-dep-populate-stamp/sfml-dep-populate-patch	4faa143ef918b8e4
+19252	19270	1723570323439038805	/home/lillo/Documents/thewizard/build2/_deps/sfml-dep-subbuild/sfml-dep-populate-prefix/src/sfml-dep-populate-stamp/sfml-dep-populate-patch	4faa143ef918b8e4
+19270	19288	1723570323455705471	sfml-dep-populate-prefix/src/sfml-dep-populate-stamp/sfml-dep-populate-configure	36cdd538d7da5592
+19270	19288	1723570323455705471	/home/lillo/Documents/thewizard/build2/_deps/sfml-dep-subbuild/sfml-dep-populate-prefix/src/sfml-dep-populate-stamp/sfml-dep-populate-configure	36cdd538d7da5592
+19288	19304	1723570323472372138	sfml-dep-populate-prefix/src/sfml-dep-populate-stamp/sfml-dep-populate-build	55a8932d914993c5
+19288	19304	1723570323472372138	/home/lillo/Documents/thewizard/build2/_deps/sfml-dep-subbuild/sfml-dep-populate-prefix/src/sfml-dep-populate-stamp/sfml-dep-populate-build	55a8932d914993c5
+19304	19320	1723570323489038804	sfml-dep-populate-prefix/src/sfml-dep-populate-stamp/sfml-dep-populate-install	404d950c62bbcb9e
+19304	19320	1723570323489038804	/home/lillo/Documents/thewizard/build2/_deps/sfml-dep-subbuild/sfml-dep-populate-prefix/src/sfml-dep-populate-stamp/sfml-dep-populate-install	404d950c62bbcb9e
+19320	19338	1723570323505705470	sfml-dep-populate-prefix/src/sfml-dep-populate-stamp/sfml-dep-populate-test	f44540411bf0f244
+19320	19338	1723570323505705470	/home/lillo/Documents/thewizard/build2/_deps/sfml-dep-subbuild/sfml-dep-populate-prefix/src/sfml-dep-populate-stamp/sfml-dep-populate-test	f44540411bf0f244
+19338	19359	1723570323529038803	CMakeFiles/sfml-dep-populate-complete	be424b80cb2ae060
+19338	19359	1723570323529038803	sfml-dep-populate-prefix/src/sfml-dep-populate-stamp/sfml-dep-populate-done	be424b80cb2ae060
+19338	19359	1723570323529038803	/home/lillo/Documents/thewizard/build2/_deps/sfml-dep-subbuild/CMakeFiles/sfml-dep-populate-complete	be424b80cb2ae060
+19338	19359	1723570323529038803	/home/lillo/Documents/thewizard/build2/_deps/sfml-dep-subbuild/sfml-dep-populate-prefix/src/sfml-dep-populate-stamp/sfml-dep-populate-done	be424b80cb2ae060

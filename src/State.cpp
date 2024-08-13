@@ -1,5 +1,5 @@
-#include "../include/States/State.h"
-#include "../include/States/StateMachine.h"
+#include "States/State.h"
+#include "States/StateMachine.h"
 
 States::State::State(StateMachine* pSMachine, States::stateID id):
     pSMachine(pSMachine),
@@ -10,7 +10,7 @@ States::State::State(StateMachine* pSMachine, States::stateID id):
 
 States::State::~State()
 {
-    pSMachine = NULL;
+    pSMachine = nullptr;
 }
 
 void States::State::setStateMachine(StateMachine* pSMachine)
@@ -34,4 +34,4 @@ void States::State::Reset()
 }
 
 
-States::State* States::State::previousState(NULL);
+States::State* States::State::previousState(nullptr);

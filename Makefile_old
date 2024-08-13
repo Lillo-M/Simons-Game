@@ -1,0 +1,179 @@
+#Compilador
+CC = g++
+#Nome do diretorio para os *.o
+ODIR=obj
+#*.o necessarios para a compilacao
+_OBJ = Game.o Ground.o EventsManager.o Player.o PlayerInputManager.o Entity.o CollisionManager.o \
+	   main.o Enemy.o Warrior.o Being.o Character.o GraphicManager.o Obstacle.o Level.o Alaska.o Animation.o \
+	   Projectile.o State.o StateMachine.o Observer.o InputManager.o EntityList.o Archer.o Arrow.o Button.o\
+	   PlayerProjectile.o Menu.o MainMenu.o MenuObserver.o PauseMenu.o LoadGameState.o Lava.o SimpleAnimation.o\
+	   ComplexAnimation.o SimpleSprite.o Horse.o Ice.o LeaderBoard.o GameOverState.o TextInputObserver.o\
+	   NewGameMenu.o Vulcano.o Math.o Skull.o
+	   
+	   
+	   
+#Setando diretorio
+OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
+#diretorio de include
+IDIR = -Iinclude/Defines -Iinclude -Iinclude/Entities -Iinclude/Entities/Characters -Iinclude/Entities/Characters/Enemies -Iinclude/Managers -Iinclude/Math
+#includes ------------------------- Colocar diretorio da bilioteca SFML -----------------------------------
+CFLAGS= $(IDIR) -IC:/SFML-2.5.1/include
+#diretorio das libraries usadas
+#includes ------------------------- Colocar diretorio da bilioteca SFML -----------------------------------
+LDIR =-LC:/SFML-2.5.1/lib
+#libraries usadas
+LIBS=-lsfml-graphics-s -lsfml-window-s -lsfml-system -lopengl32 -lfreetype -lwinmm -lgdi32 -mwindows -DSFML_STATIC
+
+
+
+
+Jogo: $(OBJ) 
+	$(CC) obj/*.o -o Jogo $(LDIR) $(LIBS)
+	@echo '===================================COMPILE COMPLETE==========================================='
+	@echo ''
+
+$(ODIR)/main.o: src/main.cpp
+	$(CC) -c -o $@ $< $(CFLAGS) 
+
+$(ODIR)/Game.o: src/Game.cpp include/Game.h
+	if test -d obj; then echo ; else mkdir obj; fi
+	@echo '======================================COMPILING==============================================='
+	$(CC) -c -o $@ $< $(CFLAGS) 
+
+$(ODIR)/Math.o: src/Math.cpp include/Math/Math.h
+	$(CC) -c -o $@ $< $(CFLAGS) 
+
+$(ODIR)/Being.o: src/Being.cpp include/Being.h
+	$(CC) -c -o $@ $< $(CFLAGS) 
+
+$(ODIR)/Ground.o: src/Ground.cpp include/Entities/Obstacles/Ground.h
+	$(CC) -c -o $@ $< $(CFLAGS) 
+
+$(ODIR)/EventsManager.o: src/EventsManager.cpp include/Managers/EventsManager.h
+	$(CC) -c -o $@ $< $(CFLAGS) 
+
+$(ODIR)/Player.o: src/Player.cpp include/Entities/Characters/Player.h
+	$(CC) -c -o $@ $< $(CFLAGS) 
+
+$(ODIR)/PlayerInputManager.o: src/PlayerInputManager.cpp include/Observers/PlayerInputManager.h
+	$(CC) -c -o $@ $< $(CFLAGS) 
+
+$(ODIR)/Entity.o: src/Entity.cpp include/Entities/Entity.h
+	$(CC) -c -o $@ $< $(CFLAGS) 
+
+$(ODIR)/CollisionManager.o: src/CollisionManager.cpp include/Managers/CollisionManager.h
+	$(CC) -c -o $@ $< $(CFLAGS) 
+
+$(ODIR)/Character.o: src/Character.cpp include/Entities/Characters/Character.h
+	$(CC) -c -o $@ $< $(CFLAGS) 
+
+$(ODIR)/Enemy.o: src/Enemy.cpp include/Entities/Characters/Enemies/Enemy.h
+	$(CC) -c -o $@ $< $(CFLAGS) 
+
+$(ODIR)/Warrior.o: src/Warrior.cpp include/Entities/Characters/Enemies/Warrior.h
+	$(CC) -c -o $@ $< $(CFLAGS) 
+
+$(ODIR)/GraphicManager.o: src/GraphicManager.cpp include/Managers/GraphicManager.h
+	$(CC) -c -o $@ $< $(CFLAGS) 
+
+$(ODIR)/Obstacle.o: src/Obstacle.cpp include/Entities/Obstacles/Obstacle.h
+	$(CC) -c -o $@ $< $(CFLAGS) 
+
+$(ODIR)/Level.o: src/Level.cpp include/Levels/Level.h
+	$(CC) -c -o $@ $< $(CFLAGS) 
+
+$(ODIR)/Alaska.o: src/Alaska.cpp include/Levels/Alaska.h
+	$(CC) -c -o $@ $< $(CFLAGS) 
+
+$(ODIR)/Vulcano.o: src/Vulcano.cpp include/Levels/Vulcano.h
+	$(CC) -c -o $@ $< $(CFLAGS) 
+
+$(ODIR)/Projectile.o: src/Projectile.cpp include/Entities/Projectiles/Projectile.h
+	$(CC) -c -o $@ $< $(CFLAGS) 
+
+$(ODIR)/State.o: src/State.cpp include/States/State.h
+	$(CC) -c -o $@ $< $(CFLAGS) 
+
+$(ODIR)/StateMachine.o: src/StateMachine.cpp include/States/StateMachine.h
+	$(CC) -c -o $@ $< $(CFLAGS) 
+
+$(ODIR)/Observer.o: src/Observer.cpp include/Observers/Observer.h
+	$(CC) -c -o $@ $< $(CFLAGS) 
+
+$(ODIR)/InputManager.o: src/InputManager.cpp include/Managers/InputManager.h
+	$(CC) -c -o $@ $< $(CFLAGS) 
+
+$(ODIR)/EntityList.o: src/EntityList.cpp include/Math/EntityList.h
+	$(CC) -c -o $@ $< $(CFLAGS) 
+
+$(ODIR)/Button.o: src/Button.cpp include/GraphicElements/Button.h
+	$(CC) -c -o $@ $< $(CFLAGS) 
+
+$(ODIR)/Menu.o: src/Menu.cpp include/Menus/Menu.h
+	$(CC) -c -o $@ $< $(CFLAGS) 
+
+$(ODIR)/MainMenu.o: src/MainMenu.cpp include/Menus/MainMenu.h
+	$(CC) -c -o $@ $< $(CFLAGS) 
+
+$(ODIR)/PauseMenu.o: src/PauseMenu.cpp include/Menus/PauseMenu.h
+	$(CC) -c -o $@ $< $(CFLAGS) 
+
+$(ODIR)/MenuObserver.o: src/MenuObserver.cpp include/Observers/MenuObserver.h
+	$(CC) -c -o $@ $< $(CFLAGS) 
+
+$(ODIR)/LoadGameState.o: src/LoadGameState.cpp include/States/LoadGameState.h
+	$(CC) -c -o $@ $< $(CFLAGS) 
+
+$(ODIR)/NewGameMenu.o: src/NewGameMenu.cpp include/Menus/NewGameMenu.h
+	$(CC) -c -o $@ $< $(CFLAGS) 
+
+$(ODIR)/Animation.o: src/Animation.cpp include/GraphicElements/Animation.h
+	$(CC) -c -o $@ $< $(CFLAGS) 
+
+$(ODIR)/SimpleAnimation.o: src/SimpleAnimation.cpp include/GraphicElements/SimpleAnimation.h
+	$(CC) -c -o $@ $< $(CFLAGS) 
+
+$(ODIR)/ComplexAnimation.o: src/ComplexAnimation.cpp include/GraphicElements/ComplexAnimation.h
+	$(CC) -c -o $@ $< $(CFLAGS) 
+
+$(ODIR)/SimpleSprite.o: src/SimpleSprite.cpp include/GraphicElements/SimpleSprite.h
+	$(CC) -c -o $@ $< $(CFLAGS) 
+
+$(ODIR)/Archer.o: src/Archer.cpp include/Entities/Characters/Enemies/Archer.h
+	$(CC) -c -o $@ $< $(CFLAGS) 
+
+$(ODIR)/Arrow.o: src/Arrow.cpp include/Entities/Projectiles/Arrow.h
+	$(CC) -c -o $@ $< $(CFLAGS) 
+
+$(ODIR)/PlayerProjectile.o: src/PlayerProjectile.cpp include/Entities/Projectiles/PlayerProjectile.h
+	$(CC) -c -o $@ $< $(CFLAGS) 
+
+$(ODIR)/Lava.o: src/Lava.cpp include/Entities/Obstacles/Lava.h
+	$(CC) -c -o $@ $< $(CFLAGS) 
+
+$(ODIR)/Horse.o: src/Horse.cpp include/Entities/Characters/Enemies/Horse.h
+	$(CC) -c -o $@ $< $(CFLAGS) 
+
+$(ODIR)/Ice.o: src/Ice.cpp include/Entities/Obstacles/Ice.h
+	$(CC) -c -o $@ $< $(CFLAGS) 
+
+$(ODIR)/LeaderBoard.o: src/LeaderBoard.cpp include/Menus/LeaderBoard.h
+	$(CC) -c -o $@ $< $(CFLAGS) 
+
+$(ODIR)/TextInputObserver.o: src/TextInputObserver.cpp include/Observers/TextInputObserver.h
+	$(CC) -c -o $@ $< $(CFLAGS) 
+
+$(ODIR)/GameOverState.o: src/GameOverState.cpp include/States/GameOverState.h
+	$(CC) -c -o $@ $< $(CFLAGS) 
+
+$(ODIR)/Skull.o: src/Skull.cpp include/Entities/Projectiles/Skull.h
+	$(CC) -c -o $@ $< $(CFLAGS) 
+
+#$(ODIR)/nome.o: src/nome.cpp include/ ... .h // lembrar de por .o em OBJ
+#	$(CC) -c -o $@ $< $(CFLAGS) 
+
+
+clean:
+	rm $(OBJ) ./*.exe 
+	@echo '================================DELETED ALL *.o FILES========================================='
+	@echo ''
