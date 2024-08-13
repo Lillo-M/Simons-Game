@@ -1,0 +1,46 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "/home/lillo/thewizard/build/_deps/sfml-dep-subbuild/CMakeFiles/sfml-dep-populate"
+		},
+		{
+			"file" : "/home/lillo/thewizard/build/_deps/sfml-dep-subbuild/CMakeFiles/sfml-dep-populate.rule"
+		},
+		{
+			"file" : "/home/lillo/thewizard/build/_deps/sfml-dep-subbuild/CMakeFiles/sfml-dep-populate-complete.rule"
+		},
+		{
+			"file" : "/home/lillo/thewizard/build/_deps/sfml-dep-subbuild/sfml-dep-populate-prefix/src/sfml-dep-populate-stamp/sfml-dep-populate-build.rule"
+		},
+		{
+			"file" : "/home/lillo/thewizard/build/_deps/sfml-dep-subbuild/sfml-dep-populate-prefix/src/sfml-dep-populate-stamp/sfml-dep-populate-configure.rule"
+		},
+		{
+			"file" : "/home/lillo/thewizard/build/_deps/sfml-dep-subbuild/sfml-dep-populate-prefix/src/sfml-dep-populate-stamp/sfml-dep-populate-download.rule"
+		},
+		{
+			"file" : "/home/lillo/thewizard/build/_deps/sfml-dep-subbuild/sfml-dep-populate-prefix/src/sfml-dep-populate-stamp/sfml-dep-populate-install.rule"
+		},
+		{
+			"file" : "/home/lillo/thewizard/build/_deps/sfml-dep-subbuild/sfml-dep-populate-prefix/src/sfml-dep-populate-stamp/sfml-dep-populate-mkdir.rule"
+		},
+		{
+			"file" : "/home/lillo/thewizard/build/_deps/sfml-dep-subbuild/sfml-dep-populate-prefix/src/sfml-dep-populate-stamp/sfml-dep-populate-patch.rule"
+		},
+		{
+			"file" : "/home/lillo/thewizard/build/_deps/sfml-dep-subbuild/sfml-dep-populate-prefix/src/sfml-dep-populate-stamp/sfml-dep-populate-test.rule"
+		},
+		{
+			"file" : "/home/lillo/thewizard/build/_deps/sfml-dep-subbuild/sfml-dep-populate-prefix/src/sfml-dep-populate-stamp/sfml-dep-populate-update.rule"
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"sfml-dep-populate"
+		],
+		"name" : "sfml-dep-populate"
+	}
+}

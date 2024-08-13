@@ -1,0 +1,3 @@
+/home/lillo/thewizard/build/_deps/sfml-dep-subbuild/CMakeFiles/sfml-dep-populate.dir
+/home/lillo/thewizard/build/_deps/sfml-dep-subbuild/CMakeFiles/edit_cache.dir
+/home/lillo/thewizard/build/_deps/sfml-dep-subbuild/CMakeFiles/rebuild_cache.dir
