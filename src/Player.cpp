@@ -128,20 +128,36 @@ void Entities::Characters::Player::Update()
 	if(grounded)
 		isJumping = false;
 	
-	if(damaged)
-	{
-		animation.Update(GraphicElements::Animation_ID::hurt, Position, faceRight);
-	}
-	else if(!attackcooled)
-	{
-		animation.Update(GraphicElements::Animation_ID::attack, Position, faceRight);
-	}
-	else if(isJumping)
-	{
-		animation.Update( GraphicElements::Animation_ID::jump,\
-	Position, faceRight);
-	}
-	else if(Velocity.x)
+  if(damaged)
+  {
+    if(!attackcooled)
+    {
+      attackcd += dt;
+      if(attackcd >= 0.4f)
+      {
+        attackcd -= 0.4f;
+        attackcooled = true;
+      }
+    }
+    else if (secondJump)
+    {
+      isJumping = true;
+      fall = false;
+      secondJump = false;
+      Velocity.y = JUMPHEIGHT;
+    }
+    animation.Update(GraphicElements::Animation_ID::hurt, Position, faceRight);
+  }
+  else if(!attackcooled)
+  {
+    animation.Update(GraphicElements::Animation_ID::attack, Position, faceRight);
+  }
+  else if(isJumping)
+  {
+    animation.Update( GraphicElements::Animation_ID::jump,\
+        Position, faceRight);
+  }
+  else if(Velocity.x)
 		animation.Update( GraphicElements::Animation_ID::walk,\
 	Position, faceRight);
 	else
